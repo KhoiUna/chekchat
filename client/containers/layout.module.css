@@ -1,0 +1,18 @@
+.container {
+    background-color: #18D2FF;
+    height: 100vh;
+}
+
+.header {
+    text-align: center;
+    padding-top: 3%;
+}
+.header:hover {
+    cursor: pointer;
+}
+
+.main {
+    padding: 3% 0;
+    margin-top: 3%;
+}
+
