@@ -1,5 +1,5 @@
+require("dotenv").config();
 const compression = require("compression");
-const { RSA_NO_PADDING } = require("constants");
 const cors = require("cors");
 const express = require("express");
 const app = express();
@@ -13,6 +13,7 @@ const io = require("socket.io")(server, {
     credentials: true,
   },
 });
+const client = require("./db/client");
 
 //env variables
 const { PORT = 5000 } = process.env;
