@@ -12,7 +12,6 @@ export default function Home() {
         <Link href="/login">
           <a>Login</a>
         </Link>
-        <p>{origin}</p>
       </main>
     </div>
   );
