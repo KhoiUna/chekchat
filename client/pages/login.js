@@ -4,6 +4,9 @@ import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import { useState } from "react";
 
+const origin =
+  process.env.NEXT_PUBLIC_ORIGIN || "https://chekapp.herokuapp.com";
+
 export default function Login() {
   const [responseText, setResponseText] = useState("");
   const [data, setData] = useState({
@@ -21,7 +24,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_ORIGIN}/api/login`, {
+      const res = await fetch(`${origin}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

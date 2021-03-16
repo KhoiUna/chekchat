@@ -4,6 +4,9 @@ import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import { useState } from "react";
 
+const origin =
+  process.env.NEXT_PUBLIC_ORIGIN || "https://chekapp.herokuapp.com";
+
 export default function Register() {
   const [responseText, setResponseText] = useState("");
   const [data, setData] = useState({
@@ -23,16 +26,13 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(
-        `${process.env.NEXT_PUBLIC_ORIGIN}/api/register`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
+      const res = await fetch(`${origin}/api/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
       if (res.ok === true) {
         setResponseText(await res.text());
