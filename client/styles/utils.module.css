@@ -31,3 +31,8 @@
 .button {
     margin-top: 2%;
 }
+
+.responseText {    
+    font-weight: bold;
+    font-style: italic;
+}

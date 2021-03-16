@@ -3,4 +3,7 @@ module.exports = {
   images: {
     domains: ["ik.imagekit.io"],
   },
+  env: {
+    ORIGIN: "http://localhost:5000",
+  },
 };
