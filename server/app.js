@@ -13,7 +13,6 @@ const io = require("socket.io")(server, {
     credentials: true,
   },
 });
-const client = require("./db/client");
 
 //env variables
 const { PORT = 5000 } = process.env;
