@@ -4,8 +4,7 @@ import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import { useState } from "react";
 
-const origin =
-  process.env.NEXT_PUBLIC_ORIGIN || "https://chekapp.herokuapp.com";
+const origin = "https://chekapp.herokuapp.com";
 
 export default function Login() {
   const [responseText, setResponseText] = useState("");

@@ -147,11 +147,3 @@ export default function Register() {
     </Layout>
   );
 }
-
-export async function getStaticProps() {
-  return {
-    props: {
-      origin: process.env.ORIGIN,
-    },
-  };
-}
