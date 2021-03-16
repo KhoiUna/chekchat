@@ -3,7 +3,4 @@ module.exports = {
   images: {
     domains: ["ik.imagekit.io"],
   },
-  env: {
-    ORIGIN: process.env.ORIGIN,
-  },
 };
