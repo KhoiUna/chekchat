@@ -4,7 +4,7 @@ import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Register() {
+export default function Register({ origin }) {
   const [responseText, setResponseText] = useState("");
   const [data, setData] = useState({
     username: "",
@@ -23,7 +23,7 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${process.env.ORIGIN}/api/register`, {
+      const res = await fetch(`${origin}/api/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -143,4 +143,12 @@ export default function Register() {
       </div>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      origin: process.env.ORIGIN,
+    },
+  };
 }

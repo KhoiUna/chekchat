@@ -4,9 +4,6 @@ module.exports = {
     domains: ["ik.imagekit.io"],
   },
   env: {
-    ORIGIN:
-      process.env.NODE_ENV === "development"
-        ? "http://localhost:5000"
-        : "https://chekapp.herokuapp.com",
+    ORIGIN: process.env.ORIGIN,
   },
 };

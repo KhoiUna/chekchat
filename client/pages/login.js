@@ -4,7 +4,7 @@ import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import { useState } from "react";
 
-export default function Login() {
+export default function Login({ origin }) {
   const [responseText, setResponseText] = useState("");
   const [data, setData] = useState({
     email: "",
@@ -21,7 +21,8 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`${process.env.ORIGIN}/api/login`, {
+      fetch("/api/hello");
+      const res = await fetch(`${origin}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -112,4 +113,12 @@ export default function Login() {
       </div>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  return {
+    props: {
+      origin: process.env.ORIGIN,
+    },
+  };
 }
