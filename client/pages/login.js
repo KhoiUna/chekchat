@@ -1,13 +1,16 @@
 import Layout from "../containers/layout";
 import { Paper, Grid, TextField, Button } from "@material-ui/core";
-import utilStyles from "../styles/utils.module.css";
+import utilStyles from "../styles/login_register.module.css";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/router";
 
 const origin =
   process.env.NEXT_PUBLIC_ORIGIN || "https://chekapp.herokuapp.com";
 
 export default function Login() {
+  const router = useRouter();
+
   const [responseText, setResponseText] = useState("");
   const [data, setData] = useState({
     email: "",
@@ -33,7 +36,10 @@ export default function Login() {
       });
 
       if (res.ok === false) setResponseText(await res.text());
-      if (res.ok === true) setResponseText("");
+      if (res.ok === true) {
+        //store localStorage
+        router.push("/todo");
+      }
     } catch (err) {
       console.error("Error logging in user");
     }

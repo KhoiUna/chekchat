@@ -1,6 +1,6 @@
 import Layout from "../containers/layout";
 import { Paper, Grid, TextField, Button } from "@material-ui/core";
-import utilStyles from "../styles/utils.module.css";
+import utilStyles from "../styles/login_register.module.css";
 import Link from "next/link";
 import { useState } from "react";
 
