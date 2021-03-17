@@ -9,7 +9,7 @@ router.post("/", async (req, res) => {
 
     res.send("ok");
   } catch (err) {
-    console.error(err);
+    console.error("Error logging in user");
   }
 });
 
