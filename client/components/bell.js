@@ -1,4 +1,4 @@
-import NotificationsIcon from "@material-ui/icons/notifications";
+import NotificationsIcon from "@material-ui/icons/Notifications";
 import Link from "next/link";
 import utilStyles from "../styles/utils.module.css";
 import NotificationBadge from "react-notification-badge";
