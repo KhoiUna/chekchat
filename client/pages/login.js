@@ -4,9 +4,17 @@ import utilStyles from "../styles/login_register.module.css";
 import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import HUE from "@material-ui/core/colors/blue";
 
 const origin =
   process.env.NEXT_PUBLIC_ORIGIN || "https://chekapp.herokuapp.com";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: HUE[800], contrastText: "#fff" },
+  },
+});
 
 export default function Login() {
   const router = useRouter();
@@ -100,14 +108,16 @@ export default function Login() {
               )}
 
               <Grid item xs={12} sm={6}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={utilStyles.button}
-                  type="submit"
-                >
-                  Login
-                </Button>
+                <MuiThemeProvider theme={theme}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={utilStyles.button}
+                    type="submit"
+                  >
+                    Login
+                  </Button>
+                </MuiThemeProvider>
               </Grid>
             </Grid>
           </Paper>

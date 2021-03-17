@@ -3,9 +3,17 @@ import { Paper, Grid, TextField, Button } from "@material-ui/core";
 import utilStyles from "../styles/login_register.module.css";
 import Link from "next/link";
 import { useState } from "react";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import HUE from "@material-ui/core/colors/blue";
 
 const origin =
   process.env.NEXT_PUBLIC_ORIGIN || "https://chekapp.herokuapp.com";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: HUE[800], contrastText: "#fff" },
+  },
+});
 
 export default function Register() {
   const [responseText, setResponseText] = useState("");
@@ -127,14 +135,16 @@ export default function Register() {
               )}
 
               <Grid item xs={12} sm={6}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={utilStyles.button}
-                  type="submit"
-                >
-                  Create an account
-                </Button>
+                <MuiThemeProvider theme={theme}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={utilStyles.button}
+                    type="submit"
+                  >
+                    Create an account
+                  </Button>
+                </MuiThemeProvider>
               </Grid>
             </Grid>
           </Paper>
