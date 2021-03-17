@@ -1,8 +1,9 @@
 import Head from "next/head";
-import Link from "next/link";
-import styles from "./layout.module.css";
+import styles from "./main_layout.module.css";
+import Menu from "../components/menu";
+import Bell from "../components/bell";
 
-export default function Layout({ children, componentName }) {
+export default function MainLayout({ children, componentName }) {
   return (
     <div className={styles.container}>
       <Head>
@@ -17,9 +18,9 @@ export default function Layout({ children, componentName }) {
       </Head>
 
       <header className={styles.header}>
-        <Link href="/">
-          <h1 className={styles.title}>CHEK</h1>
-        </Link>
+        <Menu />
+        <h1>{componentName}</h1>
+        <Bell componentName={componentName} />
       </header>
 
       <main className={styles.main}>{children}</main>

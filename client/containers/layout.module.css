@@ -1,5 +1,5 @@
 .container {
-  background-color: #18d2ff;
+  background-color: #0db3ff;
   height: 100vh;
 }
 
@@ -9,6 +9,10 @@
 }
 .header:hover {
   cursor: pointer;
+}
+
+.title {
+  color: white;
 }
 
 .main {
