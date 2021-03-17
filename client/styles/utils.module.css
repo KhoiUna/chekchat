@@ -1,38 +1,4 @@
-.container {
-    width: 80%;
-    max-width: 500px;
-    text-align: center;
-}
-
-.paper {
-    padding: 2% 0;
-}
-
-.grid {
-    padding: 2% 0;
-    margin: 2% 0;
-}
-
-.notice {
-    font-weight: bold;
-    font-style: italic;
-    text-decoration: underline;
-    font-size: 1rem;
-    margin-top: 3%;
-}
-.notice:hover {
-   cursor: pointer;
-}
-
-.title {
-    margin: 2% 0;
-}
-
-.button {
-    margin-top: 2%;
-}
-
-.responseText {    
-    font-weight: bold;
-    font-style: italic;
+.icon {
+  color: white;
+  cursor: pointer;
 }
