@@ -83,7 +83,7 @@ export default function Menu() {
   return (
     <>
       <Button onClick={toggleDrawer} style={{ textAlign: "left" }}>
-        <MenuIcon className={utilStyles.icon} style={{ fontSize: "2rem" }} />
+        <MenuIcon className={utilStyles.icon} style={{ fontSize: "2.5rem" }} />
       </Button>
       {drawerState &&
         menuList.map((anchor) => (
