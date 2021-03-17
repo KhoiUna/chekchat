@@ -28,6 +28,9 @@ const useStyles = makeStyles({
   fullList: {
     width: "auto",
   },
+  root: {
+    opacity: 0.5,
+  },
 });
 
 export default function Menu() {
@@ -88,6 +91,7 @@ export default function Menu() {
       {drawerState &&
         menuList.map((anchor) => (
           <SwipeableDrawer
+            className={classes.root}
             anchor="left"
             open={drawerState}
             onClose={toggleDrawer}
