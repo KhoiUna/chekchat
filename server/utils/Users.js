@@ -39,7 +39,7 @@ module.exports = {
       if (!(await PasswordHelper.comparePassword(password, user.password)))
         return false;
 
-      return true;
+      return { username: user.username, email: user.email };
     } catch (err) {
       console.error("Error logging in user");
     }

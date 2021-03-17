@@ -37,7 +37,7 @@ export default function Login() {
 
       if (res.ok === false) setResponseText(await res.text());
       if (res.ok === true) {
-        //store localStorage
+        localStorage.setItem("token", await res.text());
         router.push("/todo");
       }
     } catch (err) {
