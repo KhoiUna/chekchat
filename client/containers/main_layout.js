@@ -18,7 +18,7 @@ export default function MainLayout({ children, componentName }) {
       </Head>
 
       <header className={styles.header}>
-        <Menu />
+        <Menu componentName={componentName} />
         <h1>{componentName}</h1>
         <Bell componentName={componentName} />
       </header>

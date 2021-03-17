@@ -24,16 +24,18 @@ const menuList = [
 const useStyles = makeStyles({
   list: {
     width: 250,
+    padding: 0,
   },
   fullList: {
     width: "auto",
   },
   root: {
     opacity: 0.5,
+    padding: 0,
   },
 });
 
-export default function Menu() {
+export default function Menu({ componentName }) {
   const classes = useStyles();
   const [drawerState, setDrawerState] = useState(false);
 
@@ -55,13 +57,27 @@ export default function Menu() {
       onClick={toggleDrawer}
       onKeyDown={toggleDrawer}
     >
-      <List>
+      <List className={classes.list}>
+        <ListItem>
+          <ListItemText>
+            <h2>Menu</h2>
+          </ListItemText>
+        </ListItem>
+
         {menuList.slice(0, 4).map((i) => {
           const href = `/${i.toLowerCase()}`;
           return (
             <Link href={href}>
-              <ListItem button key={i}>
-                <ListItemText primary={i} />
+              <ListItem
+                button
+                key={i}
+                style={
+                  i === componentName ? { backgroundColor: "#c0c0c0" } : null
+                }
+              >
+                <ListItemText>
+                  {i === componentName ? <b>{i}</b> : i}
+                </ListItemText>
               </ListItem>
             </Link>
           );
