@@ -8,9 +8,11 @@ import {
   Divider,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Link from "next/link";
 import { useState } from "react";
 import utilStyles from "../styles/utils.module.css";
+import { useRouter } from "next/router";
 
 const menuList = [
   "Assigning",
@@ -37,6 +39,10 @@ const useStyles = makeStyles({
 
 export default function Menu({ componentName }) {
   const classes = useStyles();
+
+  const router = useRouter();
+  const goBack = () => router.back();
+
   const [drawerState, setDrawerState] = useState(false);
 
   const toggleDrawer = (event) => {
@@ -101,9 +107,21 @@ export default function Menu({ componentName }) {
 
   return (
     <>
-      <Button onClick={toggleDrawer} style={{ textAlign: "left" }}>
-        <MenuIcon className={utilStyles.icon} style={{ fontSize: "2.5rem" }} />
-      </Button>
+      {componentName !== "Notifications" ? (
+        <Button onClick={toggleDrawer}>
+          <MenuIcon
+            className={utilStyles.icon}
+            style={{ fontSize: "2.5rem" }}
+          />
+        </Button>
+      ) : (
+        <Button onClick={goBack}>
+          <ArrowBackIosIcon
+            className={utilStyles.icon}
+            style={{ fontSize: "2.5rem" }}
+          />
+        </Button>
+      )}
       {drawerState &&
         menuList.map((anchor) => (
           <SwipeableDrawer
