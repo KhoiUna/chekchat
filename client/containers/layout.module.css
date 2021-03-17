@@ -1,17 +1,16 @@
 .container {
-    background-color: #18D2FF;
-    height: 100vh;
+  background-color: #18d2ff;
+  height: 100vh;
 }
 
 .header {
-    text-align: center;
-    padding-top: 3%;
+  text-align: center;
+  padding-top: 3%;
 }
 .header:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .main {
-    margin-top: 3%;
+  margin-top: 3%;
 }
-
