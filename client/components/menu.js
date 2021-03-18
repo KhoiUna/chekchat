@@ -3,9 +3,9 @@ import {
   makeStyles,
   List,
   ListItem,
-  Button,
   ListItemText,
   Divider,
+  IconButton,
 } from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
@@ -108,19 +108,19 @@ export default function Menu({ componentName }) {
   return (
     <>
       {componentName !== "Notifications" ? (
-        <Button onClick={toggleDrawer}>
+        <IconButton onClick={toggleDrawer}>
           <MenuIcon
             className={utilStyles.icon}
             style={{ fontSize: "2.5rem" }}
           />
-        </Button>
+        </IconButton>
       ) : (
-        <Button onClick={goBack}>
+        <IconButton onClick={goBack}>
           <ArrowBackIosIcon
             className={utilStyles.icon}
             style={{ fontSize: "2.5rem" }}
           />
-        </Button>
+        </IconButton>
       )}
       {drawerState &&
         menuList.map((anchor) => (

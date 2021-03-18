@@ -3,10 +3,7 @@
   height: 100vh;
 }
 
-.header {
-  padding: 1rem;
-  background-color: #0db3ff;
-  display: grid;
-  grid-template-columns: 1fr 18fr 1fr;
-  color: white;
+.main {
+  margin-top: 2%;
+  text-align: center;
 }
