@@ -2,12 +2,13 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import Link from "next/link";
 import utilStyles from "../styles/utils.module.css";
 import Badge from "@material-ui/core/Badge";
+import IconButton from "@material-ui/core/IconButton";
 
 export default function Bell({ componentName, notificationCount }) {
   return (
     componentName !== "Notifications" && (
       <Link href="/notifications">
-        <div>
+        <IconButton>
           <Badge
             badgeContent={notificationCount || 100}
             color="error"
@@ -21,7 +22,7 @@ export default function Bell({ componentName, notificationCount }) {
           >
             <NotificationsIcon style={{ fontSize: "2rem" }} />
           </Badge>
-        </div>
+        </IconButton>
       </Link>
     )
   );
