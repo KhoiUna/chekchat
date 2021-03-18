@@ -6,7 +6,9 @@ import {
   ListItemText,
   Divider,
   IconButton,
+  Icon,
 } from "@material-ui/core";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MenuIcon from "@material-ui/icons/Menu";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Link from "next/link";
@@ -21,6 +23,7 @@ const menuList = [
   "Friends",
   "Profile",
   "Settings",
+  "Logout",
 ];
 
 const useStyles = makeStyles({
@@ -54,6 +57,11 @@ export default function Menu({ componentName }) {
       return;
     }
     setDrawerState(!drawerState);
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    router.push("/login");
   };
 
   const list = () => (
@@ -93,6 +101,18 @@ export default function Menu({ componentName }) {
       <List>
         {menuList.slice(4).map((i) => {
           const href = `/${i.toLowerCase()}`;
+          if (i === "Logout")
+            return (
+              <ListItem button key={i} onClick={logout}>
+                <ListItemText>
+                  {i}
+                  <IconButton>
+                    <ExitToAppIcon />
+                  </IconButton>
+                </ListItemText>
+              </ListItem>
+            );
+
           return (
             <Link href={href}>
               <ListItem
