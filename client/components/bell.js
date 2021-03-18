@@ -17,11 +17,9 @@ export default function Bell({ componentName, notificationCount }) {
             }}
             max={99}
             overlap="circle"
+            className={utilStyles.icon}
           >
-            <NotificationsIcon
-              className={utilStyles.icon}
-              style={{ fontSize: "2rem" }}
-            />
+            <NotificationsIcon style={{ fontSize: "2rem" }} />
           </Badge>
         </div>
       </Link>
