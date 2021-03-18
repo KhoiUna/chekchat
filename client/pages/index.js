@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Chek | Home</title>
+        <title>ChekThat | Home</title>
       </Head>
 
       <main>
