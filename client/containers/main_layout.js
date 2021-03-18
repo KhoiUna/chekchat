@@ -41,7 +41,7 @@ export default function MainLayout({ children, componentName }) {
           <Toolbar className={classes.toolBar}>
             <Menu componentName={componentName} />
 
-            <Typography variant="h4" className={classes.title}>
+            <Typography variant="h5" className={classes.title}>
               {componentName}
             </Typography>
 
