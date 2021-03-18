@@ -109,16 +109,13 @@ export default function Menu({ componentName }) {
     <>
       {componentName !== "Notifications" ? (
         <IconButton onClick={toggleDrawer}>
-          <MenuIcon
-            className={utilStyles.icon}
-            style={{ fontSize: "2.5rem" }}
-          />
+          <MenuIcon className={utilStyles.icon} style={{ fontSize: "2rem" }} />
         </IconButton>
       ) : (
         <IconButton onClick={goBack}>
           <ArrowBackIosIcon
             className={utilStyles.icon}
-            style={{ fontSize: "2.5rem" }}
+            style={{ fontSize: "2rem" }}
           />
         </IconButton>
       )}
