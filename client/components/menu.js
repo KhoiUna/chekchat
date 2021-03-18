@@ -95,8 +95,16 @@ export default function Menu({ componentName }) {
           const href = `/${i.toLowerCase()}`;
           return (
             <Link href={href}>
-              <ListItem button key={i}>
-                <ListItemText primary={i} />
+              <ListItem
+                button
+                key={i}
+                style={
+                  i === componentName ? { backgroundColor: "#c0c0c0" } : null
+                }
+              >
+                <ListItemText>
+                  {i === componentName ? <b>{i}</b> : i}
+                </ListItemText>
               </ListItem>
             </Link>
           );
