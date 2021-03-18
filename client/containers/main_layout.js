@@ -5,7 +5,7 @@ import Bell from "../components/bell";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles({
   root: {
     flexGrow: 1,
   },
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#0db3ff",
     margin: "0",
   },
-}));
+});
 
 export default function MainLayout({ children, componentName }) {
   const classes = useStyles();
