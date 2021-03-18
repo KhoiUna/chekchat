@@ -41,6 +41,7 @@ const useStyles = makeStyles({
     position: "absolute",
     bottom: "1rem",
     right: "0.8rem",
+    zIndex: 100,
   },
   tabTitle: {
     fontWeight: "bold",
