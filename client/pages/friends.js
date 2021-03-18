@@ -5,8 +5,15 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Grid from "@material-ui/core/Grid";
 import { useState } from "react";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
 import HUE from "@material-ui/core/colors/blue";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
+import utilStyles from "../styles/utils.module.css";
+import {
+  createMuiTheme,
+  makeStyles,
+  MuiThemeProvider,
+} from "@material-ui/core/styles";
 
 const friendsArray = [
   {
@@ -26,13 +33,35 @@ const friendsArray = [
   },
 ];
 
+const useStyles = makeStyles({
+  button: {
+    borderRadius: "50%",
+    margin: "4px 2px",
+    padding: "1rem",
+    position: "absolute",
+    bottom: "1rem",
+    right: "0.8rem",
+  },
+  tabTitle: {
+    fontWeight: "bold",
+    fontSize: "1rem",
+  },
+});
+
 const theme = createMuiTheme({
   palette: {
     primary: { main: HUE[700], contrastText: HUE[700] },
   },
 });
+const buttonTheme = createMuiTheme({
+  palette: {
+    primary: { main: HUE[500], contrastText: HUE[800] },
+  },
+});
 
 export default function Friends() {
+  const classes = useStyles();
+
   const [value, setValue] = useState(0);
 
   const handleTabChange = (e, newValue) => {
@@ -49,8 +78,8 @@ export default function Friends() {
           textColor="primary"
           centered
         >
-          <Tab label="Your friends" />
-          <Tab label="Sent requests" />
+          <Tab label="Your friends" className={classes.tabTitle} />
+          <Tab label="Sent requests" className={classes.tabTitle} />
         </Tabs>
       </MuiThemeProvider>
 
@@ -75,6 +104,15 @@ export default function Friends() {
           ))}
         </Grid>
       )}
+
+      <MuiThemeProvider theme={buttonTheme}>
+        <Button variant="contained" color="primary" className={classes.button}>
+          <PersonAddIcon
+            className={utilStyles.icon}
+            style={{ fontSize: "2rem" }}
+          />
+        </Button>
+      </MuiThemeProvider>
     </MainLayout>
   );
 }
