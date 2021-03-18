@@ -13,12 +13,12 @@ export default function Layout({ children, componentName }) {
         <link rel="image_src" href="/logo192.png" />
         <link rel="apple-touch-icon" href="/logo192.png" />
         <link rel="manifest" href="/manifest.json" />
-        <title>Chek | {componentName}</title>
+        <title>ChekThat | {componentName}</title>
       </Head>
 
       <header className={styles.header}>
         <Link href="/">
-          <h1 className={styles.title}>CHEK</h1>
+          <h1 className={styles.title}>CHEK-THAT</h1>
         </Link>
       </header>
 
