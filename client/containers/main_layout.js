@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   },
   appBar: {
     position: "fixed",
-    zIndex: 1,
+    zIndex: 2,
     top: 0,
   },
   title: {
