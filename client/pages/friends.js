@@ -14,6 +14,7 @@ import {
   makeStyles,
   MuiThemeProvider,
 } from "@material-ui/core/styles";
+import FriendPopup from "../components/friends/friend_popup";
 
 const friendsArray = [
   {
@@ -66,7 +67,7 @@ const useStyles = makeStyles({
     position: "fixed",
     bottom: "1rem",
     right: "0.8rem",
-    zIndex: 100,
+    zIndex: 1,
   },
   tabTitle: {
     fontWeight: "bold",
@@ -130,6 +131,8 @@ export default function Friends() {
           ))}
         </Grid>
       )}
+
+      {!false && <FriendPopup />}
 
       <MuiThemeProvider theme={buttonTheme}>
         <Button variant="contained" color="primary" className={classes.button}>
