@@ -63,7 +63,7 @@ const useStyles = makeStyles({
     borderRadius: "50%",
     margin: "4px 2px",
     padding: "1rem",
-    position: "absolute",
+    position: "fixed",
     bottom: "1rem",
     right: "0.8rem",
     zIndex: 100,
