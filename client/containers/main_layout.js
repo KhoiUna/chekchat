@@ -9,6 +9,11 @@ const useStyles = makeStyles({
   root: {
     flexGrow: 1,
   },
+  appBar: {
+    position: "fixed",
+    zIndex: 1,
+    top: 0,
+  },
   title: {
     flexGrow: 1,
   },
@@ -37,7 +42,7 @@ export default function MainLayout({ children, componentName }) {
       </Head>
 
       <header className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" className={classes.appBar}>
           <Toolbar className={classes.toolBar}>
             <Menu componentName={componentName} />
 
