@@ -22,6 +22,11 @@ const useStyles = makeStyles({
     display: "grid",
     gridTemplateRows: "1fr 1fr",
   },
+  overflowText: {
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+  },
 });
 
 export default function FriendTag({ username, email, avatarURL }) {
@@ -41,7 +46,12 @@ export default function FriendTag({ username, email, avatarURL }) {
         </div>
 
         <CardContent className={classes.gridRow}>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography
+            gutterBottom
+            variant="h5"
+            component="h2"
+            className={classes.overflowText}
+          >
             {username}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">

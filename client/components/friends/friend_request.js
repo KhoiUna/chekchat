@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   },
   gridColumn: {
     display: "grid",
-    gridTemplateColumns: "2fr 1fr",
+    gridTemplateColumns: "1fr 2fr",
   },
   gridRow: {
     display: "grid",
@@ -24,6 +24,11 @@ const useStyles = makeStyles({
   },
   badge: {
     margin: "0.8rem 0",
+  },
+  overflowText: {
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
   },
 });
 
@@ -42,15 +47,6 @@ export default function FriendRequest({ username, email, avatarURL, status }) {
     >
       <Card className={classes.root}>
         <CardActionArea className={classes.gridColumn}>
-          <CardContent className={classes.gridRow}>
-            <Typography gutterBottom variant="h6">
-              {username}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {email}
-            </Typography>
-          </CardContent>
-
           <div className={utilStyles.request_image}>
             <Image
               priority
@@ -60,6 +56,19 @@ export default function FriendRequest({ username, email, avatarURL, status }) {
               alt={username}
             />
           </div>
+
+          <CardContent className={classes.gridRow}>
+            <Typography
+              gutterBottom
+              variant="h6"
+              className={classes.overflowText}
+            >
+              {username}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {email}
+            </Typography>
+          </CardContent>
         </CardActionArea>
       </Card>
     </Badge>
