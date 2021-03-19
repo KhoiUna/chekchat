@@ -10,7 +10,6 @@ import Badge from "@material-ui/core/Badge";
 const useStyles = makeStyles({
   root: {
     maxWidth: 270,
-    marginTop: "1rem",
   },
   media: {
     height: 20,
@@ -23,6 +22,9 @@ const useStyles = makeStyles({
     display: "grid",
     gridTemplateRows: "1fr 1fr",
   },
+  badge: {
+    margin: "0.8rem 0",
+  },
 });
 
 export default function FriendRequest({ username, email, avatarURL, status }) {
@@ -34,8 +36,9 @@ export default function FriendRequest({ username, email, avatarURL, status }) {
       color="primary"
       anchorOrigin={{
         vertical: "bottom",
-        horizontal: "right",
+        horizontal: "left",
       }}
+      className={classes.badge}
     >
       <Card className={classes.root}>
         <CardActionArea className={classes.gridColumn}>

@@ -31,6 +31,31 @@ const friendsArray = [
     email: "knguyen@gmail.com",
     avatarURL: "/img/avatar.png",
   },
+  {
+    username: "Test Test",
+    email: "test@test.com",
+    avatarURL: "/img/avatar.png",
+  },
+  {
+    username: "Demo Demo",
+    email: "demo@demo.com",
+    avatarURL: "/img/avatar.png",
+  },
+  {
+    username: "Khoi Tuan Nguyen",
+    email: "knguyen@gmail.com",
+    avatarURL: "/img/avatar.png",
+  },
+  {
+    username: "Demo Demo",
+    email: "demo@demo.com",
+    avatarURL: "/img/avatar.png",
+  },
+  {
+    username: "Khoi Tuan Nguyen",
+    email: "knguyen@gmail.com",
+    avatarURL: "/img/avatar.png",
+  },
 ];
 
 const useStyles = makeStyles({
