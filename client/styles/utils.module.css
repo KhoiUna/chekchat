@@ -24,3 +24,9 @@
   cursor: pointer;
   z-index: 2;
 }
+
+.popup_container {
+  position: absolute;
+  z-index: 3;
+  bottom: 98%;
+}

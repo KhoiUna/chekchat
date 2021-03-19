@@ -14,7 +14,7 @@ import HUE from "@material-ui/core/colors/blue";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: "absolute",
+    position: "fixed",
     backgroundColor: "#f1f1f1",
     width: "100%",
   },
@@ -32,31 +32,44 @@ const buttonTheme = createMuiTheme({
     primary: { main: HUE[500], contrastText: "white" },
   },
 });
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: HUE[700], contrastText: HUE[700] },
+  },
+});
 
-export default function FriendPopup() {
+export default function FriendPopup({ showPopup, togglePopup }) {
   const classes = useStyles();
 
   return (
-    <div className={utilStyles.popup_layer}>
-      <Card className={classes.root}>
-        <CardContent>
-          <Typography gutterBottom className={classes.title}>
-            Add Friend
-          </Typography>
+    <>
+      <div
+        className={utilStyles.popup_layer}
+        onClick={() => togglePopup(showPopup)}
+      ></div>
+      <div className={utilStyles.popup_container}>
+        <Card className={classes.root}>
+          <CardContent>
+            <Typography gutterBottom className={classes.title}>
+              Add Friend
+            </Typography>
 
-          <form noValidate autoComplete="off">
-            <TextField label="Type user's email" variant="filled" />
-          </form>
-        </CardContent>
+            <form noValidate autoComplete="off">
+              <MuiThemeProvider theme={theme}>
+                <TextField label="Type user's email" variant="filled" />
+              </MuiThemeProvider>
+            </form>
+          </CardContent>
 
-        <CardActions className={classes.alignRight}>
-          <MuiThemeProvider theme={buttonTheme}>
-            <Button variant="contained" color="primary">
-              Send request
-            </Button>
-          </MuiThemeProvider>
-        </CardActions>
-      </Card>
-    </div>
+          <CardActions className={classes.alignRight}>
+            <MuiThemeProvider theme={buttonTheme}>
+              <Button variant="contained" color="primary">
+                Send request
+              </Button>
+            </MuiThemeProvider>
+          </CardActions>
+        </Card>
+      </div>
+    </>
   );
 }

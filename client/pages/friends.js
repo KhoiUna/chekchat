@@ -95,6 +95,11 @@ export default function Friends() {
     setValue(newValue);
   };
 
+  const [showPopup, setShowPopup] = useState(false);
+  const togglePopup = (state) => {
+    setShowPopup(!state);
+  };
+
   return (
     <MainLayout componentName="Friends">
       <MuiThemeProvider theme={theme}>
@@ -132,10 +137,17 @@ export default function Friends() {
         </Grid>
       )}
 
-      {!false && <FriendPopup />}
+      {showPopup && (
+        <FriendPopup showPopup={showPopup} togglePopup={togglePopup} />
+      )}
 
       <MuiThemeProvider theme={buttonTheme}>
-        <Button variant="contained" color="primary" className={classes.button}>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={() => togglePopup(showPopup)}
+        >
           <PersonAddIcon
             className={utilStyles.icon}
             style={{ fontSize: "2rem" }}
