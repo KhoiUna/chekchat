@@ -43,7 +43,9 @@ export default function Login() {
 
       if (res.ok === false) setResponseText(await res.text());
       if (res.ok === true) {
-        localStorage.setItem("token", await res.text());
+        const { email, token } = await res.json();
+        localStorage.setItem("email", email);
+        localStorage.setItem("token", token);
         router.push("/todo");
       }
     } catch (err) {
