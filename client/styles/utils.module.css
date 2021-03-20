@@ -13,6 +13,12 @@
   margin: 0 0.6rem;
 }
 
+.responseText {
+  font-style: italic;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
 .popup_layer {
   position: fixed;
   width: 100%;

@@ -9,7 +9,6 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 /* Customize scrollbar */
 *::-webkit-scrollbar {
   width: 10px !important;
@@ -20,4 +19,8 @@
 *::-webkit-scrollbar-thumb {
   background-color: silver;
   border-radius: 20px;
+}
+
+body {
+  background-color: #f1f1f1;
 }
