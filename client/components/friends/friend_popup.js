@@ -2,7 +2,6 @@ import {
   makeStyles,
   createMuiTheme,
   MuiThemeProvider,
-  withTheme,
 } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -11,10 +10,13 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import CheckIcon from "@material-ui/icons/Check";
+import CloseIcon from "@material-ui/icons/Close";
 import utilStyles from "../../styles/utils.module.css";
 import TextField from "@material-ui/core/TextField";
 import HUE from "@material-ui/core/colors/blue";
+import Grid from "@material-ui/core/Grid";
 import { useState } from "react";
+import Friends from "../../utils/Friends";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -67,17 +69,32 @@ export default function FriendPopup({ showPopup, togglePopup }) {
   const classes = useStyles();
 
   const [email, setEmail] = useState("");
-  const [progress, setProgress] = useState(false);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setProgress("start");
-    setTimeout(() => {
-      setProgress("success");
-      setEmail("");
-    }, 1000);
-  };
   const handleChange = ({ target }) => {
+    setProgress(false);
     setEmail(target.value);
+    setResponseText("");
+  };
+
+  const [progress, setProgress] = useState(false);
+  const [responseText, setResponseText] = useState("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (email.length !== 0) {
+        setProgress("start");
+        const res = await Friends.sendFriendRequest(email);
+        if (res.ok === true) {
+          setProgress("success");
+          setEmail("");
+          setResponseText("");
+        } else {
+          setProgress("fail");
+          setResponseText(res.text());
+        }
+      }
+    } catch (err) {
+      console.error("Error sending friend request");
+    }
   };
 
   return (
@@ -104,6 +121,16 @@ export default function FriendPopup({ showPopup, togglePopup }) {
                 />
               </MuiThemeProvider>
               <br />
+              {responseText && (
+                <Grid item xs={12} sm={6}>
+                  <p
+                    className={utilStyles.responseText}
+                    style={{ color: "red" }}
+                  >
+                    Invalid email
+                  </p>
+                </Grid>
+              )}
               <CardActions className={classes.alignRight}>
                 <MuiThemeProvider theme={buttonTheme}>
                   <Button
@@ -111,15 +138,20 @@ export default function FriendPopup({ showPopup, togglePopup }) {
                     color="primary"
                     type="submit"
                     style={
-                      progress === "success"
+                      progress === "start" || !progress
+                        ? null
+                        : progress === "success"
                         ? { backgroundColor: "#2cb32c" }
-                        : null
+                        : { backgroundColor: "red" }
                     }
                   >
-                    {progress === "success" ? "Request sent" : "Send request"}
+                    {progress === "start" || !progress ? "Send request" : null}
+                    {progress === "success" && "Request sent"}
+                    {progress === "fail" && "Fail to send request"}
                     <MuiThemeProvider theme={progressTheme}>
                       {progress === "start" && <CircularProgress />}
                       {progress === "success" && <CheckIcon />}
+                      {progress === "fail" && <CloseIcon />}
                     </MuiThemeProvider>
                   </Button>
                 </MuiThemeProvider>
