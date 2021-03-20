@@ -42,7 +42,7 @@ module.exports = {
       const friendRequestList = await collection
         .find({
           "from.email": userEmail,
-          status: "pending",
+          status: "Pending",
         })
         .toArray();
       return friendRequestList;
