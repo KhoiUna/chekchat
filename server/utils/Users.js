@@ -24,9 +24,9 @@ module.exports = {
       const collection = client.db("chekchat").collection("users");
 
       const user = await collection.findOne({ email });
-      if (user) return false;
+      if (user) return true;
 
-      return true;
+      return false;
     } catch (err) {
       console.error("Error checking user");
       return null;

@@ -15,7 +15,7 @@ router.post("/", async (req, res) => {
     if (validation !== true) return res.send(validation);
 
     //Check user
-    if (!(await Users.checkUser(email))) return res.send("Email already used");
+    if (await Users.checkUser(email)) return res.send("Email already used");
 
     //Save user
     if (await Users.saveUser(username, email, password)) return res.send("ok");
