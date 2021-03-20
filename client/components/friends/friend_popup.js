@@ -18,12 +18,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#f1f1f1",
     width: "100%",
   },
+  cardContent: {
+    padding: "1% 0",
+  },
   title: {
     fontSize: "2rem",
     fontWeight: "bold",
   },
   alignRight: {
     float: "right",
+    marginTop: "1rem",
   },
 }));
 
@@ -41,6 +45,10 @@ const theme = createMuiTheme({
 export default function FriendPopup({ showPopup, togglePopup }) {
   const classes = useStyles();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       <div
@@ -49,25 +57,29 @@ export default function FriendPopup({ showPopup, togglePopup }) {
       ></div>
       <div className={utilStyles.popup_container}>
         <Card className={classes.root}>
-          <CardContent>
+          <CardContent className={classes.cardContent}>
             <Typography gutterBottom className={classes.title}>
               Add Friend
             </Typography>
 
-            <form noValidate autoComplete="off">
+            <form autoComplete="off" onSubmit={handleSubmit}>
               <MuiThemeProvider theme={theme}>
-                <TextField label="Type user's email" variant="filled" />
+                <TextField
+                  label="Type user's email"
+                  variant="filled"
+                  type="email"
+                />
               </MuiThemeProvider>
+              <br />
+              <CardActions className={classes.alignRight}>
+                <MuiThemeProvider theme={buttonTheme}>
+                  <Button variant="contained" color="primary" type="submit">
+                    Send request
+                  </Button>
+                </MuiThemeProvider>
+              </CardActions>
             </form>
           </CardContent>
-
-          <CardActions className={classes.alignRight}>
-            <MuiThemeProvider theme={buttonTheme}>
-              <Button variant="contained" color="primary">
-                Send request
-              </Button>
-            </MuiThemeProvider>
-          </CardActions>
         </Card>
       </div>
     </>
