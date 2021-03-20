@@ -6,9 +6,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import HUE from "@material-ui/core/colors/blue";
-
-const origin =
-  process.env.NEXT_PUBLIC_ORIGIN || "https://chekapp.herokuapp.com";
+import { origin } from "../config/config";
 
 const theme = createMuiTheme({
   palette: {
