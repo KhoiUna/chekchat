@@ -41,12 +41,38 @@ module.exports = {
       if (!(await PasswordHelper.comparePassword(password, user.password)))
         return false;
 
-      return { username: user.username, email: user.email };
+      return {
+        username: user.username,
+        email: user.email,
+      };
     } catch (err) {
       console.error("Error logging in user");
     }
   },
-  async checkFriend(email) {
-    return true;
+  async checkAlreadyFriend(userEmail, requestEmail) {
+    try {
+      const collection = client.db("chekchat").collection("friends");
+
+      const friendList = await collection.findOne({
+        email: userEmail,
+        friend: { email: requestEmail },
+      });
+      if (friendList) return true;
+
+      return false;
+    } catch (err) {
+      console.error("Error checking user's friends");
+      return null;
+    }
+  },
+  async getUser(email) {
+    try {
+      const collection = client.db("chekchat").collection("users");
+
+      const user = await collection.findOne({ email });
+      return user;
+    } catch (err) {
+      console.error("Error getting user");
+    }
   },
 };

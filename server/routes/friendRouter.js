@@ -1,24 +1,37 @@
 const ValidationHelper = require("../helpers/ValidationHelper");
+const FriendRequest = require("../utils/FriendRequest");
 const router = require("express").Router();
 const Users = require("../utils/Users");
 
-router.post("/requests", async (req, res) => {
+router.post("/requests", async (req, res, next) => {
   try {
-    const { email } = req.body;
+    const { userEmail, requestEmail } = req.body;
     //Validate email
-    const validation = ValidationHelper.validateEmail(email);
+    const validation = ValidationHelper.validateEmail(requestEmail);
     if (!validation) return res.status(400).send("Invalid email");
 
     //Check if user is already friend
-    const alreadyFriend = ValidationHelper.validateEmail(email);
+    const alreadyFriend = await Users.checkAlreadyFriend(
+      userEmail,
+      requestEmail
+    );
     if (alreadyFriend) return res.status(400).send("User is already friend");
 
     //Check if request already sent
-    //
+    const alreadySent = await FriendRequest.checkAlreadySent(
+      userEmail,
+      requestEmail
+    );
+    if (alreadySent)
+      return res.status(400).send("Request to user already sent");
 
-    res.send("ok");
+    //Save request
+    if (await FriendRequest.saveRequest(userEmail, requestEmail))
+      return res.send("ok");
+
+    res.send("Sorry, something is wrong");
   } catch (err) {
-    console.error("Error saving friend request");
+    console.error("Error sending friend request");
     next();
   }
 });
