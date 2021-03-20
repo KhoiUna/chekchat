@@ -37,7 +37,7 @@ export default function FriendRequest({ username, email, avatarURL, status }) {
 
   return (
     <Badge
-      badgeContent={status}
+      badgeContent={status === "Pending" ? `${status}...` : status}
       color="primary"
       anchorOrigin={{
         vertical: "bottom",
