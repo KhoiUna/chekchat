@@ -35,4 +35,20 @@ module.exports = {
       return null;
     }
   },
+  async getFriendRequestList(userEmail) {
+    try {
+      const collection = client.db("chekchat").collection("friend_requests");
+
+      const friendRequestList = await collection
+        .find({
+          "from.email": userEmail,
+          status: "pending",
+        })
+        .toArray();
+      return friendRequestList;
+    } catch (err) {
+      console.error("Error getting friend request list");
+      return null;
+    }
+  },
 };

@@ -69,8 +69,14 @@ module.exports = {
     try {
       const collection = client.db("chekchat").collection("users");
 
-      const user = await collection.findOne({ email });
-      return user;
+      const user = await collection.findOne({
+        email,
+      });
+      return {
+        email: user.email,
+        username: user.username,
+        avatarURL: user.avatarURL,
+      };
     } catch (err) {
       console.error("Error getting user");
     }

@@ -3,6 +3,18 @@ const FriendRequest = require("../utils/FriendRequest");
 const router = require("express").Router();
 const Users = require("../utils/Users");
 
+router.get("/requests", async (req, res, next) => {
+  try {
+    const userEmail = req.query.userEmail;
+    const friendRequestList = await FriendRequest.getFriendRequestList(
+      userEmail
+    );
+    res.json(friendRequestList);
+  } catch (err) {
+    console.error("Error getting friend request");
+  }
+});
+
 router.post("/requests", async (req, res, next) => {
   try {
     const { userEmail, requestEmail } = req.body;
