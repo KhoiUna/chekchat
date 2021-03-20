@@ -24,7 +24,7 @@ module.exports = {
       const cursor = await collection.find({
         "from.email": userEmail,
         "to.email": requestEmail,
-        status: "pending",
+        status: "Pending",
       });
       const friendRequest = await cursor.next();
       if (friendRequest) return true;
