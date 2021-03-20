@@ -6,7 +6,7 @@ router.post("/", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const userObj = await Users.getUser(email, password);
+    const userObj = await Users.loginUser(email, password);
     if (!userObj) return res.status(401).send("Invalid username or password");
 
     const token = generateJWT(userObj);
