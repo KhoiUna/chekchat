@@ -9,13 +9,16 @@ module.exports = {
     const friendRequestList = [];
     return friendRequestList;
   },
-  async sendFriendRequest(email) {
+  async sendFriendRequest(requestEmail) {
     const res = await fetch(`${origin}/api/friends/requests`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({
+        userEmail: localStorage.getItem("email"),
+        requestEmail,
+      }),
     });
     return res;
   },

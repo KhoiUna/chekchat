@@ -89,7 +89,7 @@ export default function FriendPopup({ showPopup, togglePopup }) {
           setResponseText("");
         } else {
           setProgress("fail");
-          setResponseText(res.text());
+          setResponseText(await res.text());
         }
       }
     } catch (err) {
@@ -127,7 +127,7 @@ export default function FriendPopup({ showPopup, togglePopup }) {
                     className={utilStyles.responseText}
                     style={{ color: "red" }}
                   >
-                    Invalid email
+                    {responseText}
                   </p>
                 </Grid>
               )}
