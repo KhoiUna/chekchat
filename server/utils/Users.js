@@ -10,6 +10,8 @@ module.exports = {
         username,
         email,
         password: await PasswordHelper.hashPassword(password),
+        avatarURL:
+          "https://ik.imagekit.io/chekchat/default-avatar_TAffG0nED.png",
       });
       return response;
     } catch (err) {
@@ -43,5 +45,8 @@ module.exports = {
     } catch (err) {
       console.error("Error logging in user");
     }
+  },
+  async checkFriend(email) {
+    return true;
   },
 };

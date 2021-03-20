@@ -1,39 +1,54 @@
 const Joi = require("joi");
 const passwordValidator = require("password-validator");
 
-//Password schema
-const passwordSchema = new passwordValidator();
-passwordSchema
-  .is()
-  .min(10)
-  .is()
-  .max(30)
-  .has()
-  .uppercase()
-  .has()
-  .lowercase()
-  .has()
-  .digits(3)
-  .has()
-  .not()
-  .spaces();
-
-//username & email schema
-const schema = Joi.object({
-  username: Joi.string().alphanum().min(3).max(30).required(),
-  email: Joi.string()
-    .email({
-      minDomainSegments: 2,
-    })
-    .required(),
-});
-
 module.exports = {
   validatePassword(password) {
+    //Password schema
+    const passwordSchema = new passwordValidator();
+    passwordSchema
+      .is()
+      .min(10)
+      .is()
+      .max(30)
+      .has()
+      .uppercase()
+      .has()
+      .lowercase()
+      .has()
+      .digits(3)
+      .has()
+      .not()
+      .spaces();
+
     const error = passwordSchema.validate(password, { list: true });
     return error;
   },
+  validateEmail(email) {
+    const schema = Joi.object({
+      email: Joi.string()
+        .email({
+          minDomainSegments: 2,
+        })
+        .required(),
+    });
+    const { error } = schema.validate({
+      email,
+    });
+    if (error) return false;
+
+    return true;
+  },
   forRegistration(username, email, password, confirmPassword) {
+    //username & email schema
+    const schema = Joi.object({
+      username: Joi.string().alphanum().min(3).max(30).required(),
+      email: Joi.string()
+        .email({
+          minDomainSegments: 2,
+        })
+        .required(),
+    });
+
     const { error } = schema.validate({
       username,
       email,
