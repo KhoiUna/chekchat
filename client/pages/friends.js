@@ -1,5 +1,3 @@
-import FriendTag from "../components/friends/friend_tag";
-import FriendRequest from "../components/friends/friend_request";
 import MainLayout from "../containers/main_layout";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
@@ -15,7 +13,8 @@ import {
   MuiThemeProvider,
 } from "@material-ui/core/styles";
 import FriendPopup from "../components/friends/friend_popup";
-
+import FriendList from "../containers/friends/FriendList";
+import FriendRequestList from "../containers/friends/FriendRequestList";
 const useStyles = makeStyles({
   button: {
     borderRadius: "50%",
@@ -56,46 +55,6 @@ export default function Friends() {
     setShowPopup(!state);
   };
 
-  const [friendsArray, setFriendsArray] = useState([
-    {
-      username: "Test Test",
-      email: "test@test.com",
-      avatarURL: "/img/avatar.png",
-    },
-    {
-      username: "Demo Demo",
-      email: "demo@demo.com",
-      avatarURL: "/img/avatar.png",
-    },
-    {
-      username: "Khoi Tuan Nguyen",
-      email: "knguyen@gmail.com",
-      avatarURL: "/img/avatar.png",
-    },
-    {
-      username: "Test Test",
-      email: "test@test.com",
-      avatarURL: "/img/avatar.png",
-    },
-    {
-      username: "Demo Demo",
-      email: "demo@demo.com",
-      avatarURL: "/img/avatar.png",
-    },
-    {
-      username: "Khoi Tuan Nguyen",
-      email: "knguyen@gmail.com",
-      avatarURL: "/img/avatar.png",
-    },
-  ]);
-  useEffect(() => {
-    if (value === 0) {
-      console.log(value);
-    } else {
-      console.log(value);
-    }
-  }, [value]);
-
   return (
     <MainLayout componentName="Friends">
       <MuiThemeProvider theme={theme}>
@@ -113,23 +72,11 @@ export default function Friends() {
 
       {value === 0 ? (
         <Grid container direction="column" justify="center" alignItems="center">
-          {friendsArray.map((item) => (
-            <FriendTag
-              username={item.username}
-              email={item.email}
-              avatarURL={item.avatarURL}
-            />
-          ))}
+          <FriendList />
         </Grid>
       ) : (
         <Grid container direction="column" justify="center" alignItems="center">
-          {friendsArray.map((item) => (
-            <FriendRequest
-              username={item.username}
-              email={item.email}
-              avatarURL={item.avatarURL}
-            />
-          ))}
+          <FriendRequestList />
         </Grid>
       )}
 
