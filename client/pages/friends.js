@@ -107,7 +107,7 @@ export default function Friends() {
           centered
         >
           <Tab label="Your friends" className={classes.tabTitle} />
-          <Tab label="Sent requests" className={classes.tabTitle} />
+          <Tab label="Pending requests" className={classes.tabTitle} />
         </Tabs>
       </MuiThemeProvider>
 
