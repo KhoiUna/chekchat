@@ -4,7 +4,7 @@ import MainLayout from "../containers/main_layout";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Grid from "@material-ui/core/Grid";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
 import HUE from "@material-ui/core/colors/blue";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
@@ -15,49 +15,6 @@ import {
   MuiThemeProvider,
 } from "@material-ui/core/styles";
 import FriendPopup from "../components/friends/friend_popup";
-
-const friendsArray = [
-  {
-    username: "Test Test",
-    email: "test@test.com",
-    avatarURL: "/img/avatar.png",
-  },
-  {
-    username: "Demo Demo",
-    email: "demo@demo.com",
-    avatarURL: "/img/avatar.png",
-  },
-  {
-    username: "Khoi Tuan Nguyen",
-    email: "knguyen@gmail.com",
-    avatarURL: "/img/avatar.png",
-  },
-  {
-    username: "Test Test",
-    email: "test@test.com",
-    avatarURL: "/img/avatar.png",
-  },
-  {
-    username: "Demo Demo",
-    email: "demo@demo.com",
-    avatarURL: "/img/avatar.png",
-  },
-  {
-    username: "Khoi Tuan Nguyen",
-    email: "knguyen@gmail.com",
-    avatarURL: "/img/avatar.png",
-  },
-  {
-    username: "Demo Demo",
-    email: "demo@demo.com",
-    avatarURL: "/img/avatar.png",
-  },
-  {
-    username: "Khoi Tuan Nguyen",
-    email: "knguyen@gmail.com",
-    avatarURL: "/img/avatar.png",
-  },
-];
 
 const useStyles = makeStyles({
   button: {
@@ -90,7 +47,6 @@ export default function Friends() {
   const classes = useStyles();
 
   const [value, setValue] = useState(0);
-
   const handleTabChange = (e, newValue) => {
     setValue(newValue);
   };
@@ -99,6 +55,46 @@ export default function Friends() {
   const togglePopup = (state) => {
     setShowPopup(!state);
   };
+
+  const [friendsArray, setFriendsArray] = useState([
+    {
+      username: "Test Test",
+      email: "test@test.com",
+      avatarURL: "/img/avatar.png",
+    },
+    {
+      username: "Demo Demo",
+      email: "demo@demo.com",
+      avatarURL: "/img/avatar.png",
+    },
+    {
+      username: "Khoi Tuan Nguyen",
+      email: "knguyen@gmail.com",
+      avatarURL: "/img/avatar.png",
+    },
+    {
+      username: "Test Test",
+      email: "test@test.com",
+      avatarURL: "/img/avatar.png",
+    },
+    {
+      username: "Demo Demo",
+      email: "demo@demo.com",
+      avatarURL: "/img/avatar.png",
+    },
+    {
+      username: "Khoi Tuan Nguyen",
+      email: "knguyen@gmail.com",
+      avatarURL: "/img/avatar.png",
+    },
+  ]);
+  useEffect(() => {
+    if (value === 0) {
+      console.log(value);
+    } else {
+      console.log(value);
+    }
+  }, [value]);
 
   return (
     <MainLayout componentName="Friends">
