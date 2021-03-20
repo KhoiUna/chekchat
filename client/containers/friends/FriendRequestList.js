@@ -15,6 +15,7 @@ export default function FriendRequestList() {
           username={item.to.username}
           email={item.to.email}
           avatarURL={item.to.avatarURL}
+          status={item.status}
         />
       ))}
     </>

@@ -9,7 +9,7 @@ module.exports = {
       const response = await collection.insertOne({
         from: await getUser(userEmail),
         to: await getUser(requestEmail),
-        status: "pending",
+        status: "Pending",
       });
       return response;
     } catch (err) {
