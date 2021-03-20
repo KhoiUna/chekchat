@@ -21,16 +21,17 @@ module.exports = {
     try {
       const collection = client.db("chekchat").collection("friend_requests");
 
-      const friendRequest = await collection.findOne({
-        from: { email: userEmail },
-        to: { email: requestEmail },
+      const cursor = await collection.find({
+        "from.email": userEmail,
+        "to.email": requestEmail,
         status: "pending",
       });
+      const friendRequest = await cursor.next();
       if (friendRequest) return true;
 
       return false;
     } catch (err) {
-      console.error("Error checking user's friends");
+      console.error("Error checking user's friend request");
       return null;
     }
   },

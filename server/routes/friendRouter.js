@@ -10,6 +10,10 @@ router.post("/requests", async (req, res, next) => {
     const validation = ValidationHelper.validateEmail(requestEmail);
     if (!validation) return res.status(400).send("Invalid email");
 
+    //Check if request email exists
+    const checkEmailExists = await Users.checkUser(requestEmail);
+    if (!checkEmailExists) return res.status(400).send("User does not exist");
+
     //Check if user is already friend
     const alreadyFriend = await Users.checkAlreadyFriend(
       userEmail,
@@ -22,6 +26,7 @@ router.post("/requests", async (req, res, next) => {
       userEmail,
       requestEmail
     );
+    console.log(alreadySent);
     if (alreadySent)
       return res.status(400).send("Request to user already sent");
 
@@ -29,7 +34,7 @@ router.post("/requests", async (req, res, next) => {
     if (await FriendRequest.saveRequest(userEmail, requestEmail))
       return res.send("ok");
 
-    res.send("Sorry, something is wrong");
+    res.status(400).send("Sorry, something is wrong");
   } catch (err) {
     console.error("Error sending friend request");
     next();
