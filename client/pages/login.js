@@ -28,6 +28,7 @@ export default function Login() {
       ...prev,
       [name]: value,
     }));
+    setResponseText("");
   };
 
   const handleSubmit = async (e) => {
