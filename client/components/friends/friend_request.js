@@ -1,4 +1,8 @@
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  MuiThemeProvider,
+  createMuiTheme,
+} from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
@@ -6,6 +10,10 @@ import Typography from "@material-ui/core/Typography";
 import Image from "next/image";
 import utilStyles from "../../styles/utils.module.css";
 import Badge from "@material-ui/core/Badge";
+import CardActions from "@material-ui/core/CardActions";
+import DoneIcon from "@material-ui/icons/Done";
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles({
   root: {
@@ -22,6 +30,10 @@ const useStyles = makeStyles({
     display: "grid",
     gridTemplateRows: "1fr 1fr",
   },
+  notificationgridRow: {
+    display: "grid",
+    gridTemplateRows: "2fr 1fr",
+  },
   badge: {
     margin: "0.8rem 0",
   },
@@ -30,12 +42,28 @@ const useStyles = makeStyles({
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
   },
+  notificationRoot: {
+    maxWidth: 270,
+    margin: "0.8rem 0",
+  },
 });
 
-export default function FriendRequest({ username, email, avatarURL, status }) {
+const friendRequestButtonTheme = createMuiTheme({
+  palette: {
+    primary: { main: "#2cb32c" },
+  },
+});
+
+export default function FriendRequest({
+  fromPage,
+  username,
+  email,
+  avatarURL,
+  status,
+}) {
   const classes = useStyles();
 
-  return (
+  return fromPage === "friends" ? (
     <Badge
       badgeContent={status === "Pending" ? `${status}...` : status}
       color="primary"
@@ -72,5 +100,44 @@ export default function FriendRequest({ username, email, avatarURL, status }) {
         </CardActionArea>
       </Card>
     </Badge>
+  ) : (
+    <Card className={classes.notificationRoot}>
+      <CardActionArea className={classes.gridColumn}>
+        <div className={utilStyles.request_image}>
+          <Image
+            priority
+            src={avatarURL}
+            height={108}
+            width={108}
+            alt={username}
+          />
+        </div>
+
+        <CardContent className={classes.notificationgridRow}>
+          <Typography
+            gutterBottom
+            variant="h6"
+            className={classes.overflowText}
+          >
+            {username}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {email}
+          </Typography>
+
+          <CardActions>
+            <MuiThemeProvider theme={friendRequestButtonTheme}>
+              <IconButton aria-label="accept" color="primary">
+                <DoneIcon />
+              </IconButton>
+
+              <IconButton aria-label="reject" color="secondary">
+                <CloseIcon />
+              </IconButton>
+            </MuiThemeProvider>
+          </CardActions>
+        </CardContent>
+      </CardActionArea>
+    </Card>
   );
 }

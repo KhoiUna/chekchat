@@ -16,7 +16,7 @@ import TextField from "@material-ui/core/TextField";
 import HUE from "@material-ui/core/colors/blue";
 import Grid from "@material-ui/core/Grid";
 import { useState } from "react";
-import Friends from "../../utils/Friends";
+import FriendRequest from "../../utils/FriendRequest";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,7 +82,7 @@ export default function FriendPopup({ showPopup, togglePopup }) {
     try {
       if (email.length !== 0) {
         setProgress("start");
-        const res = await Friends.sendFriendRequest(email);
+        const res = await FriendRequest.sendFriendRequest(email);
         if (res.ok === true) {
           setProgress("success");
           setEmail("");

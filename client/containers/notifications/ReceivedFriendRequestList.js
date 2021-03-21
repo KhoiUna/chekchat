@@ -1,21 +1,21 @@
 import { useState, useEffect } from "react";
 import FriendRequest from "../../components/friends/friend_request";
-import { fetchSentFriendRequestsList } from "../../utils/FriendRequest";
+import { fetchReceivedFriendRequestsList } from "../../utils/FriendRequest";
 
-export default function FriendRequestList() {
+export default function ReceivedFriendRequestList() {
   const [friendRequestList, setFriendRequestList] = useState([]);
   useEffect(() => {
-    fetchSentFriendRequestsList().then((r) => setFriendRequestList(r));
+    fetchReceivedFriendRequestsList().then((r) => setFriendRequestList(r));
   }, []);
 
   return (
     <>
       {friendRequestList.map((item) => (
         <FriendRequest
-          fromPage="friends"
-          username={item.to.username}
-          email={item.to.email}
-          avatarURL={item.to.avatarURL}
+          fromPage="notifications"
+          username={item.from.username}
+          email={item.from.email}
+          avatarURL={item.from.avatarURL}
           status={item.status}
         />
       ))}
