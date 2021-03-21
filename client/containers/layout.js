@@ -18,7 +18,7 @@ export default function Layout({ children, componentName }) {
 
       <header className={styles.header}>
         <Link href="/">
-          <h1 className={styles.title}>CHEK-THAT</h1>
+          <h1 className={styles.title}>ChekThat</h1>
         </Link>
       </header>
 
