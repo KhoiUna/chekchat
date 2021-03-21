@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import FriendRequest from "../../components/friends/friend_request";
-import { fetchFriendRequestsList } from "../../utils/Friends";
+import { fetchSentFriendRequestsList } from "../../utils/FriendRequest";
 
 export default function FriendRequestList() {
   const [friendRequestList, setFriendRequestList] = useState([]);
   useEffect(() => {
-    fetchFriendRequestsList().then((r) => setFriendRequestList(r));
+    fetchSentFriendRequestsList().then((r) => setFriendRequestList(r));
   }, []);
 
   return (

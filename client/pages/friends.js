@@ -2,7 +2,7 @@ import MainLayout from "../containers/main_layout";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Grid from "@material-ui/core/Grid";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Button from "@material-ui/core/Button";
 import HUE from "@material-ui/core/colors/blue";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
