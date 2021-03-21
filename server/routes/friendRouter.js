@@ -22,6 +22,10 @@ router.post("/requests", async (req, res, next) => {
     const validation = ValidationHelper.validateEmail(requestEmail);
     if (!validation) return res.status(400).send("Invalid email");
 
+    //If request email is user's email, block it
+    if (userEmail === requestEmail)
+      return res.status(400).send("Cannot send request to yourself");
+
     //Check if request email exists
     const checkEmailExists = await Users.checkUser(requestEmail);
     if (!checkEmailExists) return res.status(400).send("User does not exist");
@@ -38,7 +42,6 @@ router.post("/requests", async (req, res, next) => {
       userEmail,
       requestEmail
     );
-    console.log(alreadySent);
     if (alreadySent)
       return res.status(400).send("Request to user already sent");
 
