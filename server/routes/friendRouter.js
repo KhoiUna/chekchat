@@ -3,15 +3,27 @@ const FriendRequest = require("../utils/FriendRequest");
 const router = require("express").Router();
 const Users = require("../utils/Users");
 
-router.get("/requests", async (req, res, next) => {
+router.get("/requests/sent", async (req, res, next) => {
   try {
     const userEmail = req.query.userEmail;
-    const friendRequestList = await FriendRequest.getFriendRequestList(
+    const friendRequestList = await FriendRequest.getSentFriendRequestList(
       userEmail
     );
     res.json(friendRequestList);
   } catch (err) {
-    console.error("Error getting friend request");
+    console.error("Error getting sent friend request");
+  }
+});
+
+router.get("/requests/received", async (req, res, next) => {
+  try {
+    const userEmail = req.query.userEmail;
+    const friendRequestList = await FriendRequest.getReceivedFriendRequestList(
+      userEmail
+    );
+    res.json(friendRequestList);
+  } catch (err) {
+    console.error("Error getting received friend request");
   }
 });
 
