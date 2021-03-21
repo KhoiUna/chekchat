@@ -16,8 +16,8 @@ export default function ReceivedFriendRequestList() {
   const handleClick = async (action, requestId) => {
     const res = await actionFriendRequest(action, requestId);
     setChange(!change);
-    setFriendRequestList(
-      (prev) => (prev = removeItemFromFriendRequest(prev, requestId))
+    setFriendRequestList((prev) =>
+      removeItemFromFriendRequest(prev, requestId)
     );
   };
 
