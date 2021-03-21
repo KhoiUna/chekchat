@@ -121,16 +121,13 @@ export default function FriendPopup({ showPopup, togglePopup }) {
                 />
               </MuiThemeProvider>
               <br />
+
               {responseText && (
-                <Grid item xs={12} sm={6}>
-                  <p
-                    className={utilStyles.responseText}
-                    style={{ color: "red" }}
-                  >
-                    {responseText}
-                  </p>
-                </Grid>
+                <p className={utilStyles.responseText} style={{ color: "red" }}>
+                  {responseText}
+                </p>
               )}
+
               <CardActions className={classes.alignRight}>
                 <MuiThemeProvider theme={buttonTheme}>
                   <Button
