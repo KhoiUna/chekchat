@@ -53,11 +53,13 @@ module.exports = {
     try {
       const collection = client.db("chekchat").collection("friends");
 
-      const friendList = await collection.findOne({
+      const friend = await collection.findOne({
         email: userEmail,
-        friend: { email: requestEmail },
+        "friend.email": requestEmail,
       });
-      if (friendList) return true;
+      console.log(requestEmail);
+      console.log(friend);
+      if (friend) return true;
 
       return false;
     } catch (err) {
@@ -79,6 +81,40 @@ module.exports = {
       };
     } catch (err) {
       console.error("Error getting user");
+    }
+  },
+  async addFriend(userEmail, friendEmail) {
+    try {
+      const collection = client.db("chekchat").collection("friends");
+
+      const addFriendToFirstUser = await collection.insertOne({
+        email: userEmail,
+        friend: await this.getUser(friendEmail),
+      });
+      const addFriendToSecondUser = await collection.insertOne({
+        email: friendEmail,
+        friend: await this.getUser(userEmail),
+      });
+
+      return addFriendToFirstUser && addFriendToSecondUser;
+    } catch (err) {
+      console.error("Error adding friend to user");
+      return null;
+    }
+  },
+  async getFriendList(userEmail) {
+    try {
+      const collection = client.db("chekchat").collection("friends");
+
+      const friendList = await collection
+        .find({
+          email: userEmail,
+        })
+        .toArray();
+      return friendList;
+    } catch (err) {
+      console.error("Error getting friend list");
+      return null;
     }
   },
 };

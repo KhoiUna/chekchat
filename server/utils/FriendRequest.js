@@ -1,3 +1,4 @@
+const { ObjectID } = require("bson");
 const client = require("../db/client");
 const { getUser } = require("./Users");
 
@@ -14,6 +15,32 @@ module.exports = {
       return response;
     } catch (err) {
       console.error("Error saving friend request");
+      return null;
+    }
+  },
+  async updateRequest(requestId, action) {
+    try {
+      const collection = client.db("chekchat").collection("friend_requests");
+      const status = action === "accept" ? "Accepted" : "Rejected";
+
+      const { modifiedCount } = await collection.updateOne(
+        {
+          _id: ObjectID(requestId),
+        },
+        { $set: { status } }
+      );
+
+      if (!modifiedCount) return false;
+
+      const response = await collection.findOne({
+        _id: ObjectID(requestId),
+      });
+      const friendEmail = response.from.email;
+      const userEmail = response.to.email;
+
+      return { userEmail, friendEmail };
+    } catch (err) {
+      console.error("Error updating friend request --- utils");
       return null;
     }
   },
