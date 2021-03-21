@@ -57,8 +57,6 @@ module.exports = {
         email: userEmail,
         "friend.email": requestEmail,
       });
-      console.log(requestEmail);
-      console.log(friend);
       if (friend) return true;
 
       return false;

@@ -94,4 +94,14 @@ router.put("/requests", async (req, res, next) => {
   }
 });
 
+router.get("/", async (req, res, next) => {
+  try {
+    const userEmail = req.query.userEmail;
+    const friendList = await Users.getFriendList(userEmail);
+    res.json(friendList);
+  } catch (err) {
+    console.error("Error getting friend list");
+  }
+});
+
 module.exports = router;
