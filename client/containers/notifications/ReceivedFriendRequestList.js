@@ -9,7 +9,6 @@ import removeItemFromFriendRequest from "../../helpers/removeItemFromFriendReque
 export default function ReceivedFriendRequestList() {
   const [friendRequestList, setFriendRequestList] = useState([]);
   useEffect(() => {
-    console.log("fetch");
     fetchReceivedFriendRequestsList().then((r) => setFriendRequestList(r));
   }, []);
 
