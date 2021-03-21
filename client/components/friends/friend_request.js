@@ -56,10 +56,12 @@ const friendRequestButtonTheme = createMuiTheme({
 
 export default function FriendRequest({
   fromPage,
+  requestId,
   username,
   email,
   avatarURL,
   status,
+  onClickAction,
 }) {
   const classes = useStyles();
 
@@ -127,11 +129,19 @@ export default function FriendRequest({
 
           <CardActions>
             <MuiThemeProvider theme={friendRequestButtonTheme}>
-              <IconButton aria-label="accept" color="primary">
+              <IconButton
+                aria-label="accept"
+                color="primary"
+                onClick={() => onClickAction("accept", requestId)}
+              >
                 <DoneIcon />
               </IconButton>
 
-              <IconButton aria-label="reject" color="secondary">
+              <IconButton
+                aria-label="reject"
+                color="secondary"
+                onClick={() => onClickAction("reject", requestId)}
+              >
                 <CloseIcon />
               </IconButton>
             </MuiThemeProvider>
