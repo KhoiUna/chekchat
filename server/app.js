@@ -41,6 +41,9 @@ app.use("/api/register", registerRouter);
 const friendRouter = require("./routes/friendRouter");
 app.use("/api/friends", friendRouter);
 
+const missionRouter = require("./routes/missionRouter");
+app.use("/api/missions", missionRouter);
+
 //Error handling
 app.use((err, req, res, next) => {
   const status = err.status || 500;
