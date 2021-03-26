@@ -15,6 +15,7 @@ import {
 import FriendPopup from "../components/friends/friend_popup";
 import FriendList from "../containers/friends/FriendList";
 import FriendRequestList from "../containers/friends/FriendRequestList";
+
 const useStyles = makeStyles({
   button: {
     borderRadius: "50%",
