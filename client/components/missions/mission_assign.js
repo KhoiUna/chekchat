@@ -71,6 +71,16 @@ export default function MissionAssign() {
     setSelectedReceiver(target.value);
   };
 
+  const [subject, setSubject] = useState("");
+  const handleChangeTitle = ({ target }) => {
+    setSubject(target.value);
+  };
+
+  const [description, setDescription] = useState("");
+  const handleChangeDescription = ({ target }) => {
+    setDescription(target.value);
+  };
+
   const handleClick = async () => {
     try {
       const res = await sendMissionRequest(
@@ -89,7 +99,7 @@ export default function MissionAssign() {
       <Grid container justify="center" className={classes.gridContainer}>
         <Grid item xs={6}>
           <Typography gutterBottom variant="inherit" component="h3">
-            Title:
+            Subject:
           </Typography>
         </Grid>
         <Grid item xs={6}>
@@ -101,7 +111,8 @@ export default function MissionAssign() {
             fullWidth
             autoComplete="off"
             variant="filled"
-            //   value={data.username}
+            value={subject}
+            onChange={handleChangeTitle}
           />
         </Grid>
       </Grid>
@@ -155,10 +166,10 @@ export default function MissionAssign() {
         </Grid>
         <Grid item xs={6}>
           <FormControl variant="filled" required>
-            <InputLabel id="time-slot-label">Time slot</InputLabel>
+            <InputLabel id="receiver-label">Receiver</InputLabel>
             <Select
-              labelId="time-slot-label"
-              id="demo-simple-select-outlined"
+              labelId="receiver-label"
+              id="receiver-select"
               value={selectedReceiver}
               onChange={handleSelect}
               label="To"
@@ -186,6 +197,7 @@ export default function MissionAssign() {
             aria-label="describe your mission"
             placeholder="Describe your mission here"
             className={classes.textArea}
+            onChange={handleChangeDescription}
           />
         </Grid>
       </Grid>
