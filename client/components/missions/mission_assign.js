@@ -72,7 +72,7 @@ export default function MissionAssign() {
   };
 
   const [subject, setSubject] = useState("");
-  const handleChangeTitle = ({ target }) => {
+  const handleChangeSubject = ({ target }) => {
     setSubject(target.value);
   };
 
@@ -105,14 +105,14 @@ export default function MissionAssign() {
         <Grid item xs={6}>
           <TextField
             required
-            id="title"
-            name="title"
-            label="Title"
+            id="subject"
+            name="subject"
+            label="Subject"
             fullWidth
             autoComplete="off"
             variant="filled"
             value={subject}
-            onChange={handleChangeTitle}
+            onChange={handleChangeSubject}
           />
         </Grid>
       </Grid>
