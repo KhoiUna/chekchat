@@ -41,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
   },
   textArea: {
     padding: "0.5rem",
+    resize: "none",
+    width: "90%",
+    fontSize: 14,
   },
   selectEmpty: {
     marginTop: theme.spacing(1),
@@ -193,6 +196,7 @@ export default function MissionAssign() {
         </Grid>
         <Grid item xs={6} className={classes.alignLeft}>
           <TextareaAutosize
+            rowsMin={3}
             rowsMax={10}
             aria-label="describe your mission"
             placeholder="Describe your mission here"
