@@ -11,7 +11,7 @@ module.exports = {
         body: JSON.stringify({
           userEmail: localStorage.getItem("email"),
           subject,
-          due_date: selectedDate,
+          selectedDate,
           receiver,
           description,
         }),
