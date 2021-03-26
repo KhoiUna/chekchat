@@ -11,6 +11,7 @@ import {
 import HUE from "@material-ui/core/colors/blue";
 import Typography from "@material-ui/core/Typography";
 import { useEffect, useState } from "react";
+import MissionAssign from "../components/missions/mission_assign";
 
 const useStyles = makeStyles((theme) => ({
   extendedIcon: {
@@ -94,39 +95,54 @@ export default function Assigning() {
     ]);
   }, []);
 
+  const [missionAssign, setMissionAssign] = useState(false);
+  const toggleMissionAssign = () => setMissionAssign(!missionAssign);
+
   return (
     <MainLayout componentName="Assigning">
-      <Typography
-        gutterBottom
-        variant="inherit"
-        component="h2"
-        className={classes.alignLeft}
-      >
-        Sent mission:
-      </Typography>
+      {!missionAssign && (
+        <>
+          <Typography
+            gutterBottom
+            variant="inherit"
+            component="h2"
+            className={classes.alignLeft}
+          >
+            Sent mission:
+          </Typography>
 
-      <Grid container direction="column" justify="center" alignItems="center">
-        {sentMissionList.map((i) => (
-          <MissionRequest
-            status={i.status}
-            username={i.from.username}
-            subject={i.subject}
-            avatarURL={i.from.avatarURL}
-          />
-        ))}
-      </Grid>
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+          >
+            {sentMissionList.map((i) => (
+              <MissionRequest
+                status={i.status}
+                username={i.from.username}
+                subject={i.subject}
+                avatarURL={i.from.avatarURL}
+              />
+            ))}
+          </Grid>
 
-      <MuiThemeProvider theme={buttonTheme}>
-        <Fab
-          color="primary"
-          aria-label="assign mission"
-          variant="extended"
-          className={classes.button}
-        >
-          <AddIcon className={classes.extendedIcon} />
-          Assign
-        </Fab>
-      </MuiThemeProvider>
+          <MuiThemeProvider theme={buttonTheme}>
+            <Fab
+              color="primary"
+              aria-label="assign mission"
+              variant="extended"
+              className={classes.button}
+              onClick={toggleMissionAssign}
+            >
+              <AddIcon className={classes.extendedIcon} />
+              Assign
+            </Fab>
+          </MuiThemeProvider>
+        </>
+      )}
+
+      {missionAssign && <MissionAssign />}
     </MainLayout>
   );
 }
