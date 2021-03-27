@@ -60,7 +60,7 @@ const theme = createMuiTheme({
   },
 });
 
-export default function MissionAssign() {
+export default function MissionAssign({ toggleMissionAssign }) {
   const classes = useStyles();
 
   const [friendList, setFriendList] = useState([]);
@@ -212,6 +212,7 @@ export default function MissionAssign() {
           className={utilStyles.button}
           type="submit"
           className={classes.margin}
+          onClick={toggleMissionAssign}
         >
           Cancel
         </Button>

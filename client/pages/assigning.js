@@ -142,7 +142,9 @@ export default function Assigning() {
         </>
       )}
 
-      {missionAssign && <MissionAssign />}
+      {missionAssign && (
+        <MissionAssign toggleMissionAssign={toggleMissionAssign} />
+      )}
     </MainLayout>
   );
 }
