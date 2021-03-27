@@ -1,10 +1,17 @@
 const router = require("express").Router();
 const ValidationHelper = require("../helpers/ValidationHelper");
+const Missions = require("../utils/Missions");
 const { saveMissionRequest } = require("../utils/Missions");
 
 router.get("/", async (req, res, next) => {
   try {
-    //
+    const { email, position } = req.query;
+
+    const missionRequestList = await Missions.getMissionRequest(
+      position,
+      email
+    );
+    res.json(missionRequestList);
   } catch (err) {
     console.error("Error getting mission requests");
   }
@@ -19,6 +26,10 @@ router.post("/", async (req, res, next) => {
       receiverEmail,
       description,
     } = req.body;
+
+    //If request email is user's email, block it
+    if (userEmail === receiverEmail)
+      return res.status(400).send("Cannot send request to yourself");
 
     if (
       !ValidationHelper.validateMission(

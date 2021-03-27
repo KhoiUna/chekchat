@@ -2,6 +2,29 @@ const { getUser } = require("./Users");
 const client = require("../db/client");
 
 module.exports = {
+  async getMissionRequest(position, email) {
+    try {
+      const collection = client.db("chekchat").collection("missions");
+
+      if (position === "from") {
+        const missionRequestList = await collection
+          .find({
+            "from.email": email,
+          })
+          .toArray();
+        return missionRequestList;
+      } else {
+        const missionRequestList = await collection
+          .find({
+            "to.email": email,
+          })
+          .toArray();
+        return missionRequestList;
+      }
+    } catch (err) {
+      console.error("Error getting mission request");
+    }
+  },
   async saveMissionRequest(
     userEmail,
     subject,
