@@ -46,7 +46,7 @@ export default function Assigning() {
   const [missionAssign, setMissionAssign] = useState(false);
   const toggleMissionAssign = () => setMissionAssign(!missionAssign);
 
-  const [sentMissionList, setSentMissionList] = useState([]);
+  const [sentMissionList, setSentMissionList] = useState(null);
   useEffect(() => {
     if (!missionAssign)
       fetchSentMissionRequestsList("from").then((r) => setSentMissionList(r));
@@ -65,7 +65,7 @@ export default function Assigning() {
             Sent mission:
           </Typography>
 
-          {sentMissionList.length !== 0 ? (
+          {sentMissionList ? (
             <Grid
               container
               direction="column"
