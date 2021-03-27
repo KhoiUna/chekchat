@@ -1,7 +1,16 @@
 const router = require("express").Router();
 const ValidationHelper = require("../helpers/ValidationHelper");
+const { saveMissionRequest } = require("../utils/Missions");
 
-router.post("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
+  try {
+    //
+  } catch (err) {
+    console.error("Error getting mission requests");
+  }
+});
+
+router.post("/", async (req, res, next) => {
   try {
     const {
       userEmail,
@@ -22,19 +31,22 @@ router.post("/", async (req, res) => {
     )
       return res.status(400).send("Invalid data");
 
-    //Get sender info
-    //
-
-    //Get receiver info
-    //
-
     //Save to db
-    //
+    if (
+      !(await saveMissionRequest(
+        userEmail,
+        subject,
+        selectedDate,
+        receiverEmail,
+        description
+      ))
+    )
+      return res.status(400).send("Sorry, something is wrong");
 
     res.send("ok");
   } catch (err) {
     console.error("Error saving mission request");
-    console.error(err);
+    next();
   }
 });
 
