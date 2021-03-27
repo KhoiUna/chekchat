@@ -56,12 +56,7 @@ export default function MissionRequest({ status, username, subject }) {
       <Card className={classes.root}>
         <CardActionArea className={classes.gridColumn}>
           <div className={classes.gridRow}>
-            <Typography
-              gutterBottom
-              variant="inherit"
-              component="h2"
-              className={classes.overflowText}
-            >
+            <Typography gutterBottom variant="inherit" component="h2">
               Sent to:
             </Typography>
             <Typography
