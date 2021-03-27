@@ -44,7 +44,7 @@ module.exports = {
       const missionInfo = await res.json();
       return missionInfo;
     } catch (err) {
-      console.error(`Error getting ${position} mission requests`);
+      console.error(`Error getting mission info`);
     }
   },
 };
