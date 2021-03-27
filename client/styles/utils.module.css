@@ -36,3 +36,9 @@
   z-index: 3;
   bottom: 98%;
 }
+
+.mission_popup {
+  position: absolute;
+  z-index: 3;
+  top: 2.5rem;
+}

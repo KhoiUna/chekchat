@@ -61,57 +61,65 @@ export default function MissionRequest({ requestId, username, subject }) {
     setMissionPopupView(!missionPopupView);
   };
 
-  return !missionPopupView ? (
-    <Card className={classes.notificationRoot}>
-      <CardActionArea className={classes.gridColumn}>
-        <div className={classes.gridRow}>
-          <Typography gutterBottom variant="inherit" component="h2">
-            From:
-          </Typography>
-          <Typography
-            gutterBottom
-            variant="h6"
-            component="h2"
-            className={classes.overflowUsername}
-          >
-            {username}
-          </Typography>
-        </div>
+  return (
+    <>
+      <Card className={classes.notificationRoot}>
+        <CardActionArea className={classes.gridColumn}>
+          <div className={classes.gridRow}>
+            <Typography gutterBottom variant="inherit" component="h2">
+              From:
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="h2"
+              className={classes.overflowUsername}
+            >
+              {username}
+            </Typography>
+          </div>
 
-        <Divider orientation="vertical" flexItem className={classes.divider} />
+          <Divider
+            orientation="vertical"
+            flexItem
+            className={classes.divider}
+          />
 
-        <CardContent className={classes.notificationgridRow}>
-          <Typography gutterBottom variant="inherit" component="h2">
-            Subject:
-          </Typography>
-          <Typography
-            gutterBottom
-            variant="h6"
-            component="h2"
-            className={classes.overflowText}
-          >
-            {subject}
-          </Typography>
+          <CardContent className={classes.notificationgridRow}>
+            <Typography gutterBottom variant="inherit" component="h2">
+              Subject:
+            </Typography>
+            <Typography
+              gutterBottom
+              variant="h6"
+              component="h2"
+              className={classes.overflowText}
+            >
+              {subject}
+            </Typography>
 
-          <CardActions>
-            <MuiThemeProvider theme={buttonTheme}>
-              <Button
-                variant="outlined"
-                aria-label="view and reply"
-                color="primary"
-                onClick={toggleMissionPopupView}
-              >
-                View & Reply
-              </Button>
-            </MuiThemeProvider>
-          </CardActions>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-  ) : (
-    <MissionPopupView
-      requestId={requestId}
-      toggleMissionPopupView={toggleMissionPopupView}
-    />
+            <CardActions>
+              <MuiThemeProvider theme={buttonTheme}>
+                <Button
+                  variant="outlined"
+                  aria-label="view and reply"
+                  color="primary"
+                  onClick={toggleMissionPopupView}
+                >
+                  View & Reply
+                </Button>
+              </MuiThemeProvider>
+            </CardActions>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+
+      {missionPopupView && (
+        <MissionPopupView
+          requestId={requestId}
+          toggleMissionPopupView={toggleMissionPopupView}
+        />
+      )}
+    </>
   );
 }
