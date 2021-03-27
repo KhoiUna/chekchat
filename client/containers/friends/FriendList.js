@@ -4,12 +4,12 @@ import { fetchFriendList } from "../../utils/Friends";
 import utilStyles from "../../styles/utils.module.css";
 
 export default function FriendList() {
-  const [friendList, setFriendList] = useState([]);
+  const [friendList, setFriendList] = useState(null);
   useEffect(() => {
     fetchFriendList().then((r) => setFriendList(r));
   }, []);
 
-  return friendList.length !== 0 ? (
+  return friendList ? (
     <>
       {friendList.map((item) => (
         <FriendTag
@@ -20,6 +20,6 @@ export default function FriendList() {
       ))}
     </>
   ) : (
-    <p className={utilStyles.responseText}>You have no friends yet</p>
+    <p className={utilStyles.responseText}>Loading...</p>
   );
 }
