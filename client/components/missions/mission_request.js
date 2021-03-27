@@ -10,9 +10,6 @@ const useStyles = makeStyles({
   root: {
     maxWidth: 270,
   },
-  media: {
-    height: 20,
-  },
   gridColumn: {
     display: "grid",
     gridTemplateColumns: "1fr 0fr 1fr",
