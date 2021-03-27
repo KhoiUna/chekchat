@@ -11,6 +11,8 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import HUE from "@material-ui/core/colors/blue";
+import { useState } from "react";
+import MissionPopupView from "../missions/mission_popup_view";
 
 const useStyles = makeStyles({
   notificationRoot: {
@@ -51,15 +53,15 @@ const buttonTheme = createMuiTheme({
   },
 });
 
-export default function MissionRequest({
-  requestId,
-  username,
-  subject,
-  onClickAction,
-}) {
+export default function MissionRequest({ requestId, username, subject }) {
   const classes = useStyles();
 
-  return (
+  const [missionPopupView, setMissionPopupView] = useState(false);
+  const toggleMissionPopupView = () => {
+    setMissionPopupView(!missionPopupView);
+  };
+
+  return !missionPopupView ? (
     <Card className={classes.notificationRoot}>
       <CardActionArea className={classes.gridColumn}>
         <div className={classes.gridRow}>
@@ -97,7 +99,7 @@ export default function MissionRequest({
                 variant="outlined"
                 aria-label="view and reply"
                 color="primary"
-                onClick={() => onClickAction(requestId)}
+                onClick={toggleMissionPopupView}
               >
                 View & Reply
               </Button>
@@ -106,5 +108,10 @@ export default function MissionRequest({
         </CardContent>
       </CardActionArea>
     </Card>
+  ) : (
+    <MissionPopupView
+      requestId={requestId}
+      toggleMissionPopupView={toggleMissionPopupView}
+    />
   );
 }
