@@ -65,7 +65,7 @@ export default function Assigning() {
             Sent mission:
           </Typography>
 
-          {sentMissionList ? (
+          {sentMissionList.length !== 0 ? (
             <Grid
               container
               direction="column"
