@@ -88,4 +88,19 @@ module.exports = {
 
     return true;
   },
+  validateMission(
+    userEmail,
+    subject,
+    selectedDate,
+    receiverEmail,
+    description
+  ) {
+    return (
+      this.validateEmail(userEmail) &&
+      this.validateEmail(receiverEmail) &&
+      subject &&
+      selectedDate &&
+      description
+    );
+  },
 };
