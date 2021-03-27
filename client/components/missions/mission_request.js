@@ -8,7 +8,7 @@ import Badge from "@material-ui/core/Badge";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 270,
+    width: 270,
   },
   gridColumn: {
     display: "grid",

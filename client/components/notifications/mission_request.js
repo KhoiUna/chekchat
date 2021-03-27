@@ -16,7 +16,7 @@ import MissionPopupView from "../missions/mission_popup_view";
 
 const useStyles = makeStyles({
   notificationRoot: {
-    maxWidth: 320,
+    width: 320,
     margin: "0.8rem 0",
   },
   gridColumn: {
