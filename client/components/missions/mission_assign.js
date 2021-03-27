@@ -12,6 +12,9 @@ import Button from "@material-ui/core/Button";
 import utilStyles from "../../styles/utils.module.css";
 import Typography from "@material-ui/core/Typography";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import CheckIcon from "@material-ui/icons/Check";
+import CloseIcon from "@material-ui/icons/Close";
 import {
   KeyboardDatePicker,
   KeyboardTimePicker,
@@ -59,6 +62,20 @@ const theme = createMuiTheme({
     primary: { main: HUE[500], contrastText: "#fff" },
   },
 });
+const progressTheme = createMuiTheme({
+  overrides: {
+    MuiCircularProgress: {
+      root: {
+        width: "1rem !important",
+        height: "1rem !important",
+        marginLeft: "1rem",
+      },
+      svg: {
+        color: "white",
+      },
+    },
+  },
+});
 
 export default function MissionAssign({ toggleMissionAssign }) {
   const classes = useStyles();
@@ -68,7 +85,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
     fetchFriendList().then((r) => setFriendList(r));
   }, []);
 
-  const [selectedDate, handleDateChange] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
   const [selectedReceiver, setSelectedReceiver] = useState("");
   const handleSelect = ({ target }) => {
     setSelectedReceiver(target.value);
@@ -84,14 +101,26 @@ export default function MissionAssign({ toggleMissionAssign }) {
     setDescription(target.value);
   };
 
+  const [progress, setProgress] = useState(false);
   const handleClick = async () => {
     try {
+      setProgress("start");
       const res = await sendMissionRequest(
         subject,
         selectedDate,
         selectedReceiver,
         description
       );
+      if (res.ok === true) {
+        setProgress("success");
+
+        setSelectedDate(null);
+        setSubject("");
+        setSelectedReceiver("");
+        setDescription("");
+      } else {
+        setProgress("fail");
+      }
     } catch (err) {
       console.error("Error sending mission request");
     }
@@ -132,7 +161,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
               <KeyboardDatePicker
                 label="Date"
                 value={selectedDate}
-                onChange={(date) => handleDateChange(date)}
+                onChange={(date) => setSelectedDate(date)}
                 format="yyyy/MM/dd"
               />
             </MuiPickersUtilsProvider>
@@ -154,7 +183,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
                 placeholder={`${new Date().getHours()}:${new Date().getMinutes()} AM`}
                 mask="__:__ _M"
                 value={selectedDate}
-                onChange={(date) => handleDateChange(date)}
+                onChange={(date) => setSelectedDate(date)}
               />
             </MuiPickersUtilsProvider>
           </MuiThemeProvider>
@@ -202,6 +231,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
             placeholder="Describe your mission here"
             className={classes.textArea}
             onChange={handleChangeDescription}
+            value={description}
           />
         </Grid>
       </Grid>
@@ -223,8 +253,22 @@ export default function MissionAssign({ toggleMissionAssign }) {
             className={utilStyles.button}
             type="submit"
             onClick={handleClick}
+            style={
+              progress === "start" || !progress
+                ? null
+                : progress === "success"
+                ? { backgroundColor: "#2cb32c" }
+                : { backgroundColor: "red" }
+            }
           >
-            Send
+            {progress === "start" || !progress ? "Send" : null}
+            {progress === "success" && "Request sent"}
+            {progress === "fail" && "Invalid data"}
+            <MuiThemeProvider theme={progressTheme}>
+              {progress === "start" && <CircularProgress />}
+              {progress === "success" && <CheckIcon />}
+              {progress === "fail" && <CloseIcon />}
+            </MuiThemeProvider>
           </Button>
         </MuiThemeProvider>
       </Grid>

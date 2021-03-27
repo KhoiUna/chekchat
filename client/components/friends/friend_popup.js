@@ -14,7 +14,6 @@ import CloseIcon from "@material-ui/icons/Close";
 import utilStyles from "../../styles/utils.module.css";
 import TextField from "@material-ui/core/TextField";
 import HUE from "@material-ui/core/colors/blue";
-import Grid from "@material-ui/core/Grid";
 import { useState } from "react";
 import FriendRequest from "../../utils/FriendRequest";
 
