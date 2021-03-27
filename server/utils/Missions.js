@@ -19,7 +19,7 @@ module.exports = {
       const collection = client.db("chekchat").collection("missions");
       const response = await collection.insertOne({
         subject,
-        due_date: selectedDate,
+        due_date: new Date(selectedDate),
         from: senderInfo,
         to: receiverInfo,
         description,

@@ -99,7 +99,8 @@ module.exports = {
       this.validateEmail(userEmail) &&
       this.validateEmail(receiverEmail) &&
       subject &&
-      selectedDate &&
+      new Date(new Date(selectedDate).toLocaleDateString()) >=
+        new Date(new Date().toLocaleDateString()) &&
       description
     );
   },
