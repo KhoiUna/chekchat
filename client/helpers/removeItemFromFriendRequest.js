@@ -1,7 +1,7 @@
-module.exports = (friendRequestList, requestId) => {
-  const index = friendRequestList.findIndex((item) => item._id === requestId);
+module.exports = (list, requestId) => {
+  const index = list.findIndex((item) => item._id === requestId);
   if (index > -1) {
-    friendRequestList.splice(index, 1);
+    list.splice(index, 1);
   }
-  return friendRequestList;
+  return list;
 };
