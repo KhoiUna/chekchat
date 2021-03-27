@@ -47,7 +47,8 @@ export default function Assigning() {
 
   const [sentMissionList, setSentMissionList] = useState([]);
   useEffect(() => {
-    fetchSentMissionRequestsList("from").then((r) => setSentMissionList(r));
+    if (!missionAssign)
+      fetchSentMissionRequestsList("from").then((r) => setSentMissionList(r));
   }, [missionAssign]);
 
   return (
