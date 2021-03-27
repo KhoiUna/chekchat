@@ -1,5 +1,6 @@
 const { getUser } = require("./Users");
 const client = require("../db/client");
+const { ObjectID } = require("bson");
 
 module.exports = {
   async getMissionRequest(position, email) {
@@ -23,6 +24,18 @@ module.exports = {
       }
     } catch (err) {
       console.error("Error getting mission request");
+    }
+  },
+  async getMissionInfo(requestId) {
+    try {
+      const collection = client.db("chekchat").collection("missions");
+
+      const missionInfo = await collection.findOne({
+        _id: ObjectID(requestId),
+      });
+      return missionInfo;
+    } catch (err) {
+      console.error("Error getting mission info");
     }
   },
   async saveMissionRequest(

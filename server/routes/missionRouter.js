@@ -17,6 +17,18 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+router.get("/:requestId", async (req, res, next) => {
+  try {
+    const { requestId } = req.params;
+
+    const missionInfo = await Missions.getMissionInfo(requestId);
+    res.json(missionInfo);
+  } catch (err) {
+    console.error("Error getting mission info");
+    next();
+  }
+});
+
 router.post("/", async (req, res, next) => {
   try {
     const {
