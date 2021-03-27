@@ -193,7 +193,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
       <Grid container justify="center" className={classes.gridContainer}>
         <Grid item xs={6}>
           <Typography gutterBottom variant="inherit" component="h3">
-            To:
+            Send to:
           </Typography>
         </Grid>
         <Grid item xs={6}>

@@ -62,7 +62,7 @@ export default function MissionRequest({ status, username, subject }) {
               component="h2"
               className={classes.overflowText}
             >
-              To:
+              Sent to:
             </Typography>
             <Typography
               gutterBottom

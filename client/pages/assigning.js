@@ -12,6 +12,7 @@ import HUE from "@material-ui/core/colors/blue";
 import Typography from "@material-ui/core/Typography";
 import { useEffect, useState } from "react";
 import MissionAssign from "../components/missions/mission_assign";
+import { fetchSentMissionRequestsList } from "../utils/Missions";
 
 const useStyles = makeStyles((theme) => ({
   extendedIcon: {
@@ -41,62 +42,13 @@ const buttonTheme = createMuiTheme({
 export default function Assigning() {
   const classes = useStyles();
 
-  const [sentMissionList, setSentMissionList] = useState([]);
-  useEffect(() => {
-    setSentMissionList([
-      {
-        subject: "Logo design",
-        due_date: new Date(),
-        from: { username: "Holder holderabc", avatarURL: "/img/avatar.png" },
-        to: { username: "Holder holder", avatarURL: "/img/avatar.png" },
-        description: "",
-        status: "Pending",
-      },
-      {
-        subject: "Logo design",
-        due_date: new Date(),
-        from: { username: "Holder holderabc", avatarURL: "/img/avatar.png" },
-        to: { username: "Holder holder", avatarURL: "/img/avatar.png" },
-        description: "",
-        status: "Pending",
-      },
-      {
-        subject: "Logo design",
-        due_date: new Date(),
-        from: { username: "Holder holderabc", avatarURL: "/img/avatar.png" },
-        to: { username: "Holder holder", avatarURL: "/img/avatar.png" },
-        description: "",
-        status: "Pending",
-      },
-      {
-        subject: "Logo design",
-        due_date: new Date(),
-        from: { username: "Holder holderabc", avatarURL: "/img/avatar.png" },
-        to: { username: "Holder holder", avatarURL: "/img/avatar.png" },
-        description: "",
-        status: "Pending",
-      },
-      {
-        subject: "Logo design",
-        due_date: new Date(),
-        from: { username: "Holder holderabc", avatarURL: "/img/avatar.png" },
-        to: { username: "Holder holder", avatarURL: "/img/avatar.png" },
-        description: "",
-        status: "Pending",
-      },
-      {
-        subject: "Logo design",
-        due_date: new Date(),
-        from: { username: "Holder holderabc", avatarURL: "/img/avatar.png" },
-        to: { username: "Holder holder", avatarURL: "/img/avatar.png" },
-        description: "",
-        status: "Pending",
-      },
-    ]);
-  }, []);
-
   const [missionAssign, setMissionAssign] = useState(false);
   const toggleMissionAssign = () => setMissionAssign(!missionAssign);
+
+  const [sentMissionList, setSentMissionList] = useState([]);
+  useEffect(() => {
+    fetchSentMissionRequestsList("from").then((r) => setSentMissionList(r));
+  }, [missionAssign]);
 
   return (
     <MainLayout componentName="Assigning">
@@ -111,21 +63,24 @@ export default function Assigning() {
             Sent mission:
           </Typography>
 
-          <Grid
-            container
-            direction="column"
-            justify="center"
-            alignItems="center"
-          >
-            {sentMissionList.map((i) => (
-              <MissionRequest
-                status={i.status}
-                username={i.from.username}
-                subject={i.subject}
-                avatarURL={i.from.avatarURL}
-              />
-            ))}
-          </Grid>
+          {sentMissionList ? (
+            <Grid
+              container
+              direction="column"
+              justify="center"
+              alignItems="center"
+            >
+              {sentMissionList.map((i) => (
+                <MissionRequest
+                  status={i.status}
+                  username={i.to.username}
+                  subject={i.subject}
+                />
+              ))}
+            </Grid>
+          ) : (
+            <p>Loading...</p>
+          )}
 
           <MuiThemeProvider theme={buttonTheme}>
             <Fab
