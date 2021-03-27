@@ -4,7 +4,7 @@ import {
   fetchReceivedFriendRequestsList,
   actionFriendRequest,
 } from "../../utils/FriendRequest";
-import removeItemFromFriendRequest from "../../helpers/removeItemFromFriendRequest";
+import removeItemFromList from "../../helpers/removeItemFromList";
 
 export default function ReceivedFriendRequestList() {
   const [friendRequestList, setFriendRequestList] = useState([]);
@@ -16,9 +16,7 @@ export default function ReceivedFriendRequestList() {
   const handleClick = async (action, requestId) => {
     const res = await actionFriendRequest(action, requestId);
     setChange(!change);
-    setFriendRequestList((prev) =>
-      removeItemFromFriendRequest(prev, requestId)
-    );
+    setFriendRequestList((prev) => removeItemFromList(prev, requestId));
   };
 
   return (
