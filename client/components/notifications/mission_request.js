@@ -9,12 +9,13 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import DoneIcon from "@material-ui/icons/Done";
-import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
+import HUE from "@material-ui/core/colors/blue";
 
 const useStyles = makeStyles({
-  root: {
-    maxWidth: 270,
+  notificationRoot: {
+    maxWidth: 320,
+    margin: "0.8rem 0",
   },
   gridColumn: {
     display: "grid",
@@ -26,32 +27,36 @@ const useStyles = makeStyles({
   },
   notificationgridRow: {
     display: "grid",
-    gridTemplateRows: "2fr 1fr",
-  },
-  badge: {
-    margin: "0.8rem 0",
+    gridTemplateRows: "1fr 1fr",
   },
   overflowText: {
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
   },
-  notificationRoot: {
-    maxWidth: 270,
-    margin: "0.8rem 0",
+  overflowUsername: {
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
+    padding: "0 0.5rem",
   },
   divider: {
     margin: "0.7rem 0 0.7rem 0",
   },
 });
 
-const friendRequestButtonTheme = createMuiTheme({
+const buttonTheme = createMuiTheme({
   palette: {
-    primary: { main: "#2cb32c" },
+    primary: { main: HUE[500] },
   },
 });
 
-export default function MissionRequest({ requestId, username, subject }) {
+export default function MissionRequest({
+  requestId,
+  username,
+  subject,
+  onClickAction,
+}) {
   const classes = useStyles();
 
   return (
@@ -74,26 +79,28 @@ export default function MissionRequest({ requestId, username, subject }) {
         <Divider orientation="vertical" flexItem className={classes.divider} />
 
         <CardContent className={classes.notificationgridRow}>
+          <Typography gutterBottom variant="inherit" component="h2">
+            Subject:
+          </Typography>
           <Typography
             gutterBottom
             variant="h6"
+            component="h2"
             className={classes.overflowText}
           >
-            holder
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            email
+            {subject}
           </Typography>
 
           <CardActions>
-            <MuiThemeProvider theme={friendRequestButtonTheme}>
-              <IconButton
-                aria-label="accept"
+            <MuiThemeProvider theme={buttonTheme}>
+              <Button
+                variant="outlined"
+                aria-label="view and reply"
                 color="primary"
-                onClick={() => onClickAction("accept", requestId)}
+                onClick={() => onClickAction(requestId)}
               >
-                <DoneIcon />
-              </IconButton>
+                View & Reply
+              </Button>
             </MuiThemeProvider>
           </CardActions>
         </CardContent>
