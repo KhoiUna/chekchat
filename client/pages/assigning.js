@@ -13,6 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { useEffect, useState } from "react";
 import MissionAssign from "../components/missions/mission_assign";
 import { fetchSentMissionRequestsList } from "../utils/Missions";
+import utilStyles from "../styles/utils.module.css";
 
 const useStyles = makeStyles((theme) => ({
   extendedIcon: {
@@ -80,7 +81,7 @@ export default function Assigning() {
               ))}
             </Grid>
           ) : (
-            <p>Loading...</p>
+            <p className={utilStyles.responseText}>Loading...</p>
           )}
 
           <MuiThemeProvider theme={buttonTheme}>
