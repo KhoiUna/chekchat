@@ -66,7 +66,7 @@ export default function MissionPopupView({
   }, [requestId]);
 
   const handleClick = () => {
-    //
+    console.log("action click");
   };
 
   return (
@@ -107,7 +107,24 @@ export default function MissionPopupView({
         <Grid item xs={6}>
           <TextField
             id="due_date"
-            value={missionInfo.due_date}
+            value={new Date(missionInfo.due_date).toLocaleDateString()}
+            InputProps={{
+              readOnly: true,
+            }}
+          />
+        </Grid>
+      </Grid>
+
+      <Grid container justify="center" className={classes.gridContainer}>
+        <Grid item xs={6}>
+          <Typography gutterBottom variant="inherit" component="h3">
+            Time:
+          </Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <TextField
+            id="time"
+            value={new Date(missionInfo.due_date).toLocaleTimeString()}
             InputProps={{
               readOnly: true,
             }}
