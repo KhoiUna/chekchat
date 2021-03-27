@@ -1,7 +1,7 @@
 import { origin } from "../config/config";
 
 module.exports = {
-  async sendMissionRequest(subject, selectedDate, receiver, description) {
+  async sendMissionRequest(subject, selectedDate, receiverEmail, description) {
     try {
       const res = await fetch(`${origin}/api/missions`, {
         method: "POST",
@@ -12,7 +12,7 @@ module.exports = {
           userEmail: localStorage.getItem("email"),
           subject,
           selectedDate,
-          receiver,
+          receiverEmail,
           description,
         }),
       });
