@@ -34,4 +34,17 @@ module.exports = {
       console.error(`Error getting ${position} mission requests`);
     }
   },
+  async fetchMissionInfo(requestId) {
+    try {
+      const res = await fetch(
+        `${origin}/api/missions/${requestId}?email=${localStorage.getItem(
+          "email"
+        )}`
+      );
+      const missionInfo = await res.json();
+      return missionInfo;
+    } catch (err) {
+      console.error(`Error getting ${position} mission requests`);
+    }
+  },
 };
