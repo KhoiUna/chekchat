@@ -12,12 +12,8 @@ import Typography from "@material-ui/core/Typography";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import TextField from "@material-ui/core/TextField";
 import utilStyles from "../../styles/utils.module.css";
-import {
-  KeyboardDatePicker,
-  KeyboardTimePicker,
-  MuiPickersUtilsProvider,
-} from "@material-ui/pickers";
-import DateFnsUtils from "@date-io/date-fns";
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
 import { fetchMissionInfo } from "../../utils/Missions";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
   alignRight: {
     textAlign: "right",
     margin: "1rem",
+  },
+  closeButton: {
+    textAlign: "right",
   },
   textArea: {
     padding: "0.5rem",
@@ -63,18 +62,25 @@ export default function MissionPopupView({
 
   const [missionInfo, setMissionInfo] = useState({});
   useEffect(() => {
-    fetchMissionInfo(requestId).then((r) => {
-      setMissionInfo(r);
-    });
+    fetchMissionInfo(requestId).then((r) => setMissionInfo(r));
   }, [requestId]);
 
   const handleClick = () => {
     //
   };
-  console.log(missionInfo);
+
   return (
     <Paper elevation={3} className={classes.paper}>
       <Grid container justify="center" className={classes.gridContainer}>
+        <Grid item xs={12} className={classes.closeButton}>
+          <IconButton
+            aria-label="close"
+            onClick={() => toggleMissionPopupView()}
+          >
+            <CloseIcon />
+          </IconButton>
+        </Grid>
+
         <Grid item xs={6}>
           <Typography gutterBottom variant="inherit" component="h3">
             Subject:
