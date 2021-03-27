@@ -12,7 +12,7 @@ import HUE from "@material-ui/core/colors/blue";
 import Typography from "@material-ui/core/Typography";
 import { useEffect, useState } from "react";
 import MissionAssign from "../components/missions/mission_assign";
-import { fetchSentMissionRequestsList } from "../utils/Missions";
+import { fetchMissionRequestsList } from "../utils/Missions";
 import utilStyles from "../styles/utils.module.css";
 
 const useStyles = makeStyles((theme) => ({
@@ -49,7 +49,7 @@ export default function Assigning() {
   const [sentMissionList, setSentMissionList] = useState(null);
   useEffect(() => {
     if (!missionAssign)
-      fetchSentMissionRequestsList("from").then((r) => setSentMissionList(r));
+      fetchMissionRequestsList("from").then((r) => setSentMissionList(r));
   }, [missionAssign]);
 
   return (
