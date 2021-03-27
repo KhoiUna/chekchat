@@ -180,7 +180,9 @@ export default function MissionPopupView({
             placeholder="Describe your mission here"
             className={classes.textArea}
             value={missionInfo.description}
-            disabled
+            InputProps={{
+              readOnly: true,
+            }}
           />
         </Grid>
       </Grid>
