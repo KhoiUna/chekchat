@@ -10,6 +10,8 @@ import Tab from "@material-ui/core/Tab";
 import HUE from "@material-ui/core/colors/blue";
 import { useState } from "react";
 import ReceivedFriendRequestList from "../containers/notifications/ReceivedFriendRequestList";
+import PendingMissionList from "../containers/notifications/PendingMissionList";
+
 const useStyles = makeStyles({
   button: {
     borderRadius: "50%",
@@ -57,7 +59,7 @@ export default function Notifications() {
 
       {value === 0 ? (
         <Grid container direction="column" justify="center" alignItems="center">
-          <></>
+          <PendingMissionList />
         </Grid>
       ) : (
         <Grid container direction="column" justify="center" alignItems="center">
