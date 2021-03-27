@@ -62,7 +62,7 @@ export default function Assigning() {
             component="h2"
             className={classes.alignLeft}
           >
-            Sent mission:
+            Sent missions:
           </Typography>
 
           {sentMissionList ? (
