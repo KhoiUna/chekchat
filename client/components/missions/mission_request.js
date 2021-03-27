@@ -85,7 +85,7 @@ export default function MissionRequest({ status, username, subject }) {
               component="h2"
               className={classes.overflowText}
             >
-              {subject || "Design logo"}
+              {subject}
             </Typography>
           </CardContent>
         </CardActionArea>
