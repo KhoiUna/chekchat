@@ -53,7 +53,7 @@ const buttonTheme = createMuiTheme({
   },
 });
 
-export default function MissionRequest({
+export default function NotificationsMissionRequest({
   requestId,
   username,
   subject,

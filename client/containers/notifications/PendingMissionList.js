@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchMissionRequestsList } from "../../utils/Missions";
-import MissionRequest from "../../components/notifications/mission_request";
+import NotificationsMissionRequest from "../../components/notifications/notifications_mission_request";
 
 export default function PendingMissionList({}) {
   const [missionRequestList, setMissionRequestList] = useState([]);
@@ -19,7 +19,7 @@ export default function PendingMissionList({}) {
   return (
     <>
       {missionRequestList.map((i, index) => (
-        <MissionRequest
+        <NotificationsMissionRequest
           key={index}
           requestId={i._id}
           username={i.from.username}
