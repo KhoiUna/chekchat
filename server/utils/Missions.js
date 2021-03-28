@@ -18,6 +18,7 @@ module.exports = {
         const missionRequestList = await collection
           .find({
             "to.email": email,
+            status: "Pending",
           })
           .toArray();
         return missionRequestList;
@@ -64,6 +65,25 @@ module.exports = {
       return response;
     } catch (err) {
       console.error("Error saving mission request");
+      return null;
+    }
+  },
+  async updateRequest(requestId, action) {
+    try {
+      const collection = client.db("chekchat").collection("missions");
+      const status = action === "accept" ? "Accepted" : "Rejected";
+
+      const response = await collection.updateOne(
+        {
+          _id: ObjectID(requestId),
+        },
+        { $set: { status } }
+      );
+      if (!response) return false;
+
+      return response;
+    } catch (err) {
+      console.error("Error updating mission request --- utils");
       return null;
     }
   },

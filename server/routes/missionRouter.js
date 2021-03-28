@@ -13,6 +13,7 @@ router.get("/", async (req, res, next) => {
     res.json(missionRequestList);
   } catch (err) {
     console.error("Error getting mission requests");
+    next();
   }
 });
 
@@ -75,10 +76,10 @@ router.post("/", async (req, res, next) => {
 router.put("/", async (req, res, next) => {
   try {
     const { action, requestId } = req.body;
-
+    console.log(action, requestId);
     //Update mission request
-    if (!(await Missions.updateRequest(requestId, action)))
-      return res.status(400).send("Sorry, something is wrong");
+    // if (!(await Missions.updateRequest(requestId, action)))
+    //   return res.status(400).send("Sorry, something is wrong");
 
     res.send("ok");
   } catch (err) {
