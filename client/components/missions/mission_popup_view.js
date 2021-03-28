@@ -101,6 +101,7 @@ export default function MissionPopupView({
                 InputProps={{
                   readOnly: true,
                 }}
+                multiline
               />
             </Grid>
           </Grid>
@@ -152,6 +153,7 @@ export default function MissionPopupView({
                 InputProps={{
                   readOnly: true,
                 }}
+                multiline
               />
             </Grid>
           </Grid>
@@ -169,6 +171,7 @@ export default function MissionPopupView({
                 InputProps={{
                   readOnly: true,
                 }}
+                multiline
               />
             </Grid>
           </Grid>
@@ -180,16 +183,20 @@ export default function MissionPopupView({
               </Typography>
             </Grid>
             <Grid item xs={6} className={classes.alignLeft}>
-              <TextareaAutosize
-                rowsMin={3}
-                rowsMax={10}
-                aria-label="describe your mission"
-                placeholder="Describe your mission here"
+              <TextField
+                id="description"
+                name="description"
+                aria-label="description"
+                rowsMax={3}
                 className={classes.textArea}
-                value={missionInfo.description}
+                value={
+                  missionInfo.description +
+                  "asdfsadfasdfsadfasdfasdfasdfasdfasdfasdfsadf"
+                }
                 InputProps={{
                   readOnly: true,
                 }}
+                multiline
               />
             </Grid>
           </Grid>
