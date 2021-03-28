@@ -12,7 +12,7 @@ export default function Home() {
         <link rel="image_src" href="/logo192.png" />
         <link rel="apple-touch-icon" href="/logo192.png" />
         <link rel="manifest" href="/manifest.json" />
-        <title>ChekThat | Home</title>
+        <title>ChekChat | Home</title>
       </Head>
 
       <main>

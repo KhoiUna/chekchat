@@ -43,7 +43,7 @@ export default function MainLayout({ children, componentName }) {
         <link rel="image_src" href="/logo192.png" />
         <link rel="apple-touch-icon" href="/logo192.png" />
         <link rel="manifest" href="/manifest.json" />
-        <title>ChekThat | {componentName}</title>
+        <title>ChekChat | {componentName}</title>
       </Head>
 
       <header className={classes.root}>
