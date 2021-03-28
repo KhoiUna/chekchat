@@ -189,10 +189,7 @@ export default function MissionPopupView({
                 aria-label="description"
                 rowsMax={3}
                 className={classes.textArea}
-                value={
-                  missionInfo.description +
-                  "asdfsadfasdfsadfasdfasdfasdfasdfasdfasdfsadf"
-                }
+                value={missionInfo.description}
                 InputProps={{
                   readOnly: true,
                 }}
