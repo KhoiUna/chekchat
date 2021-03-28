@@ -107,6 +107,7 @@ export default function MissionRequest({
         <MissionPopupView
           requestId={requestId}
           toggleMissionPopupView={toggleMissionPopupView}
+          fromPage="assigning"
         />
       )}
     </>

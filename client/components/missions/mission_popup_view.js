@@ -57,6 +57,7 @@ const theme = createMuiTheme({
 export default function MissionPopupView({
   requestId,
   toggleMissionPopupView,
+  fromPage,
 }) {
   const classes = useStyles();
 
@@ -193,28 +194,30 @@ export default function MissionPopupView({
             </Grid>
           </Grid>
 
-          <Grid item xs={12} className={classes.alignRight}>
-            <Button
-              variant="contained"
-              className={utilStyles.button}
-              type="submit"
-              className={classes.margin}
-              onClick={handleClick}
-            >
-              Refuse
-            </Button>
-            <MuiThemeProvider theme={theme}>
+          {fromPage === "assigning" ? null : (
+            <Grid item xs={12} className={classes.alignRight}>
               <Button
                 variant="contained"
-                color="primary"
                 className={utilStyles.button}
                 type="submit"
+                className={classes.margin}
                 onClick={handleClick}
               >
-                Accept
+                Refuse
               </Button>
-            </MuiThemeProvider>
-          </Grid>
+              <MuiThemeProvider theme={theme}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={utilStyles.button}
+                  type="submit"
+                  onClick={handleClick}
+                >
+                  Accept
+                </Button>
+              </MuiThemeProvider>
+            </Grid>
+          )}
         </Paper>
       </div>
     </>
