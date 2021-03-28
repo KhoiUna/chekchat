@@ -4,6 +4,7 @@ import Menu from "../components/menu";
 import Bell from "../components/bell";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useEffect } from "react";
 
 const useStyles = makeStyles({
   root: {
@@ -27,6 +28,10 @@ const useStyles = makeStyles({
 
 export default function MainLayout({ children, componentName }) {
   const classes = useStyles();
+
+  useEffect(() => {
+    // console.log("load notification or socket");
+  }, []);
 
   return (
     <div className={styles.container}>

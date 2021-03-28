@@ -77,6 +77,7 @@ export default function Assigning() {
                   status={i.status}
                   username={i.to.username}
                   subject={i.subject}
+                  requestId={i._id}
                 />
               ))}
             </Grid>

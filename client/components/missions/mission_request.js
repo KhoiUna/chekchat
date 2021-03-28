@@ -5,6 +5,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Badge from "@material-ui/core/Badge";
+import { useState } from "react";
+import MissionPopupView from "./mission_popup_view";
 
 const useStyles = makeStyles({
   root: {
@@ -37,56 +39,76 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MissionRequest({ status, username, subject }) {
+export default function MissionRequest({
+  requestId,
+  status,
+  username,
+  subject,
+}) {
   const classes = useStyles();
 
+  const [missionPopupView, setMissionPopupView] = useState(false);
+  const toggleMissionPopupView = () => {
+    setMissionPopupView(!missionPopupView);
+  };
+
   return (
-    <Badge
-      badgeContent={status === "Pending" ? `${status}...` : status}
-      color="primary"
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "left",
-      }}
-      className={classes.badge}
-    >
-      <Card className={classes.root}>
-        <CardActionArea className={classes.gridColumn}>
-          <div className={classes.gridRow}>
-            <Typography gutterBottom variant="inherit" component="h2">
-              Sent to:
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="h2"
-              className={classes.overflowUsername}
-            >
-              {username}
-            </Typography>
-          </div>
+    <>
+      <Badge
+        badgeContent={status === "Pending" ? `${status}...` : status}
+        color="primary"
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "left",
+        }}
+        className={classes.badge}
+        onClick={toggleMissionPopupView}
+      >
+        <Card className={classes.root}>
+          <CardActionArea className={classes.gridColumn}>
+            <div className={classes.gridRow}>
+              <Typography gutterBottom variant="inherit" component="h2">
+                Sent to:
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h6"
+                component="h2"
+                className={classes.overflowUsername}
+              >
+                {username}
+              </Typography>
+            </div>
 
-          <Divider
-            orientation="vertical"
-            flexItem
-            className={classes.divider}
-          />
+            <Divider
+              orientation="vertical"
+              flexItem
+              className={classes.divider}
+            />
 
-          <CardContent className={classes.gridRow}>
-            <Typography gutterBottom variant="inherit" component="h2">
-              Subject:
-            </Typography>
-            <Typography
-              gutterBottom
-              variant="h6"
-              component="h2"
-              className={classes.overflowText}
-            >
-              {subject}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    </Badge>
+            <CardContent className={classes.gridRow}>
+              <Typography gutterBottom variant="inherit" component="h2">
+                Subject:
+              </Typography>
+              <Typography
+                gutterBottom
+                variant="h6"
+                component="h2"
+                className={classes.overflowText}
+              >
+                {subject}
+              </Typography>
+            </CardContent>
+          </CardActionArea>
+        </Card>
+      </Badge>
+
+      {missionPopupView && (
+        <MissionPopupView
+          requestId={requestId}
+          toggleMissionPopupView={toggleMissionPopupView}
+        />
+      )}
+    </>
   );
 }
