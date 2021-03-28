@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-import { fetchMissionRequestsList } from "../../utils/Missions";
+import {
+  fetchMissionRequestsList,
+  actionMissionRequest,
+} from "../../utils/Missions";
+import removeItemFromList from "../../helpers/removeItemFromList";
 import NotificationsMissionRequest from "../../components/notifications/notifications_mission_request";
 
 export default function PendingMissionList({}) {
@@ -10,10 +14,9 @@ export default function PendingMissionList({}) {
 
   const [change, setChange] = useState(false);
   const handleClick = async (action, requestId) => {
-    // const res = await actionFriendRequest(action, requestId);
-    // setChange(!change);
-    // setFriendRequestList((prev) => removeItemFromList(prev, requestId));
-    console.log(action, requestId);
+    const res = await actionMissionRequest(action, requestId);
+    setChange(!change);
+    setMissionRequestList((prev) => removeItemFromList(prev, requestId));
   };
 
   return (
