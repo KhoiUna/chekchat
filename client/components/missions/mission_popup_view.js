@@ -58,17 +58,14 @@ export default function MissionPopupView({
   requestId,
   toggleMissionPopupView,
   fromPage,
+  onClickAction,
 }) {
   const classes = useStyles();
 
   const [missionInfo, setMissionInfo] = useState({});
   useEffect(() => {
     fetchMissionInfo(requestId).then((r) => setMissionInfo(r));
-  }, [requestId]);
-
-  const handleClick = () => {
-    console.log("action click");
-  };
+  }, []);
 
   return (
     <>
@@ -206,21 +203,19 @@ export default function MissionPopupView({
               <Button
                 variant="contained"
                 className={utilStyles.button}
-                type="submit"
                 className={classes.margin}
-                onClick={handleClick}
+                onClick={() => onClickAction("reject", requestId)}
               >
-                Refuse
+                <b>Reject</b>
               </Button>
               <MuiThemeProvider theme={theme}>
                 <Button
                   variant="contained"
                   color="primary"
                   className={utilStyles.button}
-                  type="submit"
-                  onClick={handleClick}
+                  onClick={() => onClickAction("accept", requestId)}
                 >
-                  Accept
+                  <b>Accept</b>
                 </Button>
               </MuiThemeProvider>
             </Grid>

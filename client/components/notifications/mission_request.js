@@ -53,7 +53,12 @@ const buttonTheme = createMuiTheme({
   },
 });
 
-export default function MissionRequest({ requestId, username, subject }) {
+export default function MissionRequest({
+  requestId,
+  username,
+  subject,
+  onClickAction,
+}) {
   const classes = useStyles();
 
   const [missionPopupView, setMissionPopupView] = useState(false);
@@ -106,7 +111,7 @@ export default function MissionRequest({ requestId, username, subject }) {
                   color="primary"
                   onClick={toggleMissionPopupView}
                 >
-                  View & Reply
+                  <b>View & Reply</b>
                 </Button>
               </MuiThemeProvider>
             </CardActions>
@@ -118,6 +123,7 @@ export default function MissionRequest({ requestId, username, subject }) {
         <MissionPopupView
           requestId={requestId}
           toggleMissionPopupView={toggleMissionPopupView}
+          onClickAction={onClickAction}
         />
       )}
     </>

@@ -8,6 +8,14 @@ export default function PendingMissionList({}) {
     fetchMissionRequestsList("to").then((r) => setMissionRequestList(r));
   }, []);
 
+  const [change, setChange] = useState(false);
+  const handleClick = async (action, requestId) => {
+    // const res = await actionFriendRequest(action, requestId);
+    // setChange(!change);
+    // setFriendRequestList((prev) => removeItemFromList(prev, requestId));
+    console.log(action, requestId);
+  };
+
   return (
     <>
       {missionRequestList.map((i, index) => (
@@ -16,6 +24,7 @@ export default function PendingMissionList({}) {
           requestId={i._id}
           username={i.from.username}
           subject={i.subject}
+          onClickAction={handleClick}
         />
       ))}
     </>
