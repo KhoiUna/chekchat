@@ -1,4 +1,8 @@
-import { makeStyles } from "@material-ui/core/styles";
+import {
+  createMuiTheme,
+  MuiThemeProvider,
+  makeStyles,
+} from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
@@ -7,6 +11,7 @@ import Divider from "@material-ui/core/Divider";
 import Badge from "@material-ui/core/Badge";
 import { useState } from "react";
 import MissionPopupView from "./mission_popup_view";
+import CheckIcon from "@material-ui/icons/Check";
 
 const useStyles = makeStyles({
   root: {
@@ -39,6 +44,16 @@ const useStyles = makeStyles({
   },
 });
 
+const badgeTheme = createMuiTheme({
+  overrides: {
+    MuiBadge: {
+      colorSecondary: {
+        backgroundColor: "#2cb32c",
+      },
+    },
+  },
+});
+
 export default function MissionRequest({
   requestId,
   status,
@@ -54,54 +69,68 @@ export default function MissionRequest({
 
   return (
     <>
-      <Badge
-        badgeContent={status === "Pending" ? `${status}...` : status}
-        color="primary"
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        className={classes.badge}
-        onClick={toggleMissionPopupView}
-      >
-        <Card className={classes.root}>
-          <CardActionArea className={classes.gridColumn}>
-            <div className={classes.gridRow}>
-              <Typography gutterBottom variant="inherit" component="h2">
-                Sent to:
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h6"
-                component="h2"
-                className={classes.overflowUsername}
-              >
-                {username}
-              </Typography>
-            </div>
+      <MuiThemeProvider theme={badgeTheme}>
+        <Badge
+          badgeContent={
+            status !== "Pending"
+              ? status === "Accepted"
+                ? `${status} ✔`
+                : status
+              : `${status} ...`
+          }
+          color={
+            status !== "Pending"
+              ? status === "Accepted"
+                ? "secondary"
+                : "error"
+              : "primary"
+          }
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          className={classes.badge}
+          onClick={toggleMissionPopupView}
+        >
+          <Card className={classes.root}>
+            <CardActionArea className={classes.gridColumn}>
+              <div className={classes.gridRow}>
+                <Typography gutterBottom variant="inherit" component="h2">
+                  Sent to:
+                </Typography>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  component="h2"
+                  className={classes.overflowUsername}
+                >
+                  {username}
+                </Typography>
+              </div>
 
-            <Divider
-              orientation="vertical"
-              flexItem
-              className={classes.divider}
-            />
+              <Divider
+                orientation="vertical"
+                flexItem
+                className={classes.divider}
+              />
 
-            <CardContent className={classes.gridRow}>
-              <Typography gutterBottom variant="inherit" component="h2">
-                Subject:
-              </Typography>
-              <Typography
-                gutterBottom
-                variant="h6"
-                component="h2"
-                className={classes.overflowText}
-              >
-                {subject}
-              </Typography>
-            </CardContent>
-          </CardActionArea>
-        </Card>
-      </Badge>
+              <CardContent className={classes.gridRow}>
+                <Typography gutterBottom variant="inherit" component="h2">
+                  Subject:
+                </Typography>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  component="h2"
+                  className={classes.overflowText}
+                >
+                  {subject}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+          </Card>
+        </Badge>
+      </MuiThemeProvider>
 
       {missionPopupView && (
         <MissionPopupView
