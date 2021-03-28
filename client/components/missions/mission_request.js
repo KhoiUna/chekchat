@@ -11,7 +11,6 @@ import Divider from "@material-ui/core/Divider";
 import Badge from "@material-ui/core/Badge";
 import { useState } from "react";
 import MissionPopupView from "./mission_popup_view";
-import CheckIcon from "@material-ui/icons/Check";
 
 const useStyles = makeStyles({
   root: {
