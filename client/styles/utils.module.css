@@ -38,7 +38,7 @@
 }
 
 .mission_popup {
-  position: absolute;
+  position: fixed;
   z-index: 3;
   top: 2.5rem;
 }
