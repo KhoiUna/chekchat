@@ -102,6 +102,7 @@ export default function MissionPopupView({
                   readOnly: true,
                 }}
                 multiline
+                rowsMax={3}
               />
             </Grid>
           </Grid>
@@ -154,6 +155,7 @@ export default function MissionPopupView({
                   readOnly: true,
                 }}
                 multiline
+                rowsMax={3}
               />
             </Grid>
           </Grid>
@@ -172,6 +174,7 @@ export default function MissionPopupView({
                   readOnly: true,
                 }}
                 multiline
+                rowsMax={3}
               />
             </Grid>
           </Grid>
