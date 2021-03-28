@@ -75,7 +75,7 @@ export default function MissionRequest({
             status !== "Pending"
               ? status === "Accepted"
                 ? `${status} ✔`
-                : status
+                : `${status} x`
               : `${status} ...`
           }
           color={
