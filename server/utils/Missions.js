@@ -61,6 +61,7 @@ module.exports = {
         to: receiverInfo,
         description,
         status: "Pending",
+        completed: false,
       });
       return response;
     } catch (err) {
