@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const ValidationHelper = require("../helpers/ValidationHelper");
 const Missions = require("../utils/Missions");
-const { saveMissionRequest } = require("../utils/Missions");
 
 router.get("/", async (req, res, next) => {
   try {
@@ -56,7 +55,7 @@ router.post("/", async (req, res, next) => {
 
     //Save to db
     if (
-      !(await saveMissionRequest(
+      !(await Missions.saveMissionRequest(
         userEmail,
         subject,
         selectedDate,
@@ -69,6 +68,21 @@ router.post("/", async (req, res, next) => {
     res.send("ok");
   } catch (err) {
     console.error("Error saving mission request");
+    next();
+  }
+});
+
+router.put("/", async (req, res, next) => {
+  try {
+    const { action, requestId } = req.body;
+
+    //Update mission request
+    if (!(await Missions.updateRequest(requestId, action)))
+      return res.status(400).send("Sorry, something is wrong");
+
+    res.send("ok");
+  } catch (err) {
+    console.error("Error updating mission request");
     next();
   }
 });
