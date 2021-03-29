@@ -18,9 +18,9 @@ import { fetchMissionInfo } from "../../utils/Missions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    margin: "1rem",
+    margin: "1rem 0",
     width: "90%",
-    height: "90%",
+    height: "fit-content",
     maxHeight: 600,
     maxWidth: 600,
     position: "fixed",
@@ -80,7 +80,7 @@ export default function MissionPopupView({
         className={utilStyles.popup_layer}
         onClick={() => toggleMissionPopupView()}
       ></div>
-      <Paper elevation={3} className={classes.paper}>
+      <Paper elevation={10} className={classes.paper}>
         {missionInfo && (
           <>
             <Grid container justify="center" className={classes.gridContainer}>
@@ -233,7 +233,7 @@ export default function MissionPopupView({
 
         {!missionInfo && (
           <MuiThemeProvider theme={theme}>
-            <CircularProgress style={{ marginTop: "40%" }} />
+            <CircularProgress style={{ margin: "5% 0" }} />
           </MuiThemeProvider>
         )}
       </Paper>
