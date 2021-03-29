@@ -19,6 +19,7 @@ export default function Todo() {
             subject={i.subject}
             due_date={i.due_date}
             username={i.from.username}
+            missionId={i._id}
           />
         ))}
       </Grid>
