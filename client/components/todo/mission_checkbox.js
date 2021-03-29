@@ -75,13 +75,16 @@ export default function MissionCheckbox({
   return (
     <>
       <MuiThemeProvider theme={theme}>
-        <Card className={classes.root}>
+        <Card
+          className={classes.root}
+          style={checked ? { opacity: 0.6 } : null}
+        >
           <CardActionArea className={classes.gridColumn}>
             <Checkbox
               checked={checked}
               onChange={handleChange}
               color="primary"
-              inputProps={{ "aria-label": "checkbox" }}
+              inputProps={{ "aria-label": "mission checkbox" }}
               className={classes.checkbox}
             />
 
@@ -99,6 +102,7 @@ export default function MissionCheckbox({
                 gutterBottom
                 variant="h6"
                 className={classes.overflowText}
+                style={checked ? { textDecoration: "line-through" } : null}
               >
                 <b>From:</b> {username}
               </Typography>
@@ -107,6 +111,7 @@ export default function MissionCheckbox({
                 gutterBottom
                 variant="h6"
                 className={classes.overflowText}
+                style={checked ? { textDecoration: "line-through" } : null}
               >
                 <b>Subject:</b> {subject}
               </Typography>
@@ -115,6 +120,7 @@ export default function MissionCheckbox({
                 variant="body2"
                 gutterBottom
                 className={classes.due_date}
+                style={checked ? { textDecoration: "line-through" } : null}
               >
                 <b>Due: </b>
                 {new Date(due_date).toLocaleDateString()}
