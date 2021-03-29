@@ -198,7 +198,7 @@ export default function MissionPopupView({
             </Grid>
           </Grid>
 
-          {fromPage === "assigning" ? null : (
+          {fromPage === "notification" ? (
             <Grid item xs={12} className={classes.alignRight}>
               <Button
                 variant="contained"
@@ -219,7 +219,7 @@ export default function MissionPopupView({
                 </Button>
               </MuiThemeProvider>
             </Grid>
-          )}
+          ) : null}
         </Paper>
       </div>
     </>
