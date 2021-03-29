@@ -31,6 +31,8 @@ import { sendMissionRequest } from "../../utils/Missions";
 const useStyles = makeStyles((theme) => ({
   paper: {
     margin: "1rem",
+    width: "90%",
+    maxWidth: 600,
   },
   gridContainer: {
     padding: "1rem",
@@ -127,151 +129,153 @@ export default function MissionAssign({ toggleMissionAssign }) {
   };
 
   return (
-    <Paper elevation={3} className={classes.paper}>
-      <Grid container justify="center" className={classes.gridContainer}>
-        <Grid item xs={6}>
-          <Typography gutterBottom variant="inherit" component="h3">
-            Subject:
-          </Typography>
+    <Grid container direction="column" justify="center" alignItems="center">
+      <Paper elevation={3} className={classes.paper}>
+        <Grid container justify="center" className={classes.gridContainer}>
+          <Grid item xs={6}>
+            <Typography gutterBottom variant="inherit" component="h3">
+              Subject:
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              required
+              id="subject"
+              name="subject"
+              label="Subject"
+              fullWidth
+              autoComplete="off"
+              variant="filled"
+              value={subject}
+              onChange={handleChangeSubject}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <TextField
-            required
-            id="subject"
-            name="subject"
-            label="Subject"
-            fullWidth
-            autoComplete="off"
-            variant="filled"
-            value={subject}
-            onChange={handleChangeSubject}
-          />
-        </Grid>
-      </Grid>
 
-      <Grid container justify="center" className={classes.gridContainer}>
-        <Grid item xs={6}>
-          <Typography gutterBottom variant="inherit" component="h3">
-            Due date:
-          </Typography>
+        <Grid container justify="center" className={classes.gridContainer}>
+          <Grid item xs={6}>
+            <Typography gutterBottom variant="inherit" component="h3">
+              Due date:
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <MuiThemeProvider theme={theme}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardDatePicker
+                  label="Date"
+                  value={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                  format="yyyy/MM/dd"
+                />
+              </MuiPickersUtilsProvider>
+            </MuiThemeProvider>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <MuiThemeProvider theme={theme}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardDatePicker
-                label="Date"
-                value={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
-                format="yyyy/MM/dd"
-              />
-            </MuiPickersUtilsProvider>
-          </MuiThemeProvider>
-        </Grid>
-      </Grid>
 
-      <Grid container justify="center" className={classes.gridContainer}>
-        <Grid item xs={6}>
-          <Typography gutterBottom variant="inherit" component="h3">
-            Time:
-          </Typography>
+        <Grid container justify="center" className={classes.gridContainer}>
+          <Grid item xs={6}>
+            <Typography gutterBottom variant="inherit" component="h3">
+              Time:
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <MuiThemeProvider theme={theme}>
+              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <KeyboardTimePicker
+                  label="Time"
+                  placeholder={`${new Date().getHours()}:${new Date().getMinutes()} AM`}
+                  mask="__:__ _M"
+                  value={selectedDate}
+                  onChange={(date) => setSelectedDate(date)}
+                />
+              </MuiPickersUtilsProvider>
+            </MuiThemeProvider>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <MuiThemeProvider theme={theme}>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardTimePicker
-                label="Time"
-                placeholder={`${new Date().getHours()}:${new Date().getMinutes()} AM`}
-                mask="__:__ _M"
-                value={selectedDate}
-                onChange={(date) => setSelectedDate(date)}
-              />
-            </MuiPickersUtilsProvider>
-          </MuiThemeProvider>
-        </Grid>
-      </Grid>
 
-      <Grid container justify="center" className={classes.gridContainer}>
-        <Grid item xs={6}>
-          <Typography gutterBottom variant="inherit" component="h3">
-            Send to:
-          </Typography>
+        <Grid container justify="center" className={classes.gridContainer}>
+          <Grid item xs={6}>
+            <Typography gutterBottom variant="inherit" component="h3">
+              Send to:
+            </Typography>
+          </Grid>
+          <Grid item xs={6}>
+            <FormControl variant="filled" required>
+              <InputLabel id="receiver-label">Receiver</InputLabel>
+              <Select
+                labelId="receiver-label"
+                id="receiver-select"
+                value={selectedReceiver}
+                onChange={handleSelect}
+                label="To"
+                className={classes.selectEmpty}
+              >
+                {friendList.map((i, index) => (
+                  <MenuItem value={i.friend.email} key={index}>
+                    {i.friend.username}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
         </Grid>
-        <Grid item xs={6}>
-          <FormControl variant="filled" required>
-            <InputLabel id="receiver-label">Receiver</InputLabel>
-            <Select
-              labelId="receiver-label"
-              id="receiver-select"
-              value={selectedReceiver}
-              onChange={handleSelect}
-              label="To"
-              className={classes.selectEmpty}
-            >
-              {friendList.map((i, index) => (
-                <MenuItem value={i.friend.email} key={index}>
-                  {i.friend.username}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Grid>
-      </Grid>
 
-      <Grid container justify="center" className={classes.gridContainer}>
-        <Grid item xs={6}>
-          <Typography gutterBottom variant="inherit" component="h3">
-            Description:
-          </Typography>
+        <Grid container justify="center" className={classes.gridContainer}>
+          <Grid item xs={6}>
+            <Typography gutterBottom variant="inherit" component="h3">
+              Description:
+            </Typography>
+          </Grid>
+          <Grid item xs={6} className={classes.alignLeft}>
+            <TextareaAutosize
+              rowsMin={3}
+              rowsMax={10}
+              aria-label="describe your mission"
+              placeholder="Describe your mission here"
+              className={classes.textArea}
+              onChange={handleChangeDescription}
+              value={description}
+            />
+          </Grid>
         </Grid>
-        <Grid item xs={6} className={classes.alignLeft}>
-          <TextareaAutosize
-            rowsMin={3}
-            rowsMax={10}
-            aria-label="describe your mission"
-            placeholder="Describe your mission here"
-            className={classes.textArea}
-            onChange={handleChangeDescription}
-            value={description}
-          />
-        </Grid>
-      </Grid>
 
-      <Grid item xs={12} className={classes.alignRight}>
-        <Button
-          variant="contained"
-          className={utilStyles.button}
-          type="submit"
-          className={classes.margin}
-          onClick={toggleMissionAssign}
-        >
-          Cancel
-        </Button>
-        <MuiThemeProvider theme={theme}>
+        <Grid item xs={12} className={classes.alignRight}>
           <Button
             variant="contained"
-            color="primary"
             className={utilStyles.button}
             type="submit"
-            onClick={handleClick}
-            style={
-              progress === "start" || !progress
-                ? null
-                : progress === "success"
-                ? { backgroundColor: "#2cb32c" }
-                : { backgroundColor: "red" }
-            }
+            className={classes.margin}
+            onClick={toggleMissionAssign}
           >
-            {progress === "start" || !progress ? "Send" : null}
-            {progress === "success" && "Request sent"}
-            {progress === "fail" && "Invalid data"}
-            <MuiThemeProvider theme={progressTheme}>
-              {progress === "start" && <CircularProgress />}
-              {progress === "success" && <CheckIcon />}
-              {progress === "fail" && <CloseIcon />}
-            </MuiThemeProvider>
+            Cancel
           </Button>
-        </MuiThemeProvider>
-      </Grid>
-    </Paper>
+          <MuiThemeProvider theme={theme}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={utilStyles.button}
+              type="submit"
+              onClick={handleClick}
+              style={
+                progress === "start" || !progress
+                  ? null
+                  : progress === "success"
+                  ? { backgroundColor: "#2cb32c" }
+                  : { backgroundColor: "red" }
+              }
+            >
+              {progress === "start" || !progress ? "Send" : null}
+              {progress === "success" && "Request sent"}
+              {progress === "fail" && "Invalid data"}
+              <MuiThemeProvider theme={progressTheme}>
+                {progress === "start" && <CircularProgress />}
+                {progress === "success" && <CheckIcon />}
+                {progress === "fail" && <CloseIcon />}
+              </MuiThemeProvider>
+            </Button>
+          </MuiThemeProvider>
+        </Grid>
+      </Paper>
+    </Grid>
   );
 }
