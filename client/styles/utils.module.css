@@ -42,3 +42,8 @@
   z-index: 3;
   top: 0;
 }
+
+.sortButton {
+  margin: 2%;
+  text-align: left;
+}
