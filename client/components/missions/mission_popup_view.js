@@ -18,14 +18,13 @@ import { fetchMissionInfo } from "../../utils/Missions";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
-    margin: "1rem 0",
     width: "90%",
     height: "fit-content",
     maxHeight: 600,
     maxWidth: 600,
     position: "fixed",
     zIndex: 3,
-    top: 0,
+    top: "10%",
   },
   gridContainer: {
     padding: "1rem",
@@ -80,7 +79,11 @@ export default function MissionPopupView({
         className={utilStyles.popup_layer}
         onClick={() => toggleMissionPopupView()}
       ></div>
-      <Paper elevation={10} className={classes.paper}>
+      <Paper
+        elevation={10}
+        className={classes.paper}
+        // style={fromPage === "notifications" ? { top: 0 } : null}
+      >
         {missionInfo && (
           <>
             <Grid container justify="center" className={classes.gridContainer}>
