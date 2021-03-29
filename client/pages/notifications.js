@@ -52,7 +52,7 @@ export default function Notifications() {
           textColor="primary"
           centered
         >
-          <Tab label="Pending missions" className={classes.tabTitle} />
+          <Tab label="Missions requests" className={classes.tabTitle} />
           <Tab label="Friend requests" className={classes.tabTitle} />
         </Tabs>
       </MuiThemeProvider>
