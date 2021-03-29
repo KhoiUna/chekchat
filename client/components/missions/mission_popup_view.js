@@ -79,11 +79,7 @@ export default function MissionPopupView({
         className={utilStyles.popup_layer}
         onClick={() => toggleMissionPopupView()}
       ></div>
-      <Paper
-        elevation={10}
-        className={classes.paper}
-        // style={fromPage === "notifications" ? { top: 0 } : null}
-      >
+      <Paper elevation={10} className={classes.paper}>
         {missionInfo && (
           <>
             <Grid container justify="center" className={classes.gridContainer}>
