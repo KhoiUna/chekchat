@@ -198,7 +198,7 @@ export default function MissionPopupView({
             </Grid>
           </Grid>
 
-          {fromPage === "notification" ? (
+          {fromPage === "notifications" ? (
             <Grid item xs={12} className={classes.alignRight}>
               <Button
                 variant="contained"
