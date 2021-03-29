@@ -44,6 +44,9 @@ app.use("/api/friends", friendRouter);
 const missionRouter = require("./routes/missionRouter");
 app.use("/api/missions", missionRouter);
 
+const todoRouter = require("./routes/todoRouter");
+app.use("/api/todo", todoRouter);
+
 //Error handling
 app.use((err, req, res, next) => {
   const status = err.status || 500;

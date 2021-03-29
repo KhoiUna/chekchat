@@ -27,6 +27,21 @@ module.exports = {
       console.error("Error getting mission request");
     }
   },
+  async getMissionTodoList(userEmail) {
+    try {
+      const collection = client.db("chekchat").collection("missions");
+
+      const missionTodoList = await collection
+        .find({
+          "to.email": userEmail,
+          status: "Accepted",
+        })
+        .toArray();
+      return missionTodoList;
+    } catch (err) {
+      console.error("Error getting mission todo list");
+    }
+  },
   async getMissionInfo(requestId) {
     try {
       const collection = client.db("chekchat").collection("missions");
