@@ -1,1 +1,1 @@
-# CHEKCHAT - THE APP FOR ASSIGNING MISSIONS
+# CHEKCHAT - The app for assigning missions
