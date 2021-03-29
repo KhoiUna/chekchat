@@ -3,6 +3,7 @@ import MissionCheckbox from "../components/todo/mission_checkbox";
 import Grid from "@material-ui/core/Grid";
 import { useEffect, useState } from "react";
 import { fetchMissionTodoList } from "../utils/Missions";
+import SortButton from "../components/todo/sort_button";
 
 export default function Todo() {
   const [missionTodoList, setMissionTodoList] = useState([]);
@@ -12,6 +13,8 @@ export default function Todo() {
 
   return (
     <MainLayout componentName="Todo">
+      <SortButton />
+
       <Grid container direction="column" justify="center" alignItems="center">
         {missionTodoList.map((i) => (
           <MissionCheckbox
