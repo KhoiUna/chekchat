@@ -14,7 +14,7 @@ import MissionPopupView from "../missions/mission_popup_view";
 
 const useStyles = makeStyles({
   root: {
-    width: "90%",
+    width: "85%",
     maxWidth: 600,
     margin: "1rem 0",
   },

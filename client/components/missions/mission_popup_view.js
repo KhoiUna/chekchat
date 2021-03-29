@@ -19,7 +19,7 @@ import { fetchMissionInfo } from "../../utils/Missions";
 const useStyles = makeStyles((theme) => ({
   paper: {
     margin: "1rem",
-    width: "fit-content",
+    width: "90%",
     height: "fit-content",
     maxWidth: 600,
     position: "fixed",
