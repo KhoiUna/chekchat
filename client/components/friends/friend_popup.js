@@ -22,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
     position: "fixed",
     backgroundColor: "#f1f1f1",
     width: "100%",
+    zIndex: 3,
+    top: "10%",
   },
   cardContent: {
     padding: "1% 0",
@@ -102,60 +104,58 @@ export default function FriendPopup({ showPopup, togglePopup }) {
         className={utilStyles.popup_layer}
         onClick={() => togglePopup(showPopup)}
       ></div>
-      <div className={utilStyles.popup_container}>
-        <Card className={classes.root}>
-          <CardContent className={classes.cardContent}>
-            <Typography gutterBottom className={classes.title}>
-              Add Friend
-            </Typography>
+      <Card className={classes.root}>
+        <CardContent className={classes.cardContent}>
+          <Typography gutterBottom className={classes.title}>
+            Add Friend
+          </Typography>
 
-            <form autoComplete="off" onSubmit={handleSubmit}>
-              <MuiThemeProvider theme={theme}>
-                <TextField
-                  label="Type user's email"
-                  variant="filled"
-                  type="email"
-                  onChange={handleChange}
-                  value={email}
-                />
+          <form autoComplete="off" onSubmit={handleSubmit}>
+            <MuiThemeProvider theme={theme}>
+              <TextField
+                label="Type user's email"
+                variant="filled"
+                type="email"
+                onChange={handleChange}
+                value={email}
+              />
+            </MuiThemeProvider>
+            <br />
+
+            {responseText && (
+              <p className={utilStyles.responseText} style={{ color: "red" }}>
+                {responseText}
+              </p>
+            )}
+
+            <CardActions className={classes.alignRight}>
+              <MuiThemeProvider theme={buttonTheme}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  style={
+                    progress === "start" || !progress
+                      ? null
+                      : progress === "success"
+                      ? { backgroundColor: "#2cb32c" }
+                      : { backgroundColor: "red" }
+                  }
+                >
+                  {progress === "start" || !progress ? "Send request" : null}
+                  {progress === "success" && "Request sent"}
+                  {progress === "fail" && "Fail to send request"}
+                  <MuiThemeProvider theme={progressTheme}>
+                    {progress === "start" && <CircularProgress />}
+                    {progress === "success" && <CheckIcon />}
+                    {progress === "fail" && <CloseIcon />}
+                  </MuiThemeProvider>
+                </Button>
               </MuiThemeProvider>
-              <br />
-
-              {responseText && (
-                <p className={utilStyles.responseText} style={{ color: "red" }}>
-                  {responseText}
-                </p>
-              )}
-
-              <CardActions className={classes.alignRight}>
-                <MuiThemeProvider theme={buttonTheme}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    style={
-                      progress === "start" || !progress
-                        ? null
-                        : progress === "success"
-                        ? { backgroundColor: "#2cb32c" }
-                        : { backgroundColor: "red" }
-                    }
-                  >
-                    {progress === "start" || !progress ? "Send request" : null}
-                    {progress === "success" && "Request sent"}
-                    {progress === "fail" && "Fail to send request"}
-                    <MuiThemeProvider theme={progressTheme}>
-                      {progress === "start" && <CircularProgress />}
-                      {progress === "success" && <CheckIcon />}
-                      {progress === "fail" && <CloseIcon />}
-                    </MuiThemeProvider>
-                  </Button>
-                </MuiThemeProvider>
-              </CardActions>
-            </form>
-          </CardContent>
-        </Card>
-      </div>
+            </CardActions>
+          </form>
+        </CardContent>
+      </Card>
     </>
   );
 }
