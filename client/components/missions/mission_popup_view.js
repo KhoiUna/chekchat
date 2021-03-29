@@ -20,7 +20,8 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     margin: "1rem",
     width: "90%",
-    height: "fit-content",
+    height: "90%",
+    maxHeight: 600,
     maxWidth: 600,
     position: "fixed",
     zIndex: 3,
@@ -232,7 +233,7 @@ export default function MissionPopupView({
 
         {!missionInfo && (
           <MuiThemeProvider theme={theme}>
-            <CircularProgress style={{ marginTop: "50%" }} />
+            <CircularProgress style={{ marginTop: "40%" }} />
           </MuiThemeProvider>
         )}
       </Paper>
