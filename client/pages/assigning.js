@@ -53,7 +53,7 @@ export default function Assigning() {
   }, [missionAssign]);
 
   return (
-    <MainLayout componentName="Assigning">
+    <MainLayout componentName="Missions">
       {!missionAssign && (
         <>
           <Typography

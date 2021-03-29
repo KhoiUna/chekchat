@@ -17,7 +17,7 @@ import utilStyles from "../styles/utils.module.css";
 import { useRouter } from "next/router";
 
 const menuList = [
-  "Assigning",
+  "Missions",
   "Todo",
   "Calendar",
   "Friends",
@@ -79,7 +79,7 @@ export default function Menu({ componentName }) {
         </ListItem>
 
         {menuList.slice(0, 4).map((i) => {
-          const href = `/${i.toLowerCase()}`;
+          const href = i === "Missions" ? "/assigning" : `/${i.toLowerCase()}`;
           return (
             <Link href={href}>
               <ListItem
