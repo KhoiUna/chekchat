@@ -47,6 +47,17 @@ module.exports = {
       console.error(`Error getting mission info`);
     }
   },
+  async fetchMissionTodoList() {
+    try {
+      const res = await fetch(
+        `${origin}/api/todo?email=${localStorage.getItem("email")}`
+      );
+      const missionTodoList = await res.json();
+      return missionTodoList;
+    } catch (err) {
+      console.error(`Error getting mission todo list`);
+    }
+  },
   async actionMissionRequest(action, requestId) {
     try {
       const res = await fetch(`${origin}/api/missions`, {
