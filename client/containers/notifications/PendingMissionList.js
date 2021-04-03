@@ -4,7 +4,7 @@ import {
   actionMissionRequest,
 } from "../../utils/Missions";
 import removeItemFromList from "../../helpers/removeItemFromList";
-import NotificationsMissionRequest from "../../components/notifications/notifications_mission_request";
+import InboxMissionRequest from "../../components/inbox/inbox_mission_request";
 
 export default function PendingMissionList({}) {
   const [missionRequestList, setMissionRequestList] = useState([]);
@@ -22,7 +22,7 @@ export default function PendingMissionList({}) {
   return (
     <>
       {missionRequestList.map((i, index) => (
-        <NotificationsMissionRequest
+        <InboxMissionRequest
           key={index}
           requestId={i._id}
           username={i.from.username}
