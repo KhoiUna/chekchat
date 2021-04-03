@@ -1,7 +1,7 @@
 import MainLayout from "../containers/main_layout";
 import MissionRequest from "../components/missions/mission_request";
 import Grid from "@material-ui/core/Grid";
-import AddIcon from "@material-ui/icons/Add";
+import SendIcon from "@material-ui/icons/Send";
 import Fab from "@material-ui/core/Fab";
 import {
   createMuiTheme,
@@ -89,13 +89,11 @@ export default function Assigning() {
           <MuiThemeProvider theme={buttonTheme}>
             <Fab
               color="primary"
-              aria-label="assign mission"
-              variant="extended"
+              aria-label="send mission"
               className={classes.button}
               onClick={toggleMissionAssign}
             >
-              <AddIcon className={classes.extendedIcon} />
-              Assign
+              <SendIcon />
             </Fab>
           </MuiThemeProvider>
         </>
