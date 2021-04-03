@@ -205,7 +205,7 @@ export default function MissionPopupView({
               </Grid>
             </Grid>
 
-            {fromPage === "notifications" ? (
+            {fromPage === "inbox" ? (
               <Grid item xs={12} className={classes.alignRight}>
                 <Button
                   variant="contained"
