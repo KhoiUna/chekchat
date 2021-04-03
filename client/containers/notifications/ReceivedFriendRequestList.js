@@ -24,7 +24,7 @@ export default function ReceivedFriendRequestList() {
       {friendRequestList.map((item, index) => (
         <FriendRequest
           key={index}
-          fromPage="notifications"
+          fromPage="inbox"
           requestId={item._id}
           username={item.from.username}
           email={item.from.email}
