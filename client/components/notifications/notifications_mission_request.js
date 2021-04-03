@@ -124,7 +124,7 @@ export default function NotificationsMissionRequest({
           requestId={requestId}
           toggleMissionPopupView={toggleMissionPopupView}
           onClickAction={onClickAction}
-          fromPage="notifications"
+          fromPage="inbox"
         />
       )}
     </>
