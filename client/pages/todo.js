@@ -4,8 +4,21 @@ import Grid from "@material-ui/core/Grid";
 import { useEffect, useState } from "react";
 import { fetchMissionTodoList } from "../utils/Missions";
 import SortButton from "../components/todo/sort_button";
+import io from "socket.io-client";
+import { origin } from "../config/config";
 
+let socket;
 export default function Todo() {
+  useEffect(() => {
+    socket = io(origin, {
+      withCredentials: true,
+    });
+
+    return () => {
+      socket.removeAllListeners();
+    };
+  }, []);
+
   const [missionTodoList, setMissionTodoList] = useState([]);
   useEffect(() => {
     fetchMissionTodoList().then((r) => setMissionTodoList(r));
@@ -23,6 +36,7 @@ export default function Todo() {
             due_date={i.due_date}
             username={i.from.username}
             missionId={i._id}
+            socket={socket}
           />
         ))}
       </Grid>
