@@ -47,6 +47,27 @@ app.use("/api/missions", missionRouter);
 const todoRouter = require("./routes/todoRouter");
 app.use("/api/todo", todoRouter);
 
+//Socket
+io.on("connection", (socket) => {
+  console.log("------User connected------");
+
+  socket.on("check missions", ({ missionID, completed }) => {
+    //Update mission
+    //
+    //io emit to client
+    // io.to(currentUser.room).emit("chat message", {
+    //   user,
+    //   msg,
+    //   time: new Date(time),
+    // });
+  });
+
+  //Listen when users disconnect
+  socket.on("disconnect", () => {
+    console.log("------User disconnected------");
+  });
+});
+
 //Error handling
 app.use((err, req, res, next) => {
   const status = err.status || 500;
@@ -54,6 +75,6 @@ app.use((err, req, res, next) => {
 });
 
 //Listen
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`On http://localhost:${PORT}`);
 });
