@@ -24,3 +24,7 @@
 body {
   background-color: #f1f1f1;
 }
+
+.MuiListItem-root {
+  padding: 5px 0 5px 0.8rem !important;
+}

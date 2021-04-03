@@ -14,16 +14,23 @@ import Link from "next/link";
 import { useState } from "react";
 import utilStyles from "../styles/utils.module.css";
 import { useRouter } from "next/router";
+import InboxIcon from "@material-ui/icons/Inbox";
+import SendIcon from "@material-ui/icons/Send";
+import ListAltIcon from "@material-ui/icons/ListAlt";
+import EventIcon from "@material-ui/icons/Event";
+import GroupIcon from "@material-ui/icons/Group";
+import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import SettingsIcon from "@material-ui/icons/Settings";
 
 const menuList = [
-  "Inbox",
-  "Send missions",
-  "Todo",
-  "Calendar",
-  "Friends",
-  "Profile",
-  "Settings",
-  "Logout",
+  { name: "Inbox", icon: <InboxIcon /> },
+  { name: "Send missions", icon: <SendIcon /> },
+  { name: "Todo", icon: <ListAltIcon /> },
+  { name: "Calendar", icon: <EventIcon /> },
+  { name: "Friends", icon: <GroupIcon /> },
+  { name: "Profile", icon: <AccountCircleIcon /> },
+  { name: "Settings", icon: <SettingsIcon /> },
+  { name: "Logout", icon: <ExitToAppIcon /> },
 ];
 
 const useStyles = makeStyles({
@@ -80,18 +87,23 @@ export default function Menu({ componentName }) {
 
         {menuList.slice(0, 5).map((i) => {
           const href =
-            i === "Send missions" ? "/assigning" : `/${i.toLowerCase()}`;
+            i.name === "Send missions"
+              ? "/assigning"
+              : `/${i.name.toLowerCase()}`;
           return (
             <Link href={href}>
               <ListItem
                 button
-                key={i}
+                key={i.name}
                 style={
-                  i === componentName ? { backgroundColor: "#c0c0c0" } : null
+                  i.name === componentName
+                    ? { backgroundColor: "#c0c0c0" }
+                    : null
                 }
               >
                 <ListItemText>
-                  {i === componentName ? <b>{i}</b> : i}
+                  <IconButton>{i.icon}</IconButton>
+                  {i.name === componentName ? <b>{i.name}</b> : i.name}
                 </ListItemText>
               </ListItem>
             </Link>
@@ -101,15 +113,13 @@ export default function Menu({ componentName }) {
       <Divider />
       <List>
         {menuList.slice(5).map((i) => {
-          const href = `/${i.toLowerCase()}`;
-          if (i === "Logout")
+          const href = `/${i.name.toLowerCase()}`;
+          if (i.name === "Logout")
             return (
-              <ListItem button key={i} onClick={logout}>
+              <ListItem button key={i.name} onClick={logout}>
                 <ListItemText>
-                  {i}
-                  <IconButton>
-                    <ExitToAppIcon />
-                  </IconButton>
+                  <IconButton>{i.icon}</IconButton>
+                  {i.name}
                 </ListItemText>
               </ListItem>
             );
@@ -118,13 +128,16 @@ export default function Menu({ componentName }) {
             <Link href={href}>
               <ListItem
                 button
-                key={i}
+                key={i.name}
                 style={
-                  i === componentName ? { backgroundColor: "#c0c0c0" } : null
+                  i.name === componentName
+                    ? { backgroundColor: "#c0c0c0" }
+                    : null
                 }
               >
                 <ListItemText>
-                  {i === componentName ? <b>{i}</b> : i}
+                  <IconButton>{i.icon}</IconButton>
+                  {i.name === componentName ? <b>{i.name}</b> : i.name}
                 </ListItemText>
               </ListItem>
             </Link>
