@@ -20,6 +20,6 @@
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.4",
     "password-validator": "^5.1.1",
-    "socket.io": "^4.0.0"
+    "socket.io": "^4.0.1"
   }
 }
