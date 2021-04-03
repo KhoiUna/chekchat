@@ -48,12 +48,15 @@ const todoRouter = require("./routes/todoRouter");
 app.use("/api/todo", todoRouter);
 
 //Socket
+const Missions = require("./utils/Missions");
+
 io.on("connection", (socket) => {
   console.log("------User connected------");
 
   socket.on("check missions", ({ missionID, completed }) => {
     //Update mission
-    //
+    Missions.updateMissionComplete(missionID, completed);
+
     //io emit to client
     // io.to(currentUser.room).emit("chat message", {
     //   user,

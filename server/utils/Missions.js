@@ -103,4 +103,22 @@ module.exports = {
       return null;
     }
   },
+  async updateMissionComplete(missionId, completed) {
+    try {
+      const collection = client.db("chekchat").collection("missions");
+
+      const response = await collection.updateOne(
+        {
+          _id: ObjectID(missionId),
+        },
+        { $set: { completed } }
+      );
+      if (!response) return false;
+
+      return response;
+    } catch (err) {
+      console.error("Error updating mission check --- utils");
+      return null;
+    }
+  },
 };
