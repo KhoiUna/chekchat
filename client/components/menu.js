@@ -6,7 +6,6 @@ import {
   ListItemText,
   Divider,
   IconButton,
-  Icon,
 } from "@material-ui/core";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -17,7 +16,8 @@ import utilStyles from "../styles/utils.module.css";
 import { useRouter } from "next/router";
 
 const menuList = [
-  "Missions",
+  "Inbox",
+  "Send missions",
   "Todo",
   "Calendar",
   "Friends",
@@ -78,8 +78,9 @@ export default function Menu({ componentName }) {
           </ListItemText>
         </ListItem>
 
-        {menuList.slice(0, 4).map((i) => {
-          const href = i === "Missions" ? "/assigning" : `/${i.toLowerCase()}`;
+        {menuList.slice(0, 5).map((i) => {
+          const href =
+            i === "Send missions" ? "/assigning" : `/${i.toLowerCase()}`;
           return (
             <Link href={href}>
               <ListItem
@@ -99,7 +100,7 @@ export default function Menu({ componentName }) {
       </List>
       <Divider />
       <List>
-        {menuList.slice(4).map((i) => {
+        {menuList.slice(5).map((i) => {
           const href = `/${i.toLowerCase()}`;
           if (i === "Logout")
             return (
