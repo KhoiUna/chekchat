@@ -53,16 +53,9 @@ const Missions = require("./utils/Missions");
 io.on("connection", (socket) => {
   console.log("------User connected------");
 
-  socket.on("check missions", ({ missionID, completed }) => {
-    //Update mission
-    Missions.updateMissionComplete(missionID, completed);
-
-    //io emit to client
-    // io.to(currentUser.room).emit("chat message", {
-    //   user,
-    //   msg,
-    //   time: new Date(time),
-    // });
+  socket.on("check missions", ({ missionId, completed }) => {
+    //Update mission check/completed
+    Missions.updateMissionComplete(missionId, completed);
   });
 
   //Listen when users disconnect
