@@ -72,11 +72,23 @@ export default function Friends() {
       </MuiThemeProvider>
 
       {value === 0 ? (
-        <Grid container direction="column" justify="center" alignItems="center">
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          style={{ marginBottom: "5rem" }}
+        >
           <FriendList />
         </Grid>
       ) : (
-        <Grid container direction="column" justify="center" alignItems="center">
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          style={{ marginBottom: "5rem" }}
+        >
           <FriendRequestList />
         </Grid>
       )}

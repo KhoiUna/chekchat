@@ -71,6 +71,7 @@ export default function Assigning() {
               direction="column"
               justify="center"
               alignItems="center"
+              style={{ marginBottom: "4rem" }}
             >
               {sentMissionList.map((i) => (
                 <MissionRequest
