@@ -5,9 +5,10 @@ import {
 } from "../../utils/Missions";
 import removeItemFromList from "../../helpers/removeItemFromList";
 import InboxMissionRequest from "../../components/inbox/inbox_mission_request";
+import Spinner from "../../components/spinner";
 
 export default function PendingMissionList({}) {
-  const [missionRequestList, setMissionRequestList] = useState([]);
+  const [missionRequestList, setMissionRequestList] = useState(null);
   useEffect(() => {
     fetchMissionRequestsList("to").then((r) => setMissionRequestList(r));
   }, []);
@@ -19,7 +20,7 @@ export default function PendingMissionList({}) {
     setMissionRequestList((prev) => removeItemFromList(prev, requestId));
   };
 
-  return (
+  return missionRequestList ? (
     <>
       {missionRequestList.map((i, index) => (
         <InboxMissionRequest
@@ -31,5 +32,7 @@ export default function PendingMissionList({}) {
         />
       ))}
     </>
+  ) : (
+    <Spinner />
   );
 }

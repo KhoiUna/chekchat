@@ -5,9 +5,10 @@ import {
   actionFriendRequest,
 } from "../../utils/FriendRequest";
 import removeItemFromList from "../../helpers/removeItemFromList";
+import Spinner from "../../components/spinner";
 
 export default function ReceivedFriendRequestList() {
-  const [friendRequestList, setFriendRequestList] = useState([]);
+  const [friendRequestList, setFriendRequestList] = useState(null);
   useEffect(() => {
     fetchReceivedFriendRequestsList().then((r) => setFriendRequestList(r));
   }, []);
@@ -19,7 +20,7 @@ export default function ReceivedFriendRequestList() {
     setFriendRequestList((prev) => removeItemFromList(prev, requestId));
   };
 
-  return (
+  return friendRequestList ? (
     <>
       {friendRequestList.map((item, index) => (
         <FriendRequest
@@ -34,5 +35,7 @@ export default function ReceivedFriendRequestList() {
         />
       ))}
     </>
+  ) : (
+    <Spinner />
   );
 }
