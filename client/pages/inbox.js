@@ -9,8 +9,8 @@ import Grid from "@material-ui/core/Grid";
 import Tab from "@material-ui/core/Tab";
 import HUE from "@material-ui/core/colors/blue";
 import { useState } from "react";
-import ReceivedFriendRequestList from "../containers/notifications/ReceivedFriendRequestList";
-import PendingMissionList from "../containers/notifications/PendingMissionList";
+import ReceivedFriendRequestList from "../containers/inbox/ReceivedFriendRequestList";
+import PendingMissionList from "../containers/inbox/PendingMissionList";
 
 const useStyles = makeStyles({
   button: {
