@@ -19,7 +19,6 @@ import SendIcon from "@material-ui/icons/Send";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import EventIcon from "@material-ui/icons/Event";
 import GroupIcon from "@material-ui/icons/Group";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import SettingsIcon from "@material-ui/icons/Settings";
 
 const menuList = [
@@ -28,7 +27,6 @@ const menuList = [
   { name: "Todo", icon: <ListAltIcon /> },
   { name: "Calendar", icon: <EventIcon /> },
   { name: "Friends", icon: <GroupIcon /> },
-  { name: "Profile", icon: <AccountCircleIcon /> },
   { name: "Settings", icon: <SettingsIcon /> },
   { name: "Logout", icon: <ExitToAppIcon /> },
 ];
