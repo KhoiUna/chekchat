@@ -57,11 +57,11 @@ export default function MainLayout({ children, componentName }) {
             </Typography>
 
             {componentName !== "Notifications" && componentName !== "Chat" && (
-              <Chat componentName={componentName} />
+              <Bell componentName={componentName} />
             )}
 
             {componentName !== "Notifications" && componentName !== "Chat" && (
-              <Bell componentName={componentName} />
+              <Chat componentName={componentName} />
             )}
           </Toolbar>
         </AppBar>
