@@ -13,8 +13,8 @@ import TextField from "@material-ui/core/TextField";
 import utilStyles from "../../styles/utils.module.css";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import { fetchMissionInfo } from "../../utils/Missions";
+import Spinner from "../spinner";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -230,11 +230,7 @@ export default function MissionPopupView({
           </>
         )}
 
-        {!missionInfo && (
-          <MuiThemeProvider theme={theme}>
-            <CircularProgress style={{ margin: "5% 0" }} />
-          </MuiThemeProvider>
-        )}
+        {!missionInfo && <Spinner />}
       </Paper>
     </>
   );
