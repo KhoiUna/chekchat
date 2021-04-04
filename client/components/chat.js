@@ -1,0 +1,29 @@
+import Link from "next/link";
+import utilStyles from "../styles/utils.module.css";
+import Badge from "@material-ui/core/Badge";
+import IconButton from "@material-ui/core/IconButton";
+import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer";
+
+export default function Chat({ componentName, notificationCount }) {
+  return (
+    componentName !== "Chat" && (
+      <Link href="/chat">
+        <IconButton>
+          <Badge
+            badgeContent={notificationCount || 100}
+            color="error"
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+            max={99}
+            overlap="circle"
+            className={utilStyles.icon}
+          >
+            <QuestionAnswerIcon style={{ fontSize: "2rem" }} />
+          </Badge>
+        </IconButton>
+      </Link>
+    )
+  );
+}

@@ -23,7 +23,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 
 const menuList = [
   { name: "Inbox", icon: <InboxIcon /> },
-  { name: "Send missions", icon: <SendIcon /> },
+  { name: "Sending", icon: <SendIcon /> },
   { name: "Todo", icon: <ListAltIcon /> },
   { name: "Calendar", icon: <EventIcon /> },
   { name: "Friends", icon: <GroupIcon /> },
@@ -85,9 +85,7 @@ export default function Menu({ componentName }) {
 
         {menuList.slice(0, 5).map((i) => {
           const href =
-            i.name === "Send missions"
-              ? "/assigning"
-              : `/${i.name.toLowerCase()}`;
+            i.name === "Sending" ? "/assigning" : `/${i.name.toLowerCase()}`;
           return (
             <Link href={href}>
               <ListItem
@@ -147,11 +145,13 @@ export default function Menu({ componentName }) {
 
   return (
     <>
-      {componentName !== "Notifications" ? (
+      {componentName !== "Notifications" && componentName !== "Chat" && (
         <IconButton onClick={toggleDrawer}>
           <MenuIcon className={utilStyles.icon} style={{ fontSize: "2rem" }} />
         </IconButton>
-      ) : (
+      )}
+
+      {(componentName === "Notifications" || componentName === "Chat") && (
         <IconButton onClick={goBack}>
           <ArrowBackIosIcon
             className={utilStyles.icon}
@@ -159,6 +159,7 @@ export default function Menu({ componentName }) {
           />
         </IconButton>
       )}
+
       {drawerState &&
         menuList.map((anchor) => (
           <SwipeableDrawer

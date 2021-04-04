@@ -2,6 +2,7 @@ import Head from "next/head";
 import styles from "./main_layout.module.css";
 import Menu from "../components/menu";
 import Bell from "../components/bell";
+import Chat from "../components/chat";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect } from "react";
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
   },
   toolBar: {
     display: "grid",
-    gridTemplateColumns: "1fr 18fr 1fr",
+    gridTemplateColumns: "1fr 18fr 1fr 1fr",
     backgroundColor: "#0db3ff",
     margin: "0",
   },
@@ -55,7 +56,13 @@ export default function MainLayout({ children, componentName }) {
               {componentName}
             </Typography>
 
-            <Bell componentName={componentName} />
+            {componentName !== "Notifications" && componentName !== "Chat" && (
+              <Chat componentName={componentName} />
+            )}
+
+            {componentName !== "Notifications" && componentName !== "Chat" && (
+              <Bell componentName={componentName} />
+            )}
           </Toolbar>
         </AppBar>
       </header>
