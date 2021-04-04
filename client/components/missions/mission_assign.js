@@ -13,7 +13,7 @@ import utilStyles from "../../styles/utils.module.css";
 import Typography from "@material-ui/core/Typography";
 import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import CheckIcon from "@material-ui/icons/Check";
+import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import {
   KeyboardDatePicker,
@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
   },
   margin: {
     margin: "0.8rem",
+  },
+  closeButton: {
+    textAlign: "right",
   },
 }));
 
@@ -127,6 +130,15 @@ export default function MissionAssign({ toggleMissionAssign }) {
     <Grid container direction="column" justify="center" alignItems="center">
       <Paper elevation={3} className={classes.paper}>
         <Grid container justify="center" className={classes.gridContainer}>
+          <Grid item xs={12} className={classes.closeButton}>
+            <IconButton
+              aria-label="close"
+              onClick={() => toggleMissionAssign()}
+            >
+              <CloseIcon />
+            </IconButton>
+          </Grid>
+
           <Grid item xs={6}>
             <Typography gutterBottom variant="inherit" component="h3">
               Subject:
