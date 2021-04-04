@@ -114,12 +114,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
         description
       );
       if (res.ok === true) {
-        setProgress("success");
-
-        setSelectedDate(null);
-        setSubject("");
-        setSelectedReceiver("");
-        setDescription("");
+        toggleMissionAssign();
       } else {
         setProgress("fail");
       }
@@ -259,17 +254,15 @@ export default function MissionAssign({ toggleMissionAssign }) {
               style={
                 progress === "start" || !progress
                   ? null
-                  : progress === "success"
-                  ? { backgroundColor: "#2cb32c" }
-                  : { backgroundColor: "red" }
+                  : progress === "fail"
+                  ? { backgroundColor: "red" }
+                  : null
               }
             >
               {progress === "start" || !progress ? "Send" : null}
-              {progress === "success" && "Request sent"}
               {progress === "fail" && "Invalid data"}
               <MuiThemeProvider theme={progressTheme}>
                 {progress === "start" && <CircularProgress />}
-                {progress === "success" && <CheckIcon />}
                 {progress === "fail" && <CloseIcon />}
               </MuiThemeProvider>
             </Button>
