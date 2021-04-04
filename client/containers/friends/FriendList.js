@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import FriendTag from "../../components/friends/friend_tag";
 import { fetchFriendList } from "../../utils/Friends";
-import utilStyles from "../../styles/utils.module.css";
+import Spinner from "../../components/spinner";
 
 export default function FriendList() {
   const [friendList, setFriendList] = useState(null);
@@ -20,6 +20,6 @@ export default function FriendList() {
       ))}
     </>
   ) : (
-    <p className={utilStyles.responseText}>Loading...</p>
+    <Spinner />
   );
 }

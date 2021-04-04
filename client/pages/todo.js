@@ -6,6 +6,7 @@ import { fetchMissionTodoList } from "../utils/Missions";
 import SortButton from "../components/todo/sort_button";
 import io from "socket.io-client";
 import { origin } from "../config/config";
+import Spinner from "../components/spinner";
 
 let socket;
 export default function Todo() {
@@ -19,7 +20,7 @@ export default function Todo() {
     };
   }, []);
 
-  const [missionTodoList, setMissionTodoList] = useState([]);
+  const [missionTodoList, setMissionTodoList] = useState(null);
   useEffect(() => {
     fetchMissionTodoList().then((r) => setMissionTodoList(r));
   }, []);
@@ -28,18 +29,22 @@ export default function Todo() {
     <MainLayout componentName="Todo">
       <SortButton />
 
-      <Grid container direction="column" justify="center" alignItems="center">
-        {missionTodoList.map((i) => (
-          <MissionCheckbox
-            completed={i.completed}
-            subject={i.subject}
-            due_date={i.due_date}
-            username={i.from.username}
-            missionId={i._id}
-            socket={socket}
-          />
-        ))}
-      </Grid>
+      {missionTodoList ? (
+        <Grid container direction="column" justify="center" alignItems="center">
+          {missionTodoList.map((i) => (
+            <MissionCheckbox
+              completed={i.completed}
+              subject={i.subject}
+              due_date={i.due_date}
+              username={i.from.username}
+              missionId={i._id}
+              socket={socket}
+            />
+          ))}
+        </Grid>
+      ) : (
+        <Spinner />
+      )}
     </MainLayout>
   );
 }

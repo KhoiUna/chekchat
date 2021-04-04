@@ -13,7 +13,7 @@ import Typography from "@material-ui/core/Typography";
 import { useEffect, useState } from "react";
 import MissionAssign from "../components/missions/mission_assign";
 import { fetchMissionRequestsList } from "../utils/Missions";
-import utilStyles from "../styles/utils.module.css";
+import Spinner from "../components/spinner";
 
 const useStyles = makeStyles((theme) => ({
   extendedIcon: {
@@ -83,7 +83,7 @@ export default function Assigning() {
               ))}
             </Grid>
           ) : (
-            <p className={utilStyles.responseText}>Loading...</p>
+            <Spinner />
           )}
 
           <MuiThemeProvider theme={buttonTheme}>
