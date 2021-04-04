@@ -47,7 +47,7 @@ export default function Login() {
         const { email, token } = await res.json();
         localStorage.setItem("email", email);
         localStorage.setItem("token", token);
-        router.push("/todo");
+        router.push("/inbox");
       }
     } catch (err) {
       console.error("Error logging in user");
