@@ -8,7 +8,7 @@ import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import SortIcon from "@material-ui/icons/Sort";
+import FilterListIcon from "@material-ui/icons/FilterList";
 import utilsStyle from "../../styles/utils.module.css";
 import HUE from "@material-ui/core/colors/blue";
 
@@ -62,46 +62,34 @@ export default function FilterButton({ filterSentMissionList }) {
     <div className={utilsStyle.filterButton}>
       <MuiThemeProvider theme={buttonTheme}>
         <Button
-          aria-controls="sort menu"
+          aria-controls="filter-menu"
           aria-haspopup="true"
           variant="contained"
           color="primary"
           onClick={handleClick}
         >
-          <b>Filter</b> <SortIcon style={{ marginLeft: "0.3rem" }} />
+          <b>Filter</b> <FilterListIcon style={{ marginLeft: "0.3rem" }} />
         </Button>
       </MuiThemeProvider>
 
       <StyledMenu
-        id="customized-menu"
+        id="filter-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
-          <ListItemText
-            primary="None"
-            onClick={() => filterSentMissionList("None")}
-          />
+        <StyledMenuItem onClick={() => filterSentMissionList("None")}>
+          <ListItemText primary="None" />
         </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemText
-            primary="Pending"
-            onClick={() => filterSentMissionList("Pending")}
-          />
+        <StyledMenuItem onClick={() => filterSentMissionList("Pending")}>
+          <ListItemText primary="Pending" />
         </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemText
-            primary="Accepted"
-            onClick={() => filterSentMissionList("Accepted")}
-          />
+        <StyledMenuItem onClick={() => filterSentMissionList("Accepted")}>
+          <ListItemText primary="Accepted" />
         </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemText
-            primary="Rejected"
-            onClick={() => filterSentMissionList("Rejected")}
-          />
+        <StyledMenuItem onClick={() => filterSentMissionList("Rejected")}>
+          <ListItemText primary="Rejected" />
         </StyledMenuItem>
       </StyledMenu>
     </div>
