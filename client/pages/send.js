@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core/styles";
 import HUE from "@material-ui/core/colors/blue";
 import Typography from "@material-ui/core/Typography";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MissionAssign from "../components/missions/mission_assign";
 import { fetchMissionRequestsList } from "../utils/Missions";
 import Spinner from "../components/spinner";
@@ -48,10 +48,21 @@ export default function Assigning() {
   const toggleMissionAssign = () => setMissionAssign(!missionAssign);
 
   const [sentMissionList, setSentMissionList] = useState(null);
+  const [filteredSentMissionList, setFilteredSentMissionList] = useState(null);
   useEffect(() => {
     if (!missionAssign)
-      fetchMissionRequestsList("from").then((r) => setSentMissionList(r));
+      fetchMissionRequestsList("from").then((r) => {
+        setSentMissionList(r);
+        setFilteredSentMissionList(r);
+      });
   }, [missionAssign]);
+
+  const filterSentMissionList = (status) => {
+    if (status === "None") return setFilteredSentMissionList(sentMissionList);
+
+    const filteredList = sentMissionList.filter((i) => i.status === status);
+    setFilteredSentMissionList(filteredList);
+  };
 
   return (
     <MainLayout componentName="Send">
@@ -66,9 +77,9 @@ export default function Assigning() {
             Sent missions:
           </Typography>
 
-          <FilterButton />
+          <FilterButton filterSentMissionList={filterSentMissionList} />
 
-          {sentMissionList ? (
+          {filteredSentMissionList ? (
             <Grid
               container
               direction="column"
@@ -76,7 +87,7 @@ export default function Assigning() {
               alignItems="center"
               style={{ marginBottom: "4rem" }}
             >
-              {sentMissionList.map((i) => (
+              {filteredSentMissionList.map((i) => (
                 <MissionRequest
                   status={i.status}
                   username={i.to.username}
