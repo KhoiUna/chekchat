@@ -15,7 +15,6 @@ import MissionAssign from "../components/missions/mission_assign";
 import { fetchMissionRequestsList } from "../utils/Missions";
 import Spinner from "../components/spinner";
 import FilterButton from "../components/send/filter_button";
-import utilStyles from "../styles/utils.module.css";
 
 const useStyles = makeStyles((theme) => ({
   extendedIcon: {
