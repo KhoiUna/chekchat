@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
     bottom: "1rem",
     right: "0.8rem",
     zIndex: 1,
-    padding: "1rem",
   },
   badge: {
     margin: "0.8rem 0",
