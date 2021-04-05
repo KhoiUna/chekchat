@@ -58,58 +58,62 @@ export default function Friends() {
 
   return (
     <MainLayout componentName="Friends">
-      <MuiThemeProvider theme={theme}>
-        <Tabs
-          value={value}
-          onChange={handleTabChange}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-        >
-          <Tab label="Your friends" className={classes.tabTitle} />
-          <Tab label="Sent requests" className={classes.tabTitle} />
-        </Tabs>
-      </MuiThemeProvider>
+      {!showPopup && (
+        <>
+          <MuiThemeProvider theme={theme}>
+            <Tabs
+              value={value}
+              onChange={handleTabChange}
+              indicatorColor="primary"
+              textColor="primary"
+              centered
+            >
+              <Tab label="Your friends" className={classes.tabTitle} />
+              <Tab label="Sent requests" className={classes.tabTitle} />
+            </Tabs>
+          </MuiThemeProvider>
 
-      {value === 0 ? (
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-          style={{ marginBottom: "5rem" }}
-        >
-          <FriendList />
-        </Grid>
-      ) : (
-        <Grid
-          container
-          direction="row"
-          justify="center"
-          alignItems="center"
-          style={{ marginBottom: "5rem" }}
-        >
-          <FriendRequestList />
-        </Grid>
+          {value === 0 ? (
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              style={{ marginBottom: "5rem" }}
+            >
+              <FriendList />
+            </Grid>
+          ) : (
+            <Grid
+              container
+              direction="row"
+              justify="center"
+              alignItems="center"
+              style={{ marginBottom: "5rem" }}
+            >
+              <FriendRequestList />
+            </Grid>
+          )}
+
+          <MuiThemeProvider theme={buttonTheme}>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={() => togglePopup(showPopup)}
+            >
+              <PersonAddIcon
+                className={utilStyles.icon}
+                style={{ fontSize: "2rem" }}
+              />
+            </Button>
+          </MuiThemeProvider>
+        </>
       )}
 
       {showPopup && (
         <FriendPopup showPopup={showPopup} togglePopup={togglePopup} />
       )}
-
-      <MuiThemeProvider theme={buttonTheme}>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={() => togglePopup(showPopup)}
-        >
-          <PersonAddIcon
-            className={utilStyles.icon}
-            style={{ fontSize: "2rem" }}
-          />
-        </Button>
-      </MuiThemeProvider>
     </MainLayout>
   );
 }
