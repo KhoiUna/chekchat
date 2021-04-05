@@ -3,10 +3,9 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Grid from "@material-ui/core/Grid";
 import { useState } from "react";
-import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab";
 import HUE from "@material-ui/core/colors/blue";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import utilStyles from "../styles/utils.module.css";
 import {
   createMuiTheme,
   makeStyles,
@@ -18,9 +17,6 @@ import FriendRequestList from "../containers/friends/FriendRequestList";
 
 const useStyles = makeStyles({
   button: {
-    borderRadius: "50%",
-    margin: "4px 2px",
-    padding: "1rem",
     position: "fixed",
     bottom: "1rem",
     right: "0.8rem",
@@ -39,7 +35,7 @@ const theme = createMuiTheme({
 });
 const buttonTheme = createMuiTheme({
   palette: {
-    primary: { main: HUE[500], contrastText: HUE[800] },
+    primary: { main: HUE[500], contrastText: "white" },
   },
 });
 
@@ -96,17 +92,14 @@ export default function Friends() {
           )}
 
           <MuiThemeProvider theme={buttonTheme}>
-            <Button
-              variant="contained"
+            <Fab
               color="primary"
+              aria-label="send mission"
               className={classes.button}
               onClick={() => togglePopup(showPopup)}
             >
-              <PersonAddIcon
-                className={utilStyles.icon}
-                style={{ fontSize: "2rem" }}
-              />
-            </Button>
+              <PersonAddIcon style={{ fontSize: "2rem" }} />
+            </Fab>
           </MuiThemeProvider>
         </>
       )}
