@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import MissionAssign from "../components/missions/mission_assign";
 import { fetchMissionRequestsList } from "../utils/Missions";
 import Spinner from "../components/spinner";
+import FilterButton from "../components/send/filter_button";
 
 const useStyles = makeStyles((theme) => ({
   extendedIcon: {
@@ -53,7 +54,7 @@ export default function Assigning() {
   }, [missionAssign]);
 
   return (
-    <MainLayout componentName="Sending">
+    <MainLayout componentName="Send">
       {!missionAssign && (
         <>
           <Typography
@@ -64,6 +65,8 @@ export default function Assigning() {
           >
             Sent missions:
           </Typography>
+
+          <FilterButton />
 
           {sentMissionList ? (
             <Grid
