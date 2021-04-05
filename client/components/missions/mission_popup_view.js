@@ -167,7 +167,7 @@ export default function MissionPopupView({
             <Grid container justify="center" className={classes.gridContainer}>
               <Grid item xs={6}>
                 <Typography gutterBottom variant="inherit" component="h3">
-                  Send to:
+                  To:
                 </Typography>
               </Grid>
               <Grid item xs={6}>
