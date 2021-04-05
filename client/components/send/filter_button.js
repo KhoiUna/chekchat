@@ -49,7 +49,7 @@ const buttonTheme = createMuiTheme({
   },
 });
 
-export default function FilterButton({}) {
+export default function FilterButton({ filterSentMissionList }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = ({ currentTarget }) => {
     setAnchorEl(currentTarget);
@@ -59,7 +59,7 @@ export default function FilterButton({}) {
   };
 
   return (
-    <div className={utilsStyle.sortButton}>
+    <div className={utilsStyle.filterButton}>
       <MuiThemeProvider theme={buttonTheme}>
         <Button
           aria-controls="sort menu"
@@ -68,7 +68,7 @@ export default function FilterButton({}) {
           color="primary"
           onClick={handleClick}
         >
-          <b>Sort by</b> <SortIcon style={{ marginLeft: "0.3rem" }} />
+          <b>Filter</b> <SortIcon style={{ marginLeft: "0.3rem" }} />
         </Button>
       </MuiThemeProvider>
 
@@ -80,13 +80,28 @@ export default function FilterButton({}) {
         onClose={handleClose}
       >
         <StyledMenuItem>
-          <ListItemText primary="Due date" />
+          <ListItemText
+            primary="None"
+            onClick={() => filterSentMissionList("None")}
+          />
         </StyledMenuItem>
         <StyledMenuItem>
-          <ListItemText primary="... ..." />
+          <ListItemText
+            primary="Pending"
+            onClick={() => filterSentMissionList("Pending")}
+          />
         </StyledMenuItem>
         <StyledMenuItem>
-          <ListItemText primary="... ..." />
+          <ListItemText
+            primary="Accepted"
+            onClick={() => filterSentMissionList("Accepted")}
+          />
+        </StyledMenuItem>
+        <StyledMenuItem>
+          <ListItemText
+            primary="Rejected"
+            onClick={() => filterSentMissionList("Rejected")}
+          />
         </StyledMenuItem>
       </StyledMenu>
     </div>
