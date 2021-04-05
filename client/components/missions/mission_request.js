@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     margin: "0.7rem 0 0.7rem 0",
   },
   badge: {
-    margin: "0.8rem 0",
+    margin: "0.8rem 2rem",
   },
 });
 

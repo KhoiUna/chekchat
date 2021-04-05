@@ -82,7 +82,7 @@ export default function Assigning() {
           {filteredSentMissionList ? (
             <Grid
               container
-              direction="column"
+              direction="row"
               justify="center"
               alignItems="center"
               style={{ marginBottom: "4rem" }}
