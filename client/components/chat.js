@@ -10,7 +10,7 @@ export default function Chat({ componentName, notificationCount }) {
       <Link href="/chat">
         <IconButton>
           <Badge
-            badgeContent={notificationCount || 100}
+            badgeContent={notificationCount}
             color="error"
             anchorOrigin={{
               vertical: "bottom",
