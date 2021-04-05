@@ -26,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
     bottom: "1rem",
     right: "0.8rem",
     zIndex: 1,
-    margin: "4px 2px",
     padding: "1rem",
   },
   badge: {
@@ -110,10 +109,7 @@ export default function Assigning() {
               className={classes.button}
               onClick={toggleMissionAssign}
             >
-              <SendIcon
-                style={{ fontSize: "2rem" }}
-                className={utilStyles.icon}
-              />
+              <SendIcon style={{ fontSize: "2rem" }} />
             </Fab>
           </MuiThemeProvider>
         </>
