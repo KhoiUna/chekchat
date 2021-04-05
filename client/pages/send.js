@@ -10,11 +10,12 @@ import {
 } from "@material-ui/core/styles";
 import HUE from "@material-ui/core/colors/blue";
 import Typography from "@material-ui/core/Typography";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import MissionAssign from "../components/missions/mission_assign";
 import { fetchMissionRequestsList } from "../utils/Missions";
 import Spinner from "../components/spinner";
 import FilterButton from "../components/send/filter_button";
+import utilStyles from "../styles/utils.module.css";
 
 const useStyles = makeStyles((theme) => ({
   extendedIcon: {
@@ -25,6 +26,8 @@ const useStyles = makeStyles((theme) => ({
     bottom: "1rem",
     right: "0.8rem",
     zIndex: 1,
+    margin: "4px 2px",
+    padding: "1rem",
   },
   badge: {
     margin: "0.8rem 0",
@@ -107,7 +110,10 @@ export default function Assigning() {
               className={classes.button}
               onClick={toggleMissionAssign}
             >
-              <SendIcon />
+              <SendIcon
+                style={{ fontSize: "2rem" }}
+                className={utilStyles.icon}
+              />
             </Fab>
           </MuiThemeProvider>
         </>
