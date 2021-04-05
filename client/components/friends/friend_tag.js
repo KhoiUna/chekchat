@@ -9,7 +9,7 @@ import utilStyles from "../../styles/utils.module.css";
 const useStyles = makeStyles({
   root: {
     maxWidth: 270,
-    margin: "0.8rem 0",
+    margin: "0.8rem",
   },
   media: {
     height: 20,

@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     gridTemplateRows: "2fr 1fr",
   },
   badge: {
-    margin: "0.8rem 0",
+    margin: "0.8rem 2rem",
   },
   overflowText: {
     overflow: "hidden",

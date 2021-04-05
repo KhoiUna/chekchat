@@ -74,7 +74,7 @@ export default function Friends() {
       {value === 0 ? (
         <Grid
           container
-          direction="column"
+          direction="row"
           justify="center"
           alignItems="center"
           style={{ marginBottom: "5rem" }}
@@ -84,7 +84,7 @@ export default function Friends() {
       ) : (
         <Grid
           container
-          direction="column"
+          direction="row"
           justify="center"
           alignItems="center"
           style={{ marginBottom: "5rem" }}
