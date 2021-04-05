@@ -211,7 +211,10 @@ export default function MissionPopupView({
                   variant="contained"
                   className={utilStyles.button}
                   className={classes.margin}
-                  onClick={() => onClickAction("reject", requestId)}
+                  onClick={() => {
+                    onClickAction("reject", requestId);
+                    toggleMissionPopupView();
+                  }}
                 >
                   <b>Reject</b>
                 </Button>
@@ -220,7 +223,10 @@ export default function MissionPopupView({
                     variant="contained"
                     color="primary"
                     className={utilStyles.button}
-                    onClick={() => onClickAction("accept", requestId)}
+                    onClick={() => {
+                      onClickAction("accept", requestId);
+                      toggleMissionPopupView();
+                    }}
                   >
                     <b>Accept</b>
                   </Button>

@@ -13,10 +13,8 @@ export default function PendingMissionList({}) {
     fetchMissionRequestsList("to").then((r) => setMissionRequestList(r));
   }, []);
 
-  const [change, setChange] = useState(false);
   const handleClick = async (action, requestId) => {
-    const res = await actionMissionRequest(action, requestId);
-    setChange(!change);
+    await actionMissionRequest(action, requestId);
     setMissionRequestList((prev) => removeItemFromList(prev, requestId));
   };
 
