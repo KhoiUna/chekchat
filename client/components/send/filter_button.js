@@ -32,17 +32,6 @@ const StyledMenu = withStyles({
   />
 ));
 
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    "&:focus": {
-      backgroundColor: "#f1f1f1",
-      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-        color: HUE[500],
-      },
-    },
-  },
-}))(MenuItem);
-
 const buttonTheme = createMuiTheme({
   palette: {
     primary: { main: HUE[500], contrastText: "white" },
@@ -58,6 +47,12 @@ export default function FilterButton({ filterSentMissionList }) {
     setAnchorEl(null);
   };
 
+  const [activeMenuItem, setActiveMenuItem] = useState("None");
+  const handleClickMenuItem = (target, status) => {
+    setActiveMenuItem(target.innerHTML);
+    filterSentMissionList(status);
+  };
+  console.log(activeMenuItem);
   return (
     <div className={utilsStyle.filterButton}>
       <MuiThemeProvider theme={buttonTheme}>
@@ -79,18 +74,46 @@ export default function FilterButton({ filterSentMissionList }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem onClick={() => filterSentMissionList("None")}>
+        <MenuItem
+          onClick={({ target }) => handleClickMenuItem(target, "None")}
+          style={
+            activeMenuItem === "None"
+              ? { backgroundColor: "#c0c0c078", color: "#2196f3" }
+              : { backgroundColor: "transparent", color: "black" }
+          }
+        >
           <ListItemText primary="None" />
-        </StyledMenuItem>
-        <StyledMenuItem onClick={() => filterSentMissionList("Pending")}>
+        </MenuItem>
+        <MenuItem
+          onClick={({ target }) => handleClickMenuItem(target, "Pending")}
+          style={
+            activeMenuItem === "Pending"
+              ? { backgroundColor: "#c0c0c078", color: "#2196f3" }
+              : { backgroundColor: "transparent", color: "black" }
+          }
+        >
           <ListItemText primary="Pending" />
-        </StyledMenuItem>
-        <StyledMenuItem onClick={() => filterSentMissionList("Accepted")}>
+        </MenuItem>
+        <MenuItem
+          onClick={({ target }) => handleClickMenuItem(target, "Accepted")}
+          style={
+            activeMenuItem === "Accepted"
+              ? { backgroundColor: "#c0c0c078", color: "#2196f3" }
+              : { backgroundColor: "transparent", color: "black" }
+          }
+        >
           <ListItemText primary="Accepted" />
-        </StyledMenuItem>
-        <StyledMenuItem onClick={() => filterSentMissionList("Rejected")}>
+        </MenuItem>
+        <MenuItem
+          onClick={({ target }) => handleClickMenuItem(target, "Rejected")}
+          style={
+            activeMenuItem === "Rejected"
+              ? { backgroundColor: "#c0c0c078", color: "#2196f3" }
+              : { backgroundColor: "transparent", color: "black" }
+          }
+        >
           <ListItemText primary="Rejected" />
-        </StyledMenuItem>
+        </MenuItem>
       </StyledMenu>
     </div>
   );
