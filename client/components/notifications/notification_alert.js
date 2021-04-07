@@ -1,0 +1,62 @@
+import { makeStyles } from "@material-ui/core/styles";
+import Card from "@material-ui/core/Card";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
+import PeopleIcon from "@material-ui/icons/People";
+import AssignmentIcon from "@material-ui/icons/Assignment";
+import Divider from "@material-ui/core/Divider";
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 270,
+    margin: "0.8rem 0",
+  },
+  gridColumn: {
+    display: "grid",
+    gridTemplateColumns: "1fr 0fr 2fr",
+  },
+  gridRow: {
+    display: "grid",
+    gridTemplateRows: "2fr 1fr",
+  },
+  divider: {
+    margin: "0.7rem 0 0.7rem 0",
+  },
+});
+
+export default function NotificationAlert({ username, type, seen }) {
+  const classes = useStyles();
+
+  return (
+    <Card className={classes.root} style={seen ? { opacity: 0.6 } : null}>
+      <CardActionArea className={classes.gridColumn}>
+        <div style={{ color: "#0db3ff" }}>
+          {type === "friend" && <PeopleIcon />}
+          {type === "mission" && <AssignmentIcon />}
+        </div>
+
+        <Divider orientation="vertical" flexItem className={classes.divider} />
+
+        <CardContent className={classes.gridRow}>
+          <Typography
+            gutterBottom
+            variant="body1"
+            component="h1"
+            style={{ textAlign: "left" }}
+          >
+            {username} accepted your {type} request
+          </Typography>
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            style={{ textAlign: "right" }}
+          >
+            {new Date().toLocaleDateString()}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+  );
+}
