@@ -2,9 +2,20 @@ const { getUser } = require("./Users");
 const client = require("../db/client");
 
 module.exports = {
-  async getNotifications(email) {
+  async getNotifications(email, forComp = undefined) {
     try {
       const collection = client.db("chekchat").collection("notifications");
+
+      if (forComp === "bell") {
+        const notificationList = await collection
+          .find({
+            "to_user.email": email,
+            seen: false,
+          })
+          .sort({ time: -1 })
+          .toArray();
+        return notificationList;
+      }
 
       const notificationList = await collection
         .find({
