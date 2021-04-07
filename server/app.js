@@ -47,6 +47,9 @@ app.use("/api/missions", missionRouter);
 const todoRouter = require("./routes/todoRouter");
 app.use("/api/todo", todoRouter);
 
+const notificationRouter = require("./routes/notificationRouter");
+app.use("/api/notifications", notificationRouter);
+
 //Socket
 const Missions = require("./utils/Missions");
 
