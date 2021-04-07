@@ -9,7 +9,6 @@ router.get("/", async (req, res, next) => {
     res.json(notificationList);
   } catch (err) {
     console.error("Error getting notifications");
-    console.log(err);
     next();
   }
 });
@@ -22,7 +21,7 @@ router.get("/bell", async (req, res, next) => {
       userEmail,
       "bell"
     );
-    res.json(notificationList);
+    res.json(notificationList.length);
   } catch (err) {
     console.error("Error getting notifications");
     console.log(err);
