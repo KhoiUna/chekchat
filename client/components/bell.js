@@ -10,7 +10,7 @@ export default function Bell({ componentName, notificationCount }) {
       <Link href="/notifications">
         <IconButton>
           <Badge
-            badgeContent={notificationCount || 100}
+            badgeContent={notificationCount}
             color="error"
             anchorOrigin={{
               vertical: "bottom",

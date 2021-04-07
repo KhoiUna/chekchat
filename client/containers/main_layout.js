@@ -5,7 +5,8 @@ import Bell from "../components/bell";
 import Chat from "../components/chat";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { fetchNotificationCountForBell } from "../utils/Notifications";
 
 const useStyles = makeStyles({
   root: {
@@ -30,8 +31,9 @@ const useStyles = makeStyles({
 export default function MainLayout({ children, componentName }) {
   const classes = useStyles();
 
+  const [notificationCount, setNotificationCount] = useState(null);
   useEffect(() => {
-    // console.log("load notification or socket");
+    fetchNotificationCountForBell().then((r) => setNotificationCount(r));
   }, []);
 
   return (
@@ -57,7 +59,10 @@ export default function MainLayout({ children, componentName }) {
             </Typography>
 
             {componentName !== "Notifications" && componentName !== "Chat" && (
-              <Bell componentName={componentName} />
+              <Bell
+                componentName={componentName}
+                notificationCount={notificationCount}
+              />
             )}
 
             {componentName !== "Notifications" && componentName !== "Chat" && (
