@@ -1,3 +1,5 @@
+import { origin } from "../config/config";
+
 module.exports = {
   async fetchNotificationsList() {
     try {
