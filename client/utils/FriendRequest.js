@@ -44,21 +44,4 @@ module.exports = {
       console.error("Error sending friend request");
     }
   },
-  async actionFriendRequest(action, requestId) {
-    try {
-      const res = await fetch(`${origin}/api/friends/requests`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          requestId,
-          action,
-        }),
-      });
-      return res;
-    } catch (err) {
-      console.error(`Error ${action} friend request`);
-    }
-  },
 };

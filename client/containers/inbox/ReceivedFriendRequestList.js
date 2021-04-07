@@ -1,21 +1,31 @@
 import { useState, useEffect } from "react";
 import FriendRequest from "../../components/friends/friend_request";
-import {
-  fetchReceivedFriendRequestsList,
-  actionFriendRequest,
-} from "../../utils/FriendRequest";
+import { fetchReceivedFriendRequestsList } from "../../utils/FriendRequest";
 import removeItemFromList from "../../helpers/removeItemFromList";
 import Spinner from "../../components/spinner";
+import io from "socket.io-client";
+import { origin } from "../../config/config";
 
+let socket;
 export default function ReceivedFriendRequestList() {
   const [friendRequestList, setFriendRequestList] = useState(null);
   useEffect(() => {
     fetchReceivedFriendRequestsList().then((r) => setFriendRequestList(r));
   }, []);
 
+  useEffect(() => {
+    socket = io(origin, {
+      withCredentials: true,
+    });
+
+    return () => {
+      socket.removeAllListeners();
+    };
+  }, []);
+
   const handleClick = async (action, requestId) => {
     setFriendRequestList((prev) => removeItemFromList(prev, requestId));
-    await actionFriendRequest(action, requestId);
+    socket.emit("friend requests", { action, requestId });
   };
 
   return friendRequestList ? (

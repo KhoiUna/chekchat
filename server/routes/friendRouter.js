@@ -68,32 +68,6 @@ router.post("/requests", async (req, res, next) => {
   }
 });
 
-router.put("/requests", async (req, res, next) => {
-  try {
-    const { action, requestId } = req.body;
-
-    //Update friend request and return friendEmail & userEmail
-    const { userEmail, friendEmail } = await FriendRequest.updateRequest(
-      requestId,
-      action
-    );
-    if (!friendEmail || !userEmail)
-      return res.status(400).send("Sorry, something is wrong");
-
-    if (action === "accept") {
-      if (!Users.addFriend(userEmail, friendEmail))
-        return res.status(400).send("Sorry, something is wrong");
-
-      return res.send("ok");
-    }
-
-    res.send("ok");
-  } catch (err) {
-    console.error("Error updating friend request");
-    next();
-  }
-});
-
 router.get("/", async (req, res, next) => {
   try {
     const userEmail = req.query.userEmail;

@@ -73,19 +73,4 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/", async (req, res, next) => {
-  try {
-    const { action, requestId } = req.body;
-
-    //Update mission request
-    if (!(await Missions.updateRequest(requestId, action)))
-      return res.status(400).send("Sorry, something is wrong");
-
-    res.send("ok");
-  } catch (err) {
-    console.error("Error updating mission request");
-    next();
-  }
-});
-
 module.exports = router;

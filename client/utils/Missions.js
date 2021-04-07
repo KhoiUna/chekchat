@@ -58,21 +58,4 @@ module.exports = {
       console.error(`Error getting mission todo list`);
     }
   },
-  async actionMissionRequest(action, requestId) {
-    try {
-      const res = await fetch(`${origin}/api/missions`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          requestId,
-          action,
-        }),
-      });
-      return res;
-    } catch (err) {
-      console.error(`Error ${action}ing mission request`);
-    }
-  },
 };
