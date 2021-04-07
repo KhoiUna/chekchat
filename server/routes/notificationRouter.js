@@ -1,13 +1,15 @@
 const router = require("express").Router();
+const Notifications = require("../utils/Notifications");
 
 router.get("/", async (req, res, next) => {
   try {
-    const { email } = req.query;
+    const { userEmail } = req.query;
 
-    const notificationList = await Notification.getMissionRequest(email);
+    const notificationList = await Notifications.getNotifications(userEmail);
     res.json(notificationList);
   } catch (err) {
     console.error("Error getting notifications");
+    console.log(err);
     next();
   }
 });
