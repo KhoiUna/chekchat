@@ -89,15 +89,22 @@ module.exports = {
       const collection = client.db("chekchat").collection("missions");
       const status = action === "accept" ? "Accepted" : "Rejected";
 
-      const response = await collection.updateOne(
+      const { modifiedCount } = await collection.updateOne(
         {
           _id: ObjectID(requestId),
         },
         { $set: { status } }
       );
-      if (!response) return false;
 
-      return response;
+      if (!modifiedCount) return false;
+
+      const response = await collection.findOne({
+        _id: ObjectID(requestId),
+      });
+      const senderEmail = response.from.email;
+      const receiverEmail = response.to.email;
+
+      return { senderEmail, receiverEmail };
     } catch (err) {
       console.error("Error updating mission request --- utils");
       return null;
