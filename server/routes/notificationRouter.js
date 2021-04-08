@@ -24,7 +24,6 @@ router.get("/bell", async (req, res, next) => {
     res.json(notificationList.length);
   } catch (err) {
     console.error("Error getting notifications");
-    console.log(err);
     next();
   }
 });

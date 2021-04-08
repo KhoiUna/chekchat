@@ -52,7 +52,7 @@ export default function FilterButton({ filterSentMissionList }) {
     setActiveMenuItem(target.innerHTML);
     filterSentMissionList(status);
   };
-  console.log(activeMenuItem);
+
   return (
     <div className={utilsStyle.filterButton}>
       <MuiThemeProvider theme={buttonTheme}>
