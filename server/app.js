@@ -73,12 +73,7 @@ io.on("connection", (socket) => {
     if (action === "accept") Users.addFriend(userEmail, friendEmail);
 
     //Create notification
-    Notifications.saveNotification(
-      receiverEmail,
-      senderEmail,
-      "friend",
-      action
-    );
+    Notifications.saveNotification(userEmail, friendEmail, "friend", action);
   });
 
   socket.on("mission requests", async ({ requestId, action }) => {
