@@ -23,7 +23,7 @@ import SettingsIcon from "@material-ui/icons/Settings";
 
 const menuList = [
   { name: "Inbox", icon: <InboxIcon /> },
-  { name: "Send", icon: <SendIcon /> },
+  { name: "Send tasks", icon: <SendIcon /> },
   { name: "Todo", icon: <ListAltIcon /> },
   { name: "Calendar", icon: <EventIcon /> },
   { name: "Friends", icon: <GroupIcon /> },
@@ -84,7 +84,8 @@ export default function Menu({ componentName }) {
         </ListItem>
 
         {menuList.slice(0, 5).map((i) => {
-          const href = i.name === "Send" ? "/send" : `/${i.name.toLowerCase()}`;
+          const href =
+            i.name === "Send tasks" ? "/send" : `/${i.name.toLowerCase()}`;
           return (
             <Link href={href}>
               <ListItem
