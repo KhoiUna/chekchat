@@ -41,7 +41,7 @@ module.exports = {
         from_user: senderInfo,
         to_user: receiverInfo,
         type,
-        text: `${senderInfo.username} ${action}ed your ${type} request`,
+        text: `${action}ed your ${type} request`,
         seen: false,
         clicked: false,
         time: new Date(new Date().toUTCString()),
