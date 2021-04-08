@@ -64,6 +64,11 @@ io.on("connection", (socket) => {
     Missions.updateMissionComplete(missionId, completed);
   });
 
+  socket.on("click notification", (notificationId) => {
+    //Update notification clicked
+    Notifications.updateClickedNotification(notificationId);
+  });
+
   socket.on("friend requests", async ({ requestId, action }) => {
     //Update friend request and return friendEmail & userEmail
     const { userEmail, friendEmail } = await FriendRequest.updateRequest(

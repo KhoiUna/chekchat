@@ -1,5 +1,6 @@
 const { getUser } = require("./Users");
 const client = require("../db/client");
+const { ObjectID } = require("bson");
 
 module.exports = {
   async getNotifications(email, forComp = undefined) {
@@ -49,6 +50,24 @@ module.exports = {
       return response;
     } catch (err) {
       console.error("Error saving notification");
+      return null;
+    }
+  },
+  async updateClickedNotification(notificationId) {
+    try {
+      const collection = client.db("chekchat").collection("notifications");
+
+      const response = await collection.updateOne(
+        {
+          _id: ObjectID(notificationId),
+        },
+        { $set: { clicked: true } }
+      );
+      if (!response) return false;
+
+      return response;
+    } catch (err) {
+      console.error("Error updating notification when clicked");
       return null;
     }
   },
