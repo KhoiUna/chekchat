@@ -16,11 +16,7 @@ export default function Notifications() {
       {notificationList ? (
         <Grid container direction="column" justify="center" alignItems="center">
           {notificationList.map((i) => (
-            <NotificationAlert
-              username={i.from_user.username}
-              type={i.type}
-              seen={i.seen}
-            />
+            <NotificationAlert type={i.type} seen={i.seen} text={i.text} />
           ))}
         </Grid>
       ) : (

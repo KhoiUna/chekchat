@@ -14,18 +14,18 @@ const useStyles = makeStyles({
   },
   gridColumn: {
     display: "grid",
-    gridTemplateColumns: "1fr 0fr 2fr",
+    gridTemplateColumns: "1fr 0fr 4fr",
   },
   gridRow: {
     display: "grid",
-    gridTemplateRows: "2fr 1fr",
+    gridTemplateRows: "4fr 1fr",
   },
   divider: {
     margin: "0.7rem 0 0.7rem 0",
   },
 });
 
-export default function NotificationAlert({ username, type, seen }) {
+export default function NotificationAlert({ type, text, seen }) {
   const classes = useStyles();
 
   return (
@@ -39,13 +39,8 @@ export default function NotificationAlert({ username, type, seen }) {
         <Divider orientation="vertical" flexItem className={classes.divider} />
 
         <CardContent className={classes.gridRow}>
-          <Typography
-            gutterBottom
-            variant="body1"
-            component="h1"
-            style={{ textAlign: "left" }}
-          >
-            {username} accepted your {type} request
+          <Typography gutterBottom variant="h6" style={{ textAlign: "left" }}>
+            {text}
           </Typography>
           <Typography
             variant="body2"
