@@ -28,7 +28,7 @@ module.exports = {
       console.error("Error getting notifications");
     }
   },
-  async saveMissionRequest(userEmail, receiverEmail, type, action, time) {
+  async saveNotification(userEmail, receiverEmail, type, action) {
     try {
       //Get sender info
       const senderInfo = await getUser(userEmail);
@@ -43,7 +43,7 @@ module.exports = {
         type,
         text: `${senderInfo.username} ${action}ed your ${type} request`,
         seen: false,
-        time: new Date(time),
+        time: new Date(new Date().toUTCString()),
       });
       return response;
     } catch (err) {

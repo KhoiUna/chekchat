@@ -54,6 +54,7 @@ app.use("/api/notifications", notificationRouter);
 const Missions = require("./utils/Missions");
 const FriendRequest = require("./utils/FriendRequest");
 const Users = require("./utils/Users");
+const Notifications = require("./utils/Notifications");
 
 io.on("connection", (socket) => {
   console.log("------User connected------");
@@ -70,11 +71,30 @@ io.on("connection", (socket) => {
       action
     );
     if (action === "accept") Users.addFriend(userEmail, friendEmail);
+
+    //Create notification
+    Notifications.saveNotification(
+      receiverEmail,
+      senderEmail,
+      "friend",
+      action
+    );
   });
 
-  socket.on("mission requests", ({ requestId, action }) => {
+  socket.on("mission requests", async ({ requestId, action }) => {
     //Update mission request
-    Missions.updateRequest(requestId, action);
+    const { senderEmail, receiverEmail } = await Missions.updateRequest(
+      requestId,
+      action
+    );
+
+    //Create notification
+    Notifications.saveNotification(
+      receiverEmail,
+      senderEmail,
+      "mission",
+      action
+    );
   });
 
   //Listen when users disconnect
