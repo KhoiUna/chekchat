@@ -1,3 +1,49 @@
 module.exports = {
-  //
+  forNotification(time) {
+    time = new Date(time);
+    let month = time.getMonth() + 1;
+    let date = time.getDate();
+    let timeRecordStr;
+
+    if (
+      new Date().getDate() - date === 1 &&
+      new Date().getMonth() - time.getMonth() === 0 &&
+      new Date().getFullYear() - time.getFullYear() === 0
+    ) {
+      timeRecordStr = "Yesterday";
+    } else if (
+      new Date().getDate() - date === 0 &&
+      new Date().getMonth() - time.getMonth() === 0 &&
+      new Date().getFullYear() - time.getFullYear() === 0
+    ) {
+      timeRecordStr = "Today";
+    } else {
+      if (date < 10) {
+        date = `0${date}`;
+      }
+      if (month < 11) {
+        month = `0${month}`;
+      }
+      timeRecordStr = `${time.toString().slice(0, 3)} ${month}/${date}`;
+    }
+
+    if (timeRecordStr === "Today") {
+      const hourDiff = new Date().getHours() - new Date(time).getHours();
+      timeRecordStr = `${hourDiff} hours ago`;
+
+      if (hourDiff === 0) {
+        const minuteDiff =
+          new Date().getMinutes() - new Date(time).getMinutes();
+        timeRecordStr = `${minuteDiff} minutes ago`;
+
+        if (minuteDiff === 0) {
+          const secondDiff =
+            new Date().getSeconds() - new Date(time).getSeconds();
+          timeRecordStr = `${secondDiff} seconds ago`;
+        }
+      }
+    }
+
+    return timeRecordStr;
+  },
 };

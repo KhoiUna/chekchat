@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import PeopleIcon from "@material-ui/icons/People";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Divider from "@material-ui/core/Divider";
+import FormatDatetime from "../../helpers/FormatDatetime";
 
 const useStyles = makeStyles({
   root: {
@@ -25,7 +26,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function NotificationAlert({ type, text, seen }) {
+export default function NotificationAlert({ type, text, seen, time }) {
   const classes = useStyles();
 
   return (
@@ -48,7 +49,7 @@ export default function NotificationAlert({ type, text, seen }) {
             component="p"
             style={{ textAlign: "right" }}
           >
-            {new Date().toLocaleDateString()}
+            {FormatDatetime.forNotification(time)}
           </Typography>
         </CardContent>
       </CardActionArea>

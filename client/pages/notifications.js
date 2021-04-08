@@ -16,7 +16,12 @@ export default function Notifications() {
       {notificationList ? (
         <Grid container direction="column" justify="center" alignItems="center">
           {notificationList.map((i) => (
-            <NotificationAlert type={i.type} seen={i.seen} text={i.text} />
+            <NotificationAlert
+              type={i.type}
+              seen={i.seen}
+              text={i.text}
+              time={i.time}
+            />
           ))}
         </Grid>
       ) : (
