@@ -29,17 +29,19 @@ module.exports = {
 
     if (timeRecordStr === "Today") {
       const hourDiff = new Date().getHours() - new Date(time).getHours();
-      timeRecordStr = `${hourDiff} hours ago`;
+      timeRecordStr = `${hourDiff} hour${hourDiff > 1 ? "s" : ""} ago`;
 
       if (hourDiff === 0) {
         const minuteDiff =
           new Date().getMinutes() - new Date(time).getMinutes();
-        timeRecordStr = `${minuteDiff} minutes ago`;
+        timeRecordStr = `${minuteDiff} minute${minuteDiff > 1 ? "s" : ""} ago`;
 
         if (minuteDiff === 0) {
           const secondDiff =
             new Date().getSeconds() - new Date(time).getSeconds();
-          timeRecordStr = `${secondDiff} seconds ago`;
+          timeRecordStr = `${secondDiff} second${
+            secondDiff > 1 ? "s" : ""
+          } ago`;
         }
       }
     }
