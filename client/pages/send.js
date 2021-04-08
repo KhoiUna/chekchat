@@ -65,7 +65,7 @@ export default function Assigning() {
   };
 
   return (
-    <MainLayout componentName="Send">
+    <MainLayout componentName="Send tasks">
       {!missionAssign && (
         <>
           <Typography
@@ -74,7 +74,7 @@ export default function Assigning() {
             component="h2"
             className={classes.alignLeft}
           >
-            Sent missions:
+            Sent tasks:
           </Typography>
 
           <FilterButton filterSentMissionList={filterSentMissionList} />
