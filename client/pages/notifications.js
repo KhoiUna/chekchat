@@ -4,8 +4,21 @@ import NotificationAlert from "../components/notifications/notification_alert";
 import { fetchNotificationsList } from "../utils/Notifications";
 import { useEffect, useState } from "react";
 import Spinner from "../components/spinner";
+import io from "socket.io-client";
+import { origin } from "../config/config";
 
+let socket;
 export default function Notifications() {
+  useEffect(() => {
+    socket = io(origin, {
+      withCredentials: true,
+    });
+
+    return () => {
+      socket.removeAllListeners();
+    };
+  }, []);
+
   const [notificationList, setNotificationList] = useState(null);
   useEffect(() => {
     fetchNotificationsList().then((r) => setNotificationList(r));
@@ -17,11 +30,13 @@ export default function Notifications() {
         <Grid container direction="column" justify="center" alignItems="center">
           {notificationList.map((i) => (
             <NotificationAlert
+              notificationId={i._id}
               username={i.from_user.username}
               type={i.type}
-              seen={i.seen}
+              clicked={i.clicked}
               text={i.text}
               time={i.time}
+              socket={socket}
             />
           ))}
         </Grid>

@@ -7,13 +7,13 @@ import PeopleIcon from "@material-ui/icons/People";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Divider from "@material-ui/core/Divider";
 import FormatDatetime from "../../helpers/FormatDatetime";
+import { useRouter } from "next/router";
 
 const useStyles = makeStyles({
   root: {
     width: "85%",
     maxWidth: 600,
     margin: "0.8rem 0",
-    backgroundColor: "#dbf4ff",
   },
   gridColumn: {
     display: "grid",
@@ -29,17 +29,35 @@ const useStyles = makeStyles({
 });
 
 export default function NotificationAlert({
+  notificationId,
   username,
   type,
   text,
-  seen,
   clicked,
   time,
+  socket,
 }) {
   const classes = useStyles();
 
+  const router = useRouter();
+
+  const handleClick = (notificationId, type) => {
+    socket.emit("click notification", notificationId);
+    if (type === "mission") {
+      router.push("/send");
+      return;
+    }
+    router.push("/friends");
+  };
+
   return (
-    <Card className={classes.root} style={clicked ? { opacity: 0.6 } : null}>
+    <Card
+      className={classes.root}
+      style={
+        clicked ? { backgroundColor: "white" } : { backgroundColor: "#dbf4ff" }
+      }
+      onClick={() => handleClick(notificationId, type)}
+    >
       <CardActionArea className={classes.gridColumn}>
         <div style={{ color: "#0db3ff" }}>
           {type === "friend" && <PeopleIcon />}
