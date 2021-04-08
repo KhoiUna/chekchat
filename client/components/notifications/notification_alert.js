@@ -10,8 +10,10 @@ import FormatDatetime from "../../helpers/FormatDatetime";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 270,
+    width: "85%",
+    maxWidth: 600,
     margin: "0.8rem 0",
+    backgroundColor: "#dbf4ff",
   },
   gridColumn: {
     display: "grid",
@@ -26,11 +28,18 @@ const useStyles = makeStyles({
   },
 });
 
-export default function NotificationAlert({ type, text, seen, time }) {
+export default function NotificationAlert({
+  username,
+  type,
+  text,
+  seen,
+  clicked,
+  time,
+}) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root} style={seen ? { opacity: 0.6 } : null}>
+    <Card className={classes.root} style={clicked ? { opacity: 0.6 } : null}>
       <CardActionArea className={classes.gridColumn}>
         <div style={{ color: "#0db3ff" }}>
           {type === "friend" && <PeopleIcon />}
@@ -41,7 +50,7 @@ export default function NotificationAlert({ type, text, seen, time }) {
 
         <CardContent className={classes.gridRow}>
           <Typography gutterBottom variant="h6" style={{ textAlign: "left" }}>
-            {text}
+            <b>{username}</b> {text}
           </Typography>
           <Typography
             variant="body2"
