@@ -7,6 +7,7 @@ import SortButton from "../components/todo/sort_button";
 import io from "socket.io-client";
 import { origin } from "../config/config";
 import Spinner from "../components/spinner";
+import Typography from "@material-ui/core/Typography";
 
 let socket;
 export default function Todo() {
@@ -30,9 +31,13 @@ export default function Todo() {
       <SortButton />
 
       {missionTodoList?.length === 0 && (
-        <h3 style={{ marginTop: "10%" }}>
-          <i>You have nothing to do here!</i>
-        </h3>
+        <Typography
+          variant="h6"
+          color="textSecondary"
+          style={{ marginTop: "10%" }}
+        >
+          <i>You have no tasks to do here!</i>
+        </Typography>
       )}
 
       {missionTodoList ? (
