@@ -24,6 +24,15 @@ export default function Notifications() {
     fetchNotificationsList().then((r) => setNotificationList(r));
   }, []);
 
+  if (notificationList?.length === 0)
+    return (
+      <MainLayout componentName="Notifications">
+        <h3 style={{ marginTop: "1rem" }}>
+          <i>You have no notifications here!</i>
+        </h3>
+      </MainLayout>
+    );
+
   return (
     <MainLayout componentName="Notifications">
       {notificationList ? (
