@@ -45,6 +45,7 @@ const useStyles = makeStyles({
   },
   flex: {
     display: "flex",
+    margin: "0.2rem 0",
   },
 });
 
@@ -95,7 +96,7 @@ export default function Menu({ componentName, userInfo }) {
             <Typography
               variant="h6"
               gutterBottom
-              style={{ marginLeft: "0.5rem" }}
+              style={{ marginLeft: "0.5rem", fontWeight: "bold" }}
             >
               {userInfo.username}
             </Typography>
