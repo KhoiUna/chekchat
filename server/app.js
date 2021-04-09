@@ -79,6 +79,9 @@ io.on("connection", (socket) => {
 
     //Create notification
     Notifications.saveNotification(userEmail, friendEmail, "friend", action);
+
+    //Increment notification count for user
+    Users.updateNotificationCount(friendEmail, "increment");
   });
 
   socket.on("mission requests", async ({ requestId, action }) => {
@@ -95,6 +98,9 @@ io.on("connection", (socket) => {
       "mission",
       action
     );
+
+    //Increment notification count for user
+    Users.updateNotificationCount(senderEmail, "increment");
   });
 
   //Listen when users disconnect

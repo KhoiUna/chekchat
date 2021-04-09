@@ -127,11 +127,13 @@ module.exports = {
           { $set: { notificationCount: 0 } }
         );
         if (!response) return false;
+
+        return response;
       }
 
       const response = await collection.updateOne(
         {
-          _id: ObjectID(missionId),
+          email: userEmail,
         },
         { $inc: { notificationCount: 1 } }
       );
