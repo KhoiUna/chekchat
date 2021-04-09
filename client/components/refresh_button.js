@@ -9,8 +9,6 @@ import HUE from "@material-ui/core/colors/blue";
 
 const useStyles = makeStyles({
   refreshButton: {
-    margin: "4px 2px",
-    padding: "1rem",
     position: "fixed",
     bottom: "1rem",
     left: "0.8rem",
@@ -37,7 +35,7 @@ export default function RefreshButton() {
         className={classes.refreshButton}
         onClick={refresh}
       >
-        <RefreshIcon />
+        <RefreshIcon style={{ fontSize: "2rem" }} />
       </Fab>
     </MuiThemeProvider>
   );
