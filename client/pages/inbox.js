@@ -52,11 +52,23 @@ export default function Inbox() {
       </MuiThemeProvider>
 
       {value === 0 ? (
-        <Grid container direction="column" justify="center" alignItems="center">
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          style={{ marginBottom: "5rem" }}
+        >
           <PendingMissionList />
         </Grid>
       ) : (
-        <Grid container direction="column" justify="center" alignItems="center">
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          style={{ marginBottom: "5rem" }}
+        >
           <ReceivedFriendRequestList />
         </Grid>
       )}
