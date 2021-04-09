@@ -69,27 +69,7 @@ export default function Friends() {
             </Tabs>
           </MuiThemeProvider>
 
-          {value === 0 ? (
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              style={{ marginBottom: "5rem" }}
-            >
-              <FriendList />
-            </Grid>
-          ) : (
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-              style={{ marginBottom: "5rem" }}
-            >
-              <FriendRequestList />
-            </Grid>
-          )}
+          {value === 0 ? <FriendList /> : <FriendRequestList />}
 
           <MuiThemeProvider theme={buttonTheme}>
             <Fab

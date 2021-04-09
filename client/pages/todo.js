@@ -29,6 +29,12 @@ export default function Todo() {
     <MainLayout componentName="Todo">
       <SortButton />
 
+      {missionTodoList?.length === 0 && (
+        <h3 style={{ marginTop: "10%" }}>
+          <i>You have nothing to do here!</i>
+        </h3>
+      )}
+
       {missionTodoList ? (
         <Grid container direction="column" justify="center" alignItems="center">
           {missionTodoList.map((i) => (

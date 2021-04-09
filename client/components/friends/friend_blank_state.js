@@ -4,7 +4,7 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 export default function FriendBlankState() {
   return (
     <>
-      <h3 style={{ marginTop: "20%" }}>
+      <h3 style={{ marginTop: "10%" }}>
         <i>You have no friends yet!</i>
         <br />
       </h3>
@@ -17,9 +17,9 @@ export default function FriendBlankState() {
         Click the Add Friend button
         <div
           style={{
-            color: "rgba(0, 0, 0, 0.54)",
+            color: "#0000008a",
             display: "inline",
-            margin: "3%",
+            margin: "0 0.5rem",
             fontSize: "2rem",
           }}
         >

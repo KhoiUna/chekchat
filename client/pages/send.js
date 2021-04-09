@@ -81,7 +81,7 @@ export default function Assigning() {
 
           {filteredSentMissionList?.length === 0 && (
             <>
-              <h3 style={{ marginTop: "20%" }}>
+              <h3 style={{ marginTop: "10%" }}>
                 <i>You have no tasks sent yet!</i>
                 <br />
               </h3>
@@ -94,9 +94,9 @@ export default function Assigning() {
                 Click the send button
                 <div
                   style={{
-                    color: "rgba(0, 0, 0, 0.54)",
+                    color: "#0000008a",
                     display: "inline",
-                    margin: "3%",
+                    margin: "0 0.5rem",
                     fontSize: "2rem",
                   }}
                 >

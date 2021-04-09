@@ -30,7 +30,7 @@ export default function PendingMissionList({}) {
 
   if (missionRequestList?.length === 0)
     return (
-      <h3 style={{ marginTop: "20%" }}>
+      <h3 style={{ marginTop: "10%" }}>
         <i>You have no task requests here!</i>
       </h3>
     );
