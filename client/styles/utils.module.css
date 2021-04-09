@@ -13,6 +13,12 @@
   margin: 0 0.6rem;
 }
 
+.menu_image {
+  border-radius: 100%;
+  margin: 0 0.5rem;
+  border: 3px solid #c0c0c0;
+}
+
 .responseText {
   font-style: italic;
   font-weight: bold;
