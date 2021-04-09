@@ -11,17 +11,9 @@ import HUE from "@material-ui/core/colors/blue";
 import { useState } from "react";
 import ReceivedFriendRequestList from "../containers/inbox/ReceivedFriendRequestList";
 import PendingMissionList from "../containers/inbox/PendingMissionList";
+import RefreshButton from "../components/refresh_button";
 
 const useStyles = makeStyles({
-  button: {
-    borderRadius: "50%",
-    margin: "4px 2px",
-    padding: "1rem",
-    position: "fixed",
-    bottom: "1rem",
-    right: "0.8rem",
-    zIndex: 1,
-  },
   tabTitle: {
     fontWeight: "bold",
     fontSize: "1rem",
@@ -30,7 +22,7 @@ const useStyles = makeStyles({
 
 const theme = createMuiTheme({
   palette: {
-    primary: { main: HUE[700], contrastText: HUE[700] },
+    primary: { main: HUE[700], contrastText: "#fff" },
   },
 });
 
@@ -44,6 +36,8 @@ export default function Inbox() {
 
   return (
     <MainLayout componentName="Inbox">
+      <RefreshButton />
+
       <MuiThemeProvider theme={theme}>
         <Tabs
           value={value}
