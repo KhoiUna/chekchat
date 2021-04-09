@@ -43,7 +43,6 @@ module.exports = {
         to_user: receiverInfo,
         type,
         text: `${action}ed your ${type} request`,
-        seen: false,
         clicked: false,
         time: new Date(new Date().toUTCString()),
       });
