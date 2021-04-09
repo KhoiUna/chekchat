@@ -7,6 +7,7 @@ import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
 import { fetchNotificationCountForBell } from "../utils/Notifications";
+import { fetchUserInfo } from "../utils/Users";
 
 const useStyles = makeStyles({
   root: {
@@ -32,8 +33,10 @@ export default function MainLayout({ children, componentName }) {
   const classes = useStyles();
 
   const [notificationCount, setNotificationCount] = useState(null);
+  const [userInfo, setUserInfo] = useState({});
   useEffect(() => {
     fetchNotificationCountForBell().then((r) => setNotificationCount(r));
+    fetchUserInfo().then((r) => setUserInfo(r));
   }, []);
 
   return (
@@ -52,7 +55,7 @@ export default function MainLayout({ children, componentName }) {
       <header className={classes.root}>
         <AppBar position="static" className={classes.appBar}>
           <Toolbar className={classes.toolBar}>
-            <Menu componentName={componentName} />
+            <Menu componentName={componentName} userInfo={userInfo} />
 
             <Typography variant="h5" className={classes.title}>
               {componentName}

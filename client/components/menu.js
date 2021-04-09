@@ -1,18 +1,17 @@
-import {
-  SwipeableDrawer,
-  makeStyles,
-  List,
-  ListItem,
-  ListItemText,
-  Divider,
-  IconButton,
-} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import ListItemText from "@material-ui/core/ListItemText";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import Divider from "@material-ui/core/Divider";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import IconButton from "@material-ui/core/IconButton";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import MenuIcon from "@material-ui/icons/Menu";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import Link from "next/link";
 import { useState } from "react";
 import utilStyles from "../styles/utils.module.css";
+import Typography from "@material-ui/core/Typography";
 import { useRouter } from "next/router";
 import InboxIcon from "@material-ui/icons/Inbox";
 import SendIcon from "@material-ui/icons/Send";
@@ -20,6 +19,7 @@ import ListAltIcon from "@material-ui/icons/ListAlt";
 import EventIcon from "@material-ui/icons/Event";
 import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
+import Image from "next/image";
 
 const menuList = [
   { name: "Inbox", icon: <InboxIcon /> },
@@ -43,9 +43,12 @@ const useStyles = makeStyles({
     opacity: 0.5,
     padding: 0,
   },
+  flex: {
+    display: "flex",
+  },
 });
 
-export default function Menu({ componentName }) {
+export default function Menu({ componentName, userInfo }) {
   const classes = useStyles();
 
   const router = useRouter();
@@ -77,9 +80,25 @@ export default function Menu({ componentName }) {
       onKeyDown={toggleDrawer}
     >
       <List className={classes.list}>
-        <ListItem>
+        <ListItem className={classes.flex}>
+          <div className={utilStyles.menu_image}>
+            <Image
+              src={userInfo.avatarURL}
+              priority
+              height={60}
+              width={60}
+              alt={userInfo.username}
+            />
+          </div>
+
           <ListItemText>
-            <h2>Menu</h2>
+            <Typography
+              variant="h6"
+              gutterBottom
+              style={{ marginLeft: "0.5rem" }}
+            >
+              {userInfo.username}
+            </Typography>
           </ListItemText>
         </ListItem>
 
