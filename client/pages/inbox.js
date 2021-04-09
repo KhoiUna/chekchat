@@ -52,7 +52,7 @@ export default function Inbox() {
           textColor="primary"
           centered
         >
-          <Tab label="Mission requests" className={classes.tabTitle} />
+          <Tab label="Task requests" className={classes.tabTitle} />
           <Tab label="Friend requests" className={classes.tabTitle} />
         </Tabs>
       </MuiThemeProvider>

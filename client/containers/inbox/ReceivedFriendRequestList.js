@@ -28,6 +28,13 @@ export default function ReceivedFriendRequestList() {
     socket.emit("friend requests", { action, requestId });
   };
 
+  if (friendRequestList?.length === 0)
+    return (
+      <h3 style={{ marginTop: "20%" }}>
+        <i>You have no friend requests here!</i>
+      </h3>
+    );
+
   return friendRequestList ? (
     <>
       {friendRequestList.map((item, index) => (

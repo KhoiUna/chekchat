@@ -74,10 +74,38 @@ export default function Assigning() {
             component="h2"
             className={classes.alignLeft}
           >
-            Sent tasks:
+            Tasks sent:
           </Typography>
 
           <FilterButton filterSentMissionList={filterSentMissionList} />
+
+          {filteredSentMissionList?.length === 0 && (
+            <>
+              <h3 style={{ marginTop: "20%" }}>
+                <i>You have no tasks sent yet!</i>
+                <br />
+              </h3>
+              <Typography
+                variant="p"
+                color="textSecondary"
+                style={{ margin: "1rem" }}
+                component="p"
+              >
+                Click the send button
+                <div
+                  style={{
+                    color: "rgba(0, 0, 0, 0.54)",
+                    display: "inline",
+                    margin: "3%",
+                    fontSize: "2rem",
+                  }}
+                >
+                  <SendIcon />
+                </div>
+                to send your first task!
+              </Typography>
+            </>
+          )}
 
           {filteredSentMissionList ? (
             <Grid

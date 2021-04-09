@@ -28,6 +28,13 @@ export default function PendingMissionList({}) {
     socket.emit("mission requests", { action, requestId });
   };
 
+  if (missionRequestList?.length === 0)
+    return (
+      <h3 style={{ marginTop: "20%" }}>
+        <i>You have no task requests here!</i>
+      </h3>
+    );
+
   return missionRequestList ? (
     <>
       {missionRequestList.map((i, index) => (

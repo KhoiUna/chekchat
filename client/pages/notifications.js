@@ -27,7 +27,7 @@ export default function Notifications() {
   if (notificationList?.length === 0)
     return (
       <MainLayout componentName="Notifications">
-        <h3 style={{ marginTop: "1rem" }}>
+        <h3 style={{ marginTop: "20%" }}>
           <i>You have no notifications here!</i>
         </h3>
       </MainLayout>
