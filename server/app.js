@@ -92,12 +92,7 @@ io.on("connection", (socket) => {
     );
 
     //Create notification
-    Notifications.saveNotification(
-      receiverEmail,
-      senderEmail,
-      "mission",
-      action
-    );
+    Notifications.saveNotification(receiverEmail, senderEmail, "task", action);
 
     //Increment notification count for user
     Users.updateNotificationCount(senderEmail, "increment");
