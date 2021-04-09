@@ -115,4 +115,45 @@ module.exports = {
       return null;
     }
   },
+  async updateNotificationCount(userEmail, action) {
+    try {
+      const collection = client.db("chekchat").collection("users");
+
+      if (action === "reset") {
+        const response = await collection.updateOne(
+          {
+            email: userEmail,
+          },
+          { $set: { notificationCount: 0 } }
+        );
+        if (!response) return false;
+      }
+
+      const response = await collection.updateOne(
+        {
+          _id: ObjectID(missionId),
+        },
+        { $inc: { notificationCount: 1 } }
+      );
+      if (!response) return false;
+
+      return response;
+    } catch (err) {
+      console.error("Error updating notification count");
+    }
+  },
+  async getNotificationCount(userEmail) {
+    try {
+      const collection = client.db("chekchat").collection("users");
+
+      const { notificationCount } = await collection.findOne({
+        email: userEmail,
+      });
+
+      return notificationCount;
+    } catch (err) {
+      console.error("Error getting notification count");
+      return null;
+    }
+  },
 };
