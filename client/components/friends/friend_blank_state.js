@@ -1,13 +1,19 @@
 import Typography from "@material-ui/core/Typography";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
-export default function FriendBlankState() {
+export default function FriendBlankState({ fromContainer }) {
   return (
     <>
-      <h3 style={{ marginTop: "10%" }}>
-        <i>You have no friends yet!</i>
-        <br />
-      </h3>
+      <Typography
+        variant="h6"
+        color="textSecondary"
+        style={{ marginTop: "10%" }}
+      >
+        {fromContainer === "FriendList" && <i>You have no friends yet!</i>}
+        {fromContainer === "FriendRequestList" && (
+          <i>You have no pending sent friend requests here!</i>
+        )}
+      </Typography>
       <Typography
         variant="p"
         color="textSecondary"

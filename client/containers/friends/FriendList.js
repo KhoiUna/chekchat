@@ -20,7 +20,7 @@ export default function FriendList() {
         alignItems="center"
         style={{ marginBottom: "5rem" }}
       >
-        <FriendBlankState />
+        <FriendBlankState fromContainer="FriendList" />
       </Grid>
     );
 

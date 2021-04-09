@@ -81,10 +81,13 @@ export default function Assigning() {
 
           {filteredSentMissionList?.length === 0 && (
             <>
-              <h3 style={{ marginTop: "10%" }}>
+              <Typography
+                variant="h6"
+                color="textSecondary"
+                style={{ marginTop: "10%" }}
+              >
                 <i>You have no tasks sent yet!</i>
-                <br />
-              </h3>
+              </Typography>
               <Typography
                 variant="p"
                 color="textSecondary"

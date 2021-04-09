@@ -5,6 +5,7 @@ import removeItemFromList from "../../helpers/removeItemFromList";
 import Spinner from "../../components/spinner";
 import io from "socket.io-client";
 import { origin } from "../../config/config";
+import Typography from "@material-ui/core/Typography";
 
 let socket;
 export default function ReceivedFriendRequestList() {
@@ -30,9 +31,14 @@ export default function ReceivedFriendRequestList() {
 
   if (friendRequestList?.length === 0)
     return (
-      <h3 style={{ marginTop: "10%" }}>
+      <Typography
+        variant="h6"
+        color="textSecondary"
+        style={{ marginTop: "10%" }}
+        component="p"
+      >
         <i>You have no friend requests here!</i>
-      </h3>
+      </Typography>
     );
 
   return friendRequestList ? (

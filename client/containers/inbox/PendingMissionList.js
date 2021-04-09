@@ -5,6 +5,7 @@ import InboxMissionRequest from "../../components/inbox/inbox_mission_request";
 import Spinner from "../../components/spinner";
 import io from "socket.io-client";
 import { origin } from "../../config/config";
+import Typography from "@material-ui/core/Typography";
 
 let socket;
 export default function PendingMissionList({}) {
@@ -30,9 +31,14 @@ export default function PendingMissionList({}) {
 
   if (missionRequestList?.length === 0)
     return (
-      <h3 style={{ marginTop: "10%" }}>
+      <Typography
+        variant="h6"
+        color="textSecondary"
+        style={{ marginTop: "10%" }}
+        component="p"
+      >
         <i>You have no task requests here!</i>
-      </h3>
+      </Typography>
     );
 
   return missionRequestList ? (
