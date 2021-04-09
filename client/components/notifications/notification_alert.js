@@ -43,7 +43,7 @@ export default function NotificationAlert({
 
   const handleClick = (notificationId, type) => {
     socket.emit("click notification", notificationId);
-    if (type === "mission") {
+    if (type === "task") {
       router.push("/send");
       return;
     }
@@ -61,7 +61,7 @@ export default function NotificationAlert({
       <CardActionArea className={classes.gridColumn}>
         <div style={{ color: "#0db3ff" }}>
           {type === "friend" && <PeopleIcon />}
-          {type === "mission" && <AssignmentIcon />}
+          {type === "task" && <AssignmentIcon />}
         </div>
 
         <Divider orientation="vertical" flexItem className={classes.divider} />
