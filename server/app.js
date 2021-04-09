@@ -38,6 +38,9 @@ app.use("/api/login", loginRouter);
 const registerRouter = require("./routes/registerRouter");
 app.use("/api/register", registerRouter);
 
+const userRouter = require("./routes/userRouter");
+app.use("/api/user", userRouter);
+
 const friendRouter = require("./routes/friendRouter");
 app.use("/api/friends", friendRouter);
 
