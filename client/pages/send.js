@@ -79,7 +79,7 @@ export default function Assigning() {
 
           <FilterButton filterSentMissionList={filterSentMissionList} />
 
-          {filteredSentMissionList?.length === 0 && (
+          {sentMissionList?.length === 0 && (
             <>
               <Typography
                 variant="h6"
