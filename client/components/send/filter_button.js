@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  withStyles,
-  createMuiTheme,
-  MuiThemeProvider,
-} from "@material-ui/core/styles";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -12,13 +8,9 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import utilsStyle from "../../styles/utils.module.css";
 import HUE from "@material-ui/core/colors/blue";
 
-const StyledMenu = withStyles({
-  paper: {
-    border: "1px solid #d3d4d5",
-  },
-})((props) => (
+const StyledMenu = (props) => (
   <Menu
-    elevation={0}
+    elevation={3}
     getContentAnchorEl={null}
     anchorOrigin={{
       vertical: "bottom",
@@ -30,7 +22,7 @@ const StyledMenu = withStyles({
     }}
     {...props}
   />
-));
+);
 
 const buttonTheme = createMuiTheme({
   palette: {
