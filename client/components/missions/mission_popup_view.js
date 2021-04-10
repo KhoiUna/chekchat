@@ -15,6 +15,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
 import { fetchMissionInfo } from "../../utils/Missions";
 import Spinner from "../spinner";
+import FormatDatetime from "../../helpers/FormatDatetime";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -137,7 +138,9 @@ export default function MissionPopupView({
               <Grid item xs={6}>
                 <TextField
                   id="time"
-                  value={new Date(missionInfo.due_date).toLocaleTimeString()}
+                  value={FormatDatetime.forTodoAndMissions(
+                    missionInfo.due_date
+                  )}
                   InputProps={{
                     readOnly: true,
                   }}

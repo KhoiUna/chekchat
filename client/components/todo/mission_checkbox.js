@@ -11,6 +11,7 @@ import Divider from "@material-ui/core/Divider";
 import Checkbox from "@material-ui/core/Checkbox";
 import { useState } from "react";
 import MissionPopupView from "../missions/mission_popup_view";
+import FormatDatetime from "../../helpers/FormatDatetime";
 
 const useStyles = makeStyles({
   root: {
@@ -127,7 +128,7 @@ export default function MissionCheckbox({
                 <b>Due: </b>
                 {new Date(due_date).toLocaleDateString()}
                 <span style={{ marginLeft: "0.3rem" }}>
-                  {new Date(due_date).toLocaleTimeString()}
+                  {FormatDatetime.forTodoAndMissions(due_date)}
                 </span>
               </Typography>
             </CardContent>
