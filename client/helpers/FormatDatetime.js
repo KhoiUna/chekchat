@@ -48,4 +48,13 @@ module.exports = {
 
     return timeRecordStr;
   },
+  forTodoAndMissions(date) {
+    const hour =
+      new Date(date).getHours() > 12
+        ? new Date(date).getHours() - 12
+        : new Date(date).getHours();
+    return `${hour}:${new Date(date).getMinutes()} ${new Date(date)
+      .toLocaleTimeString()
+      .slice(-2)}`;
+  },
 };
