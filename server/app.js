@@ -78,7 +78,10 @@ io.on("connection", (socket) => {
       requestId,
       action
     );
-    if (action === "accept") Users.addFriend(userEmail, friendEmail);
+    if (action === "accept") {
+      Users.addFriend(userEmail, friendEmail);
+      FriendRequest.removeRequest(userEmail, friendEmail);
+    }
 
     //Create notification
     Notifications.saveNotification(userEmail, friendEmail, "friend", action);

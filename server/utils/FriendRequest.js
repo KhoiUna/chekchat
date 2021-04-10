@@ -44,6 +44,21 @@ module.exports = {
       return null;
     }
   },
+  async removeRequest(userEmail, requestEmail) {
+    try {
+      const collection = client.db("chekchat").collection("friend_requests");
+
+      const response = await collection.deleteOne({
+        "from.email": userEmail,
+        "to.email": requestEmail,
+      });
+
+      return response;
+    } catch (err) {
+      console.error("Error deleting friend request");
+      return null;
+    }
+  },
   async checkAlreadySent(userEmail, requestEmail) {
     try {
       const collection = client.db("chekchat").collection("friend_requests");
