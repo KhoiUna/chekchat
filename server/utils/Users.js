@@ -85,6 +85,13 @@ module.exports = {
     try {
       const collection = client.db("chekchat").collection("friends");
 
+      //Check already friend if already friend then skip adding friend
+      const alreadyFriend = await this.checkAlreadyFriend(
+        userEmail,
+        friendEmail
+      );
+      if (alreadyFriend) return alreadyFriend;
+
       const addFriendToFirstUser = await collection.insertOne({
         email: userEmail,
         friend: await this.getUser(friendEmail),
