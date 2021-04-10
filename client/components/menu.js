@@ -81,27 +81,29 @@ export default function Menu({ componentName, userInfo }) {
       onKeyDown={toggleDrawer}
     >
       <List className={classes.list}>
-        <ListItem className={classes.flex}>
-          <div className={utilStyles.menu_image}>
-            <Image
-              src={userInfo.avatarURL}
-              priority
-              height={60}
-              width={60}
-              alt={userInfo.username}
-            />
-          </div>
+        <Link href={"/profile"}>
+          <ListItem className={classes.flex} button>
+            <div className={utilStyles.menu_image}>
+              <Image
+                src={userInfo.avatarURL}
+                priority
+                height={60}
+                width={60}
+                alt={userInfo.username}
+              />
+            </div>
 
-          <ListItemText>
-            <Typography
-              variant="h6"
-              gutterBottom
-              style={{ marginLeft: "0.5rem", fontWeight: "bold" }}
-            >
-              {userInfo.username}
-            </Typography>
-          </ListItemText>
-        </ListItem>
+            <ListItemText>
+              <Typography
+                variant="h6"
+                gutterBottom
+                style={{ marginLeft: "0.5rem", fontWeight: "bold" }}
+              >
+                {userInfo.username}
+              </Typography>
+            </ListItemText>
+          </ListItem>
+        </Link>
 
         {menuList.slice(0, 5).map((i) => {
           const href =
@@ -165,13 +167,20 @@ export default function Menu({ componentName, userInfo }) {
 
   return (
     <>
-      {componentName !== "Notifications" && componentName !== "Chat" && (
-        <IconButton onClick={toggleDrawer}>
-          <MenuIcon className={utilStyles.icon} style={{ fontSize: "2rem" }} />
-        </IconButton>
-      )}
+      {componentName !== "Notifications" &&
+        componentName !== "Chat" &&
+        componentName !== "Profile" && (
+          <IconButton onClick={toggleDrawer}>
+            <MenuIcon
+              className={utilStyles.icon}
+              style={{ fontSize: "2rem" }}
+            />
+          </IconButton>
+        )}
 
-      {(componentName === "Notifications" || componentName === "Chat") && (
+      {(componentName === "Notifications" ||
+        componentName === "Chat" ||
+        componentName === "Profile") && (
         <IconButton onClick={goBack}>
           <ArrowBackIosIcon
             className={utilStyles.icon}

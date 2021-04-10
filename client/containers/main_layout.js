@@ -61,16 +61,20 @@ export default function MainLayout({ children, componentName }) {
               {componentName}
             </Typography>
 
-            {componentName !== "Notifications" && componentName !== "Chat" && (
-              <Bell
-                componentName={componentName}
-                notificationCount={notificationCount}
-              />
-            )}
+            {componentName !== "Notifications" &&
+              componentName !== "Chat" &&
+              componentName !== "Profile" && (
+                <Bell
+                  componentName={componentName}
+                  notificationCount={notificationCount}
+                />
+              )}
 
-            {componentName !== "Notifications" && componentName !== "Chat" && (
-              <Chat componentName={componentName} />
-            )}
+            {componentName !== "Notifications" &&
+              componentName !== "Chat" &&
+              componentName !== "Profile" && (
+                <Chat componentName={componentName} />
+              )}
           </Toolbar>
         </AppBar>
       </header>
