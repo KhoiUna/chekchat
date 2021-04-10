@@ -12,6 +12,9 @@ import Checkbox from "@material-ui/core/Checkbox";
 import { useState } from "react";
 import MissionPopupView from "../missions/mission_popup_view";
 import FormatDatetime from "../../helpers/FormatDatetime";
+import StarIcon from "@material-ui/icons/Star";
+import StarOutlineIcon from "@material-ui/icons/StarOutline";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles({
   root: {
@@ -21,7 +24,7 @@ const useStyles = makeStyles({
   },
   gridColumn: {
     display: "grid",
-    gridTemplateColumns: "1fr 0fr 5fr",
+    gridTemplateColumns: "1fr 0fr 5fr 0fr",
   },
   gridRow: {
     display: "grid",
@@ -57,6 +60,7 @@ const theme = createMuiTheme({
 export default function MissionCheckbox({
   missionId,
   completed,
+  starred,
   subject,
   due_date,
   username,
@@ -73,6 +77,12 @@ export default function MissionCheckbox({
   const handleChange = ({ target }, missionId) => {
     setChecked(target.checked);
     socket.emit("check missions", { missionId, completed: target.checked });
+  };
+
+  const [star, setStar] = useState(starred);
+  const starTask = (missionId) => {
+    setStar(!star);
+    // socket.emit("star missions", { missionId, starred: !star });
   };
 
   return (
@@ -132,6 +142,14 @@ export default function MissionCheckbox({
                 </span>
               </Typography>
             </CardContent>
+
+            <IconButton onClick={starTask}>
+              {star ? (
+                <StarIcon style={{ color: "#ffa500" }} />
+              ) : (
+                <StarOutlineIcon />
+              )}
+            </IconButton>
           </CardActionArea>
         </Card>
       </MuiThemeProvider>
