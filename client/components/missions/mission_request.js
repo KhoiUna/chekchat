@@ -12,6 +12,12 @@ import Badge from "@material-ui/core/Badge";
 import { useState } from "react";
 import MissionPopupView from "./mission_popup_view";
 
+//
+import IconButton from "@material-ui/core/IconButton";
+import Menu from "@material-ui/core/Menu";
+import MenuItem from "@material-ui/core/MenuItem";
+import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+
 const useStyles = makeStyles({
   root: {
     width: 270,
@@ -58,6 +64,7 @@ export default function MissionRequest({
   status,
   username,
   subject,
+  sentDate,
 }) {
   const classes = useStyles();
 
@@ -89,10 +96,14 @@ export default function MissionRequest({
             horizontal: "left",
           }}
           className={classes.badge}
-          onClick={toggleMissionPopupView}
         >
           <Card className={classes.root}>
-            <CardActionArea className={classes.gridColumn}>
+            <TaskOptionMenu status={status} />
+
+            <CardActionArea
+              className={classes.gridColumn}
+              onClick={toggleMissionPopupView}
+            >
               <div className={classes.gridRow}>
                 <Typography gutterBottom variant="inherit" component="h2">
                   Sent to:
@@ -127,6 +138,15 @@ export default function MissionRequest({
                 </Typography>
               </CardContent>
             </CardActionArea>
+
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+              style={{ textAlign: "right", margin: "0 3% 2% 0" }}
+            >
+              {sentDate || new Date().toLocaleDateString()}
+            </Typography>
           </Card>
         </Badge>
       </MuiThemeProvider>
@@ -139,5 +159,53 @@ export default function MissionRequest({
         />
       )}
     </>
+  );
+}
+
+function TaskOptionMenu({ status }) {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (e) => {
+    setAnchorEl(e.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const options = [status === "Pending" ? "Cancel sending" : "Remove task"];
+
+  return (
+    <div style={{ textAlign: "right", backgroundColor: "#c7c7c7c7" }}>
+      <IconButton
+        aria-label="more"
+        aria-controls="sent-task-menu"
+        aria-haspopup="true"
+        onClick={handleClick}
+      >
+        <MoreHorizIcon />
+      </IconButton>
+
+      <Menu
+        id="sent-task-menu"
+        anchorEl={anchorEl}
+        keepMounted
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            maxHeight: 48 * 4.5,
+            width: "20ch",
+          },
+        }}
+      >
+        {options.map((option) => (
+          <MenuItem key={option} onClick={handleClose}>
+            {option}
+          </MenuItem>
+        ))}
+      </Menu>
+    </div>
   );
 }
