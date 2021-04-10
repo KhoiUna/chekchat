@@ -53,8 +53,12 @@ module.exports = {
       new Date(date).getHours() > 12
         ? new Date(date).getHours() - 12
         : new Date(date).getHours();
-    return `${hour}:${new Date(date).getMinutes()} ${new Date(date)
-      .toLocaleTimeString()
-      .slice(-2)}`;
+
+    const minute =
+      new Date(date).getMinutes() < 10
+        ? `0${new Date(date).getMinutes()}`
+        : new Date(date).getMinutes();
+
+    return `${hour}:${minute} ${new Date(date).toLocaleTimeString().slice(-2)}`;
   },
 };
