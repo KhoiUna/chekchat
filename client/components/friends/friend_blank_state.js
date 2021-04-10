@@ -11,7 +11,7 @@ export default function FriendBlankState({ fromContainer }) {
       >
         {fromContainer === "FriendList" && <i>You have no friends yet!</i>}
         {fromContainer === "FriendRequestList" && (
-          <i>You have no pending sent friend requests here!</i>
+          <i>You have no pending friend requests here!</i>
         )}
       </Typography>
       <Typography
