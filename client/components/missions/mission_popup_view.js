@@ -3,8 +3,7 @@ import {
   MuiThemeProvider,
   createMuiTheme,
 } from "@material-ui/core/styles";
-import { useEffect, useState } from "react";
-import Paper from "@material-ui/core/Paper";
+import { useEffect, useState, forwardRef } from "react";
 import Grid from "@material-ui/core/Grid";
 import HUE from "@material-ui/core/colors/blue";
 import Button from "@material-ui/core/Button";
@@ -16,39 +15,26 @@ import IconButton from "@material-ui/core/IconButton";
 import { fetchMissionInfo } from "../../utils/Missions";
 import Spinner from "../spinner";
 import FormatDatetime from "../../helpers/FormatDatetime";
+import AppBar from "@material-ui/core/AppBar";
+import Dialog from "@material-ui/core/Dialog";
+import Toolbar from "@material-ui/core/Toolbar";
+import Slide from "@material-ui/core/Slide";
+
+const Transition = forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
 const useStyles = makeStyles((theme) => ({
-  paper: {
-    width: "90%",
-    height: "fit-content",
-    maxHeight: 600,
-    maxWidth: 600,
-    position: "fixed",
-    zIndex: 3,
-    top: "10%",
-  },
   gridContainer: {
     padding: "1rem",
-  },
-  alignLeft: {
-    textAlign: "left",
   },
   alignRight: {
     textAlign: "right",
     margin: "1rem",
   },
-  closeButton: {
-    textAlign: "right",
-  },
   textArea: {
-    padding: "0.5rem",
     resize: "none",
-    width: "90%",
     fontSize: 14,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(1),
-    minWidth: 120,
   },
   margin: {
     margin: "0.8rem",
@@ -58,6 +44,18 @@ const useStyles = makeStyles((theme) => ({
 const theme = createMuiTheme({
   palette: {
     primary: { main: HUE[500], contrastText: "#fff" },
+  },
+  overrides: {
+    MuiFormControl: {
+      root: {
+        width: "100%",
+      },
+    },
+    MuiInput: {
+      root: {
+        width: "100%",
+      },
+    },
   },
 });
 
@@ -75,24 +73,36 @@ export default function MissionPopupView({
   }, []);
 
   return (
-    <>
-      <div
-        className={utilStyles.popup_layer}
-        onClick={() => toggleMissionPopupView()}
-      ></div>
-      <Paper elevation={10} className={classes.paper}>
-        {missionInfo && (
-          <>
-            <Grid container justify="center" className={classes.gridContainer}>
-              <Grid item xs={12} className={classes.closeButton}>
-                <IconButton
-                  aria-label="close"
-                  onClick={() => toggleMissionPopupView()}
-                >
-                  <CloseIcon />
-                </IconButton>
-              </Grid>
+    <MuiThemeProvider theme={theme}>
+      <Dialog
+        fullScreen
+        open={open}
+        onClose={toggleMissionPopupView}
+        TransitionComponent={Transition}
+      >
+        <AppBar>
+          <Toolbar style={{ margin: 0 }}>
+            <IconButton
+              edge="start"
+              color="inherit"
+              onClick={toggleMissionPopupView}
+              aria-label="close"
+            >
+              <CloseIcon />
+            </IconButton>
+            <Typography variant="h5">Task view</Typography>
+          </Toolbar>
+        </AppBar>
 
+        {missionInfo && (
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="flex-start"
+            style={{ marginTop: "4rem" }}
+          >
+            <Grid container justify="center" className={classes.gridContainer}>
               <Grid item xs={6}>
                 <Typography gutterBottom variant="inherit" component="h3">
                   Subject:
@@ -106,8 +116,8 @@ export default function MissionPopupView({
                   InputProps={{
                     readOnly: true,
                   }}
+                  rowsMax={5}
                   multiline
-                  rowsMax={3}
                 />
               </Grid>
             </Grid>
@@ -186,61 +196,70 @@ export default function MissionPopupView({
               </Grid>
             </Grid>
 
-            <Grid container justify="center" className={classes.gridContainer}>
+            <Grid container justify="left" className={classes.gridContainer}>
               <Grid item xs={6}>
                 <Typography gutterBottom variant="inherit" component="h3">
                   Description:
                 </Typography>
               </Grid>
-              <Grid item xs={6} className={classes.alignLeft}>
-                <TextField
-                  id="description"
-                  name="description"
-                  aria-label="description"
-                  rowsMax={2}
-                  className={classes.textArea}
-                  value={missionInfo.description}
-                  InputProps={{
-                    readOnly: true,
-                  }}
-                  multiline
-                />
-              </Grid>
-            </Grid>
 
-            {fromPage === "inbox" ? (
-              <Grid item xs={12} className={classes.alignRight}>
-                <Button
-                  variant="contained"
-                  className={utilStyles.button}
-                  className={classes.margin}
-                  onClick={() => {
-                    onClickAction("reject", requestId);
-                    toggleMissionPopupView();
-                  }}
-                >
-                  <b>Reject</b>
-                </Button>
-                <MuiThemeProvider theme={theme}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    className={utilStyles.button}
-                    onClick={() => {
-                      onClickAction("accept", requestId);
-                      toggleMissionPopupView();
-                    }}
-                  >
-                    <b>Accept</b>
-                  </Button>
-                </MuiThemeProvider>
-              </Grid>
-            ) : null}
-          </>
+              <TextField
+                id="description"
+                name="description"
+                aria-label="description"
+                className={classes.textArea}
+                value={missionInfo.description}
+                InputProps={{
+                  readOnly: true,
+                }}
+                rowsMax={15}
+                multiline
+              />
+            </Grid>
+          </Grid>
         )}
 
-        {!missionInfo && <Spinner />}
-      </Paper>
-    </>
+        {missionInfo && fromPage === "inbox" ? (
+          <div className={classes.alignRight}>
+            <Button
+              variant="contained"
+              className={utilStyles.button}
+              className={classes.margin}
+              onClick={() => {
+                onClickAction("reject", requestId);
+                toggleMissionPopupView();
+              }}
+            >
+              <b>Reject</b>
+            </Button>
+            <MuiThemeProvider theme={theme}>
+              <Button
+                variant="contained"
+                color="primary"
+                className={utilStyles.button}
+                onClick={() => {
+                  onClickAction("accept", requestId);
+                  toggleMissionPopupView();
+                }}
+              >
+                <b>Accept</b>
+              </Button>
+            </MuiThemeProvider>
+          </div>
+        ) : null}
+
+        {!missionInfo && (
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            style={{ marginTop: "4rem" }}
+          >
+            <Spinner />
+          </Grid>
+        )}
+      </Dialog>
+    </MuiThemeProvider>
   );
 }
