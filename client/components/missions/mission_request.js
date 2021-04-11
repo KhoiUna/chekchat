@@ -65,6 +65,7 @@ export default function MissionRequest({
   username,
   subject,
   sent_date,
+  cancelOrRemoveTask,
 }) {
   const classes = useStyles();
 
@@ -98,7 +99,11 @@ export default function MissionRequest({
           className={classes.badge}
         >
           <Card className={classes.root}>
-            <TaskOptionMenu status={status} />
+            <TaskOptionMenu
+              status={status}
+              cancelOrRemoveTask={cancelOrRemoveTask}
+              requestId={requestId}
+            />
 
             <CardActionArea
               className={classes.gridColumn}
@@ -162,7 +167,7 @@ export default function MissionRequest({
   );
 }
 
-function TaskOptionMenu({ status }) {
+function TaskOptionMenu({ status, requestId, cancelOrRemoveTask }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -201,7 +206,16 @@ function TaskOptionMenu({ status }) {
         }}
       >
         {options.map((option) => (
-          <MenuItem key={option} onClick={handleClose}>
+          <MenuItem
+            key={option}
+            onClick={() => {
+              cancelOrRemoveTask(
+                status === "Pending" ? "cancel" : "remove",
+                requestId
+              );
+              handleClose();
+            }}
+          >
             {option}
           </MenuItem>
         ))}

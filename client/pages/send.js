@@ -15,6 +15,7 @@ import MissionAssign from "../components/missions/mission_assign";
 import { fetchMissionRequestsList } from "../utils/Missions";
 import Spinner from "../components/spinner";
 import FilterButton from "../components/send/filter_button";
+import removeItemFromList from "../helpers/removeItemFromList";
 
 const useStyles = makeStyles((theme) => ({
   extendedIcon: {
@@ -62,6 +63,19 @@ export default function Assigning() {
 
     const filteredList = sentMissionList.filter((i) => i.status === status);
     setFilteredSentMissionList(filteredList);
+  };
+
+  const cancelOrRemoveTask = (action, requestId) => {
+    if (action === "cancel") {
+      //Delete pending task
+    }
+    //Update task visibility
+    //
+
+    const filteredList = removeItemFromList(sentMissionList, requestId);
+    setFilteredSentMissionList(filteredList);
+    setSentMissionList(filteredList);
+    return;
   };
 
   return (
@@ -125,6 +139,7 @@ export default function Assigning() {
                   subject={i.subject}
                   requestId={i._id}
                   sent_date={i.sent_date}
+                  cancelOrRemoveTask={cancelOrRemoveTask}
                 />
               ))}
             </Grid>
