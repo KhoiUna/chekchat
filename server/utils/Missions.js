@@ -11,6 +11,7 @@ module.exports = {
         const missionRequestList = await collection
           .find({
             "from.email": email,
+            visibility: true,
           })
           .toArray();
         return missionRequestList;
@@ -78,6 +79,7 @@ module.exports = {
         status: "Pending",
         completed: false,
         starred: false,
+        visibility: true,
         sent_date: new Date(new Date().toUTCString()),
       });
       return response;
@@ -112,6 +114,19 @@ module.exports = {
       return null;
     }
   },
+  async deletePendingRequest(requestId) {
+    try {
+      const collection = client.db("chekchat").collection("missions");
+
+      const response = await collection.deleteOne({
+        _id: ObjectID(requestId),
+      });
+      return response;
+    } catch (err) {
+      console.error("Error deleting pending mission request --- utils");
+      return null;
+    }
+  },
   async updateMissionComplete(missionId, completed) {
     try {
       const collection = client.db("chekchat").collection("missions");
@@ -127,6 +142,22 @@ module.exports = {
       return response;
     } catch (err) {
       console.error("Error updating mission check --- utils");
+      return null;
+    }
+  },
+  async updateVisibility(missionId) {
+    try {
+      const collection = client.db("chekchat").collection("missions");
+
+      const response = await collection.updateOne(
+        {
+          _id: ObjectID(missionId),
+        },
+        { $set: { visibility: false } }
+      );
+      return response;
+    } catch (err) {
+      console.error("Error updating mission visibility --- utils");
       return null;
     }
   },

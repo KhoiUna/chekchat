@@ -73,4 +73,32 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.put("/", async (req, res, next) => {
+  try {
+    const { requestId } = req.body;
+
+    if (!(await Missions.updateVisibility(requestId)))
+      return res.status(400).send("Sorry, something is wrong");
+
+    res.json("ok");
+  } catch (err) {
+    console.error("Error updating mission request's visibility");
+    next();
+  }
+});
+
+router.delete("/", async (req, res, next) => {
+  try {
+    const { requestId } = req.body;
+
+    if (!(await Missions.deletePendingRequest(requestId)))
+      return res.status(400).send("Sorry, something is wrong");
+
+    res.json("ok");
+  } catch (err) {
+    console.error("Error deleting pending mission request");
+    next();
+  }
+});
+
 module.exports = router;
