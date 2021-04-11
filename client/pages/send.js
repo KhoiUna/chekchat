@@ -124,6 +124,7 @@ export default function Assigning() {
                   username={i.to.username}
                   subject={i.subject}
                   requestId={i._id}
+                  sent_date={i.sent_date}
                 />
               ))}
             </Grid>

@@ -64,7 +64,7 @@ export default function MissionRequest({
   status,
   username,
   subject,
-  sentDate,
+  sent_date,
 }) {
   const classes = useStyles();
 
@@ -145,7 +145,7 @@ export default function MissionRequest({
               component="p"
               style={{ textAlign: "right", margin: "0 3% 2% 0" }}
             >
-              {sentDate || new Date().toLocaleDateString()}
+              Sent on: {new Date(sent_date).toLocaleDateString()}
             </Typography>
           </Card>
         </Badge>
