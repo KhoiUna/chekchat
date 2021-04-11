@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  withStyles,
-  createMuiTheme,
-  MuiThemeProvider,
-} from "@material-ui/core/styles";
+import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -12,13 +8,9 @@ import SortIcon from "@material-ui/icons/Sort";
 import utilsStyle from "../../styles/utils.module.css";
 import HUE from "@material-ui/core/colors/blue";
 
-const StyledMenu = withStyles({
-  paper: {
-    border: "1px solid #d3d4d5",
-  },
-})((props) => (
+const StyledMenu = (props) => (
   <Menu
-    elevation={0}
+    elevation={3}
     getContentAnchorEl={null}
     anchorOrigin={{
       vertical: "bottom",
@@ -30,18 +22,7 @@ const StyledMenu = withStyles({
     }}
     {...props}
   />
-));
-
-const StyledMenuItem = withStyles((theme) => ({
-  root: {
-    "&:focus": {
-      backgroundColor: "#f1f1f1",
-      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-        color: HUE[500],
-      },
-    },
-  },
-}))(MenuItem);
+);
 
 const buttonTheme = createMuiTheme({
   palette: {
@@ -49,7 +30,7 @@ const buttonTheme = createMuiTheme({
   },
 });
 
-export default function SortButton({}) {
+export default function FilterButton({ sortTodoList }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const handleClick = ({ currentTarget }) => {
     setAnchorEl(currentTarget);
@@ -58,11 +39,17 @@ export default function SortButton({}) {
     setAnchorEl(null);
   };
 
+  const [activeMenuItem, setActiveMenuItem] = useState("None");
+  const handleClickMenuItem = (target, status) => {
+    setActiveMenuItem(target.innerHTML);
+    // sortTodoList(status);
+  };
+
   return (
-    <div className={utilsStyle.sortButton}>
+    <div className={utilsStyle.filterButton}>
       <MuiThemeProvider theme={buttonTheme}>
         <Button
-          aria-controls="sort menu"
+          aria-controls="filter-menu"
           aria-haspopup="true"
           variant="contained"
           color="primary"
@@ -73,21 +60,52 @@ export default function SortButton({}) {
       </MuiThemeProvider>
 
       <StyledMenu
-        id="customized-menu"
+        id="filter-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <StyledMenuItem>
+        <MenuItem
+          onClick={({ target }) => handleClickMenuItem(target, "None")}
+          style={
+            activeMenuItem === "None"
+              ? { backgroundColor: "#c0c0c078", color: "#2196f3" }
+              : { backgroundColor: "transparent", color: "black" }
+          }
+        >
+          <ListItemText primary="None" />
+        </MenuItem>
+        <MenuItem
+          onClick={({ target }) => handleClickMenuItem(target, "Due date")}
+          style={
+            activeMenuItem === "Due date"
+              ? { backgroundColor: "#c0c0c078", color: "#2196f3" }
+              : { backgroundColor: "transparent", color: "black" }
+          }
+        >
           <ListItemText primary="Due date" />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemText primary="... ..." />
-        </StyledMenuItem>
-        <StyledMenuItem>
-          <ListItemText primary="... ..." />
-        </StyledMenuItem>
+        </MenuItem>
+        <MenuItem
+          onClick={({ target }) => handleClickMenuItem(target, "Starred")}
+          style={
+            activeMenuItem === "Starred"
+              ? { backgroundColor: "#c0c0c078", color: "#2196f3" }
+              : { backgroundColor: "transparent", color: "black" }
+          }
+        >
+          <ListItemText primary="Starred" />
+        </MenuItem>
+        <MenuItem
+          onClick={({ target }) => handleClickMenuItem(target, "...")}
+          style={
+            activeMenuItem === "..."
+              ? { backgroundColor: "#c0c0c078", color: "#2196f3" }
+              : { backgroundColor: "transparent", color: "black" }
+          }
+        >
+          <ListItemText primary="..." />
+        </MenuItem>
       </StyledMenu>
     </div>
   );
