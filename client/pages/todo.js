@@ -45,6 +45,7 @@ export default function Todo() {
           {missionTodoList.map((i) => (
             <MissionCheckbox
               completed={i.completed}
+              starred={i.starred}
               subject={i.subject}
               due_date={i.due_date}
               username={i.from.username}

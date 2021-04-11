@@ -80,9 +80,9 @@ export default function MissionCheckbox({
   };
 
   const [star, setStar] = useState(starred);
-  const starTask = (missionId) => {
+  const starTask = (e, missionId) => {
     setStar(!star);
-    // socket.emit("star missions", { missionId, starred: !star });
+    socket.emit("star missions", { missionId, starred: !star });
   };
 
   return (
@@ -143,11 +143,11 @@ export default function MissionCheckbox({
               </Typography>
             </CardContent>
 
-            <IconButton onClick={starTask}>
+            <IconButton onClick={(e) => starTask(e, missionId)}>
               {star ? (
-                <StarIcon style={{ color: "#ffa500" }} />
+                <StarIcon style={{ color: "#ffa500", fontSize: "2rem" }} />
               ) : (
-                <StarOutlineIcon />
+                <StarOutlineIcon style={{ fontSize: "2rem" }} />
               )}
             </IconButton>
           </CardActionArea>
