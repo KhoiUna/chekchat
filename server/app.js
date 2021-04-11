@@ -67,6 +67,11 @@ io.on("connection", (socket) => {
     Missions.updateMissionComplete(missionId, completed);
   });
 
+  socket.on("star missions", ({ missionId, starred }) => {
+    //Update mission check/completed
+    Missions.updateMissionStarred(missionId, starred);
+  });
+
   socket.on("click notification", (notificationId) => {
     //Update notification clicked
     Notifications.updateClickedNotification(notificationId);

@@ -77,6 +77,7 @@ module.exports = {
         description,
         status: "Pending",
         completed: false,
+        starred: false,
       });
       return response;
     } catch (err) {
@@ -125,6 +126,24 @@ module.exports = {
       return response;
     } catch (err) {
       console.error("Error updating mission check --- utils");
+      return null;
+    }
+  },
+  async updateMissionStarred(missionId, starred) {
+    try {
+      const collection = client.db("chekchat").collection("missions");
+
+      const response = await collection.updateOne(
+        {
+          _id: ObjectID(missionId),
+        },
+        { $set: { starred } }
+      );
+      if (!response) return false;
+
+      return response;
+    } catch (err) {
+      console.error("Error updating mission starred --- utils");
       return null;
     }
   },
