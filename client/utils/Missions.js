@@ -21,6 +21,38 @@ module.exports = {
       console.error("Error sending mission request");
     }
   },
+  async deletePendingRequest(requestId) {
+    try {
+      const res = await fetch(`${origin}/api/missions`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          requestId,
+        }),
+      });
+      return res;
+    } catch (err) {
+      console.error("Error deleting pending mission request");
+    }
+  },
+  async updateVisibility(requestId) {
+    try {
+      const res = await fetch(`${origin}/api/missions`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          requestId,
+        }),
+      });
+      return res;
+    } catch (err) {
+      console.error("Error updating mission request's visibility");
+    }
+  },
   async fetchMissionRequestsList(position) {
     try {
       const res = await fetch(

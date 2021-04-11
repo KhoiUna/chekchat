@@ -12,7 +12,11 @@ import HUE from "@material-ui/core/colors/blue";
 import Typography from "@material-ui/core/Typography";
 import { useEffect, useState } from "react";
 import MissionAssign from "../components/missions/mission_assign";
-import { fetchMissionRequestsList } from "../utils/Missions";
+import {
+  fetchMissionRequestsList,
+  deletePendingRequest,
+  updateVisibility,
+} from "../utils/Missions";
 import Spinner from "../components/spinner";
 import FilterButton from "../components/send/filter_button";
 import removeItemFromList from "../helpers/removeItemFromList";
@@ -65,17 +69,25 @@ export default function Assigning() {
     setFilteredSentMissionList(filteredList);
   };
 
-  const cancelOrRemoveTask = (action, requestId) => {
-    if (action === "cancel") {
-      //Delete pending task
-    }
-    //Update task visibility
-    //
+  const cancelOrRemoveTask = async (action, requestId) => {
+    try {
+      if (action === "cancel") {
+        //Delete pending task
+        await deletePendingRequest(requestId);
+      } else {
+        //Update task visibility
+        await updateVisibility(requestId);
+      }
 
-    const filteredList = removeItemFromList(sentMissionList, requestId);
-    setFilteredSentMissionList(filteredList);
-    setSentMissionList(filteredList);
-    return;
+      const filteredList = removeItemFromList(sentMissionList, requestId);
+      setFilteredSentMissionList(filteredList);
+      setSentMissionList(filteredList);
+
+      return true;
+    } catch (err) {
+      console.error(`Error ${action} task`);
+      return null;
+    }
   };
 
   return (
