@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import styles from "./layout.module.css";
+import Logo from "../public/logo.svg";
 
 export default function Layout({ children, componentName }) {
   return (
@@ -18,7 +19,14 @@ export default function Layout({ children, componentName }) {
 
       <header className={styles.header}>
         <Link href="/">
-          <h1 className={styles.title}>ChekChat</h1>
+          <Logo
+            style={{
+              width: "7rem",
+              height: "1%",
+              backgroundColor: "white",
+              borderRadius: "20%",
+            }}
+          />
         </Link>
       </header>
 
