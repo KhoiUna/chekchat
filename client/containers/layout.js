@@ -19,14 +19,16 @@ export default function Layout({ children, componentName }) {
 
       <header className={styles.header}>
         <Link href="/">
-          <Logo
-            style={{
-              width: "7rem",
-              height: "1%",
-              backgroundColor: "white",
-              borderRadius: "20%",
-            }}
-          />
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <Logo
+              style={{
+                width: "5.5rem",
+                height: "5.5rem",
+                margin: 0,
+              }}
+            />
+            <h1 className={styles.title}>ChekChat</h1>
+          </div>
         </Link>
       </header>
 
