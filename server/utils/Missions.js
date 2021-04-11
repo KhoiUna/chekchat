@@ -78,6 +78,7 @@ module.exports = {
         status: "Pending",
         completed: false,
         starred: false,
+        sent_date: new Date(new Date().toUTCString()),
       });
       return response;
     } catch (err) {
