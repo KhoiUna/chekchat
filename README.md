@@ -8,5 +8,5 @@
 ## Notes
 
 - MongoDB:
-  -Has 1 database called ChekChat
-  -Has 5 collections: users, friends, friend_requests, missions, notifications
+  - Has 1 database called ChekChat
+  - Has 5 collections: users, friends, friend_requests, missions, notifications
