@@ -149,7 +149,18 @@ export default function Register() {
         </form>
 
         <Link href="/login">
-          <p className={utilStyles.notice}>Already have an account? Sign in</p>
+          <p className={utilStyles.notice}>
+            Already have an account?
+            <span
+              style={{
+                borderBottom: "2px solid",
+                fontStyle: "italic",
+                marginLeft: "2px",
+              }}
+            >
+              Sign in
+            </span>
+          </p>
         </Link>
       </div>
     </Layout>

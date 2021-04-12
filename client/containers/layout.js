@@ -27,7 +27,7 @@ export default function Layout({ children, componentName }) {
                 margin: 0,
               }}
             />
-            <h1 className={styles.title}>ChekChat</h1>
+            <h1 className={styles.title}>hekChat</h1>
           </div>
         </Link>
       </header>

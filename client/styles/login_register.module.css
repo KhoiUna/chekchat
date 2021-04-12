@@ -14,8 +14,7 @@
 }
 
 .notice {
-  font-style: italic;
-  text-decoration: underline;
+  font-weight: bold;
   font-size: 1rem;
   margin-top: 3%;
   color: white;

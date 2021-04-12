@@ -126,7 +126,16 @@ export default function Login() {
 
         <Link href="/register">
           <p className={utilStyles.notice}>
-            Have not created an account? Sign up
+            Have not created an account?
+            <span
+              style={{
+                borderBottom: "2px solid",
+                fontStyle: "italic",
+                marginLeft: "2px",
+              }}
+            >
+              Sign up
+            </span>
           </p>
         </Link>
       </div>
