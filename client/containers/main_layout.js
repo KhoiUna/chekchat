@@ -35,8 +35,16 @@ export default function MainLayout({ children, componentName }) {
   const [notificationCount, setNotificationCount] = useState(null);
   const [userInfo, setUserInfo] = useState({});
   useEffect(() => {
-    fetchNotificationCountForBell().then((r) => setNotificationCount(r));
     fetchUserInfo().then((r) => setUserInfo(r));
+    fetchNotificationCountForBell().then((r) => setNotificationCount(r));
+
+    const bellInterval = setInterval(() => {
+      fetchNotificationCountForBell().then((r) => setNotificationCount(r));
+    }, 5000);
+
+    return () => {
+      clearInterval(bellInterval);
+    };
   }, []);
 
   return (
