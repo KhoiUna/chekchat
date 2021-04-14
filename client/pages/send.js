@@ -10,6 +10,8 @@ import {
 } from "@material-ui/core/styles";
 import HUE from "@material-ui/core/colors/blue";
 import Typography from "@material-ui/core/Typography";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 import { useEffect, useState } from "react";
 import MissionAssign from "../components/missions/mission_assign";
 import {
@@ -46,7 +48,11 @@ const buttonTheme = createMuiTheme({
   },
 });
 
-export default function Assigning() {
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+export default function Send() {
   const classes = useStyles();
 
   const [missionAssign, setMissionAssign] = useState(false);
@@ -73,10 +79,15 @@ export default function Assigning() {
     try {
       if (action === "cancel") {
         //Delete pending task
-        await deletePendingRequest(requestId);
+        const res = await deletePendingRequest(requestId);
+        if (res.ok === false) {
+          openSnackbar();
+          return false;
+        }
       } else {
         //Update task visibility
-        await updateVisibility(requestId);
+        const res = await updateVisibility(requestId);
+        if (res.ok === false) return false;
       }
 
       const filteredList = removeItemFromList(sentMissionList, requestId);
@@ -90,8 +101,29 @@ export default function Assigning() {
     }
   };
 
+  const [open, setOpen] = useState(false);
+  const openSnackbar = () => {
+    setOpen(true);
+  };
+  const closeSnackbar = (e, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
   return (
     <MainLayout componentName="Send tasks">
+      <Snackbar
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        key={"bottom" + "center"}
+        open={open}
+        onClose={closeSnackbar}
+        autoHideDuration={3000}
+      >
+        <Alert severity="error">Task is already accepted or rejected!</Alert>
+      </Snackbar>
+
       {!missionAssign && (
         <>
           <Typography
