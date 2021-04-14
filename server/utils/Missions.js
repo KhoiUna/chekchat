@@ -118,10 +118,12 @@ module.exports = {
     try {
       const collection = client.db("chekchat").collection("missions");
 
-      const response = await collection.deleteOne({
+      const { deletedCount } = await collection.deleteOne({
         _id: ObjectID(requestId),
+        status: "Pending",
       });
-      return response;
+
+      return deletedCount;
     } catch (err) {
       console.error("Error deleting pending mission request --- utils");
       return null;
