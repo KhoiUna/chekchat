@@ -11,7 +11,13 @@ let socket;
 export default function ReceivedFriendRequestList() {
   const [friendRequestList, setFriendRequestList] = useState(null);
   useEffect(() => {
-    fetchReceivedFriendRequestsList().then((r) => setFriendRequestList(r));
+    const timeout = setTimeout(() => {
+      fetchReceivedFriendRequestsList().then((r) => setFriendRequestList(r));
+    }, 0);
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }, []);
 
   useEffect(() => {

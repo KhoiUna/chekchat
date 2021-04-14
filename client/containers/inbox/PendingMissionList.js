@@ -11,7 +11,13 @@ let socket;
 export default function PendingMissionList({}) {
   const [missionRequestList, setMissionRequestList] = useState(null);
   useEffect(() => {
-    fetchMissionRequestsList("to").then((r) => setMissionRequestList(r));
+    const timeout = setTimeout(() => {
+      fetchMissionRequestsList("to").then((r) => setMissionRequestList(r));
+    }, 0);
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }, []);
 
   useEffect(() => {
