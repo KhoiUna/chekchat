@@ -42,7 +42,7 @@ export default function FilterButton({ sortTodoList }) {
   const [activeMenuItem, setActiveMenuItem] = useState("None");
   const handleClickMenuItem = (target, status) => {
     setActiveMenuItem(target.innerHTML);
-    // sortTodoList(status);
+    sortTodoList(status);
   };
 
   return (
@@ -97,14 +97,14 @@ export default function FilterButton({ sortTodoList }) {
           <ListItemText primary="Starred" />
         </MenuItem>
         <MenuItem
-          onClick={({ target }) => handleClickMenuItem(target, "...")}
+          onClick={({ target }) => handleClickMenuItem(target, "Completed")}
           style={
-            activeMenuItem === "..."
+            activeMenuItem === "Completed"
               ? { backgroundColor: "#c0c0c078", color: "#2196f3" }
               : { backgroundColor: "transparent", color: "black" }
           }
         >
-          <ListItemText primary="..." />
+          <ListItemText primary="Completed" />
         </MenuItem>
       </StyledMenu>
     </div>
