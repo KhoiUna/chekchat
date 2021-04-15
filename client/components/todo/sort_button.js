@@ -77,16 +77,6 @@ export default function FilterButton({ sortTodoList }) {
           <ListItemText primary="None" />
         </MenuItem>
         <MenuItem
-          onClick={({ target }) => handleClickMenuItem(target, "Due date")}
-          style={
-            activeMenuItem === "Due date"
-              ? { backgroundColor: "#c0c0c078", color: "#2196f3" }
-              : { backgroundColor: "transparent", color: "black" }
-          }
-        >
-          <ListItemText primary="Due date" />
-        </MenuItem>
-        <MenuItem
           onClick={({ target }) => handleClickMenuItem(target, "Starred")}
           style={
             activeMenuItem === "Starred"
