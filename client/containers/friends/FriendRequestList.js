@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import FriendRequest from "../../components/friends/friend_request";
 import { fetchSentFriendRequestsList } from "../../utils/FriendRequest";
 import Spinner from "../../components/spinner";
@@ -32,14 +32,16 @@ export default function FriendRequestList() {
       alignItems="center"
       style={{ marginBottom: "5rem" }}
     >
-      {friendRequestList.map((item) => (
-        <FriendRequest
-          fromPage="friends"
-          username={item.to.username}
-          email={item.to.email}
-          avatarURL={item.to.avatarURL}
-          status={item.status}
-        />
+      {friendRequestList.map((item, index) => (
+        <Fragment key={index}>
+          <FriendRequest
+            fromPage="friends"
+            username={item.to.username}
+            email={item.to.email}
+            avatarURL={item.to.avatarURL}
+            status={item.status}
+          />
+        </Fragment>
       ))}
     </Grid>
   ) : (

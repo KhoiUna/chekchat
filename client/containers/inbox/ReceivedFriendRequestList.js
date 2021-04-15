@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import FriendRequest from "../../components/friends/friend_request";
 import { fetchReceivedFriendRequestsList } from "../../utils/FriendRequest";
 import removeItemFromList from "../../helpers/removeItemFromList";
@@ -50,16 +50,18 @@ export default function ReceivedFriendRequestList() {
   return friendRequestList ? (
     <>
       {friendRequestList.map((item, index) => (
-        <FriendRequest
-          key={index}
-          fromPage="inbox"
-          requestId={item._id}
-          username={item.from.username}
-          email={item.from.email}
-          avatarURL={item.from.avatarURL}
-          status={item.status}
-          onClickAction={handleClick}
-        />
+        <Fragment key={index}>
+          <FriendRequest
+            key={index}
+            fromPage="inbox"
+            requestId={item._id}
+            username={item.from.username}
+            email={item.from.email}
+            avatarURL={item.from.avatarURL}
+            status={item.status}
+            onClickAction={handleClick}
+          />
+        </Fragment>
       ))}
     </>
   ) : (

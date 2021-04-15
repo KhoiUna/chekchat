@@ -12,7 +12,7 @@ import HUE from "@material-ui/core/colors/blue";
 import Typography from "@material-ui/core/Typography";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import MissionAssign from "../components/missions/mission_assign";
 import {
   fetchMissionRequestsList,
@@ -177,14 +177,16 @@ export default function Send() {
               style={{ marginBottom: "4rem" }}
             >
               {filteredSentMissionList.map((i) => (
-                <MissionRequest
-                  status={i.status}
-                  username={i.to.username}
-                  subject={i.subject}
-                  requestId={i._id}
-                  sent_date={i.sent_date}
-                  cancelOrRemoveTask={cancelOrRemoveTask}
-                />
+                <Fragment key={i._id}>
+                  <MissionRequest
+                    status={i.status}
+                    username={i.to.username}
+                    subject={i.subject}
+                    requestId={i._id}
+                    sent_date={i.sent_date}
+                    cancelOrRemoveTask={cancelOrRemoveTask}
+                  />
+                </Fragment>
               ))}
             </Grid>
           ) : (

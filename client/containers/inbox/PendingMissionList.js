@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { fetchMissionRequestsList } from "../../utils/Missions";
 import removeItemFromList from "../../helpers/removeItemFromList";
 import InboxMissionRequest from "../../components/inbox/inbox_mission_request";
@@ -50,13 +50,15 @@ export default function PendingMissionList({}) {
   return missionRequestList ? (
     <>
       {missionRequestList.map((i, index) => (
-        <InboxMissionRequest
-          key={index}
-          requestId={i._id}
-          username={i.from.username}
-          subject={i.subject}
-          onClickAction={handleClick}
-        />
+        <Fragment key={index}>
+          <InboxMissionRequest
+            key={index}
+            requestId={i._id}
+            username={i.from.username}
+            subject={i.subject}
+            onClickAction={handleClick}
+          />
+        </Fragment>
       ))}
     </>
   ) : (

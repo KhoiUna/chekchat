@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import FriendTag from "../../components/friends/friend_tag";
 import { fetchFriendList } from "../../utils/Friends";
 import Spinner from "../../components/spinner";
@@ -32,12 +32,14 @@ export default function FriendList() {
       alignItems="center"
       style={{ marginBottom: "5rem" }}
     >
-      {friendList.map((item) => (
-        <FriendTag
-          username={item.friend.username}
-          email={item.friend.email}
-          avatarURL={item.friend.avatarURL}
-        />
+      {friendList.map((item, index) => (
+        <Fragment key={index}>
+          <FriendTag
+            username={item.friend.username}
+            email={item.friend.email}
+            avatarURL={item.friend.avatarURL}
+          />
+        </Fragment>
       ))}
     </Grid>
   ) : (
