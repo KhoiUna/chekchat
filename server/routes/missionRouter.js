@@ -97,7 +97,6 @@ router.delete("/", async (req, res, next) => {
     if (deletedCount === 0)
       return res.status(404).send("Task is already accepted or rejected");
 
-    console.log(deletedCount);
     res.json("ok");
   } catch (err) {
     console.error("Error deleting pending mission request");
