@@ -38,7 +38,7 @@ export default function MainLayout({ children, componentName }) {
     const timeout = setTimeout(() => {
       fetchUserInfo().then((r) => setUserInfo(r));
       fetchNotificationCountForBell().then((r) => setNotificationCount(r));
-    }, 0);
+    });
 
     return () => {
       clearTimeout(timeout);

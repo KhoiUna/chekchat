@@ -13,7 +13,7 @@ export default function ReceivedFriendRequestList() {
   useEffect(() => {
     const timeout = setTimeout(() => {
       fetchReceivedFriendRequestsList().then((r) => setFriendRequestList(r));
-    }, 0);
+    });
 
     return () => {
       clearTimeout(timeout);

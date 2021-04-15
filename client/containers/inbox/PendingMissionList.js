@@ -13,7 +13,7 @@ export default function PendingMissionList({}) {
   useEffect(() => {
     const timeout = setTimeout(() => {
       fetchMissionRequestsList("to").then((r) => setMissionRequestList(r));
-    }, 0);
+    });
 
     return () => {
       clearTimeout(timeout);
