@@ -37,6 +37,7 @@ module.exports = {
           "to.email": userEmail,
           status: "Accepted",
         })
+        .sort({ due_date: 1 })
         .toArray();
       return missionTodoList;
     } catch (err) {
