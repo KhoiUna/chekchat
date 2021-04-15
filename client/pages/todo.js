@@ -36,19 +36,31 @@ export default function Todo() {
     };
   }, []);
 
+  const updateMissionState = (id, action, value) => {
+    setSortedTodoList((prev) =>
+      [...prev].map((i) => {
+        if (i._id === id) {
+          if (action === "check") i.completed = value;
+          if (action === "star") i.starred = value;
+        }
+
+        return i;
+      })
+    );
+  };
+
   const sortTodoList = (status) => {
     if (status === "None") return setSortedTodoList(missionTodoList);
 
-    if (status === "Due date") {
-      const sortedList = [...sortedTodoList].sort(
-        (a, b) => new Date(a.due_date) - new Date(b.due_date)
+    if (status === "Starred")
+      return setSortedTodoList((prev) =>
+        [...prev].sort((a, b) => b.starred - a.starred)
       );
-      setSortedTodoList(sortedList);
-    }
 
-    if (status === "Completed") {
-      //
-    }
+    if (status === "Completed")
+      return setSortedTodoList((prev) =>
+        [...prev].sort((a, b) => b.completed - a.completed)
+      );
   };
 
   return (
@@ -77,6 +89,7 @@ export default function Todo() {
                 username={i.from.username}
                 missionId={i._id}
                 socket={socket}
+                updateMissionState={updateMissionState}
               />
             </Fragment>
           ))}

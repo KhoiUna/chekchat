@@ -65,6 +65,7 @@ export default function MissionCheckbox({
   due_date,
   username,
   socket,
+  updateMissionState,
 }) {
   const classes = useStyles();
 
@@ -77,12 +78,14 @@ export default function MissionCheckbox({
   const handleChange = ({ target }, missionId) => {
     setChecked(target.checked);
     socket.emit("check missions", { missionId, completed: target.checked });
+    updateMissionState(missionId, "check", target.checked);
   };
 
   const [star, setStar] = useState(starred);
   const starTask = (e, missionId) => {
     setStar(!star);
     socket.emit("star missions", { missionId, starred: !star });
+    updateMissionState(missionId, "star", !star);
   };
 
   return (
