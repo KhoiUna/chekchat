@@ -58,9 +58,16 @@ const Missions = require("./utils/Missions");
 const FriendRequest = require("./utils/FriendRequest");
 const Users = require("./utils/Users");
 const Notifications = require("./utils/Notifications");
+const SocketHelper = require("./helpers/SocketHelper");
 
 io.on("connection", (socket) => {
   console.log("------User connected------");
+
+  //Subscribe users for events from server
+  socket.on("subscribe", (userEmail) => {
+    const user = SocketHelper.subscribeUsers(socket.id, userEmail);
+    socket.join(user.userEmail);
+  });
 
   socket.on("check missions", ({ missionId, completed }) => {
     //Update mission check/completed
@@ -93,6 +100,7 @@ io.on("connection", (socket) => {
 
     //Increment notification count for user
     Users.updateNotificationCount(friendEmail, "increment");
+    io.to(friendEmail).emit("notification count");
   });
 
   socket.on("mission requests", async ({ requestId, action }) => {
@@ -107,6 +115,7 @@ io.on("connection", (socket) => {
 
     //Increment notification count for user
     Users.updateNotificationCount(senderEmail, "increment");
+    io.to(senderEmail).emit("notification count");
   });
 
   //Listen when users disconnect
