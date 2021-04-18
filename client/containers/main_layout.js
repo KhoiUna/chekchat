@@ -8,6 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
 import { fetchNotificationCountForBell } from "../utils/Notifications";
 import { fetchUserInfo } from "../utils/Users";
+import io from "socket.io-client";
+import { origin } from "../config/config";
 
 const useStyles = makeStyles({
   root: {
@@ -29,6 +31,7 @@ const useStyles = makeStyles({
   },
 });
 
+let socket;
 export default function MainLayout({ children, componentName }) {
   const classes = useStyles();
 
@@ -42,6 +45,22 @@ export default function MainLayout({ children, componentName }) {
 
     return () => {
       clearTimeout(timeout);
+    };
+  }, []);
+
+  useEffect(() => {
+    socket = io(origin, {
+      withCredentials: true,
+    });
+
+    socket.emit("subscribe", localStorage.getItem("email"));
+
+    socket.on("notification count", () => {
+      setNotificationCount((prev) => prev + 1);
+    });
+
+    return () => {
+      socket.removeAllListeners();
     };
   }, []);
 
