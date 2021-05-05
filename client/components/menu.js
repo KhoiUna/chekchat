@@ -20,6 +20,7 @@ import EventIcon from "@material-ui/icons/Event";
 import GroupIcon from "@material-ui/icons/Group";
 import SettingsIcon from "@material-ui/icons/Settings";
 import Image from "next/image";
+import imageLoader from "../helpers/imageLoader";
 
 const menuList = [
   { name: "Inbox", icon: <InboxIcon /> },
@@ -85,6 +86,7 @@ export default function Menu({ componentName, userInfo }) {
           <ListItem className={classes.flex} button>
             <div className={utilStyles.menu_image}>
               <Image
+                loader={imageLoader}
                 src={userInfo.avatarURL}
                 priority
                 height={60}

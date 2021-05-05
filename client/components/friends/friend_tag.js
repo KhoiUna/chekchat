@@ -4,6 +4,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Image from "next/image";
+import imageLoader from "../../helpers/imageLoader";
 import utilStyles from "../../styles/utils.module.css";
 
 const useStyles = makeStyles({
@@ -37,6 +38,7 @@ export default function FriendTag({ username, email, avatarURL }) {
       <CardActionArea className={classes.gridColumn}>
         <div className={utilStyles.image}>
           <Image
+            loader={imageLoader}
             priority
             src={avatarURL}
             height={108}

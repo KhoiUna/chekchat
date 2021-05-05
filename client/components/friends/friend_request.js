@@ -14,6 +14,7 @@ import CardActions from "@material-ui/core/CardActions";
 import DoneIcon from "@material-ui/icons/Done";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
+import imageLoader from "../../helpers/imageLoader";
 
 const useStyles = makeStyles({
   root: {
@@ -79,6 +80,7 @@ export default function FriendRequest({
         <CardActionArea className={classes.gridColumn}>
           <div className={utilStyles.request_image}>
             <Image
+              loader={imageLoader}
               priority
               src={avatarURL}
               height={108}
@@ -107,6 +109,7 @@ export default function FriendRequest({
       <CardActionArea className={classes.gridColumn}>
         <div className={utilStyles.request_image}>
           <Image
+            loader={imageLoader}
             priority
             src={avatarURL}
             height={108}
