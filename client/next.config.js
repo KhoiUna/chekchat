@@ -1,7 +1,7 @@
 module.exports = {
   poweredByHeader: false,
   images: {
-    loader: "cloudinary",
+    // loader: "cloudinary",
     domains: ["ik.imagekit.io"],
   },
   webpack(config) {
