@@ -1,7 +1,7 @@
 import { origin } from "../config/config";
 
-module.exports = {
-  async fetchSentFriendRequestsList() {
+export default class FriendRequestUtil {
+  static async fetchSentFriendRequestsList() {
     try {
       const res = await fetch(
         `${origin}/api/friends/requests/sent?userEmail=${localStorage.getItem(
@@ -13,8 +13,9 @@ module.exports = {
     } catch (err) {
       console.error("Error getting friend request list");
     }
-  },
-  async fetchReceivedFriendRequestsList() {
+  }
+
+  static async fetchReceivedFriendRequestsList() {
     try {
       const res = await fetch(
         `${origin}/api/friends/requests/received?userEmail=${localStorage.getItem(
@@ -26,8 +27,9 @@ module.exports = {
     } catch (err) {
       console.error("Error getting friend request list");
     }
-  },
-  async sendFriendRequest(requestEmail) {
+  }
+
+  static async sendFriendRequest(requestEmail) {
     try {
       const res = await fetch(`${origin}/api/friends/requests`, {
         method: "POST",
@@ -43,5 +45,5 @@ module.exports = {
     } catch (err) {
       console.error("Error sending friend request");
     }
-  },
-};
+  }
+}

@@ -15,7 +15,7 @@ import utilStyles from "../../styles/utils.module.css";
 import TextField from "@material-ui/core/TextField";
 import HUE from "@material-ui/core/colors/blue";
 import { useState } from "react";
-import FriendRequest from "../../utils/FriendRequest";
+import FriendRequestUtil from "../../utils/FriendRequestUtil";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -83,7 +83,7 @@ export default function FriendPopup({ showPopup, togglePopup }) {
     try {
       if (email.length !== 0) {
         setProgress("start");
-        const res = await FriendRequest.sendFriendRequest(email);
+        const res = await FriendRequestUtil.sendFriendRequest(email);
         if (res.ok === true) {
           setProgress("success");
           setEmail("");

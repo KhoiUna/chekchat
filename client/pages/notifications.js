@@ -1,7 +1,7 @@
 import MainLayout from "../containers/main_layout";
 import Grid from "@material-ui/core/Grid";
 import NotificationAlert from "../components/notifications/notification_alert";
-import { fetchNotificationsList } from "../utils/Notifications";
+import NotificationsUtil from "../utils/NotificationsUtil";
 import { Fragment, useEffect, useState } from "react";
 import Spinner from "../components/spinner";
 import io from "socket.io-client";
@@ -22,7 +22,9 @@ export default function Notifications() {
 
   const [notificationList, setNotificationList] = useState(null);
   useEffect(() => {
-    fetchNotificationsList().then((r) => setNotificationList(r));
+    NotificationsUtil.fetchNotificationsList().then((r) =>
+      setNotificationList(r)
+    );
   }, []);
 
   if (notificationList?.length === 0)

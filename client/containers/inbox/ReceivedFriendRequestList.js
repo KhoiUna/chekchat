@@ -1,6 +1,6 @@
 import { useState, useEffect, Fragment } from "react";
 import FriendRequest from "../../components/friends/friend_request";
-import { fetchReceivedFriendRequestsList } from "../../utils/FriendRequest";
+import FriendRequestUtil from "../../utils/FriendRequestUtil";
 import removeItemFromList from "../../helpers/removeItemFromList";
 import Spinner from "../../components/spinner";
 import io from "socket.io-client";
@@ -12,7 +12,9 @@ export default function ReceivedFriendRequestList() {
   const [friendRequestList, setFriendRequestList] = useState(null);
   useEffect(() => {
     const timeout = setTimeout(() => {
-      fetchReceivedFriendRequestsList().then((r) => setFriendRequestList(r));
+      FriendRequestUtil.fetchReceivedFriendRequestsList().then((r) =>
+        setFriendRequestList(r)
+      );
     });
 
     return () => {

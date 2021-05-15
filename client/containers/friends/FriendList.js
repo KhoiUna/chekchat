@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import FriendTag from "../../components/friends/friend_tag";
-import { fetchFriendList } from "../../utils/Friends";
+import FriendsUtil from "../../utils/FriendsUtil";
 import Spinner from "../../components/spinner";
 import FriendBlankState from "../../components/friends/friend_blank_state";
 import Grid from "@material-ui/core/Grid";
@@ -8,7 +8,7 @@ import Grid from "@material-ui/core/Grid";
 export default function FriendList() {
   const [friendList, setFriendList] = useState(null);
   useEffect(() => {
-    fetchFriendList().then((r) => setFriendList(r));
+    FriendsUtil.fetchFriendList().then((r) => setFriendList(r));
   }, []);
 
   if (friendList?.length === 0)

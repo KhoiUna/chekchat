@@ -1,6 +1,6 @@
 import { origin } from "../config/config";
 
-export default class Notifications {
+export default class NotificationsUtil {
   static async fetchNotificationsList() {
     try {
       const res = await fetch(

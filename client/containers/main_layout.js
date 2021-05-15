@@ -6,8 +6,8 @@ import Chat from "../components/chat";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
-import { fetchNotificationCountForBell } from "../utils/Notifications";
-import { fetchUserInfo } from "../utils/Users";
+import NotificationsUtil from "../utils/NotificationsUtil";
+import UsersUtil from "../utils/UsersUtil";
 import io from "socket.io-client";
 import { origin } from "../config/config";
 
@@ -39,8 +39,10 @@ export default function MainLayout({ children, componentName }) {
   const [userInfo, setUserInfo] = useState({});
   useEffect(() => {
     const timeout = setTimeout(() => {
-      fetchUserInfo().then((r) => setUserInfo(r));
-      fetchNotificationCountForBell().then((r) => setNotificationCount(r));
+      UsersUtil.fetchUserInfo().then((r) => setUserInfo(r));
+      NotificationsUtil.fetchNotificationCountForBell().then((r) =>
+        setNotificationCount(r)
+      );
     });
 
     return () => {

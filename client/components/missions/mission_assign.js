@@ -25,8 +25,8 @@ import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import { fetchFriendList } from "../../utils/Friends";
-import { sendMissionRequest } from "../../utils/Missions";
+import FriendsUtil from "../../utils/FriendsUtil";
+import MissionsUtil from "../../utils/MissionsUtil";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -87,7 +87,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
 
   const [friendList, setFriendList] = useState([]);
   useEffect(() => {
-    fetchFriendList().then((r) => setFriendList(r));
+    FriendsUtil.fetchFriendList().then((r) => setFriendList(r));
   }, []);
 
   const [selectedDate, setSelectedDate] = useState(null);
@@ -110,7 +110,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
   const handleClick = async () => {
     try {
       setProgress("start");
-      const res = await sendMissionRequest(
+      const res = await MissionsUtil.sendMissionRequest(
         subject,
         selectedDate,
         selectedReceiver,

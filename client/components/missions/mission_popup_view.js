@@ -12,7 +12,7 @@ import TextField from "@material-ui/core/TextField";
 import utilStyles from "../../styles/utils.module.css";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
-import { fetchMissionInfo } from "../../utils/Missions";
+import MissionsUtil from "../../utils/MissionsUtil";
 import Spinner from "../spinner";
 import FormatDatetime from "../../helpers/FormatDatetime";
 import AppBar from "@material-ui/core/AppBar";
@@ -69,7 +69,7 @@ export default function MissionPopupView({
 
   const [missionInfo, setMissionInfo] = useState(null);
   useEffect(() => {
-    fetchMissionInfo(requestId).then((r) => setMissionInfo(r));
+    MissionsUtil.fetchMissionInfo(requestId).then((r) => setMissionInfo(r));
   }, []);
 
   return (

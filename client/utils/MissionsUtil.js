@@ -1,7 +1,12 @@
 import { origin } from "../config/config";
 
-module.exports = {
-  async sendMissionRequest(subject, selectedDate, receiverEmail, description) {
+export default class MissionsUtil {
+  static async sendMissionRequest(
+    subject,
+    selectedDate,
+    receiverEmail,
+    description
+  ) {
     try {
       const res = await fetch(`${origin}/api/missions`, {
         method: "POST",
@@ -20,8 +25,9 @@ module.exports = {
     } catch (err) {
       console.error("Error sending mission request");
     }
-  },
-  async deletePendingRequest(requestId) {
+  }
+
+  static async deletePendingRequest(requestId) {
     try {
       const res = await fetch(`${origin}/api/missions`, {
         method: "DELETE",
@@ -36,8 +42,9 @@ module.exports = {
     } catch (err) {
       console.error("Error deleting pending mission request");
     }
-  },
-  async updateVisibility(requestId) {
+  }
+
+  static async updateVisibility(requestId) {
     try {
       const res = await fetch(`${origin}/api/missions`, {
         method: "PUT",
@@ -52,8 +59,9 @@ module.exports = {
     } catch (err) {
       console.error("Error updating mission request's visibility");
     }
-  },
-  async fetchMissionRequestsList(position) {
+  }
+
+  static async fetchMissionRequestsList(position) {
     try {
       const res = await fetch(
         `${origin}/api/missions?email=${localStorage.getItem(
@@ -65,8 +73,9 @@ module.exports = {
     } catch (err) {
       console.error(`Error getting ${position} mission requests`);
     }
-  },
-  async fetchMissionInfo(requestId) {
+  }
+
+  static async fetchMissionInfo(requestId) {
     try {
       const res = await fetch(
         `${origin}/api/missions/${requestId}?email=${localStorage.getItem(
@@ -78,8 +87,9 @@ module.exports = {
     } catch (err) {
       console.error(`Error getting mission info`);
     }
-  },
-  async fetchMissionTodoList() {
+  }
+
+  static async fetchMissionTodoList() {
     try {
       const res = await fetch(
         `${origin}/api/todo?email=${localStorage.getItem("email")}`
@@ -89,5 +99,5 @@ module.exports = {
     } catch (err) {
       console.error(`Error getting mission todo list`);
     }
-  },
-};
+  }
+}

@@ -1,7 +1,7 @@
 import { origin } from "../config/config";
 
-module.exports = {
-  async fetchFriendList() {
+export default class FriendsUtil {
+  static async fetchFriendList() {
     try {
       const res = await fetch(
         `${origin}/api/friends?userEmail=${localStorage.getItem("email")}`
@@ -11,5 +11,5 @@ module.exports = {
     } catch (err) {
       console.error("Error getting friend list");
     }
-  },
-};
+  }
+}

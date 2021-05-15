@@ -1,5 +1,5 @@
 import { Fragment, useEffect, useState } from "react";
-import { fetchMissionRequestsList } from "../../utils/Missions";
+import MissionsUtil from "../../utils/MissionsUtil";
 import removeItemFromList from "../../helpers/removeItemFromList";
 import InboxMissionRequest from "../../components/inbox/inbox_mission_request";
 import Spinner from "../../components/spinner";
@@ -12,7 +12,9 @@ export default function PendingMissionList({}) {
   const [missionRequestList, setMissionRequestList] = useState(null);
   useEffect(() => {
     const timeout = setTimeout(() => {
-      fetchMissionRequestsList("to").then((r) => setMissionRequestList(r));
+      MissionsUtil.fetchMissionRequestsList("to").then((r) =>
+        setMissionRequestList(r)
+      );
     });
 
     return () => {

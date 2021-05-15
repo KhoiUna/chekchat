@@ -14,11 +14,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { Fragment, useEffect, useState } from "react";
 import MissionAssign from "../components/missions/mission_assign";
-import {
-  fetchMissionRequestsList,
-  deletePendingRequest,
-  updateVisibility,
-} from "../utils/Missions";
+import MissionsUtil from "../utils/MissionsUtil";
 import Spinner from "../components/spinner";
 import FilterButton from "../components/send/filter_button";
 import removeItemFromList from "../helpers/removeItemFromList";
@@ -62,7 +58,7 @@ export default function Send() {
   const [filteredSentMissionList, setFilteredSentMissionList] = useState(null);
   useEffect(() => {
     if (!missionAssign)
-      fetchMissionRequestsList("from").then((r) => {
+      MissionsUtil.fetchMissionRequestsList("from").then((r) => {
         setSentMissionList(r);
         setFilteredSentMissionList(r);
       });
@@ -79,14 +75,14 @@ export default function Send() {
     try {
       if (action === "cancel") {
         //Delete pending task
-        const res = await deletePendingRequest(requestId);
+        const res = await MissionsUtil.deletePendingRequest(requestId);
         if (res.ok === false) {
           openSnackbar();
           return false;
         }
       } else {
         //Update task visibility
-        const res = await updateVisibility(requestId);
+        const res = await Missions.updateVisibility(requestId);
         if (res.ok === false) return false;
       }
 

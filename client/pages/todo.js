@@ -2,7 +2,7 @@ import MainLayout from "../containers/main_layout";
 import MissionCheckbox from "../components/todo/mission_checkbox";
 import Grid from "@material-ui/core/Grid";
 import { Fragment, useEffect, useState } from "react";
-import { fetchMissionTodoList } from "../utils/Missions";
+import MissionsUtil from "../utils/MissionsUtil";
 import SortButton from "../components/todo/sort_button";
 import io from "socket.io-client";
 import { origin } from "../config/config";
@@ -25,7 +25,7 @@ export default function Todo() {
   const [sortedTodoList, setSortedTodoList] = useState(null);
   useEffect(() => {
     const timeout = setTimeout(() => {
-      fetchMissionTodoList().then((r) => {
+      MissionsUtil.fetchMissionTodoList().then((r) => {
         setMissionTodoList(r);
         setSortedTodoList(r);
       });
