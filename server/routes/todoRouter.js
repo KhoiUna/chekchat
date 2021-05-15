@@ -1,11 +1,11 @@
 const router = require("express").Router();
-const Missions = require("../utils/Missions");
+const MissionsUtil = require("../utils/MissionsUtil");
 
 router.get("/", async (req, res, next) => {
   try {
     const { email } = req.query;
 
-    const missionTodoList = await Missions.getMissionTodoList(email);
+    const missionTodoList = await MissionsUtil.getMissionTodoList(email);
     res.json(missionTodoList);
   } catch (err) {
     console.error("Error getting mission todo list");

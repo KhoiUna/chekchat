@@ -1,12 +1,12 @@
 const ValidationHelper = require("../helpers/ValidationHelper");
-const FriendRequest = require("../utils/FriendRequest");
+const FriendRequestUtil = require("../utils/FriendRequestUtil");
 const router = require("express").Router();
-const Users = require("../utils/Users");
+const UsersUtil = require("../utils/UsersUtil");
 
 router.get("/requests/sent", async (req, res, next) => {
   try {
     const userEmail = req.query.userEmail;
-    const friendRequestList = await FriendRequest.getSentFriendRequestList(
+    const friendRequestList = await FriendRequestUtil.getSentFriendRequestList(
       userEmail
     );
     res.json(friendRequestList);
@@ -18,9 +18,8 @@ router.get("/requests/sent", async (req, res, next) => {
 router.get("/requests/received", async (req, res, next) => {
   try {
     const userEmail = req.query.userEmail;
-    const friendRequestList = await FriendRequest.getReceivedFriendRequestList(
-      userEmail
-    );
+    const friendRequestList =
+      await FriendRequestUtil.getReceivedFriendRequestList(userEmail);
     res.json(friendRequestList);
   } catch (err) {
     console.error("Error getting received friend request");
@@ -39,18 +38,18 @@ router.post("/requests", async (req, res, next) => {
       return res.status(400).send("Cannot send request to yourself");
 
     //Check if request email exists
-    const checkEmailExists = await Users.checkUser(requestEmail);
+    const checkEmailExists = await UsersUtil.checkUser(requestEmail);
     if (!checkEmailExists) return res.status(400).send("User does not exist");
 
     //Check if user is already friend
-    const alreadyFriend = await Users.checkAlreadyFriend(
+    const alreadyFriend = await UsersUtil.checkAlreadyFriend(
       userEmail,
       requestEmail
     );
     if (alreadyFriend) return res.status(400).send("User is already friend");
 
     //Check if request already sent
-    const alreadySent = await FriendRequest.checkAlreadySent(
+    const alreadySent = await FriendRequestUtil.checkAlreadySent(
       userEmail,
       requestEmail
     );
@@ -58,7 +57,7 @@ router.post("/requests", async (req, res, next) => {
       return res.status(400).send("Request to user already sent");
 
     //Save request
-    if (await FriendRequest.saveRequest(userEmail, requestEmail))
+    if (await FriendRequestUtil.saveRequest(userEmail, requestEmail))
       return res.send("ok");
 
     res.status(400).send("Sorry, something is wrong");
@@ -71,7 +70,7 @@ router.post("/requests", async (req, res, next) => {
 router.get("/", async (req, res, next) => {
   try {
     const userEmail = req.query.userEmail;
-    const friendList = await Users.getFriendList(userEmail);
+    const friendList = await UsersUtil.getFriendList(userEmail);
     res.json(friendList);
   } catch (err) {
     console.error("Error getting friend list");

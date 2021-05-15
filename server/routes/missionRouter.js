@@ -1,12 +1,12 @@
 const router = require("express").Router();
 const ValidationHelper = require("../helpers/ValidationHelper");
-const Missions = require("../utils/Missions");
+const MissionsUtil = require("../utils/MissionsUtil");
 
 router.get("/", async (req, res, next) => {
   try {
     const { email, position } = req.query;
 
-    const missionRequestList = await Missions.getMissionRequest(
+    const missionRequestList = await MissionsUtil.getMissionRequest(
       position,
       email
     );
@@ -21,7 +21,7 @@ router.get("/:requestId", async (req, res, next) => {
   try {
     const { requestId } = req.params;
 
-    const missionInfo = await Missions.getMissionInfo(requestId);
+    const missionInfo = await MissionsUtil.getMissionInfo(requestId);
     res.json(missionInfo);
   } catch (err) {
     console.error("Error getting mission info");
@@ -31,13 +31,8 @@ router.get("/:requestId", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const {
-      userEmail,
-      subject,
-      selectedDate,
-      receiverEmail,
-      description,
-    } = req.body;
+    const { userEmail, subject, selectedDate, receiverEmail, description } =
+      req.body;
 
     //If request email is user's email, block it
     if (userEmail === receiverEmail)
@@ -56,7 +51,7 @@ router.post("/", async (req, res, next) => {
 
     //Save to db
     if (
-      !(await Missions.saveMissionRequest(
+      !(await MissionsUtil.saveMissionRequest(
         userEmail,
         subject,
         selectedDate,
@@ -77,7 +72,7 @@ router.put("/", async (req, res, next) => {
   try {
     const { requestId } = req.body;
 
-    if (!(await Missions.updateVisibility(requestId)))
+    if (!(await MissionsUtil.updateVisibility(requestId)))
       return res.status(400).send("Sorry, something is wrong");
 
     res.json("ok");
@@ -91,7 +86,7 @@ router.delete("/", async (req, res, next) => {
   try {
     const { requestId } = req.body;
 
-    const deletedCount = await Missions.deletePendingRequest(requestId);
+    const deletedCount = await MissionsUtil.deletePendingRequest(requestId);
     if (!deletedCount) return res.status(400).send("Sorry, something is wrong");
 
     if (deletedCount === 0)

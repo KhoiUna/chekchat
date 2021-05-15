@@ -1,15 +1,17 @@
 const router = require("express").Router();
-const Notifications = require("../utils/Notifications");
-const Users = require("../utils/Users");
+const NotificationsUtil = require("../utils/NotificationsUtil");
+const UsersUtil = require("../utils/UsersUtil");
 
 router.get("/", async (req, res, next) => {
   try {
     const { userEmail } = req.query;
 
     //Reset notification count for user
-    Users.updateNotificationCount(userEmail, "reset");
+    UsersUtil.updateNotificationCount(userEmail, "reset");
 
-    const notificationList = await Notifications.getNotifications(userEmail);
+    const notificationList = await NotificationsUtil.getNotifications(
+      userEmail
+    );
     res.json(notificationList);
   } catch (err) {
     console.error("Error getting notifications");
@@ -21,7 +23,7 @@ router.get("/bell", async (req, res, next) => {
   try {
     const { userEmail } = req.query;
 
-    const notificationCount = await Users.getNotificationCount(userEmail);
+    const notificationCount = await UsersUtil.getNotificationCount(userEmail);
     res.json(notificationCount);
   } catch (err) {
     console.error("Error getting notification count");

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const ValidationHelper = require("../helpers/ValidationHelper");
-const Users = require("../utils/Users");
+const UsersUtil = require("../utils/UsersUtil");
 
 router.post("/", async (req, res) => {
   try {
@@ -15,10 +15,11 @@ router.post("/", async (req, res) => {
     if (validation !== true) return res.send(validation);
 
     //Check user
-    if (await Users.checkUser(email)) return res.send("Email already used");
+    if (await UsersUtil.checkUser(email)) return res.send("Email already used");
 
     //Save user
-    if (await Users.saveUser(username, email, password)) return res.send("ok");
+    if (await UsersUtil.saveUser(username, email, password))
+      return res.send("ok");
 
     res.send("Sorry, something is wrong");
   } catch (err) {

@@ -54,10 +54,10 @@ const notificationRouter = require("./routes/notificationRouter");
 app.use("/api/notifications", notificationRouter);
 
 //Socket
-const Missions = require("./utils/Missions");
-const FriendRequest = require("./utils/FriendRequest");
-const Users = require("./utils/Users");
-const Notifications = require("./utils/Notifications");
+const MissionsUtil = require("./utils/MissionsUtil");
+const FriendRequestUtil = require("./utils/FriendRequestUtil");
+const UsersUtil = require("./utils/UsersUtil");
+const NotificationsUtil = require("./utils/NotificationsUtil");
 const SocketHelper = require("./helpers/SocketHelper");
 
 io.on("connection", (socket) => {
@@ -71,50 +71,60 @@ io.on("connection", (socket) => {
 
   socket.on("check missions", ({ missionId, completed }) => {
     //Update mission check/completed
-    Missions.updateMissionComplete(missionId, completed);
+    MissionsUtil.updateMissionComplete(missionId, completed);
   });
 
   socket.on("star missions", ({ missionId, starred }) => {
     //Update mission check/completed
-    Missions.updateMissionStarred(missionId, starred);
+    MissionsUtil.updateMissionStarred(missionId, starred);
   });
 
   socket.on("click notification", (notificationId) => {
     //Update notification clicked
-    Notifications.updateClickedNotification(notificationId);
+    NotificationsUtil.updateClickedNotification(notificationId);
   });
 
   socket.on("friend requests", async ({ requestId, action }) => {
     //Update friend request and return friendEmail & userEmail
-    const { userEmail, friendEmail } = await FriendRequest.updateRequest(
+    const { userEmail, friendEmail } = await FriendRequestUtil.updateRequest(
       requestId,
       action
     );
     if (action === "accept") {
-      Users.addFriend(userEmail, friendEmail);
-      FriendRequest.removeRequest(userEmail, friendEmail);
+      UsersUtil.addFriend(userEmail, friendEmail);
+      FriendRequestUtil.removeRequest(userEmail, friendEmail);
     }
 
     //Create notification
-    Notifications.saveNotification(userEmail, friendEmail, "friend", action);
+    NotificationsUtil.saveNotification(
+      userEmail,
+      friendEmail,
+      "friend",
+      action
+    );
 
     //Increment notification count for user
-    Users.updateNotificationCount(friendEmail, "increment");
+    UsersUtil.updateNotificationCount(friendEmail, "increment");
     io.to(friendEmail).emit("notification count");
   });
 
   socket.on("mission requests", async ({ requestId, action }) => {
     //Update mission request
-    const { senderEmail, receiverEmail } = await Missions.updateRequest(
+    const { senderEmail, receiverEmail } = await MissionsUtil.updateRequest(
       requestId,
       action
     );
 
     //Create notification
-    Notifications.saveNotification(receiverEmail, senderEmail, "task", action);
+    NotificationsUtil.saveNotification(
+      receiverEmail,
+      senderEmail,
+      "task",
+      action
+    );
 
     //Increment notification count for user
-    Users.updateNotificationCount(senderEmail, "increment");
+    UsersUtil.updateNotificationCount(senderEmail, "increment");
     io.to(senderEmail).emit("notification count");
   });
 
