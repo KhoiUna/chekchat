@@ -18,7 +18,7 @@ import SendIcon from "@material-ui/icons/Send";
 import ListAltIcon from "@material-ui/icons/ListAlt";
 import EventIcon from "@material-ui/icons/Event";
 import GroupIcon from "@material-ui/icons/Group";
-import SettingsIcon from "@material-ui/icons/Settings";
+import FeedbackIcon from "@material-ui/icons/Feedback";
 import Image from "next/image";
 import imageLoader from "../helpers/imageLoader";
 
@@ -28,7 +28,7 @@ const menuList = [
   { name: "Todo", icon: <ListAltIcon /> },
   { name: "Calendar", icon: <EventIcon /> },
   { name: "Friends", icon: <GroupIcon /> },
-  { name: "Settings", icon: <SettingsIcon /> },
+  { name: "Feedback", icon: <FeedbackIcon /> },
   { name: "Logout", icon: <ExitToAppIcon /> },
 ];
 
