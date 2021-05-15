@@ -56,7 +56,12 @@ export default function FriendTag({ username, email, avatarURL }) {
           >
             {username}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="p"
+            className={classes.overflowText}
+          >
             {email}
           </Typography>
         </CardContent>
