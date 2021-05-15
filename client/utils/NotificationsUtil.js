@@ -1,7 +1,7 @@
 import { origin } from "../config/config";
 
-module.exports = {
-  async fetchNotificationsList() {
+export default class Notifications {
+  static async fetchNotificationsList() {
     try {
       const res = await fetch(
         `${origin}/api/notifications?userEmail=${localStorage.getItem("email")}`
@@ -11,8 +11,9 @@ module.exports = {
     } catch (err) {
       console.error("Error getting notifications list");
     }
-  },
-  async fetchNotificationCountForBell() {
+  }
+
+  static async fetchNotificationCountForBell() {
     try {
       const res = await fetch(
         `${origin}/api/notifications/bell?userEmail=${localStorage.getItem(
@@ -24,5 +25,5 @@ module.exports = {
     } catch (err) {
       console.error("Error getting notification count");
     }
-  },
-};
+  }
+}
