@@ -82,7 +82,7 @@ export default function Send() {
         }
       } else {
         //Update task visibility
-        const res = await Missions.updateVisibility(requestId);
+        const res = await MissionsUtil.updateVisibility(requestId);
         if (res.ok === false) return false;
       }
 
