@@ -16,6 +16,10 @@ export const socketMiddleware = (store) => {
       setupSocketListener(socket, store);
     }
 
+    if (action.type === "missions/replyMission") {
+      socket.emit("mission requests", action.payload);
+    }
+
     return next(action);
   };
 };

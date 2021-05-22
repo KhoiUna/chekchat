@@ -1,20 +1,23 @@
-import { Fragment, useEffect, useState } from "react";
-import MissionsUtil from "../../utils/MissionsUtil";
-import removeItemFromList from "../../helpers/removeItemFromList";
+import { Fragment, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import InboxMissionRequest from "../../components/inbox/inbox_mission_request";
 import Spinner from "../../components/spinner";
-import io from "socket.io-client";
-import { origin } from "../../config/config";
 import Typography from "@material-ui/core/Typography";
+import {
+  loadMissionRequestsListAsync,
+  replyMission,
+  selectIsLoading,
+  selectMissionRequestsList,
+} from "../../features/missionSlice";
 
-let socket;
 export default function PendingMissionList({}) {
-  const [missionRequestList, setMissionRequestList] = useState(null);
+  const dispatch = useDispatch();
+
+  const isLoading = useSelector(selectIsLoading);
+  const missionRequestList = useSelector(selectMissionRequestsList);
   useEffect(() => {
     const timeout = setTimeout(() => {
-      MissionsUtil.fetchMissionRequestsList("to").then((r) =>
-        setMissionRequestList(r)
-      );
+      dispatch(loadMissionRequestsListAsync());
     });
 
     return () => {
@@ -22,22 +25,13 @@ export default function PendingMissionList({}) {
     };
   }, []);
 
-  useEffect(() => {
-    socket = io(origin, {
-      withCredentials: true,
-    });
-
-    return () => {
-      socket.removeAllListeners();
-    };
-  }, []);
-
-  const handleClick = async (action, requestId) => {
-    setMissionRequestList((prev) => removeItemFromList(prev, requestId));
-    socket.emit("mission requests", { action, requestId });
+  const handleClick = (action, requestId) => {
+    dispatch(replyMission({ action, requestId }));
   };
 
-  if (missionRequestList?.length === 0)
+  if (isLoading) return <Spinner />;
+
+  if (missionRequestList.length === 0)
     return (
       <Typography
         variant="h6"
@@ -49,7 +43,7 @@ export default function PendingMissionList({}) {
       </Typography>
     );
 
-  return missionRequestList ? (
+  return (
     <>
       {missionRequestList.map((i, index) => (
         <Fragment key={index}>
@@ -63,7 +57,5 @@ export default function PendingMissionList({}) {
         </Fragment>
       ))}
     </>
-  ) : (
-    <Spinner />
   );
 }
