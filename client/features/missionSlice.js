@@ -49,6 +49,17 @@ export const missionSlice = createSlice({
         );
       }
     },
+    updateMissionTodoList: (state, action) => {
+      const { id, updateAction, value } = action.payload;
+
+      state.missionTodoList = [...state.missionTodoList].map((i) => {
+        if (i._id === id) {
+          if (updateAction === "check") i.completed = value;
+          if (updateAction === "star") i.starred = value;
+        }
+        return i;
+      });
+    },
   },
   extraReducers: {
     [loadMissionRequestsListAsync.pending]: (state, action) => {
@@ -84,7 +95,8 @@ export const missionSlice = createSlice({
   },
 });
 
-export const { replyMission, sortMissionTodoList } = missionSlice.actions;
+export const { replyMission, sortMissionTodoList, updateMissionTodoList } =
+  missionSlice.actions;
 export default missionSlice.reducer;
 
 //Selectors

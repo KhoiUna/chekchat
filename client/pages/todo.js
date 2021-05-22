@@ -3,8 +3,6 @@ import MissionCheckbox from "../components/todo/mission_checkbox";
 import Grid from "@material-ui/core/Grid";
 import { Fragment, useEffect } from "react";
 import SortButton from "../components/todo/sort_button";
-import io from "socket.io-client";
-import { origin } from "../config/config";
 import Spinner from "../components/spinner";
 import Typography from "@material-ui/core/Typography";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,21 +11,11 @@ import {
   selectIsLoading,
   selectMissionTodoList,
   sortMissionTodoList,
+  updateMissionTodoList,
 } from "../features/missionSlice";
 
-let socket;
 export default function Todo() {
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    socket = io(origin, {
-      withCredentials: true,
-    });
-
-    return () => {
-      socket.removeAllListeners();
-    };
-  }, []);
 
   const missionTodoList = useSelector(selectMissionTodoList);
   const isLoading = useSelector(selectIsLoading);
@@ -42,16 +30,7 @@ export default function Todo() {
   }, []);
 
   const updateMissionState = (id, action, value) => {
-    setSortedTodoList((prev) =>
-      [...prev].map((i) => {
-        if (i._id === id) {
-          if (action === "check") i.completed = value;
-          if (action === "star") i.starred = value;
-        }
-
-        return i;
-      })
-    );
+    dispatch(updateMissionTodoList({ id, updateAction: action, value }));
   };
 
   const sortTodoList = (status) => {
@@ -93,7 +72,6 @@ export default function Todo() {
               due_date={i.due_date}
               username={i.from.username}
               missionId={i._id}
-              socket={socket}
               updateMissionState={updateMissionState}
             />
           </Fragment>

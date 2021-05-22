@@ -20,6 +20,17 @@ export const socketMiddleware = (store) => {
       socket.emit("mission requests", action.payload);
     }
 
+    if (action.type === "missions/updateMissionTodoList") {
+      const { id, updateAction, value } = action.payload;
+
+      if (updateAction === "check") {
+        socket.emit("check missions", { missionId: id, completed: value });
+      }
+      if (updateAction === "star") {
+        socket.emit("star missions", { missionId: id, starred: value });
+      }
+    }
+
     if (action.type === "friends/replyFriendRequest") {
       socket.emit("friend requests", action.payload);
     }
