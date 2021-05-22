@@ -105,7 +105,9 @@ io.on("connection", (socket) => {
 
     //Increment notification count for user
     UsersUtil.updateNotificationCount(friendEmail, "increment");
-    io.to(friendEmail).emit("notification count");
+
+    const actionData = { type: "notification count" };
+    io.to(friendEmail).emit("update", actionData);
   });
 
   socket.on("mission requests", async ({ requestId, action }) => {
@@ -125,7 +127,9 @@ io.on("connection", (socket) => {
 
     //Increment notification count for user
     UsersUtil.updateNotificationCount(senderEmail, "increment");
-    io.to(senderEmail).emit("notification count");
+
+    const actionData = { type: "notification count" };
+    io.to(senderEmail).emit("update", actionData);
   });
 
   //Listen when users disconnect
