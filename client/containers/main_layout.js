@@ -10,6 +10,11 @@ import NotificationsUtil from "../utils/NotificationsUtil";
 import UsersUtil from "../utils/UsersUtil";
 import io from "socket.io-client";
 import { origin } from "../config/config";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  loadNotificationCountAsync,
+  selectNotificationCount,
+} from "../features/notificationsSlice";
 
 const useStyles = makeStyles({
   root: {
@@ -34,15 +39,14 @@ const useStyles = makeStyles({
 let socket;
 export default function MainLayout({ children, componentName }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
-  const [notificationCount, setNotificationCount] = useState(null);
+  const notificationCount = useSelector(selectNotificationCount);
   const [userInfo, setUserInfo] = useState({});
   useEffect(() => {
     const timeout = setTimeout(() => {
       UsersUtil.fetchUserInfo().then((r) => setUserInfo(r));
-      NotificationsUtil.fetchNotificationCountForBell().then((r) =>
-        setNotificationCount(r)
-      );
+      dispatch(loadNotificationCountAsync());
     });
 
     return () => {
@@ -56,10 +60,6 @@ export default function MainLayout({ children, componentName }) {
     });
 
     socket.emit("subscribe", localStorage.getItem("email"));
-
-    socket.on("notification count", () => {
-      setNotificationCount((prev) => prev + 1);
-    });
 
     return () => {
       socket.removeAllListeners();
