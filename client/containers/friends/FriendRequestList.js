@@ -8,9 +8,15 @@ import Grid from "@material-ui/core/Grid";
 export default function FriendRequestList() {
   const [friendRequestList, setFriendRequestList] = useState(null);
   useEffect(() => {
-    FriendRequestUtil.fetchSentFriendRequestsList().then((r) =>
-      setFriendRequestList(r)
-    );
+    const timeout = setTimeout(() => {
+      FriendRequestUtil.fetchSentFriendRequestsList().then((r) =>
+        setFriendRequestList(r)
+      );
+    });
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }, []);
 
   if (friendRequestList?.length === 0)
