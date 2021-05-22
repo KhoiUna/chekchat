@@ -12,7 +12,7 @@ export const loadMissionRequestsListAsync = createAsyncThunk(
 export const missionSlice = createSlice({
   name: "missions",
   initialState: {
-    missionRequestsList: null,
+    missionRequestsList: [],
     isLoading: false,
     failedToLoad: false,
   },
