@@ -17,7 +17,7 @@ export const notificationSlice = createSlice({
   name: "notifications",
   initialState: {
     notificationCount: undefined,
-    notificationList: null,
+    notificationList: [],
     isLoading: false,
     failedToLoad: false,
   },
