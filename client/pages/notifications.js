@@ -17,10 +17,23 @@ export default function Notifications() {
   const notificationList = useSelector(selectNotificationList);
   const isLoading = useSelector(selectNotificationIsLoading);
   useEffect(() => {
-    dispatch(loadNotificationListAsync());
+    const timeout = setTimeout(() => {
+      dispatch(loadNotificationListAsync());
+    });
+
+    return () => {
+      clearTimeout(timeout);
+    };
   }, []);
 
-  if (notificationList?.length === 0)
+  if (isLoading)
+    return (
+      <MainLayout componentName="Notifications">
+        <Spinner />
+      </MainLayout>
+    );
+
+  if (notificationList.length === 0)
     return (
       <MainLayout componentName="Notifications">
         <Typography
@@ -36,24 +49,20 @@ export default function Notifications() {
 
   return (
     <MainLayout componentName="Notifications">
-      {!isLoading ? (
-        <Grid container direction="column" justify="center" alignItems="center">
-          {notificationList?.map((i, index) => (
-            <Fragment key={index}>
-              <NotificationAlert
-                notificationId={i._id}
-                username={i.from_user.username}
-                type={i.type}
-                clicked={i.clicked}
-                text={i.text}
-                time={i.time}
-              />
-            </Fragment>
-          ))}
-        </Grid>
-      ) : (
-        <Spinner />
-      )}
+      <Grid container direction="column" justify="center" alignItems="center">
+        {notificationList.map((i, index) => (
+          <Fragment key={index}>
+            <NotificationAlert
+              notificationId={i._id}
+              username={i.from_user.username}
+              type={i.type}
+              clicked={i.clicked}
+              text={i.text}
+              time={i.time}
+            />
+          </Fragment>
+        ))}
+      </Grid>
     </MainLayout>
   );
 }
