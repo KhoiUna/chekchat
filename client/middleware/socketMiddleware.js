@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 import { origin } from "../config/config";
-import { loadNotificationCountAsync } from "../features/notificationsSlice";
+import { loadNotificationCountAsync } from "../features/notificationSlice";
 
 export const socketMiddleware = (store) => {
   const socket = io(origin, { withCredentials: true });

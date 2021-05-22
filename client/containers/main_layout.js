@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   loadNotificationCountAsync,
   selectNotificationCount,
-} from "../features/notificationsSlice";
+} from "../features/notificationSlice";
 import { loadUserInfoAsync, selectUserInfo } from "../features/userSlice";
 
 const useStyles = makeStyles({

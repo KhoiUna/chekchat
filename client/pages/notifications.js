@@ -9,7 +9,7 @@ import {
   loadNotificationListAsync,
   selectNotificationList,
   selectNotificationIsLoading,
-} from "../features/notificationsSlice";
+} from "../features/notificationSlice";
 
 export default function Notifications() {
   const dispatch = useDispatch();

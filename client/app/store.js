@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
-import notificationsReducer from "../features/notificationsSlice";
+import notificationsReducer from "../features/notificationSlice";
 import userReducer from "../features/userSlice";
 import { socketMiddleware } from "../middleware/socketMiddleware";
 
