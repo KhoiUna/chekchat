@@ -8,11 +8,18 @@ export const loadMissionRequestsListAsync = createAsyncThunk(
   async () => await MissionsUtil.fetchMissionRequestsList("to")
 );
 
+export const loadMissionTodoListAsync = createAsyncThunk(
+  "missions/loadMissionTodoList",
+  async () => await MissionsUtil.fetchMissionTodoList()
+);
+
 //Slice
 export const missionSlice = createSlice({
   name: "missions",
   initialState: {
     missionRequestsList: [],
+    initMissionTodoList: [],
+    missionTodoList: [],
     isLoading: false,
     failedToLoad: false,
   },
@@ -23,6 +30,24 @@ export const missionSlice = createSlice({
         state.missionRequestsList,
         requestId
       );
+    },
+    sortMissionTodoList: (state, action) => {
+      const status = action.payload;
+      if (status === "None") {
+        state.missionTodoList = state.initMissionTodoList;
+      }
+
+      if (status === "Starred") {
+        state.missionTodoList = [...state.missionTodoList].sort(
+          (a, b) => b.starred - a.starred
+        );
+      }
+
+      if (status === "Completed") {
+        state.missionTodoList = [...state.missionTodoList].sort(
+          (a, b) => b.completed - a.completed
+        );
+      }
     },
   },
   extraReducers: {
@@ -40,13 +65,30 @@ export const missionSlice = createSlice({
       state.isLoading = false;
       state.failedToLoad = true;
     },
+    //
+    [loadMissionTodoListAsync.pending]: (state, action) => {
+      state.isLoading = true;
+      state.failedToLoad = false;
+    },
+    [loadMissionTodoListAsync.fulfilled]: (state, action) => {
+      state.initMissionTodoList = action.payload;
+      state.missionTodoList = action.payload;
+
+      state.isLoading = false;
+      state.failedToLoad = false;
+    },
+    [loadMissionTodoListAsync.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.failedToLoad = true;
+    },
   },
 });
 
-export const { replyMission } = missionSlice.actions;
+export const { replyMission, sortMissionTodoList } = missionSlice.actions;
 export default missionSlice.reducer;
 
 //Selectors
 export const selectIsLoading = (state) => state.missions.isLoading;
 export const selectMissionRequestsList = (state) =>
   state.missions.missionRequestsList;
+export const selectMissionTodoList = (state) => state.missions.missionTodoList;

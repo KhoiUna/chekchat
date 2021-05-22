@@ -2,15 +2,23 @@ import MainLayout from "../containers/main_layout";
 import MissionCheckbox from "../components/todo/mission_checkbox";
 import Grid from "@material-ui/core/Grid";
 import { Fragment, useEffect, useState } from "react";
-import MissionsUtil from "../utils/MissionsUtil";
 import SortButton from "../components/todo/sort_button";
 import io from "socket.io-client";
 import { origin } from "../config/config";
 import Spinner from "../components/spinner";
 import Typography from "@material-ui/core/Typography";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loadMissionTodoListAsync,
+  selectIsLoading,
+  selectMissionTodoList,
+  sortMissionTodoList,
+} from "../features/missionSlice";
 
 let socket;
 export default function Todo() {
+  const dispatch = useDispatch();
+
   useEffect(() => {
     socket = io(origin, {
       withCredentials: true,
@@ -21,14 +29,11 @@ export default function Todo() {
     };
   }, []);
 
-  const [missionTodoList, setMissionTodoList] = useState(null);
-  const [sortedTodoList, setSortedTodoList] = useState(null);
+  const missionTodoList = useSelector(selectMissionTodoList);
+  const isLoading = useSelector(selectIsLoading);
   useEffect(() => {
     const timeout = setTimeout(() => {
-      MissionsUtil.fetchMissionTodoList().then((r) => {
-        setMissionTodoList(r);
-        setSortedTodoList(r);
-      });
+      dispatch(loadMissionTodoListAsync());
     });
 
     return () => {
@@ -50,24 +55,21 @@ export default function Todo() {
   };
 
   const sortTodoList = (status) => {
-    if (status === "None") return setSortedTodoList(missionTodoList);
-
-    if (status === "Starred")
-      return setSortedTodoList((prev) =>
-        [...prev].sort((a, b) => b.starred - a.starred)
-      );
-
-    if (status === "Completed")
-      return setSortedTodoList((prev) =>
-        [...prev].sort((a, b) => b.completed - a.completed)
-      );
+    dispatch(sortMissionTodoList(status));
   };
 
-  return (
-    <MainLayout componentName="Todo">
-      <SortButton sortTodoList={sortTodoList} />
+  if (isLoading)
+    return (
+      <MainLayout componentName="Todo">
+        <SortButton sortTodoList={sortTodoList} />
+        <Spinner />
+      </MainLayout>
+    );
 
-      {missionTodoList?.length === 0 && (
+  if (missionTodoList.length === 0)
+    return (
+      <MainLayout componentName="Todo">
+        <SortButton sortTodoList={sortTodoList} />
         <Typography
           variant="h6"
           color="textSecondary"
@@ -75,28 +77,28 @@ export default function Todo() {
         >
           <i>You have no tasks to do here!</i>
         </Typography>
-      )}
+      </MainLayout>
+    );
 
-      {sortedTodoList ? (
-        <Grid container direction="column" justify="center" alignItems="center">
-          {sortedTodoList.map((i) => (
-            <Fragment key={i._id}>
-              <MissionCheckbox
-                completed={i.completed}
-                starred={i.starred}
-                subject={i.subject}
-                due_date={i.due_date}
-                username={i.from.username}
-                missionId={i._id}
-                socket={socket}
-                updateMissionState={updateMissionState}
-              />
-            </Fragment>
-          ))}
-        </Grid>
-      ) : (
-        <Spinner />
-      )}
+  return (
+    <MainLayout componentName="Todo">
+      <SortButton sortTodoList={sortTodoList} />
+      <Grid container direction="column" justify="center" alignItems="center">
+        {missionTodoList.map((i) => (
+          <Fragment key={i._id}>
+            <MissionCheckbox
+              completed={i.completed}
+              starred={i.starred}
+              subject={i.subject}
+              due_date={i.due_date}
+              username={i.from.username}
+              missionId={i._id}
+              socket={socket}
+              updateMissionState={updateMissionState}
+            />
+          </Fragment>
+        ))}
+      </Grid>
     </MainLayout>
   );
 }
