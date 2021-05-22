@@ -1,7 +1,7 @@
 import MainLayout from "../containers/main_layout";
 import MissionCheckbox from "../components/todo/mission_checkbox";
 import Grid from "@material-ui/core/Grid";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import SortButton from "../components/todo/sort_button";
 import io from "socket.io-client";
 import { origin } from "../config/config";
