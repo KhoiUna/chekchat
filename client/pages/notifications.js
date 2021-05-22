@@ -1,33 +1,26 @@
 import MainLayout from "../containers/main_layout";
 import Grid from "@material-ui/core/Grid";
 import NotificationAlert from "../components/notifications/notification_alert";
-import NotificationsUtil from "../utils/NotificationsUtil";
-import { Fragment, useEffect, useState } from "react";
+import { Fragment, useEffect } from "react";
 import Spinner from "../components/spinner";
-import io from "socket.io-client";
-import { origin } from "../config/config";
 import Typography from "@material-ui/core/Typography";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loadNotificationListAsync,
+  selectNotificationList,
+  selectNotificationIsLoading,
+} from "../features/notificationsSlice";
 
-let socket;
 export default function Notifications() {
-  useEffect(() => {
-    socket = io(origin, {
-      withCredentials: true,
-    });
+  const dispatch = useDispatch();
 
-    return () => {
-      socket.removeAllListeners();
-    };
+  const notificationList = useSelector(selectNotificationList);
+  const isLoading = useSelector(selectNotificationIsLoading);
+  useEffect(() => {
+    dispatch(loadNotificationListAsync());
   }, []);
 
-  const [notificationList, setNotificationList] = useState(null);
-  useEffect(() => {
-    NotificationsUtil.fetchNotificationsList().then((r) =>
-      setNotificationList(r)
-    );
-  }, []);
-
-  if (notificationList?.length === 0)
+  if (notificationList.length === 0)
     return (
       <MainLayout componentName="Notifications">
         <Typography
@@ -43,7 +36,7 @@ export default function Notifications() {
 
   return (
     <MainLayout componentName="Notifications">
-      {notificationList ? (
+      {!isLoading ? (
         <Grid container direction="column" justify="center" alignItems="center">
           {notificationList.map((i, index) => (
             <Fragment key={index}>
@@ -54,7 +47,6 @@ export default function Notifications() {
                 clicked={i.clicked}
                 text={i.text}
                 time={i.time}
-                socket={socket}
               />
             </Fragment>
           ))}

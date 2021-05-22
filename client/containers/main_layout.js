@@ -6,8 +6,6 @@ import Chat from "../components/chat";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { useEffect } from "react";
-import io from "socket.io-client";
-import { origin } from "../config/config";
 import { useSelector, useDispatch } from "react-redux";
 import {
   loadNotificationCountAsync,
@@ -35,7 +33,7 @@ const useStyles = makeStyles({
   },
 });
 
-let socket;
+// let socket;
 export default function MainLayout({ children, componentName }) {
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -50,18 +48,6 @@ export default function MainLayout({ children, componentName }) {
 
     return () => {
       clearTimeout(timeout);
-    };
-  }, []);
-
-  useEffect(() => {
-    socket = io(origin, {
-      withCredentials: true,
-    });
-
-    socket.emit("subscribe", localStorage.getItem("email"));
-
-    return () => {
-      socket.removeAllListeners();
     };
   }, []);
 

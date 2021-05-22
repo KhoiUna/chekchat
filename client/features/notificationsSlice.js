@@ -7,6 +7,11 @@ export const loadNotificationCountAsync = createAsyncThunk(
   async () => await NotificationsUtil.fetchNotificationCountForBell()
 );
 
+export const loadNotificationListAsync = createAsyncThunk(
+  "notifications/loadNotificationList",
+  async () => await NotificationsUtil.fetchNotificationsList()
+);
+
 //Slice
 export const notificationsSlice = createSlice({
   name: "notifications",
@@ -16,11 +21,7 @@ export const notificationsSlice = createSlice({
     isLoading: false,
     failedToLoad: false,
   },
-  reducers: {
-    incrementNotificationCount: (state, action) => {
-      state.notificationCount++;
-    },
-  },
+  reducers: {},
   extraReducers: {
     [loadNotificationCountAsync.pending]: (state, action) => {
       state.isLoading = true;
@@ -36,6 +37,21 @@ export const notificationsSlice = createSlice({
       state.isLoading = false;
       state.failedToLoad = true;
     },
+    //
+    [loadNotificationListAsync.pending]: (state, action) => {
+      state.isLoading = true;
+      state.failedToLoad = false;
+    },
+    [loadNotificationListAsync.fulfilled]: (state, action) => {
+      state.notificationList = action.payload;
+
+      state.isLoading = false;
+      state.failedToLoad = false;
+    },
+    [loadNotificationListAsync.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.failedToLoad = true;
+    },
   },
 });
 
@@ -43,5 +59,9 @@ export const {} = notificationsSlice.actions;
 export default notificationsSlice.reducer;
 
 //Selectors
+export const selectNotificationIsLoading = (state) =>
+  state.notifications.isLoading;
 export const selectNotificationCount = (state) =>
   state.notifications.notificationCount;
+export const selectNotificationList = (state) =>
+  state.notifications.notificationList;
