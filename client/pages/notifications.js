@@ -20,7 +20,7 @@ export default function Notifications() {
     dispatch(loadNotificationListAsync());
   }, []);
 
-  if (notificationList.length === 0)
+  if (notificationList?.length === 0)
     return (
       <MainLayout componentName="Notifications">
         <Typography
@@ -38,7 +38,7 @@ export default function Notifications() {
     <MainLayout componentName="Notifications">
       {!isLoading ? (
         <Grid container direction="column" justify="center" alignItems="center">
-          {notificationList.map((i, index) => (
+          {notificationList?.map((i, index) => (
             <Fragment key={index}>
               <NotificationAlert
                 notificationId={i._id}

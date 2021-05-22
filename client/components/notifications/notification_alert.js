@@ -8,6 +8,7 @@ import AssignmentIcon from "@material-ui/icons/Assignment";
 import Divider from "@material-ui/core/Divider";
 import FormatDatetime from "../../helpers/FormatDatetime";
 import { useRouter } from "next/router";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -35,14 +36,17 @@ export default function NotificationAlert({
   text,
   clicked,
   time,
-  socket,
 }) {
   const classes = useStyles();
-
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const handleClick = (notificationId, type) => {
-    socket.emit("click notification", notificationId);
+    dispatch({
+      type: "notifications/clickNotification",
+      payload: notificationId,
+    });
+
     if (type === "task") {
       router.push("/send");
       return;

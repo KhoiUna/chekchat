@@ -6,6 +6,11 @@ export const socketMiddleware = (store) => {
   const socket = io(origin, { withCredentials: true });
 
   return (next) => (action) => {
+    if (action.type === "notifications/clickNotification") {
+      socket.emit("click notification", action.payload);
+      return;
+    }
+
     if (action.type === "user/loadUserInfo/fulfilled") {
       socket.emit("subscribe", localStorage.getItem("email"));
       setupSocketListener(socket, store);
