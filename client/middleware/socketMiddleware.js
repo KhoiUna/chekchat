@@ -20,6 +20,10 @@ export const socketMiddleware = (store) => {
       socket.emit("mission requests", action.payload);
     }
 
+    if (action.type === "friends/replyFriendRequest") {
+      socket.emit("friend requests", action.payload);
+    }
+
     return next(action);
   };
 };

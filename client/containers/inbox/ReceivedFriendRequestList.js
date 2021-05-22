@@ -1,20 +1,24 @@
-import { useState, useEffect, Fragment } from "react";
+import { useEffect, Fragment } from "react";
 import FriendRequest from "../../components/friends/friend_request";
-import FriendRequestUtil from "../../utils/FriendRequestUtil";
 import removeItemFromList from "../../helpers/removeItemFromList";
 import Spinner from "../../components/spinner";
-import io from "socket.io-client";
-import { origin } from "../../config/config";
 import Typography from "@material-ui/core/Typography";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  loadReceivedFriendRequestsListAsync,
+  selectFriendRequestList,
+  replyFriendRequest,
+  selectIsLoading,
+} from "../../features/friendSlice";
 
-let socket;
 export default function ReceivedFriendRequestList() {
-  const [friendRequestList, setFriendRequestList] = useState(null);
+  const dispatch = useDispatch();
+
+  const friendRequestList = useSelector(selectFriendRequestList);
+  const isLoading = useSelector(selectIsLoading);
   useEffect(() => {
     const timeout = setTimeout(() => {
-      FriendRequestUtil.fetchReceivedFriendRequestsList().then((r) =>
-        setFriendRequestList(r)
-      );
+      dispatch(loadReceivedFriendRequestsListAsync());
     });
 
     return () => {
@@ -22,22 +26,13 @@ export default function ReceivedFriendRequestList() {
     };
   }, []);
 
-  useEffect(() => {
-    socket = io(origin, {
-      withCredentials: true,
-    });
-
-    return () => {
-      socket.removeAllListeners();
-    };
-  }, []);
-
-  const handleClick = async (action, requestId) => {
-    setFriendRequestList((prev) => removeItemFromList(prev, requestId));
-    socket.emit("friend requests", { action, requestId });
+  const handleClick = (action, requestId) => {
+    dispatch(replyFriendRequest({ action, requestId }));
   };
 
-  if (friendRequestList?.length === 0)
+  if (isLoading) return <Spinner />;
+
+  if (friendRequestList.length === 0)
     return (
       <Typography
         variant="h6"
@@ -49,7 +44,7 @@ export default function ReceivedFriendRequestList() {
       </Typography>
     );
 
-  return friendRequestList ? (
+  return (
     <>
       {friendRequestList.map((item, index) => (
         <Fragment key={index}>
@@ -66,7 +61,5 @@ export default function ReceivedFriendRequestList() {
         </Fragment>
       ))}
     </>
-  ) : (
-    <Spinner />
   );
 }
