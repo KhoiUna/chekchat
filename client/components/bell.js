@@ -8,7 +8,7 @@ export default function Bell({ componentName, notificationCount }) {
   return (
     componentName !== "Notifications" && (
       <Link href="/notifications">
-        <IconButton>
+        <IconButton aria-label="Open Notification page">
           <Badge
             badgeContent={notificationCount}
             color="error"

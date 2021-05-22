@@ -8,7 +8,7 @@ export default function Chat({ componentName, notificationCount }) {
   return (
     componentName !== "Chat" && (
       <Link href="/chat">
-        <IconButton>
+        <IconButton aria-label="Open Chat page">
           <Badge
             badgeContent={notificationCount}
             color="error"

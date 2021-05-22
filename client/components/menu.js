@@ -172,7 +172,7 @@ export default function Menu({ componentName, userInfo }) {
       {componentName !== "Notifications" &&
         componentName !== "Chat" &&
         componentName !== "Profile" && (
-          <IconButton onClick={toggleDrawer}>
+          <IconButton onClick={toggleDrawer} aria-label="Open menu">
             <MenuIcon
               className={utilStyles.icon}
               style={{ fontSize: "2rem" }}
