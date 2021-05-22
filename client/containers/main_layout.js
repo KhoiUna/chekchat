@@ -5,9 +5,7 @@ import Bell from "../components/bell";
 import Chat from "../components/chat";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useEffect, useState } from "react";
-import NotificationsUtil from "../utils/NotificationsUtil";
-import UsersUtil from "../utils/UsersUtil";
+import { useEffect } from "react";
 import io from "socket.io-client";
 import { origin } from "../config/config";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,6 +13,7 @@ import {
   loadNotificationCountAsync,
   selectNotificationCount,
 } from "../features/notificationsSlice";
+import { loadUserInfoAsync, selectUserInfo } from "../features/userSlice";
 
 const useStyles = makeStyles({
   root: {
@@ -42,10 +41,10 @@ export default function MainLayout({ children, componentName }) {
   const dispatch = useDispatch();
 
   const notificationCount = useSelector(selectNotificationCount);
-  const [userInfo, setUserInfo] = useState({});
+  const userInfo = useSelector(selectUserInfo);
   useEffect(() => {
     const timeout = setTimeout(() => {
-      UsersUtil.fetchUserInfo().then((r) => setUserInfo(r));
+      dispatch(loadUserInfoAsync());
       dispatch(loadNotificationCountAsync());
     });
 

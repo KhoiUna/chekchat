@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import HUE from "@material-ui/core/colors/blue";
 import { origin } from "../config/config";
+import { useDispatch } from "react-redux";
+import { loadUserInfoAsync } from "../features/userSlice";
 
 const theme = createMuiTheme({
   palette: {
@@ -16,6 +18,7 @@ const theme = createMuiTheme({
 
 export default function Login() {
   const router = useRouter();
+  const dispatch = useDispatch();
 
   const [responseText, setResponseText] = useState("");
   const [data, setData] = useState({
@@ -47,6 +50,9 @@ export default function Login() {
         const { email, token } = await res.json();
         localStorage.setItem("email", email);
         localStorage.setItem("token", token);
+
+        dispatch(loadUserInfoAsync());
+
         router.push("/inbox");
       }
     } catch (err) {
