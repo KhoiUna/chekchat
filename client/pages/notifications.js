@@ -17,13 +17,7 @@ export default function Notifications() {
   const notificationList = useSelector(selectNotificationList);
   const isLoading = useSelector(selectNotificationIsLoading);
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      dispatch(loadNotificationListAsync());
-    });
-
-    return () => {
-      clearTimeout(timeout);
-    };
+    dispatch(loadNotificationListAsync());
   }, []);
 
   if (isLoading)

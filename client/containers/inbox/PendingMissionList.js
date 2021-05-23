@@ -16,13 +16,7 @@ export default function PendingMissionList({}) {
   const isLoading = useSelector(selectIsLoading);
   const missionRequestList = useSelector(selectMissionRequestsList);
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      dispatch(loadMissionRequestsListAsync());
-    });
-
-    return () => {
-      clearTimeout(timeout);
-    };
+    dispatch(loadMissionRequestsListAsync());
   }, []);
 
   const handleClick = (action, requestId) => {

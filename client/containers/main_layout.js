@@ -41,14 +41,8 @@ export default function MainLayout({ children, componentName }) {
   const notificationCount = useSelector(selectNotificationCount);
   const userInfo = useSelector(selectUserInfo);
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      dispatch(loadUserInfoAsync());
-      dispatch(loadNotificationCountAsync());
-    });
-
-    return () => {
-      clearTimeout(timeout);
-    };
+    dispatch(loadUserInfoAsync());
+    dispatch(loadNotificationCountAsync());
   }, []);
 
   return (

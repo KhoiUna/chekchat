@@ -17,13 +17,7 @@ export default function ReceivedFriendRequestList() {
   const friendRequestList = useSelector(selectFriendRequestList);
   const isLoading = useSelector(selectIsLoading);
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      dispatch(loadReceivedFriendRequestsListAsync());
-    });
-
-    return () => {
-      clearTimeout(timeout);
-    };
+    dispatch(loadReceivedFriendRequestsListAsync());
   }, []);
 
   const handleClick = (action, requestId) => {

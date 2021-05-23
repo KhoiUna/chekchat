@@ -20,13 +20,7 @@ export default function Todo() {
   const missionTodoList = useSelector(selectMissionTodoList);
   const isLoading = useSelector(selectIsLoading);
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      dispatch(loadMissionTodoListAsync());
-    });
-
-    return () => {
-      clearTimeout(timeout);
-    };
+    dispatch(loadMissionTodoListAsync());
   }, []);
 
   const updateMissionState = (id, action, value) => {
