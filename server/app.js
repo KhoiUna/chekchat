@@ -1,12 +1,13 @@
 require("dotenv").config();
 const compression = require("compression");
 const cors = require("cors");
+const helmet = require("helmet");
+
+//Start express app
 const express = require("express");
 const app = express();
-const helmet = require("helmet");
-const session = require("express-session");
-const { origin } = require("./config/config");
 const server = require("http").createServer(app);
+const { origin } = require("./config/config");
 const io = require("socket.io")(server, {
   cors: {
     origin: [origin, "https://www.chekchat.xyz"],
@@ -24,6 +25,30 @@ const {
   SESS_SECRET,
 } = process.env;
 const IN_PROD = NODE_ENV === "production";
+
+//Define session store
+const session = require("express-session");
+const MongoDBStore = require("connect-mongodb-session")(session);
+
+const store = new MongoDBStore(
+  {
+    uri: process.env.DB_URI,
+    databaseName: "chekchat",
+    collection: "sessions",
+    expires: 1000 * 60 * 60 * 24 * 30, // 30 days in milliseconds
+    connectionOptions: {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 10000,
+    },
+  },
+  (err) => {
+    if (err) console.error(err);
+  }
+);
+store.on("error", (err) => {
+  console.error(err);
+});
 
 //Middlewares
 app.get(compression());
@@ -48,6 +73,7 @@ app.use(
       sameSite: true,
       secure: IN_PROD,
     },
+    store,
   })
 );
 app.use(express.json());
