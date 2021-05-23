@@ -143,7 +143,10 @@ export default function MissionCheckbox({
               </Typography>
             </CardContent>
 
-            <IconButton onClick={(e) => starTask(e, missionId)}>
+            <IconButton
+              onClick={(e) => starTask(e, missionId)}
+              aria-label="Star task"
+            >
               {star ? (
                 <StarIcon style={{ color: "#ffa500", fontSize: "2rem" }} />
               ) : (
