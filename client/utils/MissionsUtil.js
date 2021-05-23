@@ -10,6 +10,7 @@ export default class MissionsUtil {
     try {
       const res = await fetch(`${origin}/api/missions`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -31,6 +32,7 @@ export default class MissionsUtil {
     try {
       const res = await fetch(`${origin}/api/missions`, {
         method: "DELETE",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -48,6 +50,7 @@ export default class MissionsUtil {
     try {
       const res = await fetch(`${origin}/api/missions`, {
         method: "PUT",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
@@ -66,7 +69,10 @@ export default class MissionsUtil {
       const res = await fetch(
         `${origin}/api/missions?email=${localStorage.getItem(
           "email"
-        )}&position=${position}`
+        )}&position=${position}`,
+        {
+          credentials: "include",
+        }
       );
       const missionRequestList = await res.json();
       return missionRequestList;
@@ -80,7 +86,10 @@ export default class MissionsUtil {
       const res = await fetch(
         `${origin}/api/missions/${requestId}?email=${localStorage.getItem(
           "email"
-        )}`
+        )}`,
+        {
+          credentials: "include",
+        }
       );
       const missionInfo = await res.json();
       return missionInfo;
@@ -92,7 +101,10 @@ export default class MissionsUtil {
   static async fetchMissionTodoList() {
     try {
       const res = await fetch(
-        `${origin}/api/todo?email=${localStorage.getItem("email")}`
+        `${origin}/api/todo?email=${localStorage.getItem("email")}`,
+        {
+          credentials: "include",
+        }
       );
       const missionTodoList = await res.json();
       return missionTodoList;

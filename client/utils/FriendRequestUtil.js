@@ -6,7 +6,10 @@ export default class FriendRequestUtil {
       const res = await fetch(
         `${origin}/api/friends/requests/sent?userEmail=${localStorage.getItem(
           "email"
-        )}`
+        )}`,
+        {
+          credentials: "include",
+        }
       );
       const friendRequestList = await res.json();
       return friendRequestList;
@@ -20,7 +23,10 @@ export default class FriendRequestUtil {
       const res = await fetch(
         `${origin}/api/friends/requests/received?userEmail=${localStorage.getItem(
           "email"
-        )}`
+        )}`,
+        {
+          credentials: "include",
+        }
       );
       const friendRequestList = await res.json();
       return friendRequestList;
@@ -33,6 +39,7 @@ export default class FriendRequestUtil {
     try {
       const res = await fetch(`${origin}/api/friends/requests`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },

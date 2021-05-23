@@ -4,7 +4,12 @@ export default class NotificationsUtil {
   static async fetchNotificationsList() {
     try {
       const res = await fetch(
-        `${origin}/api/notifications?userEmail=${localStorage.getItem("email")}`
+        `${origin}/api/notifications?userEmail=${localStorage.getItem(
+          "email"
+        )}`,
+        {
+          credentials: "include",
+        }
       );
       const notificationList = await res.json();
       return notificationList;
@@ -18,7 +23,10 @@ export default class NotificationsUtil {
       const res = await fetch(
         `${origin}/api/notifications/bell?userEmail=${localStorage.getItem(
           "email"
-        )}`
+        )}`,
+        {
+          credentials: "include",
+        }
       );
       const notificationCount = await res.json();
       return notificationCount;

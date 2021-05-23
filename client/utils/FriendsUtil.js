@@ -4,7 +4,10 @@ export default class FriendsUtil {
   static async fetchFriendList() {
     try {
       const res = await fetch(
-        `${origin}/api/friends?userEmail=${localStorage.getItem("email")}`
+        `${origin}/api/friends?userEmail=${localStorage.getItem("email")}`,
+        {
+          credentials: "include",
+        }
       );
       const friendList = await res.json();
       return friendList;

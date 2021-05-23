@@ -4,7 +4,10 @@ export default class UsersUtil {
   static async fetchUserInfo() {
     try {
       const res = await fetch(
-        `${origin}/api/user?userEmail=${localStorage.getItem("email")}`
+        `${origin}/api/user?userEmail=${localStorage.getItem("email")}`,
+        {
+          credentials: "include",
+        }
       );
       const userInfo = await res.json();
       return userInfo;
