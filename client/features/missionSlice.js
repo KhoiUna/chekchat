@@ -38,13 +38,13 @@ export const missionSlice = createSlice({
       }
 
       if (status === "Starred") {
-        state.missionTodoList = [...state.missionTodoList].sort(
+        state.missionTodoList = state.missionTodoList.sort(
           (a, b) => b.starred - a.starred
         );
       }
 
       if (status === "Completed") {
-        state.missionTodoList = [...state.missionTodoList].sort(
+        state.missionTodoList = state.missionTodoList.sort(
           (a, b) => b.completed - a.completed
         );
       }
@@ -52,7 +52,15 @@ export const missionSlice = createSlice({
     updateMissionTodoList: (state, action) => {
       const { id, updateAction, value } = action.payload;
 
-      state.missionTodoList = [...state.missionTodoList].map((i) => {
+      state.missionTodoList = state.missionTodoList.map((i) => {
+        if (i._id === id) {
+          if (updateAction === "check") i.completed = value;
+          if (updateAction === "star") i.starred = value;
+        }
+        return i;
+      });
+
+      state.initMissionTodoList = state.initMissionTodoList.map((i) => {
         if (i._id === id) {
           if (updateAction === "check") i.completed = value;
           if (updateAction === "star") i.starred = value;
