@@ -10,6 +10,8 @@ router.post("/", async (req, res) => {
     if (!userObj) return res.status(401).send("Invalid username or password");
 
     const token = generateJWT(userObj);
+    req.session.user = userObj; //save user to session store
+
     res.json({ email, token });
   } catch (err) {
     console.error("Error logging in user");

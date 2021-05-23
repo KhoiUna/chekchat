@@ -3,9 +3,7 @@ const UsersUtil = require("../utils/UsersUtil");
 
 router.get("/", async (req, res, next) => {
   try {
-    const { userEmail } = req.query;
-
-    const userInfo = await UsersUtil.getUser(userEmail);
+    const userInfo = await UsersUtil.getUser(req.session.user.email);
     res.json(userInfo);
   } catch (err) {
     console.error("Error getting user info");

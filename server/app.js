@@ -4,6 +4,7 @@ const cors = require("cors");
 const express = require("express");
 const app = express();
 const helmet = require("helmet");
+const session = require("express-session");
 const { origin } = require("./config/config");
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
@@ -14,8 +15,15 @@ const io = require("socket.io")(server, {
   },
 });
 
-//env variables
-const { PORT = 5000 } = process.env;
+//.env variables
+const {
+  PORT = 5000,
+  NODE_ENV = "development",
+  SESS_LIFETIME = 1000 * 3600 * 2,
+  SESS_NAME = "sid",
+  SESS_SECRET,
+} = process.env;
+const IN_PROD = NODE_ENV === "production";
 
 //Middlewares
 app.get(compression());
@@ -27,6 +35,19 @@ app.use(
     optionsSuccessStatus: 200,
     credentials: true,
     allowedHeaders: ["Content-Type", "Cookie"],
+  })
+);
+app.use(
+  session({
+    name: SESS_NAME,
+    resave: false,
+    saveUninitialized: false,
+    secret: SESS_SECRET,
+    cookie: {
+      maxAge: SESS_LIFETIME,
+      sameSite: true,
+      secure: IN_PROD,
+    },
   })
 );
 app.use(express.json());
