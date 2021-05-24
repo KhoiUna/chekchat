@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import removeItemFromList from "../helpers/removeItemFromList";
 import FriendRequestUtil from "../utils/FriendRequestUtil";
-import UsersUtil from "../utils/UsersUtil";
 
 //Async thunk
 export const loadReceivedFriendRequestsListAsync = createAsyncThunk(
