@@ -36,9 +36,11 @@ export default function MainLayout({ children, componentName, userInfo }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
+  const userInfo = useSelector(selectUserInfo);
   const notificationCount = useSelector(selectNotificationCount);
   useEffect(() => {
     dispatch({ type: "user/subscribe" });
+    dispatch(loadUserInfoAsync());
     dispatch(loadNotificationCountAsync());
   }, []);
 
