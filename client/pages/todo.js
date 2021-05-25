@@ -54,7 +54,7 @@ export default function Todo({}) {
     );
 
   return (
-    <MainLayout componentName="Todo" userInfo={userInfo}>
+    <MainLayout componentName="Todo">
       <SortButton sortTodoList={sortTodoList} />
       <Grid container direction="column" justify="center" alignItems="center">
         {missionTodoList.map((i) => (

@@ -12,7 +12,6 @@ import { useState } from "react";
 import ReceivedFriendRequestList from "../containers/inbox/ReceivedFriendRequestList";
 import PendingMissionList from "../containers/inbox/PendingMissionList";
 import RefreshButton from "../components/refresh_button";
-import UsersUtil from "../utils/UsersUtil";
 
 const useStyles = makeStyles({
   tabTitle: {
@@ -36,7 +35,7 @@ export default function Inbox({ userInfo }) {
   };
 
   return (
-    <MainLayout componentName="Inbox" userInfo={userInfo}>
+    <MainLayout componentName="Inbox">
       <RefreshButton />
 
       <MuiThemeProvider theme={theme}>
@@ -75,14 +74,4 @@ export default function Inbox({ userInfo }) {
       )}
     </MainLayout>
   );
-}
-
-export async function getServerSideProps(ctx) {
-  const cookieObj = ctx.res.req.cookies;
-
-  const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
-
-  return {
-    props: { userInfo },
-  };
 }
