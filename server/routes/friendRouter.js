@@ -5,30 +5,33 @@ const UsersUtil = require("../utils/UsersUtil");
 
 router.get("/requests/sent", async (req, res, next) => {
   try {
-    const userEmail = req.query.userEmail;
     const friendRequestList = await FriendRequestUtil.getSentFriendRequestList(
-      userEmail
+      req.session.user.email
     );
     res.json(friendRequestList);
   } catch (err) {
     console.error("Error getting sent friend request");
+    next();
   }
 });
 
 router.get("/requests/received", async (req, res, next) => {
   try {
-    const userEmail = req.query.userEmail;
     const friendRequestList =
-      await FriendRequestUtil.getReceivedFriendRequestList(userEmail);
+      await FriendRequestUtil.getReceivedFriendRequestList(
+        req.session.user.email
+      );
     res.json(friendRequestList);
   } catch (err) {
     console.error("Error getting received friend request");
+    next();
   }
 });
 
 router.post("/requests", async (req, res, next) => {
   try {
-    const { userEmail, requestEmail } = req.body;
+    const userEmail = req.session.user.email;
+    const { requestEmail } = req.body;
     //Validate email
     const validation = ValidationHelper.validateEmail(requestEmail);
     if (!validation) return res.status(400).send("Invalid email");
@@ -69,11 +72,11 @@ router.post("/requests", async (req, res, next) => {
 
 router.get("/", async (req, res, next) => {
   try {
-    const userEmail = req.query.userEmail;
-    const friendList = await UsersUtil.getFriendList(userEmail);
+    const friendList = await UsersUtil.getFriendList(req.session.user.email);
     res.json(friendList);
   } catch (err) {
     console.error("Error getting friend list");
+    next();
   }
 });
 
