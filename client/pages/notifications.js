@@ -30,11 +30,7 @@ export default function Notifications({ userInfo }) {
 
   if (notificationList.length === 0)
     return (
-      <MainLayout
-        componentName="Notifications"
-        userInfo={userInfo}
-        notificationCount={notificationCount}
-      >
+      <MainLayout componentName="Notifications" userInfo={userInfo}>
         <Typography
           variant="h6"
           color="textSecondary"
