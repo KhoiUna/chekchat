@@ -84,6 +84,7 @@ export default function Inbox({ userInfo, notificationCount }) {
 
 export async function getServerSideProps(ctx) {
   const cookieObj = ctx.res.req.cookies;
+
   const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
   const notificationCount =
     await NotificationsUtil.fetchNotificationCountForBellServerSide(cookieObj);
