@@ -2,10 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import UsersUtil from "../utils/UsersUtil";
 
 //Async thunk
-export const loadUserInfoAsync = createAsyncThunk(
-  "user/loadUserInfo",
-  async () => await UsersUtil.fetchUserInfo()
-);
 
 //Slice
 export const userSlice = createSlice({
@@ -16,22 +12,7 @@ export const userSlice = createSlice({
     failedToLoad: false,
   },
   reducers: {},
-  extraReducers: {
-    [loadUserInfoAsync.pending]: (state, action) => {
-      state.isLoading = true;
-      state.failedToLoad = false;
-    },
-    [loadUserInfoAsync.fulfilled]: (state, action) => {
-      state.userInfo = action.payload;
-
-      state.isLoading = false;
-      state.failedToLoad = false;
-    },
-    [loadUserInfoAsync.rejected]: (state, action) => {
-      state.isLoading = false;
-      state.failedToLoad = true;
-    },
-  },
+  extraReducers: {},
 });
 
 export const {} = userSlice.actions;
