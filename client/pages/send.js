@@ -19,7 +19,6 @@ import Spinner from "../components/spinner";
 import FilterButton from "../components/send/filter_button";
 import removeItemFromList from "../helpers/removeItemFromList";
 import UsersUtil from "../utils/UsersUtil";
-import NotificationsUtil from "../utils/NotificationsUtil";
 
 const useStyles = makeStyles((theme) => ({
   extendedIcon: {
@@ -50,7 +49,7 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function Send({ userInfo, notificationCount }) {
+export default function Send({ userInfo }) {
   const classes = useStyles();
 
   const [missionAssign, setMissionAssign] = useState(false);
@@ -219,10 +218,8 @@ export async function getServerSideProps(ctx) {
   const cookieObj = ctx.res.req.cookies;
 
   const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
-  const notificationCount =
-    await NotificationsUtil.fetchNotificationCountForBellServerSide(cookieObj);
 
   return {
-    props: { userInfo, notificationCount },
+    props: { userInfo },
   };
 }

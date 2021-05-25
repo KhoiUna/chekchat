@@ -10,10 +10,9 @@ import {
   selectNotificationList,
   selectNotificationIsLoading,
 } from "../features/notificationSlice";
-import NotificationsUtil from "../utils/NotificationsUtil";
 import UsersUtil from "../utils/UsersUtil";
 
-export default function Notifications({ userInfo, notificationCount }) {
+export default function Notifications({ userInfo }) {
   const dispatch = useDispatch();
 
   const notificationList = useSelector(selectNotificationList);
@@ -79,10 +78,8 @@ export async function getServerSideProps(ctx) {
   const cookieObj = ctx.res.req.cookies;
 
   const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
-  const notificationCount =
-    await NotificationsUtil.fetchNotificationCountForBellServerSide(cookieObj);
 
   return {
-    props: { userInfo, notificationCount },
+    props: { userInfo },
   };
 }

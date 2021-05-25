@@ -1,8 +1,7 @@
 import MainLayout from "../containers/main_layout";
 import UsersUtil from "../utils/UsersUtil";
-import NotificationsUtil from "../utils/NotificationsUtil";
 
-export default function Chat({ userInfo, notificationCount }) {
+export default function Chat({ userInfo }) {
   return (
     <MainLayout
       componentName="Chat"
@@ -20,10 +19,8 @@ export async function getServerSideProps(ctx) {
   const cookieObj = ctx.res.req.cookies;
 
   const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
-  const notificationCount =
-    await NotificationsUtil.fetchNotificationCountForBellServerSide(cookieObj);
 
   return {
-    props: { userInfo, notificationCount },
+    props: { userInfo },
   };
 }

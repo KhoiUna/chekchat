@@ -14,7 +14,6 @@ import FriendPopup from "../components/friends/friend_popup";
 import FriendList from "../containers/friends/FriendList";
 import FriendRequestList from "../containers/friends/FriendRequestList";
 import UsersUtil from "../utils/UsersUtil";
-import NotificationsUtil from "../utils/NotificationsUtil";
 
 const useStyles = makeStyles({
   button: {
@@ -40,7 +39,7 @@ const buttonTheme = createMuiTheme({
   },
 });
 
-export default function Friends({ userInfo, notificationCount }) {
+export default function Friends({ userInfo }) {
   const classes = useStyles();
 
   const [value, setValue] = useState(0);
@@ -100,10 +99,8 @@ export async function getServerSideProps(ctx) {
   const cookieObj = ctx.res.req.cookies;
 
   const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
-  const notificationCount =
-    await NotificationsUtil.fetchNotificationCountForBellServerSide(cookieObj);
 
   return {
-    props: { userInfo, notificationCount },
+    props: { userInfo },
   };
 }

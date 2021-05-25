@@ -14,9 +14,8 @@ import {
   updateMissionTodoList,
 } from "../features/missionSlice";
 import UsersUtil from "../utils/UsersUtil";
-import NotificationsUtil from "../utils/NotificationsUtil";
 
-export default function Todo({ userInfo, notificationCount }) {
+export default function Todo({ userInfo }) {
   const dispatch = useDispatch();
 
   const missionTodoList = useSelector(selectMissionTodoList);
@@ -93,10 +92,8 @@ export async function getServerSideProps(ctx) {
   const cookieObj = ctx.res.req.cookies;
 
   const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
-  const notificationCount =
-    await NotificationsUtil.fetchNotificationCountForBellServerSide(cookieObj);
 
   return {
-    props: { userInfo, notificationCount },
+    props: { userInfo },
   };
 }
