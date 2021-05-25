@@ -15,7 +15,7 @@ export const appTheme = createMuiTheme({
 
 export const buttonTheme = createMuiTheme({
   palette: {
-    primary: { main: HUE[500], contrastText: "white" },
+    primary: { main: HUE[500], contrastText: "#fff" },
   },
 });
 

@@ -1,13 +1,8 @@
-import {
-  makeStyles,
-  MuiThemeProvider,
-  createMuiTheme,
-} from "@material-ui/core/styles";
+import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import { useEffect, useState } from "react";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
-import HUE from "@material-ui/core/colors/blue";
 import Button from "@material-ui/core/Button";
 import utilStyles from "../../styles/utils.module.css";
 import Typography from "@material-ui/core/Typography";
@@ -147,7 +142,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
             </Typography>
           </Grid>
           <Grid item xs={6}>
-            <MuiThemeProvider theme={appTheme}>
+            <MuiThemeProvider theme={{ ...appTheme, ...buttonTheme }}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                   label="Date"
@@ -167,7 +162,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
             </Typography>
           </Grid>
           <Grid item xs={6}>
-            <MuiThemeProvider theme={appTheme}>
+            <MuiThemeProvider theme={{ ...appTheme, ...buttonTheme }}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardTimePicker
                   label="Time"
@@ -237,7 +232,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
           >
             Cancel
           </Button>
-          <MuiThemeProvider theme={buttonTheme}>
+          <MuiThemeProvider theme={{ ...appTheme, ...buttonTheme }}>
             <Button
               variant="contained"
               color="primary"

@@ -5,7 +5,6 @@ import {
 } from "@material-ui/core/styles";
 import { useEffect, useState, forwardRef } from "react";
 import Grid from "@material-ui/core/Grid";
-import HUE from "@material-ui/core/colors/blue";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -19,7 +18,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Dialog from "@material-ui/core/Dialog";
 import Toolbar from "@material-ui/core/Toolbar";
 import Slide from "@material-ui/core/Slide";
-import { buttonTheme } from "../../themes/theme";
+import { appTheme, buttonTheme } from "../../themes/theme";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -71,7 +70,7 @@ export default function MissionPopupView({
   }, []);
 
   return (
-    <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={{ ...theme, ...buttonTheme }}>
       <Dialog
         fullScreen
         open={open}

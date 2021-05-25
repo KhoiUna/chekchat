@@ -11,8 +11,7 @@ import utilStyles from "../../styles/utils.module.css";
 import TextField from "@material-ui/core/TextField";
 import { useState } from "react";
 import FriendRequestUtil from "../../utils/FriendRequestUtil";
-import { buttonTheme, progressTheme } from "../themes/theme";
-import { appTheme } from "../../themes/theme";
+import { appTheme, buttonTheme, progressTheme } from "../../themes/theme";
 
 const useStyles = makeStyles((theme) => ({
   root: {
