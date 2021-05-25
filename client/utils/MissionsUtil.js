@@ -65,14 +65,9 @@ export default class MissionsUtil {
 
   static async fetchMissionRequestsList(position) {
     try {
-      const res = await fetch(
-        `${origin}/api/missions?email=${localStorage.getItem(
-          "email"
-        )}&position=${position}`,
-        {
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`${origin}/api/missions?position=${position}`, {
+        credentials: "include",
+      });
       const missionRequestList = await res.json();
       return missionRequestList;
     } catch (err) {
@@ -82,14 +77,9 @@ export default class MissionsUtil {
 
   static async fetchMissionInfo(requestId) {
     try {
-      const res = await fetch(
-        `${origin}/api/missions/${requestId}?email=${localStorage.getItem(
-          "email"
-        )}`,
-        {
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`${origin}/api/missions/${requestId}`, {
+        credentials: "include",
+      });
       const missionInfo = await res.json();
       return missionInfo;
     } catch (err) {
@@ -99,12 +89,9 @@ export default class MissionsUtil {
 
   static async fetchMissionTodoList() {
     try {
-      const res = await fetch(
-        `${origin}/api/todo?email=${localStorage.getItem("email")}`,
-        {
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`${origin}/api/todo`, {
+        credentials: "include",
+      });
       const missionTodoList = await res.json();
       return missionTodoList;
     } catch (err) {

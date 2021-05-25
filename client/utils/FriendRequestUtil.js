@@ -3,14 +3,9 @@ import { origin } from "../config/config";
 export default class FriendRequestUtil {
   static async fetchSentFriendRequestsList() {
     try {
-      const res = await fetch(
-        `${origin}/api/friends/requests/sent?userEmail=${localStorage.getItem(
-          "email"
-        )}`,
-        {
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`${origin}/api/friends/requests/sent`, {
+        credentials: "include",
+      });
       const friendRequestList = await res.json();
       return friendRequestList;
     } catch (err) {
@@ -20,14 +15,9 @@ export default class FriendRequestUtil {
 
   static async fetchReceivedFriendRequestsList() {
     try {
-      const res = await fetch(
-        `${origin}/api/friends/requests/received?userEmail=${localStorage.getItem(
-          "email"
-        )}`,
-        {
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`${origin}/api/friends/requests/received`, {
+        credentials: "include",
+      });
       const friendRequestList = await res.json();
       return friendRequestList;
     } catch (err) {

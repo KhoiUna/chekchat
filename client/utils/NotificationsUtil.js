@@ -16,14 +16,9 @@ export default class NotificationsUtil {
 
   static async fetchNotificationCountForBell() {
     try {
-      const res = await fetch(
-        `${origin}/api/notifications/bell?userEmail=${localStorage.getItem(
-          "email"
-        )}`,
-        {
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`${origin}/api/notifications/bell`, {
+        credentials: "include",
+      });
       const notificationCount = await res.json();
       return notificationCount;
     } catch (err) {
