@@ -8,7 +8,7 @@ import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
 import HUE from "@material-ui/core/colors/blue";
 import { origin } from "../config/config";
 import { useDispatch } from "react-redux";
-import { loadUserInfoAsync } from "../features/userSlice";
+import { loginUser } from "../features/userSlice";
 
 const theme = createMuiTheme({
   palette: {
@@ -51,7 +51,7 @@ export default function Login() {
         const { email } = await res.json();
         localStorage.setItem("email", email);
 
-        dispatch(loadUserInfoAsync());
+        dispatch({ type: "user/subscribe" });
         router.push("/inbox");
       }
     } catch (err) {
