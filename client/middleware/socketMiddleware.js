@@ -11,7 +11,7 @@ export const socketMiddleware = (store) => {
       return;
     }
 
-    if (action.type === "user/loadUserInfo/fulfilled") {
+    if (action.type === "user/subscribe") {
       socket.emit("subscribe", localStorage.getItem("email"));
       setupSocketListener(socket, store);
     }
@@ -42,6 +42,7 @@ export const socketMiddleware = (store) => {
 const setupSocketListener = (socket, store) =>
   socket.on("update", (action) => {
     if (action.type === "notification count") {
+      console.log("middleware noti");
       store.dispatch(loadNotificationCountAsync());
     }
   });

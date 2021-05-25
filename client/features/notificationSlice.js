@@ -16,7 +16,7 @@ export const loadNotificationListAsync = createAsyncThunk(
 export const notificationSlice = createSlice({
   name: "notifications",
   initialState: {
-    notificationCount: undefined,
+    notificationCount: 0,
     notificationList: [],
     isLoading: false,
     failedToLoad: false,

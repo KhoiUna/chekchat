@@ -5,6 +5,12 @@ import Bell from "../components/bell";
 import Chat from "../components/chat";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectNotificationCount,
+  loadNotificationCountAsync,
+} from "../features/notificationSlice";
+import { useEffect } from "react";
 
 const useStyles = makeStyles({
   root: {
@@ -26,13 +32,15 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MainLayout({
-  children,
-  componentName,
-  userInfo,
-  notificationCount,
-}) {
+export default function MainLayout({ children, componentName, userInfo }) {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const notificationCount = useSelector(selectNotificationCount);
+  useEffect(() => {
+    dispatch({ type: "user/subscribe" });
+    dispatch(loadNotificationCountAsync());
+  }, []);
 
   return (
     <div className={styles.container}>
