@@ -13,7 +13,6 @@ import {
 import FriendPopup from "../components/friends/friend_popup";
 import FriendList from "../containers/friends/FriendList";
 import FriendRequestList from "../containers/friends/FriendRequestList";
-import UsersUtil from "../utils/UsersUtil";
 
 const useStyles = makeStyles({
   button: {
@@ -39,7 +38,7 @@ const buttonTheme = createMuiTheme({
   },
 });
 
-export default function Friends({ userInfo }) {
+export default function Friends({}) {
   const classes = useStyles();
 
   const [value, setValue] = useState(0);
@@ -53,7 +52,7 @@ export default function Friends({ userInfo }) {
   };
 
   return (
-    <MainLayout componentName="Friends" userInfo={userInfo}>
+    <MainLayout componentName="Friends">
       {!showPopup && (
         <>
           <MuiThemeProvider theme={theme}>
@@ -94,9 +93,7 @@ export default function Friends({ userInfo }) {
 export async function getServerSideProps(ctx) {
   const cookieObj = ctx.res.req.cookies;
 
-  const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
-
   return {
-    props: { userInfo },
+    props: {},
   };
 }

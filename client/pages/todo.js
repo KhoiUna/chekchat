@@ -13,9 +13,8 @@ import {
   sortMissionTodoList,
   updateMissionTodoList,
 } from "../features/missionSlice";
-import UsersUtil from "../utils/UsersUtil";
 
-export default function Todo({ userInfo }) {
+export default function Todo({}) {
   const dispatch = useDispatch();
 
   const missionTodoList = useSelector(selectMissionTodoList);
@@ -34,11 +33,7 @@ export default function Todo({ userInfo }) {
 
   if (isLoading)
     return (
-      <MainLayout
-        componentName="Todo"
-        userInfo={userInfo}
-        notificationCount={notificationCount}
-      >
+      <MainLayout componentName="Todo">
         <SortButton sortTodoList={sortTodoList} />
         <Spinner />
       </MainLayout>
@@ -46,11 +41,7 @@ export default function Todo({ userInfo }) {
 
   if (missionTodoList.length === 0)
     return (
-      <MainLayout
-        componentName="Todo"
-        userInfo={userInfo}
-        notificationCount={notificationCount}
-      >
+      <MainLayout componentName="Todo">
         <SortButton sortTodoList={sortTodoList} />
         <Typography
           variant="h6"
@@ -87,9 +78,7 @@ export default function Todo({ userInfo }) {
 export async function getServerSideProps(ctx) {
   const cookieObj = ctx.res.req.cookies;
 
-  const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
-
   return {
-    props: { userInfo },
+    props: {},
   };
 }

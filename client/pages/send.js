@@ -18,7 +18,6 @@ import MissionsUtil from "../utils/MissionsUtil";
 import Spinner from "../components/spinner";
 import FilterButton from "../components/send/filter_button";
 import removeItemFromList from "../helpers/removeItemFromList";
-import UsersUtil from "../utils/UsersUtil";
 
 const useStyles = makeStyles((theme) => ({
   extendedIcon: {
@@ -49,7 +48,7 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function Send({ userInfo }) {
+export default function Send({}) {
   const classes = useStyles();
 
   const [missionAssign, setMissionAssign] = useState(false);
@@ -110,7 +109,7 @@ export default function Send({ userInfo }) {
   };
 
   return (
-    <MainLayout componentName="Send tasks" userInfo={userInfo}>
+    <MainLayout componentName="Send tasks">
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         key={"bottom" + "center"}
@@ -213,9 +212,7 @@ export default function Send({ userInfo }) {
 export async function getServerSideProps(ctx) {
   const cookieObj = ctx.res.req.cookies;
 
-  const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
-
   return {
-    props: { userInfo },
+    props: {},
   };
 }

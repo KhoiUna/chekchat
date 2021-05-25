@@ -10,9 +10,8 @@ import {
   selectNotificationList,
   selectNotificationIsLoading,
 } from "../features/notificationSlice";
-import UsersUtil from "../utils/UsersUtil";
 
-export default function Notifications({ userInfo }) {
+export default function Notifications({}) {
   const dispatch = useDispatch();
 
   const notificationList = useSelector(selectNotificationList);
@@ -23,14 +22,14 @@ export default function Notifications({ userInfo }) {
 
   if (isLoading)
     return (
-      <MainLayout componentName="Notifications" userInfo={userInfo}>
+      <MainLayout componentName="Notifications">
         <Spinner />
       </MainLayout>
     );
 
   if (notificationList.length === 0)
     return (
-      <MainLayout componentName="Notifications" userInfo={userInfo}>
+      <MainLayout componentName="Notifications">
         <Typography
           variant="h6"
           color="textSecondary"
@@ -43,7 +42,7 @@ export default function Notifications({ userInfo }) {
     );
 
   return (
-    <MainLayout componentName="Notifications" userInfo={userInfo}>
+    <MainLayout componentName="Notifications">
       <Grid container direction="column" justify="center" alignItems="center">
         {notificationList.map((i, index) => (
           <Fragment key={index}>
@@ -65,9 +64,7 @@ export default function Notifications({ userInfo }) {
 export async function getServerSideProps(ctx) {
   const cookieObj = ctx.res.req.cookies;
 
-  const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
-
   return {
-    props: { userInfo },
+    props: {},
   };
 }
