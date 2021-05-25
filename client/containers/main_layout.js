@@ -32,7 +32,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MainLayout({ children, componentName, userInfo }) {
+export default function MainLayout({ children, componentName }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
