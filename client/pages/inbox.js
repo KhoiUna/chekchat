@@ -36,11 +36,7 @@ export default function Inbox({ userInfo }) {
   };
 
   return (
-    <MainLayout
-      componentName="Inbox"
-      userInfo={userInfo}
-      notificationCount={notificationCount}
-    >
+    <MainLayout componentName="Inbox" userInfo={userInfo}>
       <RefreshButton />
 
       <MuiThemeProvider theme={theme}>

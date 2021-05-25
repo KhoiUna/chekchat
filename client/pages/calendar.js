@@ -3,11 +3,7 @@ import UsersUtil from "../utils/UsersUtil";
 
 export default function Calendar({ userInfo }) {
   return (
-    <MainLayout
-      componentName="Calendar"
-      userInfo={userInfo}
-      notificationCount={notificationCount}
-    >
+    <MainLayout componentName="Calendar" userInfo={userInfo}>
       <h3 style={{ marginTop: "1rem" }}>
         <i>Calendar is not available yet!</i>
       </h3>

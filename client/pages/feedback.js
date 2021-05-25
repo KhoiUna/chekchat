@@ -3,11 +3,7 @@ import UsersUtil from "../utils/UsersUtil";
 
 export default function Feedback({ userInfo }) {
   return (
-    <MainLayout
-      componentName="Feedback"
-      userInfo={userInfo}
-      notificationCount={notificationCount}
-    >
+    <MainLayout componentName="Feedback" userInfo={userInfo}>
       <p>Feedback</p>
     </MainLayout>
   );

@@ -51,11 +51,7 @@ export default function Notifications({ userInfo }) {
     );
 
   return (
-    <MainLayout
-      componentName="Notifications"
-      userInfo={userInfo}
-      notificationCount={notificationCount}
-    >
+    <MainLayout componentName="Notifications" userInfo={userInfo}>
       <Grid container direction="column" justify="center" alignItems="center">
         {notificationList.map((i, index) => (
           <Fragment key={index}>

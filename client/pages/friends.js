@@ -53,11 +53,7 @@ export default function Friends({ userInfo }) {
   };
 
   return (
-    <MainLayout
-      componentName="Friends"
-      userInfo={userInfo}
-      notificationCount={notificationCount}
-    >
+    <MainLayout componentName="Friends" userInfo={userInfo}>
       {!showPopup && (
         <>
           <MuiThemeProvider theme={theme}>

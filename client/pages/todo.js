@@ -63,11 +63,7 @@ export default function Todo({ userInfo }) {
     );
 
   return (
-    <MainLayout
-      componentName="Todo"
-      userInfo={userInfo}
-      notificationCount={notificationCount}
-    >
+    <MainLayout componentName="Todo" userInfo={userInfo}>
       <SortButton sortTodoList={sortTodoList} />
       <Grid container direction="column" justify="center" alignItems="center">
         {missionTodoList.map((i) => (

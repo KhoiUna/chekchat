@@ -110,11 +110,7 @@ export default function Send({ userInfo }) {
   };
 
   return (
-    <MainLayout
-      componentName="Send tasks"
-      userInfo={userInfo}
-      notificationCount={notificationCount}
-    >
+    <MainLayout componentName="Send tasks" userInfo={userInfo}>
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         key={"bottom" + "center"}

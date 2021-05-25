@@ -3,11 +3,7 @@ import UsersUtil from "../utils/UsersUtil";
 
 export default function Chat({ userInfo }) {
   return (
-    <MainLayout
-      componentName="Chat"
-      userInfo={userInfo}
-      notificationCount={notificationCount}
-    >
+    <MainLayout componentName="Chat" userInfo={userInfo}>
       <h3 style={{ marginTop: "1rem" }}>
         <i>Chat is not available yet!</i>
       </h3>

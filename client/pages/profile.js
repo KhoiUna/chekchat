@@ -3,11 +3,7 @@ import UsersUtil from "../utils/UsersUtil";
 
 export default function Profile({ userInfo }) {
   return (
-    <MainLayout
-      componentName="Profile"
-      userInfo={userInfo}
-      notificationCount={notificationCount}
-    >
+    <MainLayout componentName="Profile" userInfo={userInfo}>
       <p>Profile</p>
     </MainLayout>
   );
