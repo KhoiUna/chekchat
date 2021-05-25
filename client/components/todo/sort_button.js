@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
+import { MuiThemeProvider } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import SortIcon from "@material-ui/icons/Sort";
 import utilsStyle from "../../styles/utils.module.css";
-import HUE from "@material-ui/core/colors/blue";
+import { buttonTheme } from "../../themes/theme";
 
 const StyledMenu = (props) => (
   <Menu
@@ -23,12 +23,6 @@ const StyledMenu = (props) => (
     {...props}
   />
 );
-
-const buttonTheme = createMuiTheme({
-  palette: {
-    primary: { main: HUE[500], contrastText: "white" },
-  },
-});
 
 export default function FilterButton({ sortTodoList }) {
   const [anchorEl, setAnchorEl] = useState(null);

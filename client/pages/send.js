@@ -3,12 +3,8 @@ import MissionRequest from "../components/missions/mission_request";
 import Grid from "@material-ui/core/Grid";
 import SendIcon from "@material-ui/icons/Send";
 import Fab from "@material-ui/core/Fab";
-import {
-  createMuiTheme,
-  makeStyles,
-  MuiThemeProvider,
-} from "@material-ui/core/styles";
-import HUE from "@material-ui/core/colors/blue";
+import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
+import { buttonTheme } from "../themes/theme";
 import Typography from "@material-ui/core/Typography";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -37,12 +33,6 @@ const useStyles = makeStyles((theme) => ({
     margin: "0.4rem 0 0.5rem 1rem",
   },
 }));
-
-const buttonTheme = createMuiTheme({
-  palette: {
-    primary: { main: HUE[500], contrastText: "white" },
-  },
-});
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;

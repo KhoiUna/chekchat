@@ -27,6 +27,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import FriendsUtil from "../../utils/FriendsUtil";
 import MissionsUtil from "../../utils/MissionsUtil";
+import { appTheme, buttonTheme, progressTheme } from "../../themes/theme";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -61,26 +62,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "right",
   },
 }));
-
-const theme = createMuiTheme({
-  palette: {
-    primary: { main: HUE[500], contrastText: "#fff" },
-  },
-});
-const progressTheme = createMuiTheme({
-  overrides: {
-    MuiCircularProgress: {
-      root: {
-        width: "1rem !important",
-        height: "1rem !important",
-        marginLeft: "1rem",
-      },
-      svg: {
-        color: "white",
-      },
-    },
-  },
-});
 
 export default function MissionAssign({ toggleMissionAssign }) {
   const classes = useStyles();
@@ -166,7 +147,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
             </Typography>
           </Grid>
           <Grid item xs={6}>
-            <MuiThemeProvider theme={theme}>
+            <MuiThemeProvider theme={appTheme}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardDatePicker
                   label="Date"
@@ -186,7 +167,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
             </Typography>
           </Grid>
           <Grid item xs={6}>
-            <MuiThemeProvider theme={theme}>
+            <MuiThemeProvider theme={appTheme}>
               <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <KeyboardTimePicker
                   label="Time"
@@ -256,7 +237,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
           >
             Cancel
           </Button>
-          <MuiThemeProvider theme={theme}>
+          <MuiThemeProvider theme={buttonTheme}>
             <Button
               variant="contained"
               color="primary"

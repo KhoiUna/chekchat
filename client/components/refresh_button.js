@@ -1,11 +1,7 @@
-import {
-  createMuiTheme,
-  makeStyles,
-  MuiThemeProvider,
-} from "@material-ui/core/styles";
+import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
+import { buttonTheme } from "../themes/theme";
 import RefreshIcon from "@material-ui/icons/Refresh";
 import Fab from "@material-ui/core/Fab";
-import HUE from "@material-ui/core/colors/blue";
 
 const useStyles = makeStyles({
   refreshButton: {
@@ -13,12 +9,6 @@ const useStyles = makeStyles({
     bottom: "1rem",
     left: "0.8rem",
     zIndex: 1,
-  },
-});
-
-const buttonTheme = createMuiTheme({
-  palette: {
-    primary: { main: HUE[500], contrastText: "white" },
   },
 });
 

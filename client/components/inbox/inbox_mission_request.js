@@ -1,8 +1,4 @@
-import {
-  makeStyles,
-  MuiThemeProvider,
-  createMuiTheme,
-} from "@material-ui/core/styles";
+import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
@@ -10,7 +6,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
-import HUE from "@material-ui/core/colors/blue";
+import { buttonTheme } from "../../themes/theme";
 import { useState } from "react";
 import MissionPopupView from "../missions/mission_popup_view";
 
@@ -45,12 +41,6 @@ const useStyles = makeStyles({
   },
   divider: {
     margin: "0.7rem 0 0.7rem 0",
-  },
-});
-
-const buttonTheme = createMuiTheme({
-  palette: {
-    primary: { main: HUE[500] },
   },
 });
 

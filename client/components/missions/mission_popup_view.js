@@ -19,6 +19,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Dialog from "@material-ui/core/Dialog";
 import Toolbar from "@material-ui/core/Toolbar";
 import Slide from "@material-ui/core/Slide";
+import { buttonTheme } from "../../themes/theme";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -42,9 +43,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const theme = createMuiTheme({
-  palette: {
-    primary: { main: HUE[500], contrastText: "#fff" },
-  },
   overrides: {
     MuiFormControl: {
       root: {
@@ -232,7 +230,7 @@ export default function MissionPopupView({
             >
               <b>Reject</b>
             </Button>
-            <MuiThemeProvider theme={theme}>
+            <MuiThemeProvider theme={buttonTheme}>
               <Button
                 variant="contained"
                 color="primary"

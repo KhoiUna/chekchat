@@ -1,8 +1,4 @@
-import {
-  makeStyles,
-  createMuiTheme,
-  MuiThemeProvider,
-} from "@material-ui/core/styles";
+import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import CardActions from "@material-ui/core/CardActions";
@@ -13,9 +9,10 @@ import CheckIcon from "@material-ui/icons/Check";
 import CloseIcon from "@material-ui/icons/Close";
 import utilStyles from "../../styles/utils.module.css";
 import TextField from "@material-ui/core/TextField";
-import HUE from "@material-ui/core/colors/blue";
 import { useState } from "react";
 import FriendRequestUtil from "../../utils/FriendRequestUtil";
+import { buttonTheme, progressTheme } from "../themes/theme";
+import { appTheme } from "../../themes/theme";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,31 +37,6 @@ const useStyles = makeStyles((theme) => ({
     color: "white",
   },
 }));
-
-const buttonTheme = createMuiTheme({
-  palette: {
-    primary: { main: HUE[500], contrastText: "white" },
-  },
-});
-const progressTheme = createMuiTheme({
-  overrides: {
-    MuiCircularProgress: {
-      root: {
-        width: "1rem !important",
-        height: "1rem !important",
-        marginLeft: "1rem",
-      },
-      svg: {
-        color: "white",
-      },
-    },
-  },
-});
-const theme = createMuiTheme({
-  palette: {
-    primary: { main: HUE[700], contrastText: HUE[700] },
-  },
-});
 
 export default function FriendPopup({ showPopup, togglePopup }) {
   const classes = useStyles();
@@ -111,7 +83,7 @@ export default function FriendPopup({ showPopup, togglePopup }) {
           </Typography>
 
           <form autoComplete="off" onSubmit={handleSubmit}>
-            <MuiThemeProvider theme={theme}>
+            <MuiThemeProvider theme={appTheme}>
               <TextField
                 label="Type user's email"
                 variant="filled"

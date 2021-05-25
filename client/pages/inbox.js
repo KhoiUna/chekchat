@@ -1,17 +1,13 @@
 import MainLayout from "../containers/main_layout";
-import {
-  createMuiTheme,
-  makeStyles,
-  MuiThemeProvider,
-} from "@material-ui/core/styles";
+import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import Tabs from "@material-ui/core/Tabs";
 import Grid from "@material-ui/core/Grid";
 import Tab from "@material-ui/core/Tab";
-import HUE from "@material-ui/core/colors/blue";
 import { useState } from "react";
 import ReceivedFriendRequestList from "../containers/inbox/ReceivedFriendRequestList";
 import PendingMissionList from "../containers/inbox/PendingMissionList";
 import RefreshButton from "../components/refresh_button";
+import { buttonTheme } from "../themes/theme";
 
 const useStyles = makeStyles({
   tabTitle: {
@@ -20,13 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-const theme = createMuiTheme({
-  palette: {
-    primary: { main: HUE[700], contrastText: "#fff" },
-  },
-});
-
-export default function Inbox({ userInfo }) {
+export default function Inbox({}) {
   const classes = useStyles();
 
   const [value, setValue] = useState(0);
@@ -38,7 +28,7 @@ export default function Inbox({ userInfo }) {
     <MainLayout componentName="Inbox">
       <RefreshButton />
 
-      <MuiThemeProvider theme={theme}>
+      <MuiThemeProvider theme={buttonTheme}>
         <Tabs
           value={value}
           onChange={handleTabChange}

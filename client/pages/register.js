@@ -3,15 +3,9 @@ import { Paper, Grid, TextField, Button } from "@material-ui/core";
 import utilStyles from "../styles/login_register.module.css";
 import Link from "next/link";
 import { useState } from "react";
-import { createMuiTheme, MuiThemeProvider } from "@material-ui/core/styles";
-import HUE from "@material-ui/core/colors/blue";
+import { MuiThemeProvider } from "@material-ui/core/styles";
 import { origin } from "../config/config";
-
-const theme = createMuiTheme({
-  palette: {
-    primary: { main: HUE[800], contrastText: "#fff" },
-  },
-});
+import { loginRegisterTheme } from "../themes/theme";
 
 export default function Register() {
   const [responseText, setResponseText] = useState("");
@@ -133,7 +127,7 @@ export default function Register() {
               )}
 
               <Grid item xs={12} sm={6}>
-                <MuiThemeProvider theme={theme}>
+                <MuiThemeProvider theme={loginRegisterTheme}>
                   <Button
                     variant="contained"
                     color="primary"
