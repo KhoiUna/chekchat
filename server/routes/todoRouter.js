@@ -3,9 +3,9 @@ const MissionsUtil = require("../utils/MissionsUtil");
 
 router.get("/", async (req, res, next) => {
   try {
-    const { email } = req.query;
-
-    const missionTodoList = await MissionsUtil.getMissionTodoList(email);
+    const missionTodoList = await MissionsUtil.getMissionTodoList(
+      req.session.user.email
+    );
     res.json(missionTodoList);
   } catch (err) {
     console.error("Error getting mission todo list");

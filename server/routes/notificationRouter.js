@@ -4,7 +4,7 @@ const UsersUtil = require("../utils/UsersUtil");
 
 router.get("/", async (req, res, next) => {
   try {
-    const { userEmail } = req.query;
+    const userEmail = req.session.user.email;
 
     //Reset notification count for user
     UsersUtil.updateNotificationCount(userEmail, "reset");
@@ -21,9 +21,9 @@ router.get("/", async (req, res, next) => {
 
 router.get("/bell", async (req, res, next) => {
   try {
-    const { userEmail } = req.query;
-
-    const notificationCount = await UsersUtil.getNotificationCount(userEmail);
+    const notificationCount = await UsersUtil.getNotificationCount(
+      req.session.user.email
+    );
     res.json(notificationCount);
   } catch (err) {
     console.error("Error getting notification count");

@@ -4,11 +4,11 @@ const MissionsUtil = require("../utils/MissionsUtil");
 
 router.get("/", async (req, res, next) => {
   try {
-    const { email, position } = req.query;
+    const { position } = req.query;
 
     const missionRequestList = await MissionsUtil.getMissionRequest(
       position,
-      email
+      req.session.user.email
     );
     res.json(missionRequestList);
   } catch (err) {
@@ -31,8 +31,8 @@ router.get("/:requestId", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const { userEmail, subject, selectedDate, receiverEmail, description } =
-      req.body;
+    const userEmail = req.session.user.email;
+    const { subject, selectedDate, receiverEmail, description } = req.body;
 
     //If request email is user's email, block it
     if (userEmail === receiverEmail)
