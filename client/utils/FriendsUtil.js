@@ -3,12 +3,9 @@ import { origin } from "../config/config";
 export default class FriendsUtil {
   static async fetchFriendList() {
     try {
-      const res = await fetch(
-        `${origin}/api/friends?userEmail=${localStorage.getItem("email")}`,
-        {
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`${origin}/api/friends`, {
+        credentials: "include",
+      });
       const friendList = await res.json();
       return friendList;
     } catch (err) {

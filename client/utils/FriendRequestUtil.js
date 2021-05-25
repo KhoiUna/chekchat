@@ -44,7 +44,6 @@ export default class FriendRequestUtil {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userEmail: localStorage.getItem("email"),
           requestEmail,
         }),
       });

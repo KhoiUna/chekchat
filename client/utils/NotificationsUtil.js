@@ -4,14 +4,9 @@ import stringifyCookies from "../helpers/stringifyCookies";
 export default class NotificationsUtil {
   static async fetchNotificationsList() {
     try {
-      const res = await fetch(
-        `${origin}/api/notifications?userEmail=${localStorage.getItem(
-          "email"
-        )}`,
-        {
-          credentials: "include",
-        }
-      );
+      const res = await fetch(`${origin}/api/notifications`, {
+        credentials: "include",
+      });
       const notificationList = await res.json();
       return notificationList;
     } catch (err) {

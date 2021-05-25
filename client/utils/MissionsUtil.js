@@ -15,7 +15,6 @@ export default class MissionsUtil {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userEmail: localStorage.getItem("email"),
           subject,
           selectedDate: new Date(selectedDate).toUTCString(),
           receiverEmail,

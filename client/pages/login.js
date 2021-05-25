@@ -48,12 +48,10 @@ export default function Login() {
 
       if (res.ok === false) setResponseText(await res.text());
       if (res.ok === true) {
-        const { email, token } = await res.json();
+        const { email } = await res.json();
         localStorage.setItem("email", email);
-        localStorage.setItem("token", token);
 
         dispatch(loadUserInfoAsync());
-
         router.push("/inbox");
       }
     } catch (err) {
