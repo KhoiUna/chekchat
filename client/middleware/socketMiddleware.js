@@ -42,7 +42,6 @@ export const socketMiddleware = (store) => {
 const setupSocketListener = (socket, store) =>
   socket.on("update", (action) => {
     if (action.type === "notification count") {
-      console.log("middleware noti");
       store.dispatch(loadNotificationCountAsync());
     }
   });
