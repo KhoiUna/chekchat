@@ -74,11 +74,3 @@ export default function Todo({}) {
     </MainLayout>
   );
 }
-
-export async function getServerSideProps(ctx) {
-  const cookieObj = ctx.res.req.cookies;
-
-  return {
-    props: {},
-  };
-}

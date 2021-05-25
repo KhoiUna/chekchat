@@ -9,11 +9,3 @@ export default function Chat({}) {
     </MainLayout>
   );
 }
-
-export async function getServerSideProps(ctx) {
-  const cookieObj = ctx.res.req.cookies;
-
-  return {
-    props: {},
-  };
-}
