@@ -5,13 +5,6 @@ import Bell from "../components/bell";
 import Chat from "../components/chat";
 import { AppBar, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  loadNotificationCountAsync,
-  selectNotificationCount,
-} from "../features/notificationSlice";
-import { loadUserInfoAsync, selectUserInfo } from "../features/userSlice";
 
 const useStyles = makeStyles({
   root: {
@@ -33,17 +26,13 @@ const useStyles = makeStyles({
   },
 });
 
-// let socket;
-export default function MainLayout({ children, componentName }) {
+export default function MainLayout({
+  children,
+  componentName,
+  userInfo,
+  notificationCount,
+}) {
   const classes = useStyles();
-  const dispatch = useDispatch();
-
-  const notificationCount = useSelector(selectNotificationCount);
-  const userInfo = useSelector(selectUserInfo);
-  useEffect(() => {
-    dispatch(loadUserInfoAsync());
-    dispatch(loadNotificationCountAsync());
-  }, []);
 
   return (
     <div className={styles.container}>

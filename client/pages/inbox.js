@@ -12,6 +12,8 @@ import { useState } from "react";
 import ReceivedFriendRequestList from "../containers/inbox/ReceivedFriendRequestList";
 import PendingMissionList from "../containers/inbox/PendingMissionList";
 import RefreshButton from "../components/refresh_button";
+import UsersUtil from "../utils/UsersUtil";
+import NotificationsUtil from "../utils/NotificationsUtil";
 
 const useStyles = makeStyles({
   tabTitle: {
@@ -26,7 +28,7 @@ const theme = createMuiTheme({
   },
 });
 
-export default function Inbox() {
+export default function Inbox({ userInfo, notificationCount }) {
   const classes = useStyles();
 
   const [value, setValue] = useState(0);
@@ -35,7 +37,11 @@ export default function Inbox() {
   };
 
   return (
-    <MainLayout componentName="Inbox">
+    <MainLayout
+      componentName="Inbox"
+      userInfo={userInfo}
+      notificationCount={notificationCount}
+    >
       <RefreshButton />
 
       <MuiThemeProvider theme={theme}>
@@ -74,4 +80,15 @@ export default function Inbox() {
       )}
     </MainLayout>
   );
+}
+
+export async function getServerSideProps(ctx) {
+  const cookieObj = ctx.res.req.cookies;
+  const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
+  const notificationCount =
+    await NotificationsUtil.fetchNotificationCountForBellServerSide(cookieObj);
+
+  return {
+    props: { userInfo, notificationCount },
+  };
 }
