@@ -18,6 +18,8 @@ import MissionsUtil from "../utils/MissionsUtil";
 import Spinner from "../components/spinner";
 import FilterButton from "../components/send/filter_button";
 import removeItemFromList from "../helpers/removeItemFromList";
+import UsersUtil from "../utils/UsersUtil";
+import NotificationsUtil from "../utils/NotificationsUtil";
 
 const useStyles = makeStyles((theme) => ({
   extendedIcon: {
@@ -48,7 +50,7 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-export default function Send() {
+export default function Send({ userInfo, notificationCount }) {
   const classes = useStyles();
 
   const [missionAssign, setMissionAssign] = useState(false);
@@ -109,7 +111,11 @@ export default function Send() {
   };
 
   return (
-    <MainLayout componentName="Send tasks">
+    <MainLayout
+      componentName="Send tasks"
+      userInfo={userInfo}
+      notificationCount={notificationCount}
+    >
       <Snackbar
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         key={"bottom" + "center"}
@@ -207,4 +213,16 @@ export default function Send() {
       )}
     </MainLayout>
   );
+}
+
+export async function getServerSideProps(ctx) {
+  const cookieObj = ctx.res.req.cookies;
+
+  const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
+  const notificationCount =
+    await NotificationsUtil.fetchNotificationCountForBellServerSide(cookieObj);
+
+  return {
+    props: { userInfo, notificationCount },
+  };
 }

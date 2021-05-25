@@ -13,8 +13,10 @@ import {
   sortMissionTodoList,
   updateMissionTodoList,
 } from "../features/missionSlice";
+import UsersUtil from "../utils/UsersUtil";
+import NotificationsUtil from "../utils/NotificationsUtil";
 
-export default function Todo() {
+export default function Todo({ userInfo, notificationCount }) {
   const dispatch = useDispatch();
 
   const missionTodoList = useSelector(selectMissionTodoList);
@@ -33,7 +35,11 @@ export default function Todo() {
 
   if (isLoading)
     return (
-      <MainLayout componentName="Todo">
+      <MainLayout
+        componentName="Todo"
+        userInfo={userInfo}
+        notificationCount={notificationCount}
+      >
         <SortButton sortTodoList={sortTodoList} />
         <Spinner />
       </MainLayout>
@@ -41,7 +47,11 @@ export default function Todo() {
 
   if (missionTodoList.length === 0)
     return (
-      <MainLayout componentName="Todo">
+      <MainLayout
+        componentName="Todo"
+        userInfo={userInfo}
+        notificationCount={notificationCount}
+      >
         <SortButton sortTodoList={sortTodoList} />
         <Typography
           variant="h6"
@@ -54,7 +64,11 @@ export default function Todo() {
     );
 
   return (
-    <MainLayout componentName="Todo">
+    <MainLayout
+      componentName="Todo"
+      userInfo={userInfo}
+      notificationCount={notificationCount}
+    >
       <SortButton sortTodoList={sortTodoList} />
       <Grid container direction="column" justify="center" alignItems="center">
         {missionTodoList.map((i) => (
@@ -73,4 +87,16 @@ export default function Todo() {
       </Grid>
     </MainLayout>
   );
+}
+
+export async function getServerSideProps(ctx) {
+  const cookieObj = ctx.res.req.cookies;
+
+  const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
+  const notificationCount =
+    await NotificationsUtil.fetchNotificationCountForBellServerSide(cookieObj);
+
+  return {
+    props: { userInfo, notificationCount },
+  };
 }

@@ -1,7 +1,6 @@
 import MainLayout from "../containers/main_layout";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
-import Grid from "@material-ui/core/Grid";
 import { useState } from "react";
 import Fab from "@material-ui/core/Fab";
 import HUE from "@material-ui/core/colors/blue";
@@ -14,6 +13,8 @@ import {
 import FriendPopup from "../components/friends/friend_popup";
 import FriendList from "../containers/friends/FriendList";
 import FriendRequestList from "../containers/friends/FriendRequestList";
+import UsersUtil from "../utils/UsersUtil";
+import NotificationsUtil from "../utils/NotificationsUtil";
 
 const useStyles = makeStyles({
   button: {
@@ -39,7 +40,7 @@ const buttonTheme = createMuiTheme({
   },
 });
 
-export default function Friends() {
+export default function Friends({ userInfo, notificationCount }) {
   const classes = useStyles();
 
   const [value, setValue] = useState(0);
@@ -53,7 +54,11 @@ export default function Friends() {
   };
 
   return (
-    <MainLayout componentName="Friends">
+    <MainLayout
+      componentName="Friends"
+      userInfo={userInfo}
+      notificationCount={notificationCount}
+    >
       {!showPopup && (
         <>
           <MuiThemeProvider theme={theme}>
@@ -89,4 +94,16 @@ export default function Friends() {
       )}
     </MainLayout>
   );
+}
+
+export async function getServerSideProps(ctx) {
+  const cookieObj = ctx.res.req.cookies;
+
+  const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
+  const notificationCount =
+    await NotificationsUtil.fetchNotificationCountForBellServerSide(cookieObj);
+
+  return {
+    props: { userInfo, notificationCount },
+  };
 }

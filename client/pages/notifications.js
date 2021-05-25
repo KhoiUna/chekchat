@@ -10,8 +10,10 @@ import {
   selectNotificationList,
   selectNotificationIsLoading,
 } from "../features/notificationSlice";
+import NotificationsUtil from "../utils/NotificationsUtil";
+import UsersUtil from "../utils/UsersUtil";
 
-export default function Notifications() {
+export default function Notifications({ userInfo, notificationCount }) {
   const dispatch = useDispatch();
 
   const notificationList = useSelector(selectNotificationList);
@@ -22,14 +24,22 @@ export default function Notifications() {
 
   if (isLoading)
     return (
-      <MainLayout componentName="Notifications">
+      <MainLayout
+        componentName="Notifications"
+        userInfo={userInfo}
+        notificationCount={notificationCount}
+      >
         <Spinner />
       </MainLayout>
     );
 
   if (notificationList.length === 0)
     return (
-      <MainLayout componentName="Notifications">
+      <MainLayout
+        componentName="Notifications"
+        userInfo={userInfo}
+        notificationCount={notificationCount}
+      >
         <Typography
           variant="h6"
           color="textSecondary"
@@ -42,7 +52,11 @@ export default function Notifications() {
     );
 
   return (
-    <MainLayout componentName="Notifications">
+    <MainLayout
+      componentName="Notifications"
+      userInfo={userInfo}
+      notificationCount={notificationCount}
+    >
       <Grid container direction="column" justify="center" alignItems="center">
         {notificationList.map((i, index) => (
           <Fragment key={index}>
@@ -59,4 +73,16 @@ export default function Notifications() {
       </Grid>
     </MainLayout>
   );
+}
+
+export async function getServerSideProps(ctx) {
+  const cookieObj = ctx.res.req.cookies;
+
+  const userInfo = await UsersUtil.fetchUserInfoServerSide(cookieObj);
+  const notificationCount =
+    await NotificationsUtil.fetchNotificationCountForBellServerSide(cookieObj);
+
+  return {
+    props: { userInfo, notificationCount },
+  };
 }
