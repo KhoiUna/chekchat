@@ -23,11 +23,7 @@ export default function Notifications({ userInfo }) {
 
   if (isLoading)
     return (
-      <MainLayout
-        componentName="Notifications"
-        userInfo={userInfo}
-        notificationCount={notificationCount}
-      >
+      <MainLayout componentName="Notifications" userInfo={userInfo}>
         <Spinner />
       </MainLayout>
     );
