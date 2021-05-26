@@ -100,6 +100,9 @@ app.use("/api/todo", todoRouter);
 const notificationRouter = require("./routes/notificationRouter");
 app.use("/api/notifications", notificationRouter);
 
+const logoutRouter = require("./routes/logoutRouter");
+app.use("/api/logout", logoutRouter);
+
 //Socket
 const MissionsUtil = require("./utils/MissionsUtil");
 const FriendRequestUtil = require("./utils/FriendRequestUtil");
