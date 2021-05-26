@@ -2,16 +2,23 @@ import Layout from "../containers/layout";
 import { Paper, Grid, TextField, Button } from "@material-ui/core";
 import utilStyles from "../styles/login_register.module.css";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { origin } from "../config/config";
 import { useDispatch } from "react-redux";
 import { loginRegisterTheme } from "../themes/theme";
+import { cookieSecurity } from "../config/config";
+import cookie from "react-cookies";
 
 export default function Login() {
   const router = useRouter();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    const loggedIn = cookie.load("loggedIn") === "true";
+    if (loggedIn) router.push("/inbox");
+  }, []);
 
   const [responseText, setResponseText] = useState("");
   const [data, setData] = useState({
@@ -44,7 +51,14 @@ export default function Login() {
         const { email } = await res.json();
         localStorage.setItem("email", email);
 
-        dispatch({ type: "user/subscribe" });
+        cookie.save("loggedIn", true, {
+          path: "/",
+          expires: new Date(Date.now() + 2 * 3600000),
+          maxAge: 2 * 3600 * 1000,
+          sameSite: "lax",
+          secure: cookieSecurity,
+        });
+
         router.push("/inbox");
       }
     } catch (err) {
