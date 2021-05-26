@@ -6,16 +6,15 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { origin } from "../config/config";
-import { useDispatch } from "react-redux";
 import { loginRegisterTheme } from "../themes/theme";
 import { cookieSecurity } from "../config/config";
 import cookie from "react-cookies";
 
 export default function Login() {
   const router = useRouter();
-  const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log(cookieSecurity);
     const loggedIn = cookie.load("loggedIn") === "true";
     if (loggedIn) router.push("/inbox");
   }, []);
