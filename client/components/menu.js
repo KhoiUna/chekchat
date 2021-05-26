@@ -21,6 +21,7 @@ import GroupIcon from "@material-ui/icons/Group";
 import FeedbackIcon from "@material-ui/icons/Feedback";
 import Image from "next/image";
 import imageLoader from "../helpers/imageLoader";
+import { origin } from "../config/config";
 
 const menuList = [
   { name: "Inbox", icon: <InboxIcon /> },
@@ -69,9 +70,20 @@ export default function Menu({ componentName, userInfo }) {
     setDrawerState(!drawerState);
   };
 
-  const logout = () => {
-    localStorage.clear();
-    router.push("/login");
+  const logout = async () => {
+    try {
+      const res = await fetch(`${origin}/api/logout`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+
+      if (res.ok) {
+        localStorage.clear();
+        router.push("/login");
+      }
+    } catch (err) {
+      console.error("Error logging out user");
+    }
   };
 
   const list = () => (
