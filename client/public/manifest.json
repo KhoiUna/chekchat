@@ -18,7 +18,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/login",
+  "start_url": "/inbox",
   "display": "standalone",
   "theme_color": "#0db3ff",
   "background_color": "#0db3ff"
