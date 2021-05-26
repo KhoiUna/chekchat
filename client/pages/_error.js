@@ -1,6 +1,7 @@
 import Layout from "../containers/layout";
 import Link from "next/link";
 import utilStyles from "../styles/utils.module.css";
+import Typography from "@material-ui/core/Typography";
 
 function Error({ statusCode }) {
   return (
