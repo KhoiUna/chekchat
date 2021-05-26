@@ -2,7 +2,7 @@ const router = require("express").Router();
 const UsersUtil = require("../utils/UsersUtil");
 const generateJWT = require("../helpers/generateJWT");
 
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
@@ -15,6 +15,7 @@ router.post("/", async (req, res) => {
     res.json({ email, token });
   } catch (err) {
     console.error("Error logging in user");
+    next();
   }
 });
 
