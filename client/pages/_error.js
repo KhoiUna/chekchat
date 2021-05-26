@@ -8,16 +8,21 @@ function Error({ statusCode }) {
     <Layout componentName="Login">
       <div className={utilStyles.container}>
         <Typography
-          variant="h6"
-          color="textSecondary"
-          style={{ marginTop: "10%" }}
+          variant="h4"
+          style={{ marginTop: "10%", textAlign: "center", color: "white" }}
         >
-          An {statusCode} error occurs. Please try refreshing the page or head
-          back to our{" "}
-          <Link href="/login">
-            <u>login</u>
-          </Link>{" "}
-          page
+          A {statusCode} error occurs.
+          <br />
+          <div style={{ marginTop: "1%" }}>
+            <i>
+              Please try refreshing the page or head back to our{" "}
+              <Link href="/login">
+                <u style={{ cursor: "pointer", fontWeight: "bold" }}>login</u>
+              </Link>{" "}
+              page{" "}
+            </i>
+            😅
+          </div>
         </Typography>
       </div>
     </Layout>
