@@ -7,16 +7,15 @@ import { useRouter } from "next/router";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { origin } from "../config/config";
 import { loginRegisterTheme } from "../themes/theme";
-import { cookieSecurity } from "../config/config";
-import cookie from "react-cookies";
+import UsersUtil from "../utils/UsersUtil";
 
 export default function Login() {
   const router = useRouter();
 
   useEffect(() => {
-    console.log(cookieSecurity);
-    const loggedIn = cookie.load("loggedIn") === "true";
-    if (loggedIn) router.push("/inbox");
+    UsersUtil.fetchUserInfo().then((r) => {
+      if (r) router.push("/inbox");
+    });
   }, []);
 
   const [responseText, setResponseText] = useState("");
@@ -49,14 +48,6 @@ export default function Login() {
       if (res.ok === true) {
         const { email } = await res.json();
         localStorage.setItem("email", email);
-
-        cookie.save("loggedIn", true, {
-          path: "/",
-          expires: new Date(Date.now() + 2 * 3600000),
-          maxAge: 2 * 3600 * 1000,
-          sameSite: "lax",
-          secure: cookieSecurity,
-        });
 
         router.push("/inbox");
       }

@@ -52,7 +52,6 @@ export default function MainLayout({ children, componentName }) {
         dispatch(loadNotificationCountAsync());
       })
       .catch((err) => {
-        console.error(err);
         router.push("/login");
       });
   }, []);
