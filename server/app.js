@@ -118,74 +118,76 @@ io.on("connection", (socket) => {
   console.log("------User connected------");
   const userSession = socket.request.session.user;
 
-  //Subscribe users for events from server
-  socket.on("subscribe", () => {
-    const user = SocketHelper.subscribeUsers(socket.id, userSession.email);
-    socket.join(user.userEmail);
-  });
+  if (userSession) {
+    //Subscribe users for events from server
+    socket.on("subscribe", () => {
+      const user = SocketHelper.subscribeUsers(socket.id, userSession.email);
+      socket.join(user.userEmail);
+    });
 
-  socket.on("check missions", ({ missionId, completed }) => {
-    //Update mission check/completed
-    MissionsUtil.updateMissionComplete(missionId, completed);
-  });
+    socket.on("check missions", ({ missionId, completed }) => {
+      //Update mission check/completed
+      MissionsUtil.updateMissionComplete(missionId, completed);
+    });
 
-  socket.on("star missions", ({ missionId, starred }) => {
-    //Update mission check/completed
-    MissionsUtil.updateMissionStarred(missionId, starred);
-  });
+    socket.on("star missions", ({ missionId, starred }) => {
+      //Update mission check/completed
+      MissionsUtil.updateMissionStarred(missionId, starred);
+    });
 
-  socket.on("click notification", (notificationId) => {
-    //Update notification clicked
-    NotificationsUtil.updateClickedNotification(notificationId);
-  });
+    socket.on("click notification", (notificationId) => {
+      //Update notification clicked
+      NotificationsUtil.updateClickedNotification(notificationId);
+    });
 
-  socket.on("friend requests", async ({ requestId, action }) => {
-    //Update friend request and return friendEmail & userEmail
-    const { userEmail, friendEmail } = await FriendRequestUtil.updateRequest(
-      requestId,
-      action
-    );
-    if (action === "accept") {
-      UsersUtil.addFriend(userEmail, friendEmail);
-      FriendRequestUtil.removeRequest(userEmail, friendEmail);
-    }
+    socket.on("friend requests", async ({ requestId, action }) => {
+      //Update friend request and return friendEmail & userEmail
+      const { userEmail, friendEmail } = await FriendRequestUtil.updateRequest(
+        requestId,
+        action
+      );
+      if (action === "accept") {
+        UsersUtil.addFriend(userEmail, friendEmail);
+        FriendRequestUtil.removeRequest(userEmail, friendEmail);
+      }
 
-    //Create notification
-    NotificationsUtil.saveNotification(
-      userEmail,
-      friendEmail,
-      "friend",
-      action
-    );
+      //Create notification
+      NotificationsUtil.saveNotification(
+        userEmail,
+        friendEmail,
+        "friend",
+        action
+      );
 
-    //Increment notification count for user
-    UsersUtil.updateNotificationCount(friendEmail, "increment");
+      //Increment notification count for user
+      UsersUtil.updateNotificationCount(friendEmail, "increment");
 
-    const actionData = { type: "notification count" };
-    io.to(friendEmail).emit("update", actionData);
-  });
+      const actionData = { type: "notification count" };
+      io.to(friendEmail).emit("update", actionData);
+    });
 
-  socket.on("mission requests", async ({ requestId, action }) => {
-    //Update mission request
-    const { senderEmail, receiverEmail } = await MissionsUtil.updateRequest(
-      requestId,
-      action
-    );
+    socket.on("mission requests", async ({ requestId, action }) => {
+      //Update mission request
+      const { senderEmail, receiverEmail } = await MissionsUtil.updateRequest(
+        requestId,
+        action
+      );
 
-    //Create notification
-    NotificationsUtil.saveNotification(
-      receiverEmail,
-      senderEmail,
-      "task",
-      action
-    );
+      //Create notification
+      NotificationsUtil.saveNotification(
+        receiverEmail,
+        senderEmail,
+        "task",
+        action
+      );
 
-    //Increment notification count for user
-    UsersUtil.updateNotificationCount(senderEmail, "increment");
+      //Increment notification count for user
+      UsersUtil.updateNotificationCount(senderEmail, "increment");
 
-    const actionData = { type: "notification count" };
-    io.to(senderEmail).emit("update", actionData);
-  });
+      const actionData = { type: "notification count" };
+      io.to(senderEmail).emit("update", actionData);
+    });
+  }
 
   //Listen when users disconnect
   socket.on("disconnect", () => {
