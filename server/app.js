@@ -62,20 +62,20 @@ app.use(
     allowedHeaders: ["Content-Type", "Cookie"],
   })
 );
-app.use(
-  session({
-    name: SESS_NAME,
-    resave: false,
-    saveUninitialized: false,
-    secret: SESS_SECRET,
-    cookie: {
-      maxAge: SESS_LIFETIME,
-      sameSite: true,
-      secure: IN_PROD,
-    },
-    store,
-  })
-);
+
+const sessionMiddleware = session({
+  name: SESS_NAME,
+  resave: false,
+  saveUninitialized: false,
+  secret: SESS_SECRET,
+  cookie: {
+    maxAge: SESS_LIFETIME,
+    sameSite: true,
+    secure: IN_PROD,
+  },
+  store,
+});
+app.use(sessionMiddleware);
 app.use(express.json());
 
 //Routes
@@ -110,11 +110,16 @@ const UsersUtil = require("./utils/UsersUtil");
 const NotificationsUtil = require("./utils/NotificationsUtil");
 const SocketHelper = require("./helpers/SocketHelper");
 
+io.use((socket, next) => {
+  sessionMiddleware(socket.request, {}, next);
+});
+
 io.on("connection", (socket) => {
   console.log("------User connected------");
 
   //Subscribe users for events from server
-  socket.on("subscribe", (userEmail) => {
+  socket.on("subscribe", () => {
+    const userEmail = socket.request.session.user.email;
     const user = SocketHelper.subscribeUsers(socket.id, userEmail);
     socket.join(user.userEmail);
   });
