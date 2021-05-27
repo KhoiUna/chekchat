@@ -119,8 +119,8 @@ io.on("connection", (socket) => {
 
   //Subscribe users for events from server
   socket.on("subscribe", () => {
-    const userEmail = socket.request.session.user.email;
-    const user = SocketHelper.subscribeUsers(socket.id, userEmail);
+    const { email } = socket.request.session.user;
+    const user = SocketHelper.subscribeUsers(socket.id, email);
     socket.join(user.userEmail);
   });
 
