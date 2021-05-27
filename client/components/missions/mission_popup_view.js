@@ -18,7 +18,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Dialog from "@material-ui/core/Dialog";
 import Toolbar from "@material-ui/core/Toolbar";
 import Slide from "@material-ui/core/Slide";
-import { appTheme, buttonTheme } from "../../themes/theme";
+import { buttonTheme } from "../../themes/theme";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
