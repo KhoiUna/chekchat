@@ -194,7 +194,7 @@ export default function Menu({ componentName, userInfo }) {
       {(componentName === "Notifications" ||
         componentName === "Chat" ||
         componentName === "Profile") && (
-        <IconButton onClick={goBack}>
+        <IconButton onClick={goBack} aria-label="go back">
           <ArrowBackIosIcon
             className={utilStyles.icon}
             style={{ fontSize: "2rem" }}
