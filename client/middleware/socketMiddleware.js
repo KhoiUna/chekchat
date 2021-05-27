@@ -3,7 +3,7 @@ import { origin } from "../config/config";
 import { loadNotificationCountAsync } from "../features/notificationSlice";
 
 export const socketMiddleware = (store) => {
-  const socket = io(origin, { withCredentials: true });
+  const socket = io(origin, { withCredentials: true, autoConnect: false });
 
   return (next) => (action) => {
     if (action.type === "notifications/clickNotification") {
@@ -12,6 +12,7 @@ export const socketMiddleware = (store) => {
     }
 
     if (action.type === "user/subscribe") {
+      socket.connect();
       socket.emit("subscribe");
       setupSocketListener(socket, store);
     }
