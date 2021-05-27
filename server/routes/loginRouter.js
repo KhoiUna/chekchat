@@ -12,7 +12,7 @@ router.post("/", async (req, res, next) => {
     const token = generateJWT(userObj);
     req.session.user = userObj; //save user to session store
 
-    res.json({ email, token });
+    res.json("ok");
   } catch (err) {
     console.error("Error logging in user");
     next();
