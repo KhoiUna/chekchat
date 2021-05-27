@@ -12,7 +12,7 @@ export const socketMiddleware = (store) => {
     }
 
     if (action.type === "user/subscribe") {
-      socket.emit("subscribe", localStorage.getItem("email"));
+      socket.emit("subscribe");
       setupSocketListener(socket, store);
     }
 
