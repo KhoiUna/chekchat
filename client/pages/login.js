@@ -46,9 +46,6 @@ export default function Login() {
 
       if (res.ok === false) setResponseText(await res.text());
       if (res.ok === true) {
-        const { email } = await res.json();
-        localStorage.setItem("email", email);
-
         router.push("/inbox");
       }
     } catch (err) {

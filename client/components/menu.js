@@ -78,7 +78,6 @@ export default function Menu({ componentName, userInfo }) {
       });
 
       if (res.ok) {
-        localStorage.clear();
         router.push("/login");
       }
     } catch (err) {
