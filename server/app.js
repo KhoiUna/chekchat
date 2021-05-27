@@ -116,11 +116,11 @@ io.use((socket, next) => {
 
 io.on("connection", (socket) => {
   console.log("------User connected------");
+  const userSession = socket.request.session.user;
 
   //Subscribe users for events from server
   socket.on("subscribe", () => {
-    const { email } = socket.request.session?.user;
-    const user = SocketHelper.subscribeUsers(socket.id, email);
+    const user = SocketHelper.subscribeUsers(socket.id, userSession.email);
     socket.join(user.userEmail);
   });
 
