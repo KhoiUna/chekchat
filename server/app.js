@@ -100,6 +100,9 @@ app.use("/api/todo", todoRouter);
 const notificationRouter = require("./routes/notificationRouter");
 app.use("/api/notifications", notificationRouter);
 
+const feedbackRouter = require("./routes/feedbackRouter");
+app.use("/api/feedback", feedbackRouter);
+
 const logoutRouter = require("./routes/logoutRouter");
 app.use("/api/logout", logoutRouter);
 
