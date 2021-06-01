@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Card from "@material-ui/core/Card";
 import { MuiThemeProvider, makeStyles } from "@material-ui/core/styles";
 import { useState } from "react";
+import utilStyles from "../styles/login_register.module.css";
 import { appTheme, buttonTheme } from "../themes/theme";
 import FeedbackUtil from "../utils/FeedbackUtil";
 
@@ -32,36 +33,47 @@ export default function Feedback({}) {
     }));
   };
 
+  const [responseText, setResponseText] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (feedback.subject && feedback.comment) {
       const res = await FeedbackUtil.submitFeedback(feedback);
+
+      if (res.ok === true) {
+        setFeedback({
+          subject: "",
+          comment: "",
+        });
+        setResponseText("Submitted successfully.");
+      }
     }
   };
 
   return (
     <MainLayout componentName="Feedback">
-      <Typography
-        variant="h6"
-        gutterBottom
-        style={{ margin: "0 1.3rem", fontWeight: "bold", textAlign: "left" }}
-      >
-        Please follow these steps to write a good feedback for us:
-      </Typography>
+      <div style={{ margin: "1% 0", textAlign: "left" }}>
+        <Typography
+          variant="h6"
+          gutterBottom
+          style={{ margin: "0 1.3rem", fontWeight: "bold" }}
+        >
+          Please follow these steps to write a good feedback for us:
+        </Typography>
 
-      <Typography
-        variant="h6"
-        gutterBottom
-        style={{ margin: "0 2.5rem", textAlign: "left", marginLeft: "2rem" }}
-      >
-        <ol>
-          <li>Be specific on your feedback's subject.</li>
-          <li>Write down the steps that lead you to the bug or error.</li>
-          <li>
-            Add any additional comment to your feedback (<i>optional </i>)
-          </li>
-        </ol>
-      </Typography>
+        <Typography
+          variant="body1"
+          gutterBottom
+          style={{ margin: "0 2.5rem", marginLeft: "2rem" }}
+        >
+          <ol>
+            <li>Be specific on your feedback's subject.</li>
+            <li>Write down the steps that lead you to the bug or error.</li>
+            <li>
+              Add any additional comment to your feedback (<i>optional </i>)
+            </li>
+          </ol>
+        </Typography>
+      </div>
 
       <Card className={classes.card}>
         <form
@@ -96,12 +108,23 @@ export default function Feedback({}) {
           />
           <br />
 
+          {responseText && (
+            <p className={utilStyles.responseText} style={{ color: "#3dda58" }}>
+              {responseText}
+              <br />
+              Thank you for your feedback!
+            </p>
+          )}
+
           <MuiThemeProvider theme={buttonTheme}>
             <Button
               variant="contained"
               color="primary"
               type="submit"
               className={classes.cardContent}
+              disabled={
+                !Boolean(feedback.subject) || !Boolean(feedback.comment)
+              }
             >
               Submit
             </Button>
