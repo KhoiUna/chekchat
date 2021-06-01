@@ -31,6 +31,7 @@ export default function Feedback({}) {
       ...prev,
       [name]: value,
     }));
+    setResponseText("");
   };
 
   const [responseText, setResponseText] = useState("");
