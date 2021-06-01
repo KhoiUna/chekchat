@@ -9,4 +9,4 @@
 
 - MongoDB:
   - Has 1 database called ChekChat
-  - Has 5 collections: users, friends, friend_requests, missions, notifications, sessions (to store users' cookie sessions)
+  - Has 5 collections: users, friends, friend_requests, missions, notifications, sessions (to store users' cookie sessions), feedbacks
