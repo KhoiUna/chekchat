@@ -3,7 +3,7 @@ import { origin } from "../config/config";
 export default class FriendsUtil {
   static async fetchFriendList() {
     try {
-      const res = await fetch(`${origin}/api/friends`, {
+      const res = await fetch(`${origin}/api/user/friends`, {
         credentials: "include",
       });
       const friendList = await res.json();

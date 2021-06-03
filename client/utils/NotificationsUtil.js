@@ -4,7 +4,7 @@ import stringifyCookies from "../helpers/stringifyCookies";
 export default class NotificationsUtil {
   static async fetchNotificationsList() {
     try {
-      const res = await fetch(`${origin}/api/notifications`, {
+      const res = await fetch(`${origin}/api/user/notifications`, {
         credentials: "include",
       });
       const notificationList = await res.json();
@@ -16,7 +16,7 @@ export default class NotificationsUtil {
 
   static async fetchNotificationCountForBell() {
     try {
-      const res = await fetch(`${origin}/api/notifications/bell`, {
+      const res = await fetch(`${origin}/api/user/notifications/bell`, {
         credentials: "include",
       });
       const notificationCount = await res.json();
@@ -28,7 +28,7 @@ export default class NotificationsUtil {
 
   static async fetchNotificationCountForBellServerSide(cookieObj) {
     try {
-      const res = await fetch(`${origin}/api/notifications/bell`, {
+      const res = await fetch(`${origin}/api/user/notifications/bell`, {
         credentials: "include",
         headers: {
           cookie: stringifyCookies(cookieObj),

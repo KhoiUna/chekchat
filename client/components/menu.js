@@ -72,7 +72,7 @@ export default function Menu({ componentName, userInfo }) {
 
   const logout = async () => {
     try {
-      const res = await fetch(`${origin}/api/logout`, {
+      const res = await fetch(`${origin}/api/user/logout`, {
         method: "DELETE",
         credentials: "include",
       });

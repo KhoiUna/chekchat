@@ -4,7 +4,7 @@ export default class FeedbackUtil {
   static async submitFeedback(feedbackObj) {
     try {
       console.log(feedbackObj);
-      const res = await fetch(`${origin}/api/feedback`, {
+      const res = await fetch(`${origin}/api/user/feedback`, {
         method: "POST",
         credentials: "include",
         headers: {

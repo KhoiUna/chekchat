@@ -8,7 +8,7 @@ export default class MissionsUtil {
     description
   ) {
     try {
-      const res = await fetch(`${origin}/api/missions`, {
+      const res = await fetch(`${origin}/api/user/missions`, {
         method: "POST",
         credentials: "include",
         headers: {
@@ -29,7 +29,7 @@ export default class MissionsUtil {
 
   static async deletePendingRequest(requestId) {
     try {
-      const res = await fetch(`${origin}/api/missions`, {
+      const res = await fetch(`${origin}/api/user/missions`, {
         method: "DELETE",
         credentials: "include",
         headers: {
@@ -47,7 +47,7 @@ export default class MissionsUtil {
 
   static async updateVisibility(requestId) {
     try {
-      const res = await fetch(`${origin}/api/missions`, {
+      const res = await fetch(`${origin}/api/user/missions`, {
         method: "PUT",
         credentials: "include",
         headers: {
@@ -65,9 +65,12 @@ export default class MissionsUtil {
 
   static async fetchMissionRequestsList(position) {
     try {
-      const res = await fetch(`${origin}/api/missions?position=${position}`, {
-        credentials: "include",
-      });
+      const res = await fetch(
+        `${origin}/api/user/missions?position=${position}`,
+        {
+          credentials: "include",
+        }
+      );
       const missionRequestList = await res.json();
       return missionRequestList;
     } catch (err) {
@@ -77,7 +80,7 @@ export default class MissionsUtil {
 
   static async fetchMissionInfo(requestId) {
     try {
-      const res = await fetch(`${origin}/api/missions/${requestId}`, {
+      const res = await fetch(`${origin}/api/user/missions/${requestId}`, {
         credentials: "include",
       });
       const missionInfo = await res.json();
@@ -89,7 +92,7 @@ export default class MissionsUtil {
 
   static async fetchMissionTodoList() {
     try {
-      const res = await fetch(`${origin}/api/todo`, {
+      const res = await fetch(`${origin}/api/user/todo`, {
         credentials: "include",
       });
       const missionTodoList = await res.json();

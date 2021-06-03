@@ -3,7 +3,7 @@ import { origin } from "../config/config";
 export default class FriendRequestUtil {
   static async fetchSentFriendRequestsList() {
     try {
-      const res = await fetch(`${origin}/api/friends/requests/sent`, {
+      const res = await fetch(`${origin}/api/user/friends/requests/sent`, {
         credentials: "include",
       });
       const friendRequestList = await res.json();
@@ -15,7 +15,7 @@ export default class FriendRequestUtil {
 
   static async fetchReceivedFriendRequestsList() {
     try {
-      const res = await fetch(`${origin}/api/friends/requests/received`, {
+      const res = await fetch(`${origin}/api/user/friends/requests/received`, {
         credentials: "include",
       });
       const friendRequestList = await res.json();
@@ -27,7 +27,7 @@ export default class FriendRequestUtil {
 
   static async sendFriendRequest(requestEmail) {
     try {
-      const res = await fetch(`${origin}/api/friends/requests`, {
+      const res = await fetch(`${origin}/api/user/friends/requests`, {
         method: "POST",
         credentials: "include",
         headers: {
