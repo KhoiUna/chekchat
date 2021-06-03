@@ -48,9 +48,6 @@ const useStyles = makeStyles((theme) => ({
     margin: "1rem",
   },
   textArea: {
-    padding: "0.5rem",
-    resize: "none",
-    width: "90%",
     fontSize: 14,
   },
   selectEmpty: {
@@ -234,14 +231,20 @@ export default function MissionAssign({ toggleMissionAssign }) {
               </Typography>
             </Grid>
             <Grid item xs={6} className={classes.alignLeft}>
-              <TextareaAutosize
+              <TextField
+                id="filled-textarea"
+                label="Task description"
+                name="task description"
+                multiline
                 rowsMin={3}
                 rowsMax={10}
-                aria-label="describe your mission"
-                placeholder="Describe your mission here"
+                aria-label="describe your task"
+                placeholder="Describe your task here"
+                variant="filled"
                 className={classes.textArea}
                 onChange={handleChangeDescription}
                 value={description}
+                required
               />
             </Grid>
           </Grid>
