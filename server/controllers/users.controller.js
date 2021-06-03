@@ -8,7 +8,7 @@ const MissionsUtil = require("../utils/MissionsUtil");
 const NotificationsUtil = require("../utils/NotificationsUtil");
 
 module.exports = class UsersController {
-  //login, register & logout route
+  //register, login & logout route
   static async register(req, res, next) {
     try {
       const { username, email, password, confirmPassword } = req.body;
@@ -83,6 +83,35 @@ module.exports = class UsersController {
       res.json(userInfo);
     } catch (err) {
       console.error("Error getting user info");
+      next();
+    }
+  }
+
+  //notification route
+  static async getNotifications(req, res, next) {
+    try {
+      const userEmail = req.session.user.email;
+
+      //Reset notification count for user
+      UsersUtil.updateNotificationCount(userEmail, "reset");
+
+      const notificationList = await NotificationsUtil.getNotifications(
+        userEmail
+      );
+      res.json(notificationList);
+    } catch (err) {
+      console.error("Error getting notifications");
+      next();
+    }
+  }
+  static async getNotificationCount(req, res, next) {
+    try {
+      const notificationCount = await UsersUtil.getNotificationCount(
+        req.session.user.email
+      );
+      res.json(notificationCount);
+    } catch (err) {
+      console.error("Error getting notification count");
       next();
     }
   }
@@ -191,35 +220,6 @@ module.exports = class UsersController {
       res.json(missionTodoList);
     } catch (err) {
       console.error("Error getting mission todo list");
-      next();
-    }
-  }
-
-  //notification route
-  static async getNotifications(req, res, next) {
-    try {
-      const userEmail = req.session.user.email;
-
-      //Reset notification count for user
-      UsersUtil.updateNotificationCount(userEmail, "reset");
-
-      const notificationList = await NotificationsUtil.getNotifications(
-        userEmail
-      );
-      res.json(notificationList);
-    } catch (err) {
-      console.error("Error getting notifications");
-      next();
-    }
-  }
-  static async getNotificationCount(req, res, next) {
-    try {
-      const notificationCount = await UsersUtil.getNotificationCount(
-        req.session.user.email
-      );
-      res.json(notificationCount);
-    } catch (err) {
-      console.error("Error getting notification count");
       next();
     }
   }

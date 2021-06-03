@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const UsersController = require("../controllers/users.controller");
 
-//login, register & logout route
-router.post("/login", UsersController.login);
+//register, login & logout route
 router.post("/register", UsersController.register);
+router.post("/login", UsersController.login);
 router.delete("/logout", UsersController.logout);
 
 //user route
