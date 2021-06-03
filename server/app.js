@@ -79,32 +79,8 @@ app.use(sessionMiddleware);
 app.use(express.json());
 
 //Routes
-const loginRouter = require("./routes/loginRouter");
-app.use("/api/login", loginRouter);
-
-const registerRouter = require("./routes/registerRouter");
-app.use("/api/register", registerRouter);
-
 const userRouter = require("./routes/userRouter");
 app.use("/api/user", userRouter);
-
-const friendRouter = require("./routes/friendRouter");
-app.use("/api/friends", friendRouter);
-
-const missionRouter = require("./routes/missionRouter");
-app.use("/api/missions", missionRouter);
-
-const todoRouter = require("./routes/todoRouter");
-app.use("/api/todo", todoRouter);
-
-const notificationRouter = require("./routes/notificationRouter");
-app.use("/api/notifications", notificationRouter);
-
-const feedbackRouter = require("./routes/feedbackRouter");
-app.use("/api/feedback", feedbackRouter);
-
-const logoutRouter = require("./routes/logoutRouter");
-app.use("/api/logout", logoutRouter);
 
 //Socket
 const MissionsUtil = require("./utils/MissionsUtil");
