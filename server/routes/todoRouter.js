@@ -1,16 +1,6 @@
 const router = require("express").Router();
-const MissionsUtil = require("../utils/MissionsUtil");
+const UsersController = require("../controllers/users.controller");
 
-router.get("/", async (req, res, next) => {
-  try {
-    const missionTodoList = await MissionsUtil.getMissionTodoList(
-      req.session.user.email
-    );
-    res.json(missionTodoList);
-  } catch (err) {
-    console.error("Error getting mission todo list");
-    next();
-  }
-});
+router.get("/", UsersController.getMissionTodoList);
 
 module.exports = router;

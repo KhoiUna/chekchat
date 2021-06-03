@@ -1,14 +1,6 @@
 const router = require("express").Router();
-const UsersUtil = require("../utils/UsersUtil");
+const UsersController = require("../controllers/users.controller");
 
-router.get("/", async (req, res, next) => {
-  try {
-    const userInfo = await UsersUtil.getUser(req.session.user.email);
-    res.json(userInfo);
-  } catch (err) {
-    console.error("Error getting user info");
-    next();
-  }
-});
+router.get("/", UsersController.getUserInfo);
 
 module.exports = router;

@@ -1,18 +1,6 @@
-const LogoutMiddleware = require("../middlewares/LogoutMiddleware");
+const UsersController = require("../controllers/users.controller");
 const router = require("express").Router();
 
-router.delete(
-  "/",
-  LogoutMiddleware.destroySession,
-  LogoutMiddleware.clearCookies,
-  (req, res, next) => {
-    try {
-      res.send("ok");
-    } catch (err) {
-      console.error("Error logging out user");
-      next();
-    }
-  }
-);
+router.delete("/", UsersController.logout);
 
 module.exports = router;
