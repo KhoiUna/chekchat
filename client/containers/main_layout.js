@@ -12,8 +12,6 @@ import {
   loadNotificationCountAsync,
 } from "../features/notificationSlice";
 import { useEffect } from "react";
-import UsersUtil from "../utils/UsersUtil";
-import { useRouter } from "next/router";
 
 const useStyles = makeStyles({
   root: {
@@ -38,7 +36,6 @@ const useStyles = makeStyles({
 export default function MainLayout({ children, componentName }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const router = useRouter();
 
   const userInfo = useSelector(selectUserInfo);
   const notificationCount = useSelector(selectNotificationCount);
