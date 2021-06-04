@@ -12,12 +12,6 @@ import UsersUtil from "../utils/UsersUtil";
 export default function Login() {
   const router = useRouter();
 
-  useEffect(() => {
-    UsersUtil.fetchUserInfo().then((r) => {
-      if (r) router.push("/inbox");
-    });
-  }, []);
-
   const [responseText, setResponseText] = useState("");
   const [data, setData] = useState({
     email: "",
