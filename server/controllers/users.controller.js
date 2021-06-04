@@ -43,7 +43,6 @@ module.exports = class UsersController {
       if (!userObj) return res.status(401).send("Invalid username or password");
 
       const token = generateJWT(userObj);
-      req.session.user = userObj; //save user to session store
 
       res
         .cookie("loggedIn", true, {
@@ -79,7 +78,7 @@ module.exports = class UsersController {
   //user route
   static async getUserInfo(req, res, next) {
     try {
-      const userInfo = await UsersUtil.getUser(req.session.user.email);
+      const userInfo = await UsersUtil.getUser(req.user.email);
       res.json(userInfo);
     } catch (err) {
       console.error("Error getting user info");
@@ -90,7 +89,7 @@ module.exports = class UsersController {
   //notification route
   static async getNotifications(req, res, next) {
     try {
-      const userEmail = req.session.user.email;
+      const userEmail = req.user.email;
 
       //Reset notification count for user
       UsersUtil.updateNotificationCount(userEmail, "reset");
@@ -107,7 +106,7 @@ module.exports = class UsersController {
   static async getNotificationCount(req, res, next) {
     try {
       const notificationCount = await UsersUtil.getNotificationCount(
-        req.session.user.email
+        req.user.email
       );
       res.json(notificationCount);
     } catch (err) {
@@ -123,7 +122,7 @@ module.exports = class UsersController {
 
       const missionRequestList = await MissionsUtil.getMissionRequest(
         position,
-        req.session.user.email
+        req.user.email
       );
       res.json(missionRequestList);
     } catch (err) {
@@ -144,7 +143,7 @@ module.exports = class UsersController {
   }
   static async sendMissionRequest(req, res, next) {
     try {
-      const userEmail = req.session.user.email;
+      const userEmail = req.user.email;
       const { subject, selectedDate, receiverEmail, description } = req.body;
 
       //If request email is user's email, block it
@@ -215,7 +214,7 @@ module.exports = class UsersController {
   static async getMissionTodoList(req, res, next) {
     try {
       const missionTodoList = await MissionsUtil.getMissionTodoList(
-        req.session.user.email
+        req.user.email
       );
       res.json(missionTodoList);
     } catch (err) {
@@ -228,9 +227,7 @@ module.exports = class UsersController {
   static async getSentFriendRequestList(req, res, next) {
     try {
       const friendRequestList =
-        await FriendRequestUtil.getSentFriendRequestList(
-          req.session.user.email
-        );
+        await FriendRequestUtil.getSentFriendRequestList(req.user.email);
       res.json(friendRequestList);
     } catch (err) {
       console.error("Error getting sent friend request");
@@ -240,9 +237,7 @@ module.exports = class UsersController {
   static async getReceivedFriendRequestList(req, res, next) {
     try {
       const friendRequestList =
-        await FriendRequestUtil.getReceivedFriendRequestList(
-          req.session.user.email
-        );
+        await FriendRequestUtil.getReceivedFriendRequestList(req.user.email);
       res.json(friendRequestList);
     } catch (err) {
       console.error("Error getting received friend request");
@@ -251,7 +246,7 @@ module.exports = class UsersController {
   }
   static async sendFriendRequest(req, res, next) {
     try {
-      const userEmail = req.session.user.email;
+      const userEmail = req.user.email;
       const { requestEmail } = req.body;
       //Validate email
       const validation = ValidationHelper.validateEmail(requestEmail);
@@ -292,7 +287,7 @@ module.exports = class UsersController {
   }
   static async getFriendList(req, res, next) {
     try {
-      const friendList = await UsersUtil.getFriendList(req.session.user.email);
+      const friendList = await UsersUtil.getFriendList(req.user.email);
       res.json(friendList);
     } catch (err) {
       console.error("Error getting friend list");
@@ -307,13 +302,7 @@ module.exports = class UsersController {
 
       if (!subject || !comment) return res.status(400).send("Invalid feedback");
 
-      if (
-        !(await FeedbackUtil.saveFeedback(
-          subject,
-          comment,
-          req.session.user.email
-        ))
-      )
+      if (!(await FeedbackUtil.saveFeedback(subject, comment, req.user.email)))
         return res.status(400).send("Sorry, something is wrong");
 
       res.json("ok");
