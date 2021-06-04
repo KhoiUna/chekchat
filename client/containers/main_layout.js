@@ -43,17 +43,9 @@ export default function MainLayout({ children, componentName }) {
   const userInfo = useSelector(selectUserInfo);
   const notificationCount = useSelector(selectNotificationCount);
   useEffect(() => {
-    UsersUtil.fetchUserInfo()
-      .then((r) => {
-        if (!r) router.push("/login");
-
-        dispatch({ type: "user/subscribe" });
-        dispatch(loadUserInfoAsync());
-        dispatch(loadNotificationCountAsync());
-      })
-      .catch((err) => {
-        router.push("/login");
-      });
+    dispatch({ type: "user/subscribe" });
+    dispatch(loadUserInfoAsync());
+    dispatch(loadNotificationCountAsync());
   }, []);
 
   return (
