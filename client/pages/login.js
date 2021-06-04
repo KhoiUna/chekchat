@@ -7,7 +7,6 @@ import { useRouter } from "next/router";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { origin } from "../config/config";
 import { loginRegisterTheme } from "../themes/theme";
-import UsersUtil from "../utils/UsersUtil";
 
 export default function Login() {
   const router = useRouter();
