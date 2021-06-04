@@ -78,6 +78,22 @@ const sessionMiddleware = session({
 app.use(sessionMiddleware);
 app.use(express.json());
 
+//Initialize passport local
+const passport = require("passport");
+const localPassportSetup = require("./config/local-passport-setup");
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Configure Passport authenticated session persistence
+passport.serializeUser((user, done) => {
+  const { username, email } = user;
+  done(null, { username, email });
+});
+passport.deserializeUser((userObj, done) => {
+  return done(null, userObj);
+});
+
 //Routes
 const userRouter = require("./routes/userRouter");
 app.use("/api/user", userRouter);
