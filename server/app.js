@@ -106,12 +106,12 @@ const NotificationsUtil = require("./utils/NotificationsUtil");
 const SocketHelper = require("./helpers/SocketHelper");
 
 io.use((socket, next) => {
-  sessionMiddleware(socket.request, {}, next);
+  sessionMiddleware(socket.request, socket.request.res || {}, next);
 });
 
 io.on("connection", (socket) => {
   console.log("------User connected------");
-  const userSession = socket.request.session.user;
+  const userSession = socket.request.session.passport?.user;
 
   if (userSession) {
     //Subscribe users for events from server
@@ -135,7 +135,7 @@ io.on("connection", (socket) => {
       NotificationsUtil.updateClickedNotification(notificationId);
     });
 
-    socket.on("friend requests", async ({ requestId, action }) => {
+    socket.on("friend requests", async ({ action, requestId }) => {
       //Update friend request and return friendEmail & userEmail
       const { userEmail, friendEmail } = await FriendRequestUtil.updateRequest(
         requestId,
