@@ -34,6 +34,9 @@ export default function Register() {
         body: JSON.stringify(data),
       });
 
+      if (res.ok === false) {
+        setResponseText(await res.text());
+      }
       if (res.ok === true) {
         setResponseText(await res.text());
         setData({
