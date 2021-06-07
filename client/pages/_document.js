@@ -9,7 +9,18 @@ export default class MyDocument extends Document {
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <meta name="theme-color" content="#000000" />
-          <meta name="description" content="Chatting App for Your Workspace" />
+          <meta name="description" content="The app for assigning tasks" />
+          <meta
+            name="keywords"
+            content="chekchat, task app, productivity app, chat app"
+          />
+          <meta name="twitter:card" content="summary" />
+          <meta name="og:title" property="og:title" content="ChekChat | Home" />
+          <meta
+            property="og:image"
+            content="https://www.chekchat.xyz/logo192.png"
+          />
+          <link rel="canonical" href="https://chekchat.xyz/" />
           <link rel="image_src" href="/logo192.png" />
           <link rel="apple-touch-icon" href="/logo192.png" />
           <link rel="manifest" href="/manifest.json" />
