@@ -19,19 +19,19 @@ module.exports = class UsersController {
         password,
         confirmPassword
       );
-      if (validation !== true) return res.send(validation);
+      if (validation !== true) return res.status(400).send(validation);
 
       //Check user
       if (await UsersUtil.checkUser(email))
-        return res.send("Email already used");
+        return res.status(400).send("Email already used");
 
       //Save user
       if (await UsersUtil.saveUser(username, email, password))
         return res.send("ok");
 
-      res.send("Sorry, something is wrong");
+      res.status(400).send("Sorry, something is wrong");
     } catch (err) {
-      console.error("Error in register router");
+      console.error("Error in registering user");
       next();
     }
   }
