@@ -36,6 +36,12 @@ export default function Register() {
 
       if (res.ok === true) {
         setResponseText(await res.text());
+        setData({
+          username: "",
+          email: "",
+          password: "",
+          confirmPassword: "",
+        });
       }
     } catch (err) {
       console.error("Error registering user");
