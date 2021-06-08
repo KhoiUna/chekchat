@@ -2,14 +2,23 @@ import Layout from "../containers/layout";
 import { Paper, Grid, TextField, Button } from "@material-ui/core";
 import utilStyles from "../styles/login_register.module.css";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { origin } from "../config/config";
 import { loginRegisterTheme } from "../themes/theme";
+import CheckLoggedIn from "../helpers/checkLoggedIn";
 
 export default function Login() {
   const router = useRouter();
+
+  useEffect(() => {
+    CheckLoggedIn()
+      .then((res) => {
+        if (res.ok === true) router.push("/inbox");
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   const [responseText, setResponseText] = useState("");
   const [data, setData] = useState({

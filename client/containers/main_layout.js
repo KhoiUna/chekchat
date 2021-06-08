@@ -12,6 +12,8 @@ import {
   loadNotificationCountAsync,
 } from "../features/notificationSlice";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
+import CheckLoggedIn from "../helpers/checkLoggedIn";
 
 const useStyles = makeStyles({
   root: {
@@ -35,7 +37,16 @@ const useStyles = makeStyles({
 
 export default function MainLayout({ children, componentName }) {
   const classes = useStyles();
+  const router = useRouter();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    CheckLoggedIn()
+      .then((res) => {
+        if (res.ok === false) router.push("/login");
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   const userInfo = useSelector(selectUserInfo);
   const notificationCount = useSelector(selectNotificationCount);
