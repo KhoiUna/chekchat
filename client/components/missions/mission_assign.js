@@ -5,7 +5,6 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import utilStyles from "../../styles/utils.module.css";
 import Typography from "@material-ui/core/Typography";
-import TextareaAutosize from "@material-ui/core/TextareaAutosize";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
