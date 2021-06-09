@@ -15,7 +15,7 @@
     "@material-ui/pickers": "^3.3.10",
     "@reduxjs/toolkit": "^1.5.1",
     "@svgr/webpack": "^5.5.0",
-    "date-fns": "^2.19.0",
+    "date-fns": "^2.21.3",
     "next": "^10.2.0",
     "next-redux-wrapper": "^6.0.2",
     "react": "17.0.1",
