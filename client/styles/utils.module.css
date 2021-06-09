@@ -52,3 +52,10 @@
   text-align: left;
   margin: 1rem;
 }
+
+.uploadAvatar {
+  border-radius: 100%;
+  max-width: 145px;
+  width: 40%;
+  margin-top: 2%;
+}
