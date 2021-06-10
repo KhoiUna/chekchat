@@ -107,7 +107,9 @@ export default function Send({}) {
         onClose={closeSnackbar}
         autoHideDuration={3000}
       >
-        <Alert severity="error">Task is already accepted or rejected!</Alert>
+        <Alert onClose={closeSnackbar} severity="error">
+          Task is already accepted or rejected!
+        </Alert>
       </Snackbar>
 
       {!missionAssign && (

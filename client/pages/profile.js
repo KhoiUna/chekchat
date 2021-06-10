@@ -67,7 +67,9 @@ export default function Profile() {
         onClose={closeSnackbar}
         autoHideDuration={3000}
       >
-        <Alert severity="success">{snackbarText}</Alert>
+        <Alert onClose={closeSnackbar} severity="success">
+          {snackbarText}
+        </Alert>
       </Snackbar>
 
       <div className={utilStyles.uploadedAvatar}>
