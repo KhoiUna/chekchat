@@ -98,7 +98,7 @@ export default function Menu({ componentName, userInfo }) {
             <div className={utilStyles.menu_image}>
               <Image
                 loader={imageLoader}
-                src={userInfo.avatarURL}
+                src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}/tr:r-max/${userInfo.avatarURL}`}
                 priority
                 height={60}
                 width={60}

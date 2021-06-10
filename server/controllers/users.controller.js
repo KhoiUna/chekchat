@@ -125,7 +125,7 @@ module.exports = class UsersController {
     });
 
     const result = imagekit.getAuthenticationParameters();
-    console.log(result);
+
     res.send(result);
     next();
   }
