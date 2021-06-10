@@ -33,7 +33,7 @@ export default class UsersUtil {
 
   static async updateUserAvatar(avatarPath) {
     try {
-      const res = await fetch(`${origin}/user/updateAvatar`, {
+      const res = await fetch(`${origin}/api//user/updateAvatar`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
