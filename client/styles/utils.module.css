@@ -16,7 +16,6 @@
 .menu_image {
   border-radius: 100%;
   margin: 0 0.5rem;
-  border: 3px solid #c0c0c0;
 }
 
 .responseText {
@@ -54,8 +53,5 @@
 }
 
 .uploadedAvatar {
-  border-radius: 100%;
-  max-width: 145px;
-  width: 40%;
-  margin-top: 4rem;
+  margin: 5% 0 1% 0;
 }
