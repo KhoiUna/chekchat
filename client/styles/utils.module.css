@@ -55,3 +55,15 @@
 .uploadedAvatar {
   margin: 5% 0 1% 0;
 }
+
+.chatNotificationBadgeContainer {
+  margin: auto;
+}
+
+.chatNotificationBadge {
+  background-color: red;
+  border-radius: 100%;
+  color: white;
+  padding: 0.3rem;
+  margin: 1rem 0 0 0;
+}
