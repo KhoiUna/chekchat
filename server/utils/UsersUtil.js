@@ -169,16 +169,23 @@ module.exports = class UsersUtil {
 
   static async updateAvatarURL(userEmail, avatarURL) {
     try {
-      const collection = client.db("chekchat").collection("users");
-
-      const response = await collection.updateOne(
+      const userCollection = client.db("chekchat").collection("users");
+      const userResponse = await collection.updateOne(
         {
           email: userEmail,
         },
         { $set: { avatarURL } }
       );
 
-      if (!response) return false;
+      const friendCollection = client.db("chekchat").collection("friends");
+      const friendResponse = await friendCollection.updateMany(
+        {
+          "friend.email": userEmail,
+        },
+        { $set: { avatarURL } }
+      );
+
+      if (!userResponse || !friendResponse) return false;
 
       return true;
     } catch (err) {
