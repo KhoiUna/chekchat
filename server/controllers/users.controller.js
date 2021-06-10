@@ -62,12 +62,10 @@ module.exports = class UsersController {
   }
   static async logout(req, res, next) {
     try {
+      req.logout();
       req.session.destroy((err) => {
         if (err) console.error(err);
       });
-
-      res.clearCookie("loggedIn", { path: "/" });
-      res.clearCookie("sid", { path: "/" });
 
       res.send("ok");
     } catch (err) {
