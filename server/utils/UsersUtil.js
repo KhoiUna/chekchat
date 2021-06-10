@@ -184,7 +184,18 @@ module.exports = class UsersUtil {
         { $set: { avatarURL } }
       );
 
-      if (!userResponse || !friendResponse) return false;
+      const friendRequestCollection = client
+        .db("chekchat")
+        .collection("friend_requests");
+      const friendRequestResponse = await friendRequestCollection.updateMany(
+        {
+          "from.email": userEmail,
+        },
+        { $set: { avatarURL } }
+      );
+
+      if (!userResponse || !friendResponse || !friendRequestResponse)
+        return false;
 
       return true;
     } catch (err) {
