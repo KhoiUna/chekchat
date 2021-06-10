@@ -15,7 +15,11 @@ export const userSlice = createSlice({
     isLoading: false,
     failedToLoad: false,
   },
-  reducers: {},
+  reducers: {
+    updateAvatarURL: (state, action) => {
+      state.userInfo.avatarURL = action.payload;
+    },
+  },
   extraReducers: {
     [loadUserInfoAsync.pending]: (state, action) => {
       state.isLoading = true;
@@ -34,7 +38,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const {} = userSlice.actions;
+export const { updateAvatarURL } = userSlice.actions;
 export default userSlice.reducer;
 
 //Selectors
