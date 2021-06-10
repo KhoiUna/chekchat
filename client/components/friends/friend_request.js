@@ -82,7 +82,7 @@ export default function FriendRequest({
             <Image
               loader={imageLoader}
               priority
-              src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}/tr:r-max/${avatarURL}`}
+              src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${avatarURL}`}
               height={108}
               width={108}
               alt={username}
@@ -111,7 +111,7 @@ export default function FriendRequest({
           <Image
             loader={imageLoader}
             priority
-            src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}/tr:r-max/${avatarURL}`}
+            src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${avatarURL}`}
             height={108}
             width={108}
             alt={username}
