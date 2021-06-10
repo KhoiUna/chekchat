@@ -170,7 +170,7 @@ module.exports = class UsersUtil {
   static async updateAvatarURL(userEmail, avatarURL) {
     try {
       const userCollection = client.db("chekchat").collection("users");
-      const userResponse = await collection.updateOne(
+      const userResponse = await userCollection.updateOne(
         {
           email: userEmail,
         },
