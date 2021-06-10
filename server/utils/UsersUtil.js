@@ -187,12 +187,19 @@ module.exports = class UsersUtil {
       const friendRequestCollection = client
         .db("chekchat")
         .collection("friend_requests");
-      const friendRequestResponse = await friendRequestCollection.updateMany(
-        {
-          "from.email": userEmail,
-        },
-        { $set: { "from.avatarURL": avatarURL } }
-      );
+      const friendRequestResponse =
+        (await friendRequestCollection.updateMany(
+          {
+            "from.email": userEmail,
+          },
+          { $set: { "from.avatarURL": avatarURL } }
+        )) &&
+        (await friendRequestCollection.updateMany(
+          {
+            "to.email": userEmail,
+          },
+          { $set: { "to.avatarURL": avatarURL } }
+        ));
 
       if (!userResponse || !friendResponse || !friendRequestResponse)
         return false;
