@@ -191,7 +191,7 @@ module.exports = class UsersUtil {
         {
           "from.email": userEmail,
         },
-        { $set: { "from.avatarURL": avatarURL, "to.avatarURL": avatarURL } }
+        { $set: { "from.avatarURL": avatarURL } }
       );
 
       if (!userResponse || !friendResponse || !friendRequestResponse)
