@@ -12,6 +12,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectUserInfo, updateAvatarURL } from "../features/userSlice";
 import UsersUtil from "../utils/UsersUtil";
 import { useState } from "react";
+import Image from "next/image";
+import imageLoader from "../helpers/imageLoader";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -41,22 +43,18 @@ export default function Profile() {
   };
 
   const onError = (err) => {
-    console.error("Error", err);
+    console.error("Error updating user avatar");
   };
 
   const [snackbarText, setSnackbarText] = useState("");
   const onSuccess = async (res) => {
-    console.log("Success", res);
-
     if (res.fileType === "image") {
-      const avatarPath = res.url;
+      const avatarPath = res.filePath;
       if (await UsersUtil.updateUserAvatar(avatarPath)) {
         dispatch(updateAvatarURL(avatarPath));
         setSnackbarText("Avatar is successfully updated!");
         openSnackbar();
       }
-    } else {
-      // setImgURL("");
     }
   };
 
@@ -72,12 +70,20 @@ export default function Profile() {
         <Alert severity="success">{snackbarText}</Alert>
       </Snackbar>
 
-      <img
-        src={avatarURL ? avatarURL + "?tr=w-300,h-300" : null}
-        className={utilStyles.uploadedAvatar}
-        alt={username}
-      />
-      <br />
+      <div className={utilStyles.uploadedAvatar}>
+        <Image
+          loader={imageLoader}
+          src={
+            avatarURL
+              ? `${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}/tr:r-max/${avatarURL}?tr=w-300,h-300`
+              : `${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}/default-avatar_TAffG0nED.png?tr=w-300,h-300`
+          }
+          priority
+          height={200}
+          width={200}
+          alt={username}
+        />
+      </div>
 
       <IKContext
         publicKey={process.env.NEXT_PUBLIC_IMGKIT_PUBLIC_KEY}
