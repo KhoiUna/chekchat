@@ -181,7 +181,7 @@ module.exports = class UsersUtil {
         {
           "friend.email": userEmail,
         },
-        { $set: { avatarURL } }
+        { $set: { "friend.avatarURL": avatarURL } }
       );
 
       const friendRequestCollection = client
@@ -191,7 +191,7 @@ module.exports = class UsersUtil {
         {
           "from.email": userEmail,
         },
-        { $set: { avatarURL } }
+        { $set: { "from.avatarURL": avatarURL } }
       );
 
       if (!userResponse || !friendResponse || !friendRequestResponse)
