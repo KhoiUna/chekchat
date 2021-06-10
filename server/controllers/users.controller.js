@@ -6,6 +6,7 @@ const FriendRequestUtil = require("../utils/FriendRequestUtil");
 const ValidationHelper = require("../helpers/ValidationHelper");
 const MissionsUtil = require("../utils/MissionsUtil");
 const NotificationsUtil = require("../utils/NotificationsUtil");
+const ImageKit = require("imagekit");
 
 module.exports = class UsersController {
   //register, login & logout route
@@ -111,6 +112,33 @@ module.exports = class UsersController {
       res.json(notificationCount);
     } catch (err) {
       console.error("Error getting notification count");
+      next();
+    }
+  }
+
+  //profile route
+  static authToUpdateAvatar(req, res, next) {
+    const imagekit = new ImageKit({
+      urlEndpoint: process.env.IMGKIT_URL_ENDPOINT,
+      publicKey: process.env.IMGKIT_PUBLIC_KEY,
+      privateKey: process.env.IMGKIT_PRIVATE_KEY,
+    });
+
+    const result = imagekit.getAuthenticationParameters();
+    console.log(result);
+    res.send(result);
+    next();
+  }
+  static async updateAvatar(req, res, next) {
+    try {
+      const avatarURL = req.body.avatarPath;
+
+      if (!(await UsersUtil.updateAvatarURL(req.user.email, avatarURL)))
+        return res.status(400).send("Sorry, something is wrong");
+
+      res.send("ok");
+    } catch (err) {
+      console.error("Error updating user avatar");
       next();
     }
   }
