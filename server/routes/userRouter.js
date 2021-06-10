@@ -27,6 +27,14 @@ router.get(
   UsersController.getNotificationCount
 );
 
+//profile route
+router.get("/profile/updateAvatar/auth", UsersController.authToUpdateAvatar);
+router.post(
+  "/profile/updateAvatar",
+  redirectLogin,
+  UsersController.updateAvatar
+);
+
 //mission route
 router.get("/missions", redirectLogin, UsersController.getMissionRequest);
 router.get(

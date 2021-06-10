@@ -30,4 +30,24 @@ export default class UsersUtil {
       return;
     }
   }
+
+  static async updateUserAvatar(avatarPath) {
+    try {
+      const res = await fetch(`${origin}/api/user/profile/updateAvatar`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ avatarPath }),
+      });
+
+      if (res.ok === true) return true;
+
+      return false;
+    } catch (err) {
+      console.error("Error updating user avatar");
+      return;
+    }
+  }
 }

@@ -166,4 +166,24 @@ module.exports = class UsersUtil {
       return null;
     }
   }
+
+  static async updateAvatarURL(userEmail, avatarURL) {
+    try {
+      const collection = client.db("chekchat").collection("users");
+
+      const response = await collection.updateOne(
+        {
+          email: userEmail,
+        },
+        { $set: { avatarURL } }
+      );
+
+      if (!response) return false;
+
+      return true;
+    } catch (err) {
+      console.error("Error updating user avatar --util");
+      return;
+    }
+  }
 };

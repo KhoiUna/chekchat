@@ -28,3 +28,8 @@ body {
 .MuiListItem-root {
   padding: 5px 0.8rem !important;
 }
+
+input[type="file"] {
+  opacity: 0;
+  cursor: pointer;
+}
