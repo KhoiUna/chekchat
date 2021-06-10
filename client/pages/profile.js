@@ -82,7 +82,7 @@ export default function Profile() {
       <IKContext
         publicKey={process.env.NEXT_PUBLIC_IMGKIT_PUBLIC_KEY}
         urlEndpoint={process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}
-        authenticationEndpoint={`${origin}/api/user/updateAvatar/auth`}
+        authenticationEndpoint={`${origin}/api/user/profile/updateAvatar/auth`}
       >
         <MuiThemeProvider theme={buttonTheme}>
           <Button color="primary">
