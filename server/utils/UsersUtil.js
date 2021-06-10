@@ -10,8 +10,7 @@ module.exports = class UsersUtil {
         username,
         email,
         password: await PasswordHelper.hashPassword(password),
-        avatarURL:
-          "https://ik.imagekit.io/chekchat/default-avatar_TAffG0nED.png",
+        avatarURL: "/default-avatar_TAffG0nED.png",
       });
       return response;
     } catch (err) {
