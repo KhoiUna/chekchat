@@ -67,6 +67,8 @@ module.exports = class UsersController {
         if (err) console.error(err);
       });
 
+      res.clearCookie("sid", { path: "/" });
+
       res.send("ok");
     } catch (err) {
       console.error("Error logging out user");
