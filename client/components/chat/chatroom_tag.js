@@ -13,6 +13,7 @@ const useStyles = makeStyles({
     margin: "1rem 0",
     padding: "0 2%",
     cursor: "pointer",
+    textAlign: "left",
   },
   gridRow: {
     display: "grid",
@@ -38,7 +39,7 @@ export default function ChatroomTag({
   const classes = useStyles();
 
   return (
-    <Link href={`/chat/${1}`}>
+    <Link href={`/chat/${roomId || 1}`}>
       <Grid container justify="center" className={classes.gridColumn}>
         <div className={utilStyles.image}>
           <Image
@@ -55,7 +56,8 @@ export default function ChatroomTag({
 
         <div className={classes.gridRow}>
           <Typography variant="h5" className={classes.overflowText}>
-            {subject || "asdfasfasdsdfasfasdfasdfasdff"}
+            {subject ||
+              "subjectsubjectsubjectsubjectsubjectsubjectsubjectsubjectsubjectsubject"}
           </Typography>
 
           <Typography
@@ -64,7 +66,8 @@ export default function ChatroomTag({
             gutterBottom
             className={classes.overflowText}
           >
-            {lastMessage || "assfasdfasdfsadf"}
+            {lastMessage ||
+              "last msg last msg last msg last msg last msg last msg last msg last msg last msg "}
           </Typography>
         </div>
 
