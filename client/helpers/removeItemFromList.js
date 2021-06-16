@@ -1,3 +1,3 @@
-export default function (list, requestId) {
+export default function removeItemFromList(list, requestId) {
   return list.filter((i) => i._id !== requestId);
 }
