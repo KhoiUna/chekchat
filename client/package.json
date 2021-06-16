@@ -14,7 +14,6 @@
     "@material-ui/lab": "^4.0.0-alpha.57",
     "@material-ui/pickers": "^3.3.10",
     "@reduxjs/toolkit": "^1.5.1",
-    "@svgr/webpack": "^5.5.0",
     "date-fns": "^2.21.3",
     "imagekitio-react": "^1.0.9",
     "next": "^11.0.0",
