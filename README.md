@@ -45,51 +45,51 @@
     status
     }
 
-- **missions** {
-  subject,
-  due_date,
-  from: {
-  email,
-  username,
-  avatarURL
-  },
-  to: {
-  email,
-  username,
-  avatarURL
-  },
-  description,
-  status,
-  completed,
-  starred,
-  visibility,
-  sent_date
-  }
+  - **missions** {
+    subject,
+    due_date,
+    from: {
+    email,
+    username,
+    avatarURL
+    },
+    to: {
+    email,
+    username,
+    avatarURL
+    },
+    description,
+    status,
+    completed,
+    starred,
+    visibility,
+    sent_date
+    }
 
-- **notifications** {
-  from_user: {
-  email,
-  username,
-  avatarURL,
-  },
-  to_user: {
-  email,
-  username,
-  avatarURL
-  },
-  type,
-  text,
-  clicked,
-  time
-  }
+  - **notifications** {
+    from_user: {
+    email,
+    username,
+    avatarURL,
+    },
+    to_user: {
+    email,
+    username,
+    avatarURL
+    },
+    type,
+    text,
+    clicked,
+    time
+    }
 
-- **feedbacks** {
-  subject,
-  from_user,
-  submitted_date,
-  comment
-  }
+  - **feedbacks** {
+    subject,
+    from_user,
+    submitted_date,
+    comment
+    }
 
-- **sessions** {
-  _store users' cookie sessions_
-  }
+  - **sessions** {
+    _store users' cookie sessions_
+    }
