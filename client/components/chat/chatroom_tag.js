@@ -74,8 +74,7 @@ export default function ChatroomTag({
 
         <div className={classes.gridRow}>
           <Typography variant="h5" className={classes.overflowText}>
-            {subject ||
-              "subjectsubjectsubjectsubjectsubjectsubjectsubjectsubjectsubjectsubject"}
+            {subject}
           </Typography>
 
           <Typography
@@ -84,8 +83,7 @@ export default function ChatroomTag({
             gutterBottom
             className={classes.overflowText}
           >
-            {lastMessage ||
-              "last msg last msg last msg last msg last msg last msg last msg last msg last msg "}
+            {lastMessage}
           </Typography>
         </div>
 
