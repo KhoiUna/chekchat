@@ -1,14 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import ChatUtil from "../utils/ChatUtil";
 
 //Async thunk
 export const loadChatRoomsAsync = createAsyncThunk(
-  "notifications/loadNotificationCount",
-  async () => await null
+  "chat/loadChatRooms",
+  async () => await ChatUtil.fetchChatRooms()
 );
 
 export const loadChatMessagesAsync = createAsyncThunk(
-  "notifications/loadNotificationList",
-  async () => await null
+  "chat/loadChatMessages",
+  async () => await ChatUtil
 );
 
 //Slice
