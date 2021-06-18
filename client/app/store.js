@@ -4,6 +4,7 @@ import notificationsReducer from "../features/notificationSlice";
 import userReducer from "../features/userSlice";
 import missionsReducer from "../features/missionSlice";
 import friendsReducer from "../features/friendSlice";
+import chatReducer from "../features/chatSlice";
 import { socketMiddleware } from "../middleware/socketMiddleware";
 
 const makeStore = () =>
@@ -13,6 +14,7 @@ const makeStore = () =>
       missions: missionsReducer,
       friends: friendsReducer,
       notifications: notificationsReducer,
+      chat: chatReducer,
     },
     middleware: (getDefaultMiddleware) =>
       getDefaultMiddleware().concat(socketMiddleware),
