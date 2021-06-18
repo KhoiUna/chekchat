@@ -1,9 +1,10 @@
 import Head from "next/head";
 import Link from "next/link";
+import Logo from "../components/logo";
 
 export default function Home() {
   return (
-    <div>
+    <>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,11 +27,23 @@ export default function Home() {
         <title>ChekChat | Home</title>
       </Head>
 
-      <main>
-        <Link href="/login">
-          <a>Login</a>
-        </Link>
-      </main>
-    </div>
+      <body>
+        <header>
+          <Logo
+            style={{
+              width: "5.5rem",
+              height: "5.5rem",
+              margin: 0,
+              backgroundColor: "#0db3ff",
+            }}
+          />
+        </header>
+        <main>
+          <Link href="/login">
+            <a>Login</a>
+          </Link>
+        </main>
+      </body>
+    </>
   );
 }
