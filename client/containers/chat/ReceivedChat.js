@@ -37,7 +37,7 @@ export default function ReceivedChat({}) {
       username={item.from_user.username}
       roomId={item._id}
       avatarURL={item.from_user.avatarURL}
-      subject={item.mission.subject}
+      subject={item.mission[0].subject}
       lastMessage={item.lastMessage}
       notified={item.notified}
     />
