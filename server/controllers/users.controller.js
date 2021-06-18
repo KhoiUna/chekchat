@@ -7,6 +7,7 @@ const ValidationHelper = require("../helpers/ValidationHelper");
 const MissionsUtil = require("../utils/MissionsUtil");
 const NotificationsUtil = require("../utils/NotificationsUtil");
 const ImageKit = require("imagekit");
+const ChatUtil = require("../utils/ChatUtil");
 
 module.exports = class UsersController {
   //register, login & logout route
@@ -112,6 +113,17 @@ module.exports = class UsersController {
       res.json(notificationCount);
     } catch (err) {
       console.error("Error getting notification count");
+      next();
+    }
+  }
+
+  //chat route
+  static async getChatRooms(req, res, next) {
+    try {
+      const chatRooms = await ChatUtil.getChatRooms(req.user.email);
+      res.json(chatRooms);
+    } catch (err) {
+      console.error("Error getting chat rooms");
       next();
     }
   }

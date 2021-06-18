@@ -27,6 +27,9 @@ router.get(
   UsersController.getNotificationCount
 );
 
+//chat route
+router.get("/chat/rooms", redirectLogin, UsersController.getChatRooms);
+
 //profile route
 router.get("/profile/updateAvatar/auth", UsersController.authToUpdateAvatar);
 router.post(
