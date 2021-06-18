@@ -201,7 +201,45 @@ module.exports = class UsersUtil {
           { $set: { "to.avatarURL": avatarURL } }
         ));
 
-      if (!userResponse || !friendResponse || !friendRequestResponse)
+      const missionCollection = client.db("chekchat").collection("missions");
+      const missionResponse =
+        (await missionCollection.updateMany(
+          {
+            "from.email": userEmail,
+          },
+          { $set: { "from.avatarURL": avatarURL } }
+        )) &&
+        (await missionCollection.updateMany(
+          {
+            "to.email": userEmail,
+          },
+          { $set: { "to.avatarURL": avatarURL } }
+        ));
+
+      const notificationCollection = client
+        .db("chekchat")
+        .collection("notifications");
+      const notificationResponse =
+        (await notificationCollection.updateMany(
+          {
+            "from_user.email": userEmail,
+          },
+          { $set: { "from_user.avatarURL": avatarURL } }
+        )) &&
+        (await notificationCollection.updateMany(
+          {
+            "to_user.email": userEmail,
+          },
+          { $set: { "to_user.avatarURL": avatarURL } }
+        ));
+
+      if (
+        !userResponse ||
+        !friendResponse ||
+        !friendRequestResponse ||
+        !missionResponse ||
+        !notificationResponse
+      )
         return false;
 
       return true;
