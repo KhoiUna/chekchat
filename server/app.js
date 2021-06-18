@@ -87,8 +87,8 @@ app.use(passport.session());
 
 // Configure Passport authenticated session persistence
 passport.serializeUser((user, done) => {
-  const { username, email } = user;
-  done(null, { username, email });
+  const { username, email, avatarURL } = user;
+  done(null, { username, email, avatarURL });
 });
 passport.deserializeUser((userObj, done) => {
   return done(null, userObj);
@@ -122,6 +122,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("check missions", ({ missionId, completed }) => {
+      console.log(userSession);
       //Update mission check/completed
       MissionsUtil.updateMissionComplete(missionId, completed);
     });

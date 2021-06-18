@@ -16,6 +16,7 @@ passport.use(
         return done(null, {
           username: userObj.username,
           email: userObj.email,
+          avatarURL: userObj.avatarURL,
         });
       } catch (err) {
         return done(err);

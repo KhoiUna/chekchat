@@ -45,6 +45,7 @@ module.exports = class UsersUtil {
       return {
         username: user.username,
         email: user.email,
+        avatarURL: user.avatarURL,
       };
     } catch (err) {
       console.error("Error logging in user");
