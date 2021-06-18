@@ -1,10 +1,15 @@
-import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
+import {
+  createMuiTheme,
+  makeStyles,
+  MuiThemeProvider,
+} from "@material-ui/core/styles";
 import Image from "next/image";
 import Link from "next/link";
 import imageLoader from "../../helpers/imageLoader";
 import utilStyles from "../../styles/utils.module.css";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import Badge from "@material-ui/core/Badge";
 
 const useStyles = makeStyles({
   gridColumn: {
@@ -28,13 +33,27 @@ const useStyles = makeStyles({
   },
 });
 
+const badgeTheme = createMuiTheme({
+  overrides: {
+    MuiBadge: {
+      dot: {
+        width: "1rem",
+        borderRadius: "100%",
+        marginTop: "2rem",
+        height: null,
+        minWidth: null,
+      },
+    },
+  },
+});
+
 export default function ChatroomTag({
   username,
   roomId,
   avatarURL,
   subject,
   lastMessage,
-  notificationCount = 100,
+  notificationCount = 2,
 }) {
   const classes = useStyles();
 
@@ -71,11 +90,9 @@ export default function ChatroomTag({
           </Typography>
         </div>
 
-        <div className={utilStyles.chatNotificationBadgeContainer}>
-          <span className={utilStyles.chatNotificationBadge}>
-            {notificationCount > 99 ? "99+" : notificationCount}
-          </span>
-        </div>
+        <MuiThemeProvider theme={badgeTheme}>
+          <Badge variant="dot" color="primary" />
+        </MuiThemeProvider>
       </Grid>
     </Link>
   );
