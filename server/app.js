@@ -104,6 +104,7 @@ const FriendRequestUtil = require("./utils/FriendRequestUtil");
 const UsersUtil = require("./utils/UsersUtil");
 const NotificationsUtil = require("./utils/NotificationsUtil");
 const SocketHelper = require("./helpers/SocketHelper");
+const ChatUtil = require("./utils/ChatUtil");
 
 io.use((socket, next) => {
   sessionMiddleware(socket.request, socket.request.res || {}, next);
@@ -175,6 +176,10 @@ io.on("connection", (socket) => {
         "task",
         action
       );
+
+      if (action === "accept") {
+        ChatUtil.createChatRoom({ requestId, senderEmail, receiverEmail });
+      }
 
       //Increment notification count for user
       UsersUtil.updateNotificationCount(senderEmail, "increment");
