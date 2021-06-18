@@ -1,60 +1,64 @@
 import MainLayout from "../containers/main_layout";
-import ChatroomTag from "../components/chat/chatroom_tag";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
+import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
+import { buttonTheme } from "../themes/theme";
+import { useState } from "react";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  loadChatRoomsAsync,
-  selectChatIsLoading,
-  selectChatRooms,
-} from "../features/chatSlice";
-import Spinner from "../components/spinner";
-import { useEffect } from "react";
+import ReceivedChat from "../containers/chat/ReceivedChat";
+import SentChat from "../containers/chat/SentChat";
+
+const useStyles = makeStyles({
+  tabTitle: {
+    fontWeight: "bold",
+    fontSize: "1rem",
+  },
+});
 
 export default function Chat({}) {
-  const dispatch = useDispatch();
+  const classes = useStyles();
 
-  const isLoading = useSelector(selectChatIsLoading);
-  const chatRooms = useSelector(selectChatRooms);
-  useEffect(() => {
-    dispatch(loadChatRoomsAsync());
-  }, []);
-
-  if (isLoading)
-    return (
-      <MainLayout componentName="Chat">
-        <Spinner />
-      </MainLayout>
-    );
-
-  if (chatRooms.length === 0)
-    return (
-      <MainLayout componentName="Chat">
-        <Typography
-          variant="h6"
-          color="textSecondary"
-          style={{ marginTop: "10%" }}
-          component="p"
-        >
-          <i>You have no discussions yet!</i>
-        </Typography>
-      </MainLayout>
-    );
+  const [value, setValue] = useState(0);
+  const handleTabChange = (e, newValue) => {
+    setValue(newValue);
+  };
 
   return (
     <MainLayout componentName="Chat">
-      <Grid container direction="column" justify="center" alignItems="center">
-        {chatRooms.map((item) => (
-          <ChatroomTag
-            username={item.from_user.username}
-            roomId={item._id}
-            avatarURL={item.from_user.avatarURL}
-            subject={item.subject}
-            lastMessage={item.lastMessage}
-            notified={item.notified}
-          />
-        ))}
-      </Grid>
+      <MuiThemeProvider theme={buttonTheme}>
+        <Tabs
+          value={value}
+          onChange={handleTabChange}
+          indicatorColor="primary"
+          textColor="primary"
+          centered
+        >
+          <Tab label="Received tasks" className={classes.tabTitle} />
+          <Tab label="Sent tasks" className={classes.tabTitle} />
+        </Tabs>
+      </MuiThemeProvider>
+
+      {value === 0 ? (
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          style={{ marginBottom: "5rem" }}
+        >
+          <ReceivedChat />
+        </Grid>
+      ) : (
+        <Grid
+          container
+          direction="column"
+          justify="center"
+          alignItems="center"
+          style={{ marginBottom: "5rem" }}
+        >
+          <SentChat />
+        </Grid>
+      )}
     </MainLayout>
   );
 }

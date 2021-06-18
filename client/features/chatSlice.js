@@ -4,12 +4,12 @@ import ChatUtil from "../utils/ChatUtil";
 //Async thunk
 export const loadChatRoomsAsync = createAsyncThunk(
   "chat/loadChatRooms",
-  async () => await ChatUtil.fetchChatRooms()
+  async (position) => await ChatUtil.fetchChatRooms(position)
 );
 
 export const loadChatMessagesAsync = createAsyncThunk(
   "chat/loadChatMessages",
-  async () => await ChatUtil
+  async () => await ChatUtil.fetchChatMessages()
 );
 
 //Slice
