@@ -19,7 +19,7 @@
     email,
     password,
     avatarURL,
-    notificationCount,
+    notificationCount
     }
 
   - **friends** {
