@@ -45,7 +45,14 @@ export default function Chat({}) {
     <MainLayout componentName="Chat">
       <Grid container direction="column" justify="center" alignItems="center">
         {chatRooms.map((item) => (
-          <ChatroomTag />
+          <ChatroomTag
+            username={item.from_user.username}
+            roomId={item._id}
+            avatarURL={item.from_user.avatarURL}
+            subject={item.subject}
+            lastMessage={item.lastMessage}
+            notified={item.notified}
+          />
         ))}
       </Grid>
     </MainLayout>

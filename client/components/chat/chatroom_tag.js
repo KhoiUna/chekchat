@@ -53,7 +53,7 @@ export default function ChatroomTag({
   avatarURL,
   subject,
   lastMessage,
-  notificationCount = 2,
+  notified,
 }) {
   const classes = useStyles();
 
@@ -64,8 +64,7 @@ export default function ChatroomTag({
           <Image
             loader={imageLoader}
             priority
-            //   src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${avatarURL}`}
-            src={`/img/avatar.png`}
+            src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${avatarURL}`}
             height={108}
             width={108}
             alt={username}
@@ -90,9 +89,11 @@ export default function ChatroomTag({
           </Typography>
         </div>
 
-        <MuiThemeProvider theme={badgeTheme}>
-          <Badge variant="dot" color="primary" />
-        </MuiThemeProvider>
+        {notified && (
+          <MuiThemeProvider theme={badgeTheme}>
+            <Badge variant="dot" color="primary" />
+          </MuiThemeProvider>
+        )}
       </Grid>
     </Link>
   );
