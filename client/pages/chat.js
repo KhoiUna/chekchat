@@ -33,8 +33,8 @@ export default function Chat({}) {
           textColor="primary"
           centered
         >
-          <Tab label="Received tasks" className={classes.tabTitle} />
-          <Tab label="Sent tasks" className={classes.tabTitle} />
+          <Tab label="Tasks received" className={classes.tabTitle} />
+          <Tab label="Tasks sent" className={classes.tabTitle} />
         </Tabs>
       </MuiThemeProvider>
 
