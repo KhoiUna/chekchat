@@ -48,7 +48,7 @@ export default function Notifications({}) {
           <Fragment key={index}>
             <NotificationAlert
               notificationId={i._id}
-              username={i.from_user.username}
+              username={i.from_user[0].username}
               type={i.type}
               clicked={i.clicked}
               text={i.text}
