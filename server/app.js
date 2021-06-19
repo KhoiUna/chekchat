@@ -87,8 +87,8 @@ app.use(passport.session());
 
 // Configure Passport authenticated session persistence
 passport.serializeUser((user, done) => {
-  const { username, email, avatarURL } = user;
-  done(null, { username, email, avatarURL });
+  const { id, username, email, avatarURL } = user;
+  done(null, { id, username, email, avatarURL });
 });
 passport.deserializeUser((userObj, done) => {
   return done(null, userObj);
