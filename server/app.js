@@ -117,12 +117,11 @@ io.on("connection", (socket) => {
   if (userSession) {
     //Subscribe users for events from server
     socket.on("subscribe", () => {
-      const user = SocketHelper.subscribeUsers(socket.id, userSession.email);
-      socket.join(user.userEmail);
+      const user = SocketHelper.subscribeUsers(socket.id, userSession.id);
+      socket.join(user.userId);
     });
 
     socket.on("check missions", ({ missionId, completed }) => {
-      console.log(userSession);
       //Update mission check/completed
       MissionsUtil.updateMissionComplete(missionId, completed);
     });
@@ -152,10 +151,11 @@ io.on("connection", (socket) => {
       NotificationsUtil.saveNotification(userId, friendId, "friend", action);
 
       //Increment notification count for user
-      UsersUtil.updateNotificationCount(friendEmail, "increment");
+      UsersUtil.updateNotificationCount(friendId, "increment");
 
       const actionData = { type: "notification count" };
-      io.to(friendEmail).emit("update", actionData);
+      console.log(friendId);
+      io.to(friendId).emit("update", actionData);
     });
 
     socket.on("mission requests", async ({ requestId, action }) => {

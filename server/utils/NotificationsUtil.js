@@ -1,27 +1,41 @@
-const UsersUtil = require("./UsersUtil");
 const client = require("../db/client");
 const { ObjectID } = require("bson");
 
 module.exports = class NotificationsUtil {
-  static async getNotifications(email, forComp = undefined) {
+  static async getNotifications(userId) {
     try {
       const collection = client.db("chekchat").collection("notifications");
-
-      if (forComp === "bell") {
-        const notificationList = await collection
-          .find({
-            "to_user.email": email,
-            seen: false,
-          })
-          .sort({ time: -1 })
-          .toArray();
-        return notificationList;
-      }
+      const agg = [
+        {
+          $match: {
+            to_user: userId,
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "from_user",
+            foreignField: "_id",
+            as: "from_user",
+          },
+        },
+        {
+          $project: {
+            from_user: {
+              username: { $arrayElemAt: ["$from_user.username", 0] },
+              email: { $arrayElemAt: ["$from_user.email", 0] },
+              avatarURL: { $arrayElemAt: ["$from_user.avatarURL", 0] },
+            },
+            type: 1,
+            clicked: 1,
+            text: 1,
+            time: 1,
+          },
+        },
+      ];
 
       const notificationList = await collection
-        .find({
-          "to_user.email": email,
-        })
+        .aggregate(agg)
         .sort({ time: -1 })
         .toArray();
       return notificationList;
@@ -30,12 +44,12 @@ module.exports = class NotificationsUtil {
     }
   }
 
-  static async saveNotification(userEmail, receiverEmail, type, action) {
+  static async saveNotification(userId, friendId, type, action) {
     try {
       const collection = client.db("chekchat").collection("notifications");
       const response = await collection.insertOne({
-        from_user: await UsersUtil.getUserId(userEmail),
-        to_user: await UsersUtil.getUserId(receiverEmail),
+        from_user: ObjectID(userId),
+        to_user: ObjectID(friendId),
         type,
         text: `${action}ed your ${type} request`,
         clicked: false,

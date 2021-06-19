@@ -158,14 +158,14 @@ module.exports = class UsersUtil {
     }
   }
 
-  static async updateNotificationCount(userEmail, action) {
+  static async updateNotificationCount(userId, action) {
     try {
       const collection = client.db("chekchat").collection("users");
 
       if (action === "reset") {
         const response = await collection.updateOne(
           {
-            email: userEmail,
+            _id: userId,
           },
           { $set: { notificationCount: 0 } }
         );
@@ -176,7 +176,7 @@ module.exports = class UsersUtil {
 
       const response = await collection.updateOne(
         {
-          email: userEmail,
+          _id: userId,
         },
         { $inc: { notificationCount: 1 } }
       );
@@ -188,12 +188,12 @@ module.exports = class UsersUtil {
     }
   }
 
-  static async getNotificationCount(userEmail) {
+  static async getNotificationCount(userId) {
     try {
       const collection = client.db("chekchat").collection("users");
 
       const { notificationCount } = await collection.findOne({
-        email: userEmail,
+        _id: userId,
       });
 
       return notificationCount;

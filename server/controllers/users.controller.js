@@ -91,13 +91,11 @@ module.exports = class UsersController {
   //notification route
   static async getNotifications(req, res, next) {
     try {
-      const userEmail = req.user.email;
-
       //Reset notification count for user
-      UsersUtil.updateNotificationCount(userEmail, "reset");
+      UsersUtil.updateNotificationCount(req.user.id, "reset");
 
       const notificationList = await NotificationsUtil.getNotifications(
-        userEmail
+        req.user.id
       );
       res.json(notificationList);
     } catch (err) {
@@ -108,7 +106,7 @@ module.exports = class UsersController {
   static async getNotificationCount(req, res, next) {
     try {
       const notificationCount = await UsersUtil.getNotificationCount(
-        req.user.email
+        req.user.id
       );
       res.json(notificationCount);
     } catch (err) {
