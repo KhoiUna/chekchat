@@ -1,4 +1,4 @@
-const { ObjectID } = require("mongodb");
+const { ObjectID, ObjectId } = require("mongodb");
 const client = require("../db/client");
 const PasswordHelper = require("../helpers/PasswordHelper");
 
@@ -59,8 +59,8 @@ module.exports = class UsersUtil {
       const collection = client.db("chekchat").collection("friends");
 
       const friend = await collection.findOne({
-        email: userEmail,
-        "friend.email": requestEmail,
+        userId: ObjectId(await this.getUserId(userEmail)),
+        friendId: ObjectID(await this.getUserId(requestEmail)),
       });
       if (friend) return true;
 
@@ -71,12 +71,12 @@ module.exports = class UsersUtil {
     }
   }
 
-  static async getUser(email) {
+  static async getUser(userId) {
     try {
       const collection = client.db("chekchat").collection("users");
 
       const user = await collection.findOne({
-        email,
+        _id: ObjectID(userId),
       });
       return {
         email: user.email,
@@ -102,17 +102,17 @@ module.exports = class UsersUtil {
     }
   }
 
-  static async addFriend(userEmail, friendEmail) {
+  static async addFriend({ userId, friendId }) {
     try {
       const collection = client.db("chekchat").collection("friends");
 
       const addFriendToFirstUser = await collection.insertOne({
-        userId: await this.getUserId(userEmail),
-        friendId: await this.getUserId(friendEmail),
+        userId: ObjectID(userId),
+        friendId: ObjectID(friendId),
       });
       const addFriendToSecondUser = await collection.insertOne({
-        userId: await this.getUserId(friendEmail),
-        friendId: await this.getUserId(userEmail),
+        userId: ObjectID(friendId),
+        friendId: ObjectID(userId),
       });
 
       return addFriendToFirstUser && addFriendToSecondUser;
@@ -122,15 +122,35 @@ module.exports = class UsersUtil {
     }
   }
 
-  static async getFriendList(userEmail) {
+  static async getFriendList(userId) {
     try {
       const collection = client.db("chekchat").collection("friends");
+      const agg = [
+        {
+          $match: {
+            userId,
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "friendId",
+            foreignField: "_id",
+            as: "friend",
+          },
+        },
+        {
+          $project: {
+            friend: {
+              username: { $arrayElemAt: ["$friend.username", 0] },
+              email: { $arrayElemAt: ["$friend.email", 0] },
+              avatarURL: { $arrayElemAt: ["$friend.avatarURL", 0] },
+            },
+          },
+        },
+      ];
 
-      const friendList = await collection
-        .find({
-          email: userEmail,
-        })
-        .toArray();
+      const friendList = await collection.aggregate(agg).toArray();
       return friendList;
     } catch (err) {
       console.error("Error getting friend list ---util");

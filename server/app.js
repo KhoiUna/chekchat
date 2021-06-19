@@ -139,22 +139,17 @@ io.on("connection", (socket) => {
 
     socket.on("friend requests", async ({ action, requestId }) => {
       //Update friend request and return friendEmail & userEmail
-      const { userEmail, friendEmail } = await FriendRequestUtil.updateRequest(
+      const { userId, friendId } = await FriendRequestUtil.updateRequest(
         requestId,
         action
       );
       if (action === "accept") {
-        UsersUtil.addFriend(userEmail, friendEmail);
-        FriendRequestUtil.removeRequest(userEmail, friendEmail);
+        UsersUtil.addFriend({ userId, friendId });
+        FriendRequestUtil.removeRequest({ userId, friendId });
       }
 
       //Create notification
-      NotificationsUtil.saveNotification(
-        userEmail,
-        friendEmail,
-        "friend",
-        action
-      );
+      NotificationsUtil.saveNotification(userId, friendId, "friend", action);
 
       //Increment notification count for user
       UsersUtil.updateNotificationCount(friendEmail, "increment");

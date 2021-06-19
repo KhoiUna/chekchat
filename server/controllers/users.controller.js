@@ -80,7 +80,7 @@ module.exports = class UsersController {
   //user route
   static async getUserInfo(req, res, next) {
     try {
-      const userInfo = await UsersUtil.getUser(req.user.email);
+      const userInfo = await UsersUtil.getUser(req.user.id);
       res.json(userInfo);
     } catch (err) {
       console.error("Error getting user info");
@@ -270,7 +270,7 @@ module.exports = class UsersController {
   static async getSentFriendRequestList(req, res, next) {
     try {
       const friendRequestList =
-        await FriendRequestUtil.getSentFriendRequestList(req.user.email);
+        await FriendRequestUtil.getSentFriendRequestList(req.user.id);
       res.json(friendRequestList);
     } catch (err) {
       console.error("Error getting sent friend request");
@@ -280,7 +280,7 @@ module.exports = class UsersController {
   static async getReceivedFriendRequestList(req, res, next) {
     try {
       const friendRequestList =
-        await FriendRequestUtil.getReceivedFriendRequestList(req.user.email);
+        await FriendRequestUtil.getReceivedFriendRequestList(req.user.id);
       res.json(friendRequestList);
     } catch (err) {
       console.error("Error getting received friend request");
@@ -330,7 +330,7 @@ module.exports = class UsersController {
   }
   static async getFriendList(req, res, next) {
     try {
-      const friendList = await UsersUtil.getFriendList(req.user.email);
+      const friendList = await UsersUtil.getFriendList(req.user.id);
       res.json(friendList);
     } catch (err) {
       console.error("Error getting friend list");

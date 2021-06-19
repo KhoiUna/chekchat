@@ -8,8 +8,8 @@ module.exports = class FriendRequestUtil {
       const collection = client.db("chekchat").collection("friend_requests");
 
       const response = await collection.insertOne({
-        from: await UsersUtil.getUserId(userEmail),
-        to: await UsersUtil.getUserId(requestEmail),
+        from_user: await UsersUtil.getUserId(userEmail),
+        to_user: await UsersUtil.getUserId(requestEmail),
         status: "Pending",
       });
       return response;
@@ -36,23 +36,23 @@ module.exports = class FriendRequestUtil {
       const response = await collection.findOne({
         _id: ObjectID(requestId),
       });
-      const friendEmail = response.from.email;
-      const userEmail = response.to.email;
+      const friendId = response.from_user;
+      const userId = response.to_user;
 
-      return { userEmail, friendEmail };
+      return { userId, friendId };
     } catch (err) {
       console.error("Error updating friend request --- utils");
       return null;
     }
   }
 
-  static async removeRequest(userEmail, requestEmail) {
+  static async removeRequest({ userId, friendId }) {
     try {
       const collection = client.db("chekchat").collection("friend_requests");
 
       const response = await collection.deleteOne({
-        "from.email": userEmail,
-        "to.email": requestEmail,
+        from_user: ObjectID(userId),
+        to_user: ObjectID(friendId),
       });
 
       return response;
@@ -67,8 +67,8 @@ module.exports = class FriendRequestUtil {
       const collection = client.db("chekchat").collection("friend_requests");
 
       const cursor = await collection.find({
-        "from.email": userEmail,
-        "to.email": requestEmail,
+        from_user: ObjectID(await UsersUtil.getUserId(userEmail)),
+        to_user: ObjectID(await UsersUtil.getUserId(requestEmail)),
         status: "Pending",
       });
       const friendRequest = await cursor.next();
@@ -81,16 +81,38 @@ module.exports = class FriendRequestUtil {
     }
   }
 
-  static async getSentFriendRequestList(userEmail) {
+  static async getSentFriendRequestList(userId) {
     try {
       const collection = client.db("chekchat").collection("friend_requests");
+      const agg = [
+        {
+          $match: {
+            from_user: ObjectID(userId),
+            status: "Pending",
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "to_user",
+            foreignField: "_id",
+            as: "to_user",
+          },
+        },
+        {
+          $project: {
+            from_user: 1,
+            to_user: {
+              username: { $arrayElemAt: ["$to_user.username", 0] },
+              email: { $arrayElemAt: ["$to_user.email", 0] },
+              avatarURL: { $arrayElemAt: ["$to_user.avatarURL", 0] },
+            },
+            status: 1,
+          },
+        },
+      ];
 
-      const friendRequestList = await collection
-        .find({
-          "from.email": userEmail,
-          status: "Pending",
-        })
-        .toArray();
+      const friendRequestList = await collection.aggregate(agg).toArray();
       return friendRequestList;
     } catch (err) {
       console.error("Error getting friend request list ---util");
@@ -98,16 +120,38 @@ module.exports = class FriendRequestUtil {
     }
   }
 
-  static async getReceivedFriendRequestList(userEmail) {
+  static async getReceivedFriendRequestList(userId) {
     try {
       const collection = client.db("chekchat").collection("friend_requests");
+      const agg = [
+        {
+          $match: {
+            to_user: ObjectID(userId),
+            status: "Pending",
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "from_user",
+            foreignField: "_id",
+            as: "from_user",
+          },
+        },
+        {
+          $project: {
+            from_user: {
+              username: { $arrayElemAt: ["$from_user.username", 0] },
+              email: { $arrayElemAt: ["$from_user.email", 0] },
+              avatarURL: { $arrayElemAt: ["$from_user.avatarURL", 0] },
+            },
+            to_user: 1,
+            status: 1,
+          },
+        },
+      ];
 
-      const friendRequestList = await collection
-        .find({
-          "to.email": userEmail,
-          status: "Pending",
-        })
-        .toArray();
+      const friendRequestList = await collection.aggregate(agg).toArray();
       return friendRequestList;
     } catch (err) {
       console.error("Error getting friend request list");
