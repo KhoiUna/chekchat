@@ -46,9 +46,9 @@ export default function ReceivedFriendRequestList() {
             key={index}
             fromPage="inbox"
             requestId={item._id}
-            username={item.from.username}
-            email={item.from.email}
-            avatarURL={item.from.avatarURL}
+            username={item.from_user[0].username}
+            email={item.from_user[0].email}
+            avatarURL={item.from_user[0].avatarURL}
             status={item.status}
             onClickAction={handleClick}
           />
