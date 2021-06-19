@@ -69,7 +69,7 @@ module.exports = class ChatUtil {
         .aggregate(agg)
         .sort({ last_updated: 1 })
         .toArray();
-      console.log(chatRooms);
+
       return chatRooms;
     } catch (err) {
       console.error("Error getting chat rooms --util");
