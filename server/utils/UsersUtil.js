@@ -108,11 +108,11 @@ module.exports = class UsersUtil {
 
       const addFriendToFirstUser = await collection.insertOne({
         email: userEmail,
-        friend: await this.getUser(friendEmail),
+        friend: await this.getUserId(friendEmail),
       });
       const addFriendToSecondUser = await collection.insertOne({
         email: friendEmail,
-        friend: await this.getUser(userEmail),
+        friend: await this.getUserId(userEmail),
       });
 
       return addFriendToFirstUser && addFriendToSecondUser;

@@ -120,7 +120,7 @@ module.exports = class ChatUtil {
 
       return chatRooms;
     } catch (err) {
-      console.error("Error getting chat rooms --util");
+      console.error("Error getting chat rooms ---util");
       return null;
     }
   }
@@ -131,8 +131,8 @@ module.exports = class ChatUtil {
 
       const response = await collection.insertOne({
         missionId: ObjectID(requestId),
-        from_user: await UsersUtil.getUser(senderEmail),
-        to_user: await UsersUtil.getUser(receiverEmail),
+        from_user: await UsersUtil.getUserId(senderEmail),
+        to_user: await UsersUtil.getUserId(receiverEmail),
         notified: false,
         last_updated: new Date(new Date().toUTCString()),
         lastMessage: "Let's start your discussion!",
