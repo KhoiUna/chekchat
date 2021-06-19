@@ -35,9 +35,9 @@ export default function FriendList() {
       {friendList.map((item, index) => (
         <Fragment key={index}>
           <FriendTag
-            username={item.friend.username}
-            email={item.friend.email}
-            avatarURL={item.friend.avatarURL}
+            username={item.friend[0].username}
+            email={item.friend[0].email}
+            avatarURL={item.friend[0].avatarURL}
           />
         </Fragment>
       ))}
