@@ -23,6 +23,17 @@ module.exports = class ChatUtil {
               as: "mission",
             },
           },
+          {
+            $project: {
+              missionId: 1,
+              from_user: 1,
+              to_user: 1,
+              notified: 1,
+              last_updated: 1,
+              lastMessage: 1,
+              mission: { subject: { $arrayElemAt: ["$mission.subject", 0] } },
+            },
+          },
         ];
       }
       if (position === "sent") {
@@ -40,6 +51,17 @@ module.exports = class ChatUtil {
               as: "mission",
             },
           },
+          {
+            $project: {
+              missionId: 1,
+              from_user: 1,
+              to_user: 1,
+              notified: 1,
+              last_updated: 1,
+              lastMessage: 1,
+              mission: { subject: { $arrayElemAt: ["$mission.subject", 0] } },
+            },
+          },
         ];
       }
 
@@ -47,7 +69,7 @@ module.exports = class ChatUtil {
         .aggregate(agg)
         .sort({ last_updated: 1 })
         .toArray();
-
+      console.log(chatRooms);
       return chatRooms;
     } catch (err) {
       console.error("Error getting chat rooms --util");
