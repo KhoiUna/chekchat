@@ -1,7 +1,10 @@
 {
-  "name": "server",
+  "name": "chekchat-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "NodeJS server for ChekChat",
+  "engines": {
+    "node": "16.x"
+  },
   "main": "index.js",
   "scripts": {
     "start": "node app.js"
