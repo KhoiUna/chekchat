@@ -34,9 +34,9 @@ export default function ReceivedChat({}) {
 
   return chatRooms.map((item) => (
     <ChatroomTag
-      username={item.from_user.username}
+      username={item.from_user[0].username}
       roomId={item._id}
-      avatarURL={item.from_user.avatarURL}
+      avatarURL={item.from_user[0].avatarURL}
       subject={item.mission[0].subject}
       lastMessage={item.lastMessage}
       notified={item.notified}
