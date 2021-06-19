@@ -32,16 +32,10 @@ module.exports = class NotificationsUtil {
 
   static async saveNotification(userEmail, receiverEmail, type, action) {
     try {
-      //Get sender info
-      const senderInfo = await UsersUtil.getUser(userEmail);
-
-      //Get receiver info
-      const receiverInfo = await UsersUtil.getUser(receiverEmail);
-
       const collection = client.db("chekchat").collection("notifications");
       const response = await collection.insertOne({
-        from_user: senderInfo,
-        to_user: receiverInfo,
+        from_user: await UsersUtil.getUserId(userEmail),
+        to_user: await UsersUtil.getUserId(receiverEmail),
         type,
         text: `${action}ed your ${type} request`,
         clicked: false,

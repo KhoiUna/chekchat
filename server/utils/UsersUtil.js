@@ -107,12 +107,12 @@ module.exports = class UsersUtil {
       const collection = client.db("chekchat").collection("friends");
 
       const addFriendToFirstUser = await collection.insertOne({
-        email: userEmail,
-        friend: await this.getUserId(friendEmail),
+        userId: await this.getUserId(userEmail),
+        friendId: await this.getUserId(friendEmail),
       });
       const addFriendToSecondUser = await collection.insertOne({
-        email: friendEmail,
-        friend: await this.getUserId(userEmail),
+        userId: await this.getUserId(friendEmail),
+        friendId: await this.getUserId(userEmail),
       });
 
       return addFriendToFirstUser && addFriendToSecondUser;

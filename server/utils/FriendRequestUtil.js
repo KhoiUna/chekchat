@@ -8,13 +8,13 @@ module.exports = class FriendRequestUtil {
       const collection = client.db("chekchat").collection("friend_requests");
 
       const response = await collection.insertOne({
-        from: await UsersUtil.getUser(userEmail),
-        to: await UsersUtil.getUser(requestEmail),
+        from: await UsersUtil.getUserId(userEmail),
+        to: await UsersUtil.getUserId(requestEmail),
         status: "Pending",
       });
       return response;
     } catch (err) {
-      console.error("Error saving friend request");
+      console.error("Error saving friend request ---util");
       return null;
     }
   }
@@ -57,7 +57,7 @@ module.exports = class FriendRequestUtil {
 
       return response;
     } catch (err) {
-      console.error("Error deleting friend request");
+      console.error("Error deleting friend request ---util");
       return null;
     }
   }
@@ -76,7 +76,7 @@ module.exports = class FriendRequestUtil {
 
       return false;
     } catch (err) {
-      console.error("Error checking user's friend request");
+      console.error("Error checking user's friend request ---util");
       return null;
     }
   }
@@ -93,7 +93,7 @@ module.exports = class FriendRequestUtil {
         .toArray();
       return friendRequestList;
     } catch (err) {
-      console.error("Error getting friend request list");
+      console.error("Error getting friend request list ---util");
       return null;
     }
   }

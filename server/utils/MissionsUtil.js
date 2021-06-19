@@ -25,7 +25,7 @@ module.exports = class MissionsUtil {
         return missionRequestList;
       }
     } catch (err) {
-      console.error("Error getting mission request");
+      console.error("Error getting mission request ---util");
     }
   }
 
@@ -42,7 +42,7 @@ module.exports = class MissionsUtil {
         .toArray();
       return missionTodoList;
     } catch (err) {
-      console.error("Error getting mission todo list");
+      console.error("Error getting mission todo list ---util");
     }
   }
 
@@ -55,7 +55,7 @@ module.exports = class MissionsUtil {
       });
       return missionInfo;
     } catch (err) {
-      console.error("Error getting mission info");
+      console.error("Error getting mission info ---util");
     }
   }
 
@@ -67,18 +67,12 @@ module.exports = class MissionsUtil {
     description
   ) {
     try {
-      //Get sender info
-      const senderInfo = await UsersUtil.getUser(userEmail);
-
-      //Get receiver info
-      const receiverInfo = await UsersUtil.getUser(receiverEmail);
-
       const collection = client.db("chekchat").collection("missions");
       const response = await collection.insertOne({
         subject,
         due_date: new Date(selectedDate),
-        from: senderInfo,
-        to: receiverInfo,
+        from_user: await UsersUtil.getUserId(userEmail),
+        to_user: await UsersUtil.getUserId(receiverEmail),
         description,
         status: "Pending",
         completed: false,
@@ -88,7 +82,7 @@ module.exports = class MissionsUtil {
       });
       return response;
     } catch (err) {
-      console.error("Error saving mission request");
+      console.error("Error saving mission request ---util");
       return null;
     }
   }
