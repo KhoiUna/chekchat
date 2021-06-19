@@ -15,7 +15,7 @@ module.exports = class UsersUtil {
       });
       return response;
     } catch (err) {
-      console.error("Error saving user");
+      console.error("Error saving user ---util");
       return null;
     }
   }
@@ -29,7 +29,7 @@ module.exports = class UsersUtil {
 
       return false;
     } catch (err) {
-      console.error("Error checking user");
+      console.error("Error checking user ---util");
       return null;
     }
   }
@@ -50,7 +50,7 @@ module.exports = class UsersUtil {
         avatarURL: user.avatarURL,
       };
     } catch (err) {
-      console.error("Error logging in user");
+      console.error("Error logging in user ---util");
     }
   }
 
@@ -66,7 +66,7 @@ module.exports = class UsersUtil {
 
       return false;
     } catch (err) {
-      console.error("Error checking user's friends");
+      console.error("Error checking user's friends ---util");
       return null;
     }
   }
@@ -84,7 +84,21 @@ module.exports = class UsersUtil {
         avatarURL: user.avatarURL,
       };
     } catch (err) {
-      console.error("Error getting user");
+      console.error("Error getting user ---util");
+    }
+  }
+
+  static async getUserId(email) {
+    try {
+      const collection = client.db("chekchat").collection("users");
+
+      const user = await collection.findOne({
+        email,
+      });
+      return user._id;
+    } catch (err) {
+      console.error("Error getting user id ---util");
+      return;
     }
   }
 
@@ -103,7 +117,7 @@ module.exports = class UsersUtil {
 
       return addFriendToFirstUser && addFriendToSecondUser;
     } catch (err) {
-      console.error("Error adding friend to user");
+      console.error("Error adding friend to user ---util");
       return null;
     }
   }
@@ -119,7 +133,7 @@ module.exports = class UsersUtil {
         .toArray();
       return friendList;
     } catch (err) {
-      console.error("Error getting friend list");
+      console.error("Error getting friend list ---util");
       return null;
     }
   }
@@ -150,7 +164,7 @@ module.exports = class UsersUtil {
 
       return response;
     } catch (err) {
-      console.error("Error updating notification count");
+      console.error("Error updating notification count ---util");
     }
   }
 
@@ -164,7 +178,7 @@ module.exports = class UsersUtil {
 
       return notificationCount;
     } catch (err) {
-      console.error("Error getting notification count");
+      console.error("Error getting notification count ---util");
       return null;
     }
   }
@@ -247,7 +261,7 @@ module.exports = class UsersUtil {
 
       return true;
     } catch (err) {
-      console.error("Error updating user avatar --util");
+      console.error("Error updating user avatar ---util");
       return;
     }
   }
