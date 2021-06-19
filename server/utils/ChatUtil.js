@@ -3,7 +3,7 @@ const client = require("../db/client");
 const UsersUtil = require("./UsersUtil");
 
 module.exports = class ChatUtil {
-  static async getChatRooms(userEmail, position) {
+  static async getChatRooms({ userId, position }) {
     try {
       const collection = client.db("chekchat").collection("rooms");
 
@@ -12,7 +12,7 @@ module.exports = class ChatUtil {
         agg = [
           {
             $match: {
-              "to_user.email": userEmail,
+              to_user: ObjectID(userId),
             },
           },
           {
@@ -24,10 +24,34 @@ module.exports = class ChatUtil {
             },
           },
           {
+            $lookup: {
+              from: "users",
+              localField: "from_user",
+              foreignField: "_id",
+              as: "from_user",
+            },
+          },
+          {
+            $lookup: {
+              from: "users",
+              localField: "to_user",
+              foreignField: "_id",
+              as: "to_user",
+            },
+          },
+          {
             $project: {
               missionId: 1,
-              from_user: 1,
-              to_user: 1,
+              from_user: {
+                username: { $arrayElemAt: ["$from_user.username", 0] },
+                email: { $arrayElemAt: ["$from_user.email", 0] },
+                avatarURL: { $arrayElemAt: ["$from_user.avatarURL", 0] },
+              },
+              to_user: {
+                username: { $arrayElemAt: ["$to_user.username", 0] },
+                email: { $arrayElemAt: ["$to_user.email", 0] },
+                avatarURL: { $arrayElemAt: ["$to_user.avatarURL", 0] },
+              },
               notified: 1,
               last_updated: 1,
               lastMessage: 1,
@@ -40,7 +64,7 @@ module.exports = class ChatUtil {
         agg = [
           {
             $match: {
-              "from_user.email": userEmail,
+              from_user: ObjectID(userId),
             },
           },
           {
@@ -52,10 +76,34 @@ module.exports = class ChatUtil {
             },
           },
           {
+            $lookup: {
+              from: "users",
+              localField: "from_user",
+              foreignField: "_id",
+              as: "from_user",
+            },
+          },
+          {
+            $lookup: {
+              from: "users",
+              localField: "to_user",
+              foreignField: "_id",
+              as: "to_user",
+            },
+          },
+          {
             $project: {
               missionId: 1,
-              from_user: 1,
-              to_user: 1,
+              from_user: {
+                username: { $arrayElemAt: ["$from_user.username", 0] },
+                email: { $arrayElemAt: ["$from_user.email", 0] },
+                avatarURL: { $arrayElemAt: ["$from_user.avatarURL", 0] },
+              },
+              to_user: {
+                username: { $arrayElemAt: ["$to_user.username", 0] },
+                email: { $arrayElemAt: ["$to_user.email", 0] },
+                avatarURL: { $arrayElemAt: ["$to_user.avatarURL", 0] },
+              },
               notified: 1,
               last_updated: 1,
               lastMessage: 1,

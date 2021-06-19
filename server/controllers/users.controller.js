@@ -120,10 +120,10 @@ module.exports = class UsersController {
   //chat route
   static async getChatRooms(req, res, next) {
     try {
-      const chatRooms = await ChatUtil.getChatRooms(
-        req.user.email,
-        req.query.position
-      );
+      const chatRooms = await ChatUtil.getChatRooms({
+        userId: req.user.id,
+        position: req.query.position,
+      });
       res.json(chatRooms);
     } catch (err) {
       console.error("Error getting chat rooms");
