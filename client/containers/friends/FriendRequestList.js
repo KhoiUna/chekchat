@@ -38,9 +38,9 @@ export default function FriendRequestList() {
         <Fragment key={index}>
           <FriendRequest
             fromPage="friends"
-            username={item.to.username}
-            email={item.to.email}
-            avatarURL={item.to.avatarURL}
+            username={item.to_user[0].username}
+            email={item.to_user[0].email}
+            avatarURL={item.to_user[0].avatarURL}
             status={item.status}
           />
         </Fragment>
