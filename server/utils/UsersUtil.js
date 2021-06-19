@@ -1,3 +1,4 @@
+const { ObjectID } = require("mongodb");
 const client = require("../db/client");
 const PasswordHelper = require("../helpers/PasswordHelper");
 
@@ -43,6 +44,7 @@ module.exports = class UsersUtil {
         return false;
 
       return {
+        id: user._id,
         username: user.username,
         email: user.email,
         avatarURL: user.avatarURL,
