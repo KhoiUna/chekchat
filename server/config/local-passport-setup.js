@@ -14,6 +14,7 @@ passport.use(
         }
 
         return done(null, {
+          id: userObj.id,
           username: userObj.username,
           email: userObj.email,
           avatarURL: userObj.avatarURL,
