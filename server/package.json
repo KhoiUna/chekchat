@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "NodeJS server for ChekChat",
   "engines": {
-    "node": "16.x"
+    "node": "16.x",
+    "npm": "7.x"
   },
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
