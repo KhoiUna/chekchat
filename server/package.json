@@ -11,7 +11,7 @@
     "start": "node app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Khoi Nguyen",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
