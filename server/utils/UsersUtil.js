@@ -236,39 +236,12 @@ module.exports = class UsersUtil {
           { $set: { "to_user.avatarURL": avatarURL } }
         ));
 
-      const chatRoomCollection = client.db("chekchat").collection("rooms");
-      const chatRoomResponse =
-        (await chatRoomCollection.updateMany(
-          {
-            "from_user.email": userEmail,
-          },
-          { $set: { "from_user.avatarURL": avatarURL } }
-        )) &&
-        (await chatRoomCollection.updateMany(
-          {
-            "to_user.email": userEmail,
-          },
-          { $set: { "to_user.avatarURL": avatarURL } }
-        ));
-
-      const chatMessageCollection = client
-        .db("chekchat")
-        .collection("messages");
-      const chatMessageResponse = await chatMessageCollection.updateMany(
-        {
-          "user.email": userEmail,
-        },
-        { $set: { "user.avatarURL": avatarURL } }
-      );
-
       if (
         !userResponse ||
         !friendResponse ||
         !friendRequestResponse ||
         !missionResponse ||
-        !notificationResponse ||
-        !chatRoomResponse ||
-        !chatMessageResponse
+        !notificationResponse
       )
         return false;
 
