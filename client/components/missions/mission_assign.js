@@ -214,8 +214,8 @@ export default function MissionAssign({ toggleMissionAssign }) {
                   className={classes.selectEmpty}
                 >
                   {friendList.map((i, index) => (
-                    <MenuItem value={i.friend.email} key={index}>
-                      {i.friend.username}
+                    <MenuItem value={i.friend[0].email} key={index}>
+                      {i.friend[0].username}
                     </MenuItem>
                   ))}
                 </Select>
