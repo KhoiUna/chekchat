@@ -168,7 +168,7 @@ export default function Send({}) {
                 <Fragment key={i._id}>
                   <MissionRequest
                     status={i.status}
-                    username={i.to.username}
+                    username={i.to_user[0].username}
                     subject={i.subject}
                     requestId={i._id}
                     sent_date={i.sent_date}

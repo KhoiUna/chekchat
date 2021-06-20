@@ -164,7 +164,7 @@ export default function MissionPopupView({
               <Grid item xs={6}>
                 <TextField
                   id="sender"
-                  value={missionInfo.from?.username}
+                  value={missionInfo.from_user[0].username}
                   InputProps={{
                     readOnly: true,
                   }}
@@ -183,7 +183,7 @@ export default function MissionPopupView({
               <Grid item xs={6}>
                 <TextField
                   id="receiver"
-                  value={missionInfo.to?.username}
+                  value={missionInfo.to_user[0].username}
                   InputProps={{
                     readOnly: true,
                   }}
