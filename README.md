@@ -14,82 +14,54 @@
 
 - Collections' schema:
 
-  - **users** {
-    username,
-    email,
-    password,
-    avatarURL,
-    notificationCount
+  >- **users** {\
+    username,\
+    email,\
+    password,\
+    avatarURL,\
+    notificationCount\
     }
 
-  - **friends** {
-    email,
-    friend: {
-    email,
-    username,
-    avatarURL
-    }
+  >- **friends** {\
+    userId: <_ObjectID ref to users schema_>,\
+    friendId: <_ObjectID ref to users schema_>\
     }
 
-  - **friend_requests** {
-    from: {
-    email,
-    username,
-    avatarURL
-    },
-    to: {
-    email,
-    username,
-    avatarURL
-    },
-    status
+>  - **friend_requests** {\
+    from_user: <_ObjectID ref to users schema_>,\
+    to_user: <_ObjectID ref to users schema_>,\
+    status\
     }
 
-  - **missions** {
-    subject,
-    due_date,
-    from: {
-    email,
-    username,
-    avatarURL
-    },
-    to: {
-    email,
-    username,
-    avatarURL
-    },
-    description,
-    status,
-    completed,
-    starred,
-    visibility,
-    sent_date
+  >- **missions** {\
+    subject,\
+    due_date,\
+    from_user: <_ObjectID ref to users schema_>,\
+    to_user: <_ObjectID ref to users schema_>,\
+    description,\
+    status,\
+    completed,\
+    starred,\
+    visibility,\
+    sent_date\
     }
 
-  - **notifications** {
-    from_user: {
-    email,
-    username,
-    avatarURL,
-    },
-    to_user: {
-    email,
-    username,
-    avatarURL
-    },
-    type,
-    text,
-    clicked,
-    time
+  >- **notifications** {\
+    from_user: <_ObjectID ref to users schema_>,\
+    to_user: <_ObjectID ref to users schema_>,\
+    type,\
+    text,\
+    clicked,\
+    time\
     }
 
-  - **feedbacks** {
-    subject,
-    from_user,
-    submitted_date,
-    comment
+  >- **feedbacks** {\
+    subject,\
+    from_user,\
+    submitted_date,\
+    comment\
     }
 
-  - **sessions** {
-    _store users' cookie sessions_
+  >- **sessions** {\
+    _store users' cookie sessions_\
     }
