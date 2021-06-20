@@ -3,27 +3,95 @@ const client = require("../db/client");
 const { ObjectID } = require("bson");
 
 module.exports = class MissionsUtil {
-  static async getMissionRequest(position, email) {
+  static async getMissionRequest(position, userId) {
     try {
       const collection = client.db("chekchat").collection("missions");
 
+      let agg;
       if (position === "from") {
-        const missionRequestList = await collection
-          .find({
-            "from.email": email,
-            visibility: true,
-          })
-          .toArray();
-        return missionRequestList;
+        agg = [
+          {
+            $match: {
+              from_user: ObjectID(userId),
+              visibility: true,
+            },
+          },
+          {
+            $lookup: {
+              from: "users",
+              localField: "to_user",
+              foreignField: "_id",
+              as: "to_user",
+            },
+          },
+          {
+            $project: {
+              completed: 1,
+              description: 1,
+              due_date: 1,
+              to_user: {
+                username: { $arrayElemAt: ["$to_user.username", 0] },
+                email: { $arrayElemAt: ["$to_user.email", 0] },
+                avatarURL: { $arrayElemAt: ["$to_user.avatarURL", 0] },
+              },
+              sent_date: 1,
+              starred: 1,
+              status: 1,
+              subject: 1,
+              visibility: 1,
+            },
+          },
+        ];
       } else {
-        const missionRequestList = await collection
-          .find({
-            "to.email": email,
-            status: "Pending",
-          })
-          .toArray();
-        return missionRequestList;
+        agg = [
+          {
+            $match: {
+              to_user: ObjectID(userId),
+              status: "Pending",
+            },
+          },
+          {
+            $lookup: {
+              from: "users",
+              localField: "from_user",
+              foreignField: "_id",
+              as: "from_user",
+            },
+          },
+          {
+            $lookup: {
+              from: "users",
+              localField: "to_user",
+              foreignField: "_id",
+              as: "to_user",
+            },
+          },
+          {
+            $project: {
+              completed: 1,
+              description: 1,
+              due_date: 1,
+              from_user: {
+                username: { $arrayElemAt: ["$from_user.username", 0] },
+                email: { $arrayElemAt: ["$from_user.email", 0] },
+                avatarURL: { $arrayElemAt: ["$from_user.avatarURL", 0] },
+              },
+              to_user: {
+                username: { $arrayElemAt: ["$to_user.username", 0] },
+                email: { $arrayElemAt: ["$to_user.email", 0] },
+                avatarURL: { $arrayElemAt: ["$to_user.avatarURL", 0] },
+              },
+              sent_date: 1,
+              starred: 1,
+              status: 1,
+              subject: 1,
+              visibility: 1,
+            },
+          },
+        ];
       }
+      const missionRequestList = await collection.aggregate(agg).toArray();
+      return missionRequestList;
     } catch (err) {
       console.error("Error getting mission request ---util");
     }
@@ -50,9 +118,48 @@ module.exports = class MissionsUtil {
     try {
       const collection = client.db("chekchat").collection("missions");
 
-      const missionInfo = await collection.findOne({
-        _id: ObjectID(requestId),
-      });
+      const cursor = await collection.aggregate([
+        {
+          $match: {
+            _id: ObjectID(requestId),
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "from_user",
+            foreignField: "_id",
+            as: "from_user",
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "to_user",
+            foreignField: "_id",
+            as: "to_user",
+          },
+        },
+        {
+          $project: {
+            from_user: {
+              username: { $arrayElemAt: ["$from_user.username", 0] },
+              email: { $arrayElemAt: ["$from_user.email", 0] },
+              avatarURL: { $arrayElemAt: ["$from_user.avatarURL", 0] },
+            },
+            to_user: {
+              username: { $arrayElemAt: ["$to_user.username", 0] },
+              email: { $arrayElemAt: ["$to_user.email", 0] },
+              avatarURL: { $arrayElemAt: ["$to_user.avatarURL", 0] },
+            },
+            due_date: 1,
+            description: 1,
+            subject: 1,
+          },
+        },
+      ]);
+
+      const missionInfo = await cursor.next();
       return missionInfo;
     } catch (err) {
       console.error("Error getting mission info ---util");

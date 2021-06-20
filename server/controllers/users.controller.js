@@ -163,7 +163,7 @@ module.exports = class UsersController {
 
       const missionRequestList = await MissionsUtil.getMissionRequest(
         position,
-        req.user.email
+        req.user.id
       );
       res.json(missionRequestList);
     } catch (err) {
