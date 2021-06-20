@@ -64,7 +64,7 @@ export default function Todo({}) {
               starred={i.starred}
               subject={i.subject}
               due_date={i.due_date}
-              username={i.from.username}
+              username={i.from_user[0].username}
               missionId={i._id}
               updateMissionState={updateMissionState}
             />
