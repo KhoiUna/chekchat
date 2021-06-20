@@ -7,6 +7,7 @@ const useStyles = makeStyles({
   root: {
     width: "50%",
     maxWidth: "222px",
+    marginTop: "1rem",
   },
 });
 
