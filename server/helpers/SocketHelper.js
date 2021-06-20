@@ -2,7 +2,7 @@ let users = [];
 
 module.exports = {
   subscribeUsers(socketId, userId) {
-    const user = { socketId, userId };
+    const user = { socketId, id: userId };
     users.push(user);
 
     return user;

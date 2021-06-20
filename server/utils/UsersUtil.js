@@ -165,7 +165,7 @@ module.exports = class UsersUtil {
       if (action === "reset") {
         const response = await collection.updateOne(
           {
-            _id: userId,
+            _id: ObjectID(userId),
           },
           { $set: { notificationCount: 0 } }
         );

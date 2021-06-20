@@ -117,8 +117,11 @@ io.on("connection", (socket) => {
   if (userSession) {
     //Subscribe users for events from server
     socket.on("subscribe", () => {
-      const user = SocketHelper.subscribeUsers(socket.id, userSession.id);
-      socket.join(user.userId);
+      const user = SocketHelper.subscribeUsers(
+        socket.id,
+        userSession.id.toString()
+      );
+      socket.join(user.id);
     });
 
     socket.on("check missions", ({ missionId, completed }) => {
@@ -154,8 +157,7 @@ io.on("connection", (socket) => {
       UsersUtil.updateNotificationCount(friendId, "increment");
 
       const actionData = { type: "notification count" };
-      console.log(friendId);
-      io.to(friendId).emit("update", actionData);
+      io.to(friendId.toString()).emit("update", actionData);
     });
 
     socket.on("mission requests", async ({ requestId, action }) => {
