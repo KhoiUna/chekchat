@@ -146,7 +146,7 @@ module.exports = class UsersController {
     try {
       const avatarURL = req.body.avatarPath;
 
-      if (!(await UsersUtil.updateAvatarURL(req.user.email, avatarURL)))
+      if (!(await UsersUtil.updateAvatarURL(req.user.id, avatarURL)))
         return res.status(400).send("Sorry, something is wrong");
 
       res.send("ok");

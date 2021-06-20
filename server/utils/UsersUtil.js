@@ -203,81 +203,17 @@ module.exports = class UsersUtil {
     }
   }
 
-  static async updateAvatarURL(userEmail, avatarURL) {
+  static async updateAvatarURL(userId, avatarURL) {
     try {
       const userCollection = client.db("chekchat").collection("users");
       const userResponse = await userCollection.updateOne(
         {
-          email: userEmail,
+          _id: ObjectID(userId),
         },
         { $set: { avatarURL } }
       );
 
-      const friendCollection = client.db("chekchat").collection("friends");
-      const friendResponse = await friendCollection.updateMany(
-        {
-          "friend.email": userEmail,
-        },
-        { $set: { "friend.avatarURL": avatarURL } }
-      );
-
-      const friendRequestCollection = client
-        .db("chekchat")
-        .collection("friend_requests");
-      const friendRequestResponse =
-        (await friendRequestCollection.updateMany(
-          {
-            "from.email": userEmail,
-          },
-          { $set: { "from.avatarURL": avatarURL } }
-        )) &&
-        (await friendRequestCollection.updateMany(
-          {
-            "to.email": userEmail,
-          },
-          { $set: { "to.avatarURL": avatarURL } }
-        ));
-
-      const missionCollection = client.db("chekchat").collection("missions");
-      const missionResponse =
-        (await missionCollection.updateMany(
-          {
-            "from.email": userEmail,
-          },
-          { $set: { "from.avatarURL": avatarURL } }
-        )) &&
-        (await missionCollection.updateMany(
-          {
-            "to.email": userEmail,
-          },
-          { $set: { "to.avatarURL": avatarURL } }
-        ));
-
-      const notificationCollection = client
-        .db("chekchat")
-        .collection("notifications");
-      const notificationResponse =
-        (await notificationCollection.updateMany(
-          {
-            "from_user.email": userEmail,
-          },
-          { $set: { "from_user.avatarURL": avatarURL } }
-        )) &&
-        (await notificationCollection.updateMany(
-          {
-            "to_user.email": userEmail,
-          },
-          { $set: { "to_user.avatarURL": avatarURL } }
-        ));
-
-      if (
-        !userResponse ||
-        !friendResponse ||
-        !friendRequestResponse ||
-        !missionResponse ||
-        !notificationResponse
-      )
-        return false;
+      if (!userResponse) return false;
 
       return true;
     } catch (err) {
