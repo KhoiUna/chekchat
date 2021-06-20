@@ -97,15 +97,44 @@ module.exports = class MissionsUtil {
     }
   }
 
-  static async getMissionTodoList(userEmail) {
+  static async getMissionTodoList(userId) {
     try {
       const collection = client.db("chekchat").collection("missions");
 
       const missionTodoList = await collection
-        .find({
-          "to.email": userEmail,
-          status: "Accepted",
-        })
+        .aggregate([
+          {
+            $match: {
+              to_user: userId,
+              status: "Accepted",
+            },
+          },
+          {
+            $lookup: {
+              from: "users",
+              localField: "from_user",
+              foreignField: "_id",
+              as: "from_user",
+            },
+          },
+          {
+            $project: {
+              completed: 1,
+              description: 1,
+              due_date: 1,
+              from_user: {
+                username: { $arrayElemAt: ["$from_user.username", 0] },
+                email: { $arrayElemAt: ["$from_user.email", 0] },
+                avatarURL: { $arrayElemAt: ["$from_user.avatarURL", 0] },
+              },
+              sent_date: 1,
+              starred: 1,
+              status: 1,
+              subject: 1,
+              visibility: 1,
+            },
+          },
+        ])
         .sort({ due_date: 1 })
         .toArray();
       return missionTodoList;
@@ -211,10 +240,10 @@ module.exports = class MissionsUtil {
       const response = await collection.findOne({
         _id: ObjectID(requestId),
       });
-      const senderEmail = response.from.email;
-      const receiverEmail = response.to.email;
+      const senderId = response.from_user;
+      const receiverId = response.to_user;
 
-      return { senderEmail, receiverEmail };
+      return { senderId, receiverId };
     } catch (err) {
       console.error("Error updating mission request --- utils");
       return null;

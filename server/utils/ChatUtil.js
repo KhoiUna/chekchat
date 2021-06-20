@@ -125,14 +125,14 @@ module.exports = class ChatUtil {
     }
   }
 
-  static async createChatRoom({ requestId, senderEmail, receiverEmail }) {
+  static async createChatRoom({ requestId, senderId, receiverId }) {
     try {
       const collection = client.db("chekchat").collection("rooms");
 
       const response = await collection.insertOne({
         missionId: ObjectID(requestId),
-        from_user: await UsersUtil.getUserId(senderEmail),
-        to_user: await UsersUtil.getUserId(receiverEmail),
+        from_user: ObjectID(senderId),
+        to_user: ObjectID(receiverId),
         notified: false,
         last_updated: new Date(new Date().toUTCString()),
         lastMessage: "Let's start your discussion!",

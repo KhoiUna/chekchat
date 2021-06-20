@@ -255,7 +255,7 @@ module.exports = class UsersController {
   static async getMissionTodoList(req, res, next) {
     try {
       const missionTodoList = await MissionsUtil.getMissionTodoList(
-        req.user.email
+        req.user.id
       );
       res.json(missionTodoList);
     } catch (err) {
