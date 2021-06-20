@@ -36,6 +36,7 @@ module.exports = class FriendRequestUtil {
       const response = await collection.findOne({
         _id: ObjectID(requestId),
       });
+
       const friendId = response.from_user;
       const userId = response.to_user;
 
