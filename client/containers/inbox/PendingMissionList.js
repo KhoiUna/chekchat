@@ -44,7 +44,7 @@ export default function PendingMissionList({}) {
           <InboxMissionRequest
             key={index}
             requestId={i._id}
-            username={i.from.username}
+            username={i.from_user[0].username}
             subject={i.subject}
             onClickAction={handleClick}
           />
