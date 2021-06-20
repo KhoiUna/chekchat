@@ -14,6 +14,7 @@ import UsersUtil from "../utils/UsersUtil";
 import { useState } from "react";
 import Image from "next/image";
 import imageLoader from "../helpers/imageLoader";
+import ProgressBar from "../components/progress_bar";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -32,7 +33,17 @@ export default function Profile() {
   const { username, avatarURL } = useSelector(selectUserInfo);
 
   const [open, setOpen] = useState(false);
-  const openSnackbar = () => {
+  const [snackbarSeverity, setSnackbarSeverity] = useState("");
+  const [snackbarText, setSnackbarText] = useState("");
+  const openSnackbar = (status) => {
+    if (status === "error") {
+      setSnackbarSeverity("error");
+      setSnackbarText("Sorry, there is an error updating avatar");
+    }
+    if (status === "success") {
+      setSnackbarSeverity("success");
+      setSnackbarText("Avatar is successfully updated!");
+    }
     setOpen(true);
   };
   const closeSnackbar = (e, reason) => {
@@ -42,18 +53,41 @@ export default function Profile() {
     setOpen(false);
   };
 
-  const onError = (err) => {
-    console.error("Error updating user avatar");
+  const [showProgress, setShowProgress] = useState(false);
+  const [progressValue, setProgressValue] = useState(0);
+  const showProgressBar = (status) => {
+    if (status !== "success" && status !== "error")
+      return setShowProgress(status);
+
+    if (status === "success") {
+      setProgressValue(100);
+      return setTimeout(() => {
+        showProgressBar(false);
+        setProgressValue(0);
+      }, 1000);
+    }
+    if (status === "error") {
+      setProgressValue(50);
+    }
+    return setTimeout(() => {
+      showProgressBar(false);
+      setProgressValue(0);
+    }, 1000);
   };
 
-  const [snackbarText, setSnackbarText] = useState("");
+  const onError = (err) => {
+    console.error("Error updating user avatar");
+    openSnackbar("error");
+    showProgressBar("error");
+  };
+
   const onSuccess = async (res) => {
     if (res.fileType === "image") {
       const avatarPath = res.filePath;
       if (await UsersUtil.updateUserAvatar(avatarPath)) {
         dispatch(updateAvatarURL(avatarPath));
-        setSnackbarText("Avatar is successfully updated!");
-        openSnackbar();
+        openSnackbar("success");
+        showProgressBar("success");
       }
     }
   };
@@ -67,7 +101,7 @@ export default function Profile() {
         onClose={closeSnackbar}
         autoHideDuration={3000}
       >
-        <Alert onClose={closeSnackbar} severity="success">
+        <Alert onClose={closeSnackbar} severity={snackbarSeverity}>
           {snackbarText}
         </Alert>
       </Snackbar>
@@ -87,24 +121,29 @@ export default function Profile() {
         />
       </div>
 
-      <IKContext
-        publicKey={process.env.NEXT_PUBLIC_IMGKIT_PUBLIC_KEY}
-        urlEndpoint={process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}
-        authenticationEndpoint={`${origin}/api/user/profile/updateAvatar/auth`}
-      >
-        <MuiThemeProvider theme={buttonTheme}>
-          <Button color="primary">
-            Change avatar
-            <IKUpload
-              fileName="user_avatar.png"
-              onError={onError}
-              onSuccess={onSuccess}
-              folder={"/chekchat_upload"}
-              style={{ position: "absolute" }}
-            />
-          </Button>
-        </MuiThemeProvider>
-      </IKContext>
+      {showProgress ? (
+        <ProgressBar progressValue={progressValue} />
+      ) : (
+        <IKContext
+          publicKey={process.env.NEXT_PUBLIC_IMGKIT_PUBLIC_KEY}
+          urlEndpoint={process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}
+          authenticationEndpoint={`${origin}/api/user/profile/updateAvatar/auth`}
+        >
+          <MuiThemeProvider theme={buttonTheme}>
+            <Button color="primary">
+              Change avatar
+              <IKUpload
+                fileName="user_avatar.png"
+                onError={onError}
+                onSuccess={onSuccess}
+                folder={"/chekchat_upload"}
+                style={{ position: "absolute" }}
+                onChange={() => showProgressBar(true)}
+              />
+            </Button>
+          </MuiThemeProvider>
+        </IKContext>
+      )}
       <br />
 
       <TextField
