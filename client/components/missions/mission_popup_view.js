@@ -19,6 +19,7 @@ import Dialog from "@material-ui/core/Dialog";
 import Toolbar from "@material-ui/core/Toolbar";
 import Slide from "@material-ui/core/Slide";
 import { buttonTheme } from "../../themes/theme";
+import Link from "next/link";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -61,6 +62,8 @@ export default function MissionPopupView({
   toggleMissionPopupView,
   fromPage,
   onClickAction,
+  status,
+  chatroomId,
 }) {
   const classes = useStyles();
 
@@ -216,7 +219,7 @@ export default function MissionPopupView({
           </Grid>
         )}
 
-        {missionInfo && fromPage === "inbox" ? (
+        {missionInfo && fromPage === "inbox" && (
           <div className={classes.alignRight}>
             <Button
               variant="contained"
@@ -243,7 +246,25 @@ export default function MissionPopupView({
               </Button>
             </MuiThemeProvider>
           </div>
-        ) : null}
+        )}
+
+        {missionInfo &&
+          (fromPage === "send" || fromPage === "todo") &&
+          status === "Accepted" && (
+            <div className={classes.alignRight}>
+              <MuiThemeProvider theme={buttonTheme}>
+                <Link href={`/chat/${missionInfo.chatroomId}`}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={utilStyles.button}
+                  >
+                    <b>Go to task chat</b>
+                  </Button>
+                </Link>
+              </MuiThemeProvider>
+            </div>
+          )}
 
         {!missionInfo && (
           <Grid

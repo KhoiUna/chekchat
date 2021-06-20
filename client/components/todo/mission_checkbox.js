@@ -65,6 +65,7 @@ export default function MissionCheckbox({
   due_date,
   username,
   updateMissionState,
+  status,
 }) {
   const classes = useStyles();
 
@@ -162,6 +163,7 @@ export default function MissionCheckbox({
           requestId={missionId}
           toggleMissionPopupView={toggleMissionPopupView}
           fromPage="todo"
+          status={status}
         />
       )}
     </>

@@ -67,6 +67,7 @@ export default function Todo({}) {
               username={i.from_user[0].username}
               missionId={i._id}
               updateMissionState={updateMissionState}
+              status={i.status}
             />
           </Fragment>
         ))}

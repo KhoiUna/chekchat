@@ -170,6 +170,14 @@ module.exports = class MissionsUtil {
           },
         },
         {
+          $lookup: {
+            from: "rooms",
+            localField: "_id",
+            foreignField: "missionId",
+            as: "chatroomId",
+          },
+        },
+        {
           $project: {
             from_user: {
               username: { $arrayElemAt: ["$from_user.username", 0] },
@@ -184,6 +192,10 @@ module.exports = class MissionsUtil {
             due_date: 1,
             description: 1,
             subject: 1,
+            status: 1,
+            chatroomId: {
+              $arrayElemAt: ["$chatroomId._id", 0],
+            },
           },
         },
       ]);
