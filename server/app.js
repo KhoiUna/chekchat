@@ -162,28 +162,23 @@ io.on("connection", (socket) => {
 
     socket.on("mission requests", async ({ requestId, action }) => {
       //Update mission request
-      const { senderEmail, receiverEmail } = await MissionsUtil.updateRequest(
+      const { senderId, receiverId } = await MissionsUtil.updateRequest(
         requestId,
         action
       );
 
       //Create notification
-      NotificationsUtil.saveNotification(
-        receiverEmail,
-        senderEmail,
-        "task",
-        action
-      );
+      NotificationsUtil.saveNotification(receiverId, senderId, "task", action);
 
       if (action === "accept") {
-        ChatUtil.createChatRoom({ requestId, senderEmail, receiverEmail });
+        ChatUtil.createChatRoom({ requestId, senderId, receiverId });
       }
 
       //Increment notification count for user
-      UsersUtil.updateNotificationCount(senderEmail, "increment");
+      UsersUtil.updateNotificationCount(senderId, "increment");
 
       const actionData = { type: "notification count" };
-      io.to(senderEmail).emit("update", actionData);
+      io.to(senderId.toString()).emit("update", actionData);
     });
   }
 
