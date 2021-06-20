@@ -14,7 +14,7 @@ import Badge from "@material-ui/core/Badge";
 const useStyles = makeStyles({
   gridColumn: {
     display: "grid",
-    gridTemplateColumns: "1fr 2fr 1fr",
+    gridTemplateColumns: "0.6fr 2.5fr 1fr",
     margin: "1rem 0",
     padding: "0 2%",
     cursor: "pointer",
@@ -24,12 +24,15 @@ const useStyles = makeStyles({
     display: "grid",
     gridTemplateRows: "1fr 1fr",
     textAlign: "left",
-    margin: 0,
+    margin: "auto 1rem",
   },
   overflowText: {
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
+  },
+  badge: {
+    margin: "auto",
   },
 });
 
@@ -39,7 +42,6 @@ const badgeTheme = createMuiTheme({
       dot: {
         width: "1rem",
         borderRadius: "100%",
-        marginTop: "2rem",
         height: null,
         minWidth: null,
       },
@@ -60,7 +62,7 @@ export default function ChatroomTag({
   return (
     <Link href={`/chat/${roomId || 1}`}>
       <Grid container justify="center" className={classes.gridColumn}>
-        <div className={utilStyles.image}>
+        <div style={{ borderRadius: "100%", margin: "auto" }}>
           <Image
             loader={imageLoader}
             priority
@@ -88,9 +90,11 @@ export default function ChatroomTag({
         </div>
 
         {notified && (
-          <MuiThemeProvider theme={badgeTheme}>
-            <Badge variant="dot" color="primary" />
-          </MuiThemeProvider>
+          <div className={classes.badge}>
+            <MuiThemeProvider theme={badgeTheme}>
+              <Badge variant="dot" color="primary" />
+            </MuiThemeProvider>
+          </div>
         )}
       </Grid>
     </Link>
