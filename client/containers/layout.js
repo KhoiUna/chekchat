@@ -25,7 +25,10 @@ export default function Layout({ children, componentName }) {
           property="og:image"
           content="https://www.chekchat.xyz/logo192.png"
         />
-        <link rel="canonical" href="https://chekchat.xyz/" />
+        <link
+          rel="canonical"
+          href={`https://chekchat.xyz/${componentName.toLowerCase()}`}
+        />
         <link rel="image_src" href="/logo192.png" />
         <link rel="apple-touch-icon" href="/logo192.png" />
         <link rel="manifest" href="/manifest.json" />
