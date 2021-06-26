@@ -21,5 +21,6 @@
   "start_url": "/login",
   "display": "standalone",
   "theme_color": "#0db3ff",
-  "background_color": "#0db3ff"
+  "background_color": "#0db3ff",
+  "screenshots": []
 }
