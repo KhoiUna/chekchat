@@ -3,6 +3,7 @@
   "name": "ChekChat",
   "description": "The app for assigning tasks",
   "categories": ["chat", "social", "productivity"],
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "favicon.ico",
