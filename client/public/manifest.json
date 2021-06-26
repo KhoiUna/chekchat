@@ -1,6 +1,8 @@
 {
   "short_name": "ChekChat",
-  "name": "ChekChat | The app for assigning tasks",
+  "name": "ChekChat",
+  "description": "The app for assigning tasks",
+  "categories": ["chat", "social", "productivity"],
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,17 +10,30 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "/images/192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {      
+      "src": "/images/512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+    {
+      "purpose": "maskable",
+      "src": "/images/192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "logo512.png",
+      "purpose": "maskable",
+      "src": "/images/512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
   "start_url": "/login",
+  "scope": "/",
   "display": "standalone",
   "theme_color": "#0db3ff",
   "background_color": "#0db3ff",
