@@ -75,11 +75,11 @@ export default function MainLayout({ children, componentName }) {
         />
         <meta
           property="og:image"
-          content="https://www.chekchat.xyz/logo192.png"
+          content="https://www.chekchat.xyz/images/192x192.png"
         />
         <link rel="canonical" href="https://chekchat.xyz" />
-        <link rel="image_src" href="/logo192.png" />
-        <link rel="apple-touch-icon" href="/logo192.png" />
+        <link rel="image_src" href="/images/192x192.png" />
+        <link rel="apple-touch-icon" href="/images/192x192.png" />
         <link rel="manifest" href="/manifest.json" />
         <title>ChekChat | {componentName}</title>
       </Head>
