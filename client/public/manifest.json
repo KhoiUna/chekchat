@@ -10,24 +10,24 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "/images/192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
-    {      
-      "src": "logo512.png",
+    {
+      "src": "/images/512x512.png",
       "type": "image/png",
       "sizes": "512x512"
-    }
+    },
     {
       "purpose": "maskable",
-      "src": "logo192.png",
+      "src": "/images/192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
       "purpose": "maskable",
-      "src": "logo512.png",
+      "src": "/images/512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
