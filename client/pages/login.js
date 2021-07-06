@@ -46,7 +46,13 @@ export default function Login() {
         body: JSON.stringify(data),
       });
 
-      if (res.ok === false) setResponseText("Invalid email or password");
+      if (res.ok === false) {
+        setData((prev) => ({
+          ...prev,
+          password: "",
+        }));
+        setResponseText("Invalid email or password");
+      }
       if (res.ok === true) {
         router.push("/inbox");
       }
