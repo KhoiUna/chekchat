@@ -69,7 +69,9 @@ export default function MissionPopupView({
 
   const [missionInfo, setMissionInfo] = useState(null);
   useEffect(() => {
-    MissionsUtil.fetchMissionInfo(requestId).then((r) => setMissionInfo(r));
+    MissionsUtil.fetchMissionInfo(requestId)
+      .then((r) => setMissionInfo(r))
+      .catch((err) => console.error("Error fetching mission info"));
   }, []);
 
   return (
@@ -218,7 +220,7 @@ export default function MissionPopupView({
 
             <Grid
               container
-              justifyContent="left"
+              justifyContent="flex-start"
               className={classes.gridContainer}
             >
               <Grid item xs={6}>
