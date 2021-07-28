@@ -48,10 +48,12 @@ export default function Send({}) {
   const [filteredSentMissionList, setFilteredSentMissionList] = useState(null);
   useEffect(() => {
     if (!missionAssign)
-      MissionsUtil.fetchMissionRequestsList("from").then((r) => {
-        setSentMissionList(r);
-        setFilteredSentMissionList(r);
-      });
+      MissionsUtil.fetchMissionRequestsList("from")
+        .then((r) => {
+          setSentMissionList(r);
+          setFilteredSentMissionList(r);
+        })
+        .catch((err) => console.error("Error fetching sent mission list"));
   }, [missionAssign]);
 
   const filterSentMissionList = (status) => {

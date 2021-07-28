@@ -66,7 +66,11 @@ export default function MissionAssign({ toggleMissionAssign }) {
 
   const [friendList, setFriendList] = useState([]);
   useEffect(() => {
-    FriendsUtil.fetchFriendList().then((r) => setFriendList(r));
+    FriendsUtil.fetchFriendList()
+      .then((r) => setFriendList(r))
+      .catch((err) =>
+        console.error("Error fetching friend list for selections")
+      );
   }, []);
 
   const [selectedDate, setSelectedDate] = useState(null);
@@ -255,7 +259,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
                 label="Task description"
                 name="task description"
                 multiline
-                rowsMin={3}
+                rowsmin={3}
                 maxRows={10}
                 aria-label="describe your task"
                 placeholder="Describe your task here"

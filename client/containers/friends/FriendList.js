@@ -8,7 +8,9 @@ import Grid from "@material-ui/core/Grid";
 export default function FriendList() {
   const [friendList, setFriendList] = useState(null);
   useEffect(() => {
-    FriendsUtil.fetchFriendList().then((r) => setFriendList(r));
+    FriendsUtil.fetchFriendList()
+      .then((r) => setFriendList(r))
+      .catch((err) => console.error("Error fetching friend list"));
   }, []);
 
   if (friendList?.length === 0)
