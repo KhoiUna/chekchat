@@ -55,3 +55,39 @@
 .uploadedAvatar {
   margin: 5% 0 1% 0;
 }
+
+.chat_room {
+  width: 100%;
+  background-color: #f1f1f1;
+  display: grid;
+  grid-template-rows: 15fr 1fr;
+  overflow: hidden;
+}
+
+.send_bar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  max-height: 160px;
+  overflow-y: auto;
+  display: flex;
+  padding-bottom: 2%;
+}
+
+.send_form {
+  -webkit-user-modify: read-write-plaintext-only;
+  background-color: #fff;
+  width: 60rem;
+  padding: 0.7rem;
+  border-radius: 12px;
+  margin: 0 auto auto auto;
+  text-align: left;
+}
+.send_form:focus {
+  outline: none;
+}
+.send_form:empty:before {
+  content: attr(placeholder);
+  color: #787878;
+}
