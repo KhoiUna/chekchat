@@ -45,7 +45,7 @@ export default function Inbox({}) {
         <Grid
           container
           direction="column"
-          justify="center"
+          justifyContent="center"
           alignItems="center"
           style={{ marginBottom: "5rem" }}
         >
@@ -55,7 +55,7 @@ export default function Inbox({}) {
         <Grid
           container
           direction="column"
-          justify="center"
+          justifyContent="center"
           alignItems="center"
           style={{ marginBottom: "5rem" }}
         >

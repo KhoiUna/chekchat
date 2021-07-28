@@ -130,11 +130,15 @@ export default function MissionAssign({ toggleMissionAssign }) {
         <Grid
           container
           direction="column"
-          justify="center"
+          justifyContent="center"
           alignItems="flex-start"
           style={{ marginTop: "4rem" }}
         >
-          <Grid container justify="center" className={classes.gridContainer}>
+          <Grid
+            container
+            justifyContent="center"
+            className={classes.gridContainer}
+          >
             <Grid item xs={6}>
               <Typography gutterBottom variant="inherit" component="h3">
                 Subject:
@@ -155,7 +159,11 @@ export default function MissionAssign({ toggleMissionAssign }) {
             </Grid>
           </Grid>
 
-          <Grid container justify="center" className={classes.gridContainer}>
+          <Grid
+            container
+            justifyContent="center"
+            className={classes.gridContainer}
+          >
             <Grid item xs={6}>
               <Typography gutterBottom variant="inherit" component="h3">
                 Due date:
@@ -175,7 +183,11 @@ export default function MissionAssign({ toggleMissionAssign }) {
             </Grid>
           </Grid>
 
-          <Grid container justify="center" className={classes.gridContainer}>
+          <Grid
+            container
+            justifyContent="center"
+            className={classes.gridContainer}
+          >
             <Grid item xs={6}>
               <Typography gutterBottom variant="inherit" component="h3">
                 Time:
@@ -196,7 +208,11 @@ export default function MissionAssign({ toggleMissionAssign }) {
             </Grid>
           </Grid>
 
-          <Grid container justify="center" className={classes.gridContainer}>
+          <Grid
+            container
+            justifyContent="center"
+            className={classes.gridContainer}
+          >
             <Grid item xs={6}>
               <Typography gutterBottom variant="inherit" component="h3">
                 Send to:
@@ -223,7 +239,11 @@ export default function MissionAssign({ toggleMissionAssign }) {
             </Grid>
           </Grid>
 
-          <Grid container justify="center" className={classes.gridContainer}>
+          <Grid
+            container
+            justifyContent="center"
+            className={classes.gridContainer}
+          >
             <Grid item xs={6}>
               <Typography gutterBottom variant="inherit" component="h3">
                 Description:
@@ -248,7 +268,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
             </Grid>
           </Grid>
 
-          <Grid container justify="center">
+          <Grid container justifyContent="center">
             <Grid item xs={12} className={classes.alignRight}>
               <Button
                 variant="contained"

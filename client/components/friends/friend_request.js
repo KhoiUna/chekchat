@@ -1,7 +1,7 @@
 import {
   makeStyles,
   MuiThemeProvider,
-  createMuiTheme,
+  createTheme,
 } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -49,7 +49,7 @@ const useStyles = makeStyles({
   },
 });
 
-const friendRequestButtonTheme = createMuiTheme({
+const friendRequestButtonTheme = createTheme({
   palette: {
     primary: { main: "#2cb32c" },
   },

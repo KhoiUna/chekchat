@@ -39,11 +39,21 @@ export default function Chat({}) {
       </MuiThemeProvider>
 
       {value === 0 ? (
-        <Grid container direction="column" justify="center" alignItems="center">
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
           <ReceivedChat />
         </Grid>
       ) : (
-        <Grid container direction="column" justify="center" alignItems="center">
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+        >
           <SentChat />
         </Grid>
       )}

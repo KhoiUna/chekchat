@@ -56,7 +56,12 @@ export default function Todo({}) {
   return (
     <MainLayout componentName="Todo">
       <SortButton sortTodoList={sortTodoList} />
-      <Grid container direction="column" justify="center" alignItems="center">
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+      >
         {missionTodoList.map((i) => (
           <Fragment key={i._id}>
             <MissionCheckbox

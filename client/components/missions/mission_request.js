@@ -1,5 +1,5 @@
 import {
-  createMuiTheme,
+  createTheme,
   MuiThemeProvider,
   makeStyles,
 } from "@material-ui/core/styles";
@@ -49,7 +49,7 @@ const useStyles = makeStyles({
   },
 });
 
-const badgeTheme = createMuiTheme({
+const badgeTheme = createTheme({
   overrides: {
     MuiBadge: {
       colorSecondary: {

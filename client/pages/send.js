@@ -160,7 +160,7 @@ export default function Send({}) {
             <Grid
               container
               direction="row"
-              justify="center"
+              justifyContent="center"
               alignItems="center"
               style={{ marginBottom: "4rem" }}
             >

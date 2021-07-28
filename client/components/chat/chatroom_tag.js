@@ -1,5 +1,5 @@
 import {
-  createMuiTheme,
+  createTheme,
   makeStyles,
   MuiThemeProvider,
 } from "@material-ui/core/styles";
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
   },
 });
 
-const badgeTheme = createMuiTheme({
+const badgeTheme = createTheme({
   overrides: {
     MuiBadge: {
       dot: {
@@ -61,7 +61,7 @@ export default function ChatroomTag({
 
   return (
     <Link href={`/chat/${roomId || 1}`}>
-      <Grid container justify="center" className={classes.gridColumn}>
+      <Grid container justifyContent="center" className={classes.gridColumn}>
         <div style={{ borderRadius: "100%", margin: "auto" }}>
           <Image
             loader={imageLoader}

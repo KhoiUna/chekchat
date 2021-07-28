@@ -16,7 +16,7 @@ export default function FriendList() {
       <Grid
         container
         direction="column"
-        justify="center"
+        justifyContent="center"
         alignItems="center"
         style={{ marginBottom: "5rem" }}
       >
@@ -28,7 +28,7 @@ export default function FriendList() {
     <Grid
       container
       direction="row"
-      justify="center"
+      justifyContent="center"
       alignItems="center"
       style={{ marginBottom: "5rem" }}
     >

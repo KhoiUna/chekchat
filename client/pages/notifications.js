@@ -43,7 +43,12 @@ export default function Notifications({}) {
 
   return (
     <MainLayout componentName="Notifications">
-      <Grid container direction="column" justify="center" alignItems="center">
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+      >
         {notificationList.map((i, index) => (
           <Fragment key={index}>
             <NotificationAlert

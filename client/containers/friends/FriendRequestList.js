@@ -18,7 +18,7 @@ export default function FriendRequestList() {
       <Grid
         container
         direction="column"
-        justify="center"
+        justifyContent="center"
         alignItems="center"
         style={{ marginBottom: "5rem" }}
       >
@@ -30,7 +30,7 @@ export default function FriendRequestList() {
     <Grid
       container
       direction="row"
-      justify="center"
+      justifyContent="center"
       alignItems="center"
       style={{ marginBottom: "5rem" }}
     >

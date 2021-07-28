@@ -1,7 +1,7 @@
 import {
   makeStyles,
   MuiThemeProvider,
-  createMuiTheme,
+  createTheme,
 } from "@material-ui/core/styles";
 import { useEffect, useState, forwardRef } from "react";
 import Grid from "@material-ui/core/Grid";
@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const theme = createMuiTheme({
+const theme = createTheme({
   overrides: {
     MuiFormControl: {
       root: {
@@ -98,11 +98,15 @@ export default function MissionPopupView({
           <Grid
             container
             direction="column"
-            justify="center"
+            justifyContent="center"
             alignItems="flex-start"
             style={{ marginTop: "4rem" }}
           >
-            <Grid container justify="center" className={classes.gridContainer}>
+            <Grid
+              container
+              justifyContent="center"
+              className={classes.gridContainer}
+            >
               <Grid item xs={6}>
                 <Typography gutterBottom variant="inherit" component="h3">
                   Subject:
@@ -122,7 +126,11 @@ export default function MissionPopupView({
               </Grid>
             </Grid>
 
-            <Grid container justify="center" className={classes.gridContainer}>
+            <Grid
+              container
+              justifyContent="center"
+              className={classes.gridContainer}
+            >
               <Grid item xs={6}>
                 <Typography gutterBottom variant="inherit" component="h3">
                   Due date:
@@ -139,7 +147,11 @@ export default function MissionPopupView({
               </Grid>
             </Grid>
 
-            <Grid container justify="center" className={classes.gridContainer}>
+            <Grid
+              container
+              justifyContent="center"
+              className={classes.gridContainer}
+            >
               <Grid item xs={6}>
                 <Typography gutterBottom variant="inherit" component="h3">
                   Time:
@@ -158,7 +170,11 @@ export default function MissionPopupView({
               </Grid>
             </Grid>
 
-            <Grid container justify="center" className={classes.gridContainer}>
+            <Grid
+              container
+              justifyContent="center"
+              className={classes.gridContainer}
+            >
               <Grid item xs={6}>
                 <Typography gutterBottom variant="inherit" component="h3">
                   From:
@@ -177,7 +193,11 @@ export default function MissionPopupView({
               </Grid>
             </Grid>
 
-            <Grid container justify="center" className={classes.gridContainer}>
+            <Grid
+              container
+              justifyContent="center"
+              className={classes.gridContainer}
+            >
               <Grid item xs={6}>
                 <Typography gutterBottom variant="inherit" component="h3">
                   To:
@@ -196,7 +216,11 @@ export default function MissionPopupView({
               </Grid>
             </Grid>
 
-            <Grid container justify="left" className={classes.gridContainer}>
+            <Grid
+              container
+              justifyContent="left"
+              className={classes.gridContainer}
+            >
               <Grid item xs={6}>
                 <Typography gutterBottom variant="inherit" component="h3">
                   Description:
@@ -270,7 +294,7 @@ export default function MissionPopupView({
           <Grid
             container
             direction="column"
-            justify="center"
+            justifyContent="center"
             alignItems="center"
             style={{ marginTop: "4rem" }}
           >

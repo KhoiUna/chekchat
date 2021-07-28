@@ -1,25 +1,25 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 import HUE from "@material-ui/core/colors/blue";
 
-export const loginRegisterTheme = createMuiTheme({
+export const loginRegisterTheme = createTheme({
   palette: {
     primary: { main: HUE[800], contrastText: "#fff" },
   },
 });
 
-export const appTheme = createMuiTheme({
+export const appTheme = createTheme({
   palette: {
     primary: { main: HUE[700], contrastText: HUE[700] },
   },
 });
 
-export const buttonTheme = createMuiTheme({
+export const buttonTheme = createTheme({
   palette: {
     primary: { main: HUE[500], contrastText: "#fff" },
   },
 });
 
-export const progressTheme = createMuiTheme({
+export const progressTheme = createTheme({
   overrides: {
     MuiCircularProgress: {
       root: {

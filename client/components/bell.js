@@ -17,7 +17,7 @@ export default function Bell({ componentName, notificationCount }) {
               horizontal: "right",
             }}
             max={99}
-            overlap="circle"
+            overlap="circular"
             className={utilStyles.icon}
           >
             <NotificationsIcon style={{ fontSize: "2rem" }} />

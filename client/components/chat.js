@@ -17,7 +17,7 @@ export default function Chat({ componentName, notificationCount }) {
               horizontal: "right",
             }}
             max={99}
-            overlap="circle"
+            overlap="circular"
             className={utilStyles.icon}
           >
             <QuestionAnswerIcon style={{ fontSize: "2rem" }} />

@@ -69,7 +69,7 @@ export default function Login() {
             <Grid
               container
               direction="column"
-              justify="center"
+              justifyContent="center"
               alignItems="center"
               spacing={1}
               className={utilStyles.grid}
