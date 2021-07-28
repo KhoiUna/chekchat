@@ -101,7 +101,7 @@ export default function Feedback({}) {
             placeholder="Write the steps here"
             multiline
             rows={4}
-            rowsMax={7}
+            maxRows={7}
             variant="filled"
             className={classes.cardContent}
             value={feedback.comment}

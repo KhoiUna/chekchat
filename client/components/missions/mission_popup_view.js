@@ -76,7 +76,7 @@ export default function MissionPopupView({
     <MuiThemeProvider theme={{ ...theme, ...buttonTheme }}>
       <Dialog
         fullScreen
-        open={open}
+        open={true}
         onClose={toggleMissionPopupView}
         TransitionComponent={Transition}
       >
@@ -120,7 +120,7 @@ export default function MissionPopupView({
                   InputProps={{
                     readOnly: true,
                   }}
-                  rowsMax={5}
+                  maxRows={5}
                   multiline
                 />
               </Grid>
@@ -188,7 +188,7 @@ export default function MissionPopupView({
                     readOnly: true,
                   }}
                   multiline
-                  rowsMax={3}
+                  maxRows={3}
                 />
               </Grid>
             </Grid>
@@ -211,7 +211,7 @@ export default function MissionPopupView({
                     readOnly: true,
                   }}
                   multiline
-                  rowsMax={3}
+                  maxRows={3}
                 />
               </Grid>
             </Grid>
@@ -236,7 +236,7 @@ export default function MissionPopupView({
                 InputProps={{
                   readOnly: true,
                 }}
-                rowsMax={15}
+                maxRows={15}
                 multiline
               />
             </Grid>

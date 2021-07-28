@@ -109,7 +109,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
     <MuiThemeProvider theme={buttonTheme}>
       <Dialog
         fullScreen
-        open={open}
+        open={true}
         onClose={toggleMissionAssign}
         TransitionComponent={Transition}
       >
@@ -256,7 +256,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
                 name="task description"
                 multiline
                 rowsMin={3}
-                rowsMax={10}
+                maxRows={10}
                 aria-label="describe your task"
                 placeholder="Describe your task here"
                 variant="filled"
