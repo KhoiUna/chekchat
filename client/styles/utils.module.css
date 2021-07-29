@@ -68,21 +68,26 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: red;
-  max-height: 160px;
-  overflow-y: auto;
+}
+
+.send_area {
+  background-color: #fff;
+  width: 90%;
+  padding: 0.7rem;
+  border-radius: 12px;
+  margin: 0 0.5rem 0.8rem 0.5rem;
   display: flex;
-  padding-bottom: 2%;
 }
 
 .send_form {
   -webkit-user-modify: read-write-plaintext-only;
   background-color: #fff;
-  width: 60rem;
-  padding: 0.7rem;
-  border-radius: 12px;
-  margin: 0 auto auto auto;
   text-align: left;
+  float: left;
+  overflow-y: auto;
+  max-height: 160px;
+  margin: auto 0;
+  width: 100%;
 }
 .send_form:focus {
   outline: none;
