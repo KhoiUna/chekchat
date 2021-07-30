@@ -35,7 +35,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MainLayout({ children, componentName }) {
+export default function MainLayout({ children, componentName, roomTitle }) {
   const classes = useStyles();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -90,7 +90,7 @@ export default function MainLayout({ children, componentName }) {
             <Menu componentName={componentName} userInfo={userInfo} />
 
             <Typography variant="h5" className={classes.title}>
-              {componentName}
+              {roomTitle ? roomTitle : componentName}
             </Typography>
 
             {componentName !== "Notifications" &&
