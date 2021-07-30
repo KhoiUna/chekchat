@@ -64,6 +64,26 @@
   overflow: hidden;
 }
 
+.chatbox {
+  text-align: left;
+  display: flex;
+  margin: 1rem 0.5rem 1.3rem 0.5rem;
+}
+
+.chat_avatar {
+  border-radius: 100%;
+  margin: 0 0.5rem;
+}
+
+.chat_container {
+  margin: 0 0 0 0.5rem;
+}
+
+.chat_info {
+  display: flex;
+  align-items: baseline;
+}
+
 .send_bar {
   position: fixed;
   bottom: 0;

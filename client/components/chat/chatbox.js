@@ -1,10 +1,49 @@
+import Image from "next/image";
+import imageLoader from "../../helpers/imageLoader";
+import utilStyles from "../../styles/utils.module.css";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import FormatDatetime from "../../helpers/FormatDatetime";
+
+const useStyles = makeStyles({
+  chat_sent_datetime: {
+    marginLeft: "0.3rem",
+  },
+});
+
 export default function Chatbox({ from_user, message, sent_datetime }) {
+  const classes = useStyles();
+
   return (
-    <div>
-      <div>{message}</div>
-      <div>
-        <div></div>
-        <div></div>
+    <div className={utilStyles.chatbox}>
+      <div className={utilStyles.chat_avatar}>
+        <Image
+          loader={imageLoader}
+          src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${from_user.avatarURL}`}
+          priority
+          height={50}
+          width={50}
+          alt={from_user.username}
+        />
+      </div>
+
+      <div className={utilStyles.chat_container}>
+        <div className={utilStyles.chat_info}>
+          <Typography variant="h6" gutterBottom>
+            {from_user.username}
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            gutterBottom
+            className={classes.chat_sent_datetime}
+          >
+            {FormatDatetime.forChatbox(sent_datetime)}
+          </Typography>
+        </div>
+
+        <Typography variant="body1" gutterBottom>
+          {message}
+        </Typography>
       </div>
     </div>
   );
