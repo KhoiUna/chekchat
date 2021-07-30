@@ -57,14 +57,14 @@
 }
 
 .chat_area {
+  height: 94vh;
   display: grid;
   grid-template-rows: 9fr 1fr;
-  overflow: hidden;
+  margin: 0;
 }
 
 .chat_display {
   overflow: auto;
-  margin-top: 36rem;
 }
 
 .chat_room {
@@ -98,6 +98,7 @@
 .send_bar {
   position: fixed;
   bottom: 0;
+  left: 0;
   width: 100%;
   background-color: #f1f1f1;
 }
