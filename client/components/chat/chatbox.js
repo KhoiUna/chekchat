@@ -11,6 +11,7 @@ const useStyles = makeStyles({
   },
   chat_sent_datetime: {
     marginLeft: "0.3rem",
+    color: "#737373",
   },
   chat_message: {
     whiteSpace: "pre-line",
@@ -43,7 +44,7 @@ export default function Chatbox({ from_user, message, sent_datetime }) {
             {from_user.username}
           </Typography>
           <Typography
-            variant="subtitle1"
+            variant="subtitle2"
             gutterBottom
             className={classes.chat_sent_datetime}
           >
