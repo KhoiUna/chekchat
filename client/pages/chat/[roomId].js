@@ -3,7 +3,7 @@ import Spinner from "../../components/spinner";
 import ChatDisplay from "../../containers/chat/ChatDisplay";
 import SendBar from "../../components/chat/send_bar";
 import utilStyles from "../../styles/utils.module.css";
-import { useEffect, useState } from "react";
+import { isValidElement, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import ChatUtil from "../../utils/ChatUtil";
 
@@ -29,11 +29,11 @@ export default function ChatRoom({}) {
       ChatUtil.fetchChatRoomTitle(roomId).then((r) => {
         setRoomTitle(r);
         setIsLoading(false);
+
+        document.querySelector("#chat-display").scrollTop =
+          document.querySelector("#chat-display").scrollHeight;
       });
     }
-
-    document.querySelector("#chat-display").scrollTop =
-      document.querySelector("#chat-display").scrollHeight;
   }, [roomId]);
 
   return (
