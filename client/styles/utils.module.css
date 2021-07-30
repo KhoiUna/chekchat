@@ -64,7 +64,8 @@
 }
 
 .chat_display {
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .chat_room {

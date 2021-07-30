@@ -18,15 +18,19 @@ export default function ChatRoom({}) {
   const isLoading = false;
 
   return (
-    <MainLayout componentName="Chat">
+    <MainLayout componentName="Chat" roomTitle="Room Title">
       <div className={utilStyles.chat_area}>
         <div className={utilStyles.chat_display}>
-          {isLoading ? <Spinner /> : <ChatArea msgArray={arr} />}
+          {isLoading ? (
+            <div style={{ marginTop: "1rem" }}>
+              <Spinner />
+            </div>
+          ) : (
+            <ChatArea msgArray={arr} />
+          )}
         </div>
 
-        <div>
-          <SendBar />
-        </div>
+        <SendBar />
       </div>
     </MainLayout>
   );
