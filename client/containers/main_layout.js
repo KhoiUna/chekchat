@@ -26,6 +26,9 @@ const useStyles = makeStyles({
   },
   title: {
     flexGrow: 1,
+    overflow: "hidden",
+    textOverflow: "ellipsis",
+    whiteSpace: "nowrap",
   },
   toolBar: {
     display: "grid",

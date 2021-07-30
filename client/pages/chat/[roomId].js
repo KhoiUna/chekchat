@@ -4,6 +4,7 @@ import ChatDisplay from "../../containers/chat/ChatDisplay";
 import SendBar from "../../components/chat/send_bar";
 import utilStyles from "../../styles/utils.module.css";
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const arr = new Array(20).fill({
   from_user: {
@@ -18,13 +19,16 @@ const arr = new Array(20).fill({
 export default function ChatRoom({}) {
   const isLoading = false;
 
+  const router = useRouter();
+  const roomId = router.query.roomId;
+
   useEffect(() => {
     document.querySelector("#chat-display").scrollTop =
       document.querySelector("#chat-display").scrollHeight;
   });
 
   return (
-    <MainLayout componentName="Chat" roomTitle="Room Title">
+    <MainLayout componentName="Chat" roomTitle={roomId}>
       <div className={utilStyles.chat_area}>
         <div className={utilStyles.chat_display} id="chat-display">
           {isLoading ? (
