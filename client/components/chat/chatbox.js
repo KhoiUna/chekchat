@@ -6,6 +6,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import FormatDatetime from "../../helpers/FormatDatetime";
 
 const useStyles = makeStyles({
+  chat_username: {
+    fontWeight: "bold",
+  },
   chat_sent_datetime: {
     marginLeft: "0.3rem",
   },
@@ -32,7 +35,11 @@ export default function Chatbox({ from_user, message, sent_datetime }) {
 
       <div className={utilStyles.chat_container}>
         <div className={utilStyles.chat_info}>
-          <Typography variant="h6" gutterBottom>
+          <Typography
+            variant="h6"
+            gutterBottom
+            className={classes.chat_username}
+          >
             {from_user.username}
           </Typography>
           <Typography
