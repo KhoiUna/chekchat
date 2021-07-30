@@ -111,7 +111,9 @@ export default function MainLayout({ children, componentName, roomTitle }) {
         </AppBar>
       </header>
 
-      <main className={styles.main}>{children}</main>
+      <main className={roomTitle ? styles.main_for_chatroom : styles.main}>
+        {children}
+      </main>
     </div>
   );
 }
