@@ -56,12 +56,21 @@
   margin: 5% 0 1% 0;
 }
 
+.chat_area {
+  display: grid;
+  grid-template-rows: 9fr 1fr;
+  overflow: hidden;
+}
+
+.chat_display {
+  overflow: auto;
+  margin-top: 36rem;
+}
+
 .chat_room {
-  width: 100%;
   background-color: #f1f1f1;
   display: grid;
   grid-template-rows: 15fr 1fr;
-  overflow: hidden;
 }
 
 .chatbox {
@@ -73,6 +82,8 @@
 .chat_avatar {
   border-radius: 100%;
   margin: 0 0.5rem;
+  width: 100%;
+  max-width: 50px;
 }
 
 .chat_container {
