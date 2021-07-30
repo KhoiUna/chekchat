@@ -29,6 +29,11 @@ router.get(
 
 //chat route
 router.get("/chat/rooms", redirectLogin, UsersController.getChatRooms);
+router.get(
+  "/chat/room/:roomId",
+  redirectLogin,
+  UsersController.getChatRoomTitle
+);
 
 //profile route
 router.get("/profile/updateAvatar/auth", UsersController.authToUpdateAvatar);

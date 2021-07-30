@@ -3,8 +3,9 @@ import Spinner from "../../components/spinner";
 import ChatDisplay from "../../containers/chat/ChatDisplay";
 import SendBar from "../../components/chat/send_bar";
 import utilStyles from "../../styles/utils.module.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import ChatUtil from "../../utils/ChatUtil";
 
 const arr = new Array(20).fill({
   from_user: {
@@ -17,18 +18,26 @@ const arr = new Array(20).fill({
 });
 
 export default function ChatRoom({}) {
-  const isLoading = false;
+  const [isLoading, setIsLoading] = useState(true);
+  const [roomTitle, setRoomTitle] = useState("");
 
   const router = useRouter();
   const roomId = router.query.roomId;
 
   useEffect(() => {
+    if (roomId) {
+      ChatUtil.fetchChatRoomTitle(roomId).then((r) => {
+        setRoomTitle(r);
+        setIsLoading(false);
+      });
+    }
+
     document.querySelector("#chat-display").scrollTop =
       document.querySelector("#chat-display").scrollHeight;
-  });
+  }, [roomId]);
 
   return (
-    <MainLayout componentName="Chat" roomTitle={roomId}>
+    <MainLayout componentName="Chat" roomTitle={roomTitle}>
       <div className={utilStyles.chat_area}>
         <div className={utilStyles.chat_display} id="chat-display">
           {isLoading ? (

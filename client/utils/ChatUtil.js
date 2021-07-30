@@ -20,6 +20,21 @@ export default class ChatUtil {
     }
   }
 
+  static async fetchChatRoomTitle(roomId) {
+    try {
+      const roomTitle = await (
+        await fetch(`${origin}/api/user/chat/room/${roomId}`, {
+          credentials: "include",
+        })
+      ).json();
+
+      return roomTitle;
+    } catch (error) {
+      console.error("Error getting chat room title");
+      return;
+    }
+  }
+
   static async fetchChatMessages() {
     try {
       return;

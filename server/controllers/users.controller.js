@@ -128,6 +128,17 @@ module.exports = class UsersController {
       next();
     }
   }
+  static async getChatRoomTitle(req, res, next) {
+    try {
+      const roomTitle = await ChatUtil.getChatRoomTitle({
+        roomId: req.params.roomId,
+      });
+      res.json(roomTitle);
+    } catch (err) {
+      console.error("Error getting chat room title");
+      next();
+    }
+  }
 
   //profile route
   static authToUpdateAvatar(req, res, next) {

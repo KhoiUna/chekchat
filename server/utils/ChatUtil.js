@@ -1,6 +1,5 @@
 const { ObjectID } = require("mongodb");
 const client = require("../db/client");
-const UsersUtil = require("./UsersUtil");
 
 module.exports = class ChatUtil {
   static async getChatRooms({ userId, position }) {
@@ -137,9 +136,47 @@ module.exports = class ChatUtil {
         last_updated: new Date(new Date().toUTCString()),
         lastMessage: "Let's start your discussion!",
       });
+
       return response;
     } catch (err) {
       console.error("Error creating chat room ---util");
+      return;
+    }
+  }
+
+  static async getChatRoomTitle({ roomId }) {
+    try {
+      const collection = client.db("chekchat").collection("rooms");
+
+      const agg = [
+        {
+          $match: {
+            _id: ObjectID(roomId),
+          },
+        },
+        {
+          $lookup: {
+            from: "missions",
+            localField: "missionId",
+            foreignField: "_id",
+            as: "mission",
+          },
+        },
+        {
+          $project: {
+            mission: {
+              subject: { $arrayElemAt: ["$mission.subject", 0] },
+            },
+          },
+        },
+      ];
+
+      const response = await collection.aggregate(agg).next();
+      const roomTitle = response.mission[0].subject;
+
+      return roomTitle;
+    } catch (err) {
+      console.error("Error getting chat room title ---util");
       return;
     }
   }
