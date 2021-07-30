@@ -65,7 +65,7 @@
 .chat_display {
   overflow-x: hidden;
   overflow-y: auto;
-  margin: 3.7rem 0 0 0;
+  margin: 3.7rem 0 0.5rem 0;
 }
 
 .chat_room {

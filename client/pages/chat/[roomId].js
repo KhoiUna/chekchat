@@ -5,7 +5,7 @@ import SendBar from "../../components/chat/send_bar";
 import utilStyles from "../../styles/utils.module.css";
 import { useEffect } from "react";
 
-const arr = new Array(50).fill({
+const arr = new Array(20).fill({
   from_user: {
     username: "John Doe",
     avatarURL: "/chekchat_upload/user_avatar_qTUoDmgcE.png",
