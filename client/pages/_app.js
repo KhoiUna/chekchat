@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <script type="module" src="/pwabuilder-sw-register.js"></script>
+        {/* <script type="module" src="/pwabuilder-sw-register.js"></script> */}
       </Head>
 
       <Component {...pageProps} />
