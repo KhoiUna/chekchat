@@ -34,7 +34,7 @@
     }
   ],
   "start_url": "/todo",
-  "scope": "/todo",
+  "scope": ".",
   "display": "standalone",
   "theme_color": "#0db3ff",
   "background_color": "#0db3ff",
