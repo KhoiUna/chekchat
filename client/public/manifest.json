@@ -33,8 +33,8 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/login",
-  "scope": ".",
+  "start_url": "/todo",
+  "scope": "/todo",
   "display": "standalone",
   "theme_color": "#0db3ff",
   "background_color": "#0db3ff",
