@@ -23,7 +23,7 @@
     "express-session": "^1.17.2",
     "helmet": "^4.6.0",
     "imagekit": "^3.1.2",
-    "joi": "^17.4.0",
+    "joi": "^17.4.1",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^3.6.10",
     "passport": "^0.4.1",
