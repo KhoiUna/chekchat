@@ -22,7 +22,7 @@ export default function ChatRoom({}) {
   const [roomTitle, setRoomTitle] = useState("");
 
   const router = useRouter();
-  const { roomId } = router.query;
+  const roomId = router.query?.roomId;
 
   useEffect(() => {
     if (roomId) {
