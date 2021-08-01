@@ -22,7 +22,7 @@ export default function ChatRoom({}) {
   const [roomTitle, setRoomTitle] = useState("");
 
   const router = useRouter();
-  const roomId = router.query.roomId;
+  const { roomId } = router.query;
 
   useEffect(() => {
     if (roomId) {
@@ -37,7 +37,7 @@ export default function ChatRoom({}) {
   }, [roomId]);
 
   return (
-    <MainLayout componentName="Chat" roomTitle={roomTitle}>
+    <MainLayout componentName="Chat" roomTitle={roomId ? roomTitle : ""}>
       <div className={utilStyles.chat_area}>
         <div className={utilStyles.chat_display} id="chat-display">
           {isLoading ? (
