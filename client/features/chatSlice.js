@@ -14,7 +14,20 @@ export const loadChatRoomTitleAsync = createAsyncThunk(
 
 export const loadChatMessagesAsync = createAsyncThunk(
   "chat/loadChatMessages",
-  async () => await ChatUtil.fetchChatMessages()
+  async (roomId) => {
+    //FIXME
+    await ChatUtil.fetchChatMessages(roomId);
+
+    return new Array(20).fill({
+      from_user: {
+        username: "John Doe",
+        avatarURL: "/chekchat_upload/user_avatar_qTUoDmgcE.png",
+      },
+      message:
+        "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.\nAhahahihi ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.",
+      sent_datetime: 651681631651651,
+    });
+  }
 );
 
 //Slice
