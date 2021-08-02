@@ -8,8 +8,10 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadChatRoomTitleAsync,
+  loadChatMessagesAsync,
   selectChatIsLoading,
   selectChatRoomTitle,
+  selectChatMessages,
 } from "../../features/chatSlice";
 
 export default function ChatRoom({}) {
@@ -20,27 +22,17 @@ export default function ChatRoom({}) {
 
   const isLoading = useSelector(selectChatIsLoading);
   const chatRoomTitle = useSelector(selectChatRoomTitle);
-  const [demoArr, setDemoArr] = useState([]);
+  const chatMessages = useSelector(selectChatMessages);
   useEffect(() => {
     if (roomId) {
       dispatch({
         type: "chat/subscribe",
         payload: roomId,
       });
+
       dispatch(loadChatRoomTitleAsync(roomId));
 
-      // FIXME: dispatch(loadChatRoomMessages(roomId)) here
-      setDemoArr(
-        new Array(20).fill({
-          from_user: {
-            username: "John Doe",
-            avatarURL: "/chekchat_upload/user_avatar_qTUoDmgcE.png",
-          },
-          message:
-            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.\nAhahahihi ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.",
-          sent_datetime: new Date(),
-        })
-      );
+      dispatch(loadChatMessagesAsync(roomId));
     }
   }, [roomId]);
 
@@ -58,7 +50,7 @@ export default function ChatRoom({}) {
               <Spinner />
             </div>
           ) : (
-            <ChatDisplay msgArray={demoArr} />
+            <ChatDisplay msgArray={chatMessages} />
           )}
         </div>
 
