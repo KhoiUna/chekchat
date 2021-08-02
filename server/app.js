@@ -149,6 +149,8 @@ io.on("connection", (socket) => {
       const actionData = {
         type: "chat message",
         payload: {
+          avatarURL: userSession.avatarURL,
+          username: userSession.username,
           sent_datetime,
           message,
         },
