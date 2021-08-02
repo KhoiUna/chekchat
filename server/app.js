@@ -131,7 +131,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("chat unsubscribe", () => {
-      const currentRoom = SocketHelper.getCurrentChatRoom(socket.id);
+      const currentRoom = SocketHelper.unsubscribeUsersForChat(socket.id);
       socket.leave(currentRoom.roomId);
     });
 
@@ -140,12 +140,13 @@ io.on("connection", (socket) => {
 
       //FIXME: save to db
       const messageForSaving = {
-        from_user: "",
+        from_user: userSession.id,
         roomId: currentRoom.roomId,
         sent_datetime: new Date(sent_datetime),
         message,
       };
       //FIXME: write code to save here in ChatUtil
+      //
 
       const actionData = {
         type: "chat message",
@@ -222,6 +223,7 @@ io.on("connection", (socket) => {
   //Listen when users disconnect
   socket.on("disconnect", () => {
     console.log("------User disconnected------");
+    SocketHelper.removeUser(socket.id);
   });
 });
 
