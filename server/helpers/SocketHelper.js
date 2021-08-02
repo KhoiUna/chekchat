@@ -8,8 +8,8 @@ module.exports = {
 
     return user;
   },
-  subscribeUsersForChat(socketId, userId, roomId) {
-    const room = { socketId, userId, roomId };
+  subscribeUsersForChat(socketId, roomId) {
+    const room = { socketId, roomId };
     rooms.push(room);
     return room;
   },

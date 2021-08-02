@@ -126,11 +126,7 @@ io.on("connection", (socket) => {
 
     //Subscribe users for chat rooms
     socket.on("chat subscribe", ({ roomId }) => {
-      const room = SocketHelper.subscribeUsersForChat(
-        socket.id,
-        userSession.id.toString(),
-        roomId
-      );
+      const room = SocketHelper.subscribeUsersForChat(socket.id, roomId);
       socket.join(room.roomId);
     });
 
