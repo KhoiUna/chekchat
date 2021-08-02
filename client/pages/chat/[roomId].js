@@ -3,7 +3,7 @@ import Spinner from "../../components/spinner";
 import ChatDisplay from "../../containers/chat/ChatDisplay";
 import SendBar from "../../components/chat/send_bar";
 import utilStyles from "../../styles/utils.module.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import {
