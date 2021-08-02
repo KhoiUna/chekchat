@@ -149,10 +149,12 @@ io.on("connection", (socket) => {
       const actionData = {
         type: "chat message",
         payload: {
-          avatarURL: userSession.avatarURL,
-          username: userSession.username,
-          sent_datetime,
+          from_user: {
+            username: userSession.username,
+            avatarURL: userSession.avatarURL,
+          },
           message,
+          sent_datetime,
         },
       };
       io.to(currentRoom.roomId).emit("update", actionData);
