@@ -7,19 +7,11 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import ChatUtil from "../../utils/ChatUtil";
 
-const arr = new Array(20).fill({
-  from_user: {
-    username: "John Doe",
-    avatarURL: "/chekchat_upload/user_avatar_qTUoDmgcE.png",
-  },
-  message:
-    "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.\nAhahahihi ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.",
-  sent_datetime: new Date(),
-});
-
 export default function ChatRoom({}) {
   const [isLoading, setIsLoading] = useState(true);
   const [roomTitle, setRoomTitle] = useState("");
+
+  const [demoArr, setDemoArr] = useState([]);
 
   const router = useRouter();
   const roomId = router.query?.roomId;
@@ -29,6 +21,18 @@ export default function ChatRoom({}) {
       ChatUtil.fetchChatRoomTitle(roomId).then((r) => {
         setRoomTitle(r);
         setIsLoading(false);
+
+        setDemoArr(
+          new Array(20).fill({
+            from_user: {
+              username: "John Doe",
+              avatarURL: "/chekchat_upload/user_avatar_qTUoDmgcE.png",
+            },
+            message:
+              "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.\nAhahahihi ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.",
+            sent_datetime: new Date(),
+          })
+        );
 
         document.querySelector("#chat-display").scrollTop =
           document.querySelector("#chat-display").scrollHeight;
@@ -45,7 +49,7 @@ export default function ChatRoom({}) {
               <Spinner />
             </div>
           ) : (
-            <ChatDisplay msgArray={arr} />
+            <ChatDisplay msgArray={demoArr} />
           )}
         </div>
 
