@@ -56,5 +56,9 @@ const setupSocketListener = (socket, store) =>
     }
     if (action.type === "chat message") {
       store.dispatch(pushChatMessage(action.payload));
+
+      //Scroll to bottom after receiving chat message from socket server
+      document.querySelector("#chat-display").scrollTop =
+        document.querySelector("#chat-display").scrollHeight;
     }
   });
