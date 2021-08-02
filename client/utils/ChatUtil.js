@@ -35,8 +35,9 @@ export default class ChatUtil {
     }
   }
 
-  static async fetchChatMessages() {
+  static async fetchChatMessages(roomId) {
     try {
+      //FIXME: add fetch here
       return;
     } catch (err) {
       console.error("Error getting chat messages");
