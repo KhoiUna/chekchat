@@ -137,6 +137,15 @@ io.on("connection", (socket) => {
     socket.on("chat message", ({ sent_datetime, message }) => {
       const currentRoom = SocketHelper.getCurrentChatRoom(socket.id);
 
+      //FIXME: save to db
+      const messageForSaving = {
+        from_user: "",
+        roomId: currentRoom.roomId,
+        sent_datetime: new Date(sent_datetime),
+        message,
+      };
+      //FIXME: write code to save here in ChatUtil
+
       const actionData = {
         type: "chat message",
         payload: {
