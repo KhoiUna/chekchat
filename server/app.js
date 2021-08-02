@@ -130,6 +130,11 @@ io.on("connection", (socket) => {
       socket.join(room.roomId);
     });
 
+    socket.on("chat unsubscribe", () => {
+      const currentRoom = SocketHelper.getCurrentChatRoom(socket.id);
+      socket.leave(currentRoom.roomId);
+    });
+
     socket.on("chat message", ({ sent_datetime, message }) => {
       const currentRoom = SocketHelper.getCurrentChatRoom(socket.id);
 
