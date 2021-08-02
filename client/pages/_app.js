@@ -6,7 +6,7 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        {/* #FIXME: Cancel service worker for now */}
+        {/* FIXME: Cancel service worker for now */}
         {/* <script type="module" src="/pwabuilder-sw-register.js"></script> */}
       </Head>
 
