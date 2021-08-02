@@ -12,18 +12,20 @@ export const socketMiddleware = (store) => {
       return;
     }
 
-    if (action.type === "user/subscribe") {
-      socket.connect();
-      socket.emit("subscribe");
-      setupSocketListener(socket, store);
-    }
-
     if (action.type === "chat/subscribe") {
       socket.emit("chat subscribe", { roomId: action.payload });
+      return;
     }
 
     if (action.type === "chat/chatMessage") {
       socket.emit("chat message", action.payload);
+      return;
+    }
+
+    if (action.type === "user/subscribe") {
+      socket.connect();
+      socket.emit("subscribe");
+      setupSocketListener(socket, store);
     }
 
     if (action.type === "missions/replyMission") {
