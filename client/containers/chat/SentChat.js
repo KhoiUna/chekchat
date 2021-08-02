@@ -7,7 +7,7 @@ import {
   selectChatRooms,
 } from "../../features/chatSlice";
 import Spinner from "../../components/spinner";
-import { useEffect } from "react";
+import { Fragment, useEffect } from "react";
 
 export default function ReceivedChat({}) {
   const dispatch = useDispatch();
@@ -32,14 +32,16 @@ export default function ReceivedChat({}) {
       </Typography>
     );
 
-  return chatRooms.map((item) => (
-    <ChatroomTag
-      username={item.to_user[0].username}
-      roomId={item._id}
-      avatarURL={item.to_user[0].avatarURL}
-      subject={item.mission[0].subject}
-      lastMessage={item.lastMessage}
-      notified={item.notified}
-    />
+  return chatRooms.map((item, index) => (
+    <Fragment key={index}>
+      <ChatroomTag
+        username={item.to_user[0].username}
+        roomId={item._id}
+        avatarURL={item.to_user[0].avatarURL}
+        subject={item.mission[0].subject}
+        lastMessage={item.lastMessage}
+        notified={item.notified}
+      />
+    </Fragment>
   ));
 }
