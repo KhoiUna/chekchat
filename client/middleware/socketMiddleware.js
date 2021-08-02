@@ -1,5 +1,6 @@
 import io from "socket.io-client";
 import { origin } from "../config/config";
+import { pushChatMessage } from "../features/chatSlice";
 import { loadNotificationCountAsync } from "../features/notificationSlice";
 
 export const socketMiddleware = (store) => {
@@ -15,6 +16,14 @@ export const socketMiddleware = (store) => {
       socket.connect();
       socket.emit("subscribe");
       setupSocketListener(socket, store);
+    }
+
+    if (action.type === "chat/subscribe") {
+      socket.emit("chat subscribe", { roomId: action.payload });
+    }
+
+    if (action.type === "chat/chatMessage") {
+      socket.emit("chat message", action.payload);
     }
 
     if (action.type === "missions/replyMission") {
@@ -44,5 +53,8 @@ const setupSocketListener = (socket, store) =>
   socket.on("update", (action) => {
     if (action.type === "notification count") {
       store.dispatch(loadNotificationCountAsync());
+    }
+    if (action.type === "chat message") {
+      store.dispatch(pushChatMessage(action.payload));
     }
   });

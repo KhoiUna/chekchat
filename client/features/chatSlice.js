@@ -40,7 +40,11 @@ export const chatSlice = createSlice({
     isLoading: false,
     failedToLoad: false,
   },
-  reducers: {},
+  reducers: {
+    pushChatMessage: (state, action) => {
+      state.chatMessages.push(action.payload);
+    },
+  },
   extraReducers: {
     [loadChatRoomsAsync.pending]: (state, action) => {
       state.isLoading = true;
@@ -91,7 +95,7 @@ export const chatSlice = createSlice({
   },
 });
 
-export const {} = chatSlice.actions;
+export const { pushChatMessage } = chatSlice.actions;
 export default chatSlice.reducer;
 
 //Selectors
