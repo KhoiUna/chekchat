@@ -5,43 +5,48 @@ import SendBar from "../../components/chat/send_bar";
 import utilStyles from "../../styles/utils.module.css";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import ChatUtil from "../../utils/ChatUtil";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  loadChatRoomTitleAsync,
+  selectChatIsLoading,
+  selectChatRoomTitle,
+} from "../../features/chatSlice";
 
 export default function ChatRoom({}) {
-  const [isLoading, setIsLoading] = useState(true);
-  const [roomTitle, setRoomTitle] = useState("");
-
-  const [demoArr, setDemoArr] = useState([]);
+  const dispatch = useDispatch();
 
   const router = useRouter();
-  const roomId = router.query?.roomId;
+  const { roomId } = router.query;
 
+  const isLoading = useSelector(selectChatIsLoading);
+  const chatRoomTitle = useSelector(selectChatRoomTitle);
+  const [demoArr, setDemoArr] = useState([]);
   useEffect(() => {
     if (roomId) {
-      ChatUtil.fetchChatRoomTitle(roomId).then((r) => {
-        setRoomTitle(r);
-        setIsLoading(false);
+      dispatch(loadChatRoomTitleAsync(roomId));
 
-        setDemoArr(
-          new Array(20).fill({
-            from_user: {
-              username: "John Doe",
-              avatarURL: "/chekchat_upload/user_avatar_qTUoDmgcE.png",
-            },
-            message:
-              "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.\nAhahahihi ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.",
-            sent_datetime: new Date(),
-          })
-        );
-
-        document.querySelector("#chat-display").scrollTop =
-          document.querySelector("#chat-display").scrollHeight;
-      });
+      // FIXME: dispatch(loadChatRoomMessages(roomId)) here
+      setDemoArr(
+        new Array(20).fill({
+          from_user: {
+            username: "John Doe",
+            avatarURL: "/chekchat_upload/user_avatar_qTUoDmgcE.png",
+          },
+          message:
+            "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.\nAhahahihi ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam dignissimos laborum fugiat deleniti? Eum quasi quidem quibusdam.",
+          sent_datetime: new Date(),
+        })
+      );
     }
   }, [roomId]);
 
+  useEffect(() => {
+    document.querySelector("#chat-display").scrollTop =
+      document.querySelector("#chat-display").scrollHeight;
+  }, [isLoading]);
+
   return (
-    <MainLayout componentName="Chat" roomTitle={roomId ? roomTitle : ""}>
+    <MainLayout componentName="Chat" roomTitle={roomId ? chatRoomTitle : ""}>
       <div className={utilStyles.chat_area}>
         <div className={utilStyles.chat_display} id="chat-display">
           {isLoading ? (
