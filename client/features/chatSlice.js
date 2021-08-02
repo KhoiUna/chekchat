@@ -7,6 +7,11 @@ export const loadChatRoomsAsync = createAsyncThunk(
   async (position) => await ChatUtil.fetchChatRooms(position)
 );
 
+export const loadChatRoomTitleAsync = createAsyncThunk(
+  "chat/loadChatRoomTitle",
+  async (roomId) => await ChatUtil.fetchChatRoomTitle(roomId)
+);
+
 export const loadChatMessagesAsync = createAsyncThunk(
   "chat/loadChatMessages",
   async () => await ChatUtil.fetchChatMessages()
@@ -17,6 +22,7 @@ export const chatSlice = createSlice({
   name: "chat",
   initialState: {
     chatRooms: [],
+    chatRoomTitle: "",
     chatMessages: [],
     isLoading: false,
     failedToLoad: false,
@@ -37,6 +43,23 @@ export const chatSlice = createSlice({
       state.isLoading = false;
       state.failedToLoad = true;
     },
+    //
+    //
+    [loadChatRoomTitleAsync.pending]: (state, action) => {
+      state.isLoading = true;
+      state.failedToLoad = false;
+    },
+    [loadChatRoomTitleAsync.fulfilled]: (state, action) => {
+      state.chatRoomTitle = action.payload;
+
+      state.isLoading = false;
+      state.failedToLoad = false;
+    },
+    [loadChatRoomTitleAsync.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.failedToLoad = true;
+    },
+    //
     //
     [loadChatMessagesAsync.pending]: (state, action) => {
       state.isLoading = true;
@@ -61,4 +84,5 @@ export default chatSlice.reducer;
 //Selectors
 export const selectChatIsLoading = (state) => state.chat.isLoading;
 export const selectChatRooms = (state) => state.chat.chatRooms;
+export const selectChatRoomTitle = (state) => state.chat.chatRoomTitle;
 export const selectChatMessages = (state) => state.chat.chatMessages;
