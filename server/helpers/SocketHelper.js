@@ -3,13 +3,13 @@ let rooms = [];
 
 module.exports = {
   subscribeUsers(socketId, userId) {
-    const user = { socketId, id: userId };
+    const user = { socketId, userId };
     users.push(user);
 
     return user;
   },
   subscribeUsersForChat(socketId, userId, roomId) {
-    const room = { socketId, id: userId, roomId };
+    const room = { socketId, userId, roomId };
     rooms.push(room);
     return room;
   },

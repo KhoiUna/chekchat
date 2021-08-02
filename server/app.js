@@ -121,7 +121,7 @@ io.on("connection", (socket) => {
         socket.id,
         userSession.id.toString()
       );
-      socket.join(user.id);
+      socket.join(user.userId);
     });
 
     //Subscribe users for chat rooms
