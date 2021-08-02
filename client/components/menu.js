@@ -22,6 +22,7 @@ import FeedbackIcon from "@material-ui/icons/Feedback";
 import Image from "next/image";
 import imageLoader from "../helpers/imageLoader";
 import { origin } from "../config/config";
+import { useDispatch } from "react-redux";
 
 const menuList = [
   { name: "Inbox", icon: <InboxIcon /> },
@@ -52,10 +53,17 @@ const useStyles = makeStyles({
 });
 
 export default function Menu({ componentName, userInfo }) {
+  const dispatch = useDispatch();
   const classes = useStyles();
 
   const router = useRouter();
-  const goBack = () => router.back();
+  const goBack = () => {
+    if (componentName === "Chat Room")
+      dispatch({
+        type: "chat/unsubscribe",
+      });
+    router.back();
+  };
 
   const [drawerState, setDrawerState] = useState(false);
 
@@ -182,6 +190,7 @@ export default function Menu({ componentName, userInfo }) {
     <>
       {componentName !== "Notifications" &&
         componentName !== "Chat" &&
+        componentName !== "Chat Room" &&
         componentName !== "Profile" && (
           <IconButton onClick={toggleDrawer} aria-label="Open menu">
             <MenuIcon
@@ -193,8 +202,9 @@ export default function Menu({ componentName, userInfo }) {
 
       {(componentName === "Notifications" ||
         componentName === "Chat" ||
+        componentName === "Chat Room" ||
         componentName === "Profile") && (
-        <IconButton onClick={goBack} aria-label="go back">
+        <IconButton onClick={() => goBack(componentName)} aria-label="go back">
           <ArrowBackIosIcon
             className={utilStyles.icon}
             style={{ fontSize: "2rem" }}

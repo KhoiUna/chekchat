@@ -42,7 +42,10 @@ export default function ChatRoom({}) {
   }, [isLoading]);
 
   return (
-    <MainLayout componentName="Chat" roomTitle={roomId ? chatRoomTitle : ""}>
+    <MainLayout
+      componentName="Chat Room"
+      roomTitle={roomId ? chatRoomTitle : ""}
+    >
       <div className={utilStyles.chat_area}>
         <div className={utilStyles.chat_display} id="chat-display">
           {isLoading ? (

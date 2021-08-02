@@ -17,6 +17,11 @@ export const socketMiddleware = (store) => {
       return;
     }
 
+    if (action.type === "chat/unsubscribe") {
+      socket.emit("chat unsubscribe");
+      return;
+    }
+
     if (action.type === "chat/chatMessage") {
       socket.emit("chat message", action.payload);
       return;

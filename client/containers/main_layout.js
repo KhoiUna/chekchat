@@ -98,6 +98,7 @@ export default function MainLayout({ children, componentName, roomTitle }) {
 
             {componentName !== "Notifications" &&
               componentName !== "Chat" &&
+              componentName !== "Chat Room" &&
               componentName !== "Profile" && (
                 <Bell
                   componentName={componentName}
@@ -107,6 +108,7 @@ export default function MainLayout({ children, componentName, roomTitle }) {
 
             {componentName !== "Notifications" &&
               componentName !== "Chat" &&
+              componentName !== "Chat Room" &&
               componentName !== "Profile" && (
                 <Chat componentName={componentName} />
               )}
