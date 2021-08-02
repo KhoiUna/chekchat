@@ -23,6 +23,10 @@ export default function ChatRoom({}) {
   const [demoArr, setDemoArr] = useState([]);
   useEffect(() => {
     if (roomId) {
+      dispatch({
+        type: "chat/subscribe",
+        payload: roomId,
+      });
       dispatch(loadChatRoomTitleAsync(roomId));
 
       // FIXME: dispatch(loadChatRoomMessages(roomId)) here

@@ -3,6 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import utilStyles from "../../styles/utils.module.css";
 import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import { buttonTheme } from "../../themes/theme";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   button: {
@@ -13,6 +14,7 @@ const useStyles = makeStyles({
 
 export default function SendBar({}) {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const handleKeyPress = (e) => {
     const { target } = e;
@@ -20,22 +22,25 @@ export default function SendBar({}) {
     if (e.which === 13 && target.innerText.trim().length !== 0) {
       if (!e.shiftKey) {
         e.preventDefault();
-        // const socketMsgObj = {
-        //   user: { username, avatarURL },
-        //   msg: target.innerText,
-        //   time: Date.now(),
-        // };
-        // socket.emit("chat message", socketMsgObj);
+
+        dispatch({
+          type: "chat/chatMessage",
+          payload: {
+            sent_datetime: new Date().toUTCString(),
+            message: target.innerText,
+          },
+        });
+
         target.innerText = "";
       } else if (e.shiftKey) {
-        //Allow shift + Enter
+        //Allow shift + Enter to make new line
         target.style.bottom += "3vh";
       }
     } else if (e.which === 13 && target.innerText.trim().length === 0) {
       if (!e.shiftKey) {
         e.preventDefault();
       } else if (e.shiftKey) {
-        //Allow shift + Enter
+        //Allow shift + Enter to make new line
         target.style.bottom += "3vh";
       }
     }
@@ -43,12 +48,14 @@ export default function SendBar({}) {
 
   const handleClick = (e) => {
     if (document.getElementById("msg").innerText.trim().length !== 0) {
-      // const socketMsgObj = {
-      //   user: { username, avatarURL },
-      //   msg: document.getElementById("msg").innerText,
-      //   time: Date.now(),
-      // };
-      // socket.emit("chat message", socketMsgObj);
+      dispatch({
+        type: "chat/chatMessage",
+        payload: {
+          sent_datetime: new Date().toUTCString(),
+          message: document.getElementById("msg").innerText,
+        },
+      });
+
       document.getElementById("msg").innerText = "";
     }
   };
