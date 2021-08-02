@@ -1,4 +1,5 @@
 let users = [];
+let rooms = [];
 
 module.exports = {
   subscribeUsers(socketId, userId) {
@@ -7,7 +8,12 @@ module.exports = {
 
     return user;
   },
-  getCurrentUser(socketId) {
-    return users.find((user) => user.socketId === socketId);
+  subscribeUsersForChat(socketId, userId, roomId) {
+    const room = { socketId, id: userId, roomId };
+    rooms.push(room);
+    return room;
+  },
+  getCurrentChatRoom(socketId) {
+    return rooms.find((room) => room.socketId === socketId);
   },
 };

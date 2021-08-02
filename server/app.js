@@ -124,6 +124,29 @@ io.on("connection", (socket) => {
       socket.join(user.id);
     });
 
+    //Subscribe users for chat rooms
+    socket.on("chat subscribe", ({ roomId }) => {
+      const room = SocketHelper.subscribeUsersForChat(
+        socket.id,
+        userSession.id.toString(),
+        roomId
+      );
+      socket.join(room.roomId);
+    });
+
+    socket.on("chat message", ({ sent_datetime, message }) => {
+      const currentRoom = SocketHelper.getCurrentChatRoom(socket.id);
+
+      const actionData = {
+        type: "chat message",
+        payload: {
+          sent_datetime,
+          message,
+        },
+      };
+      io.to(currentRoom.roomId).emit("update", actionData);
+    });
+
     socket.on("check missions", ({ missionId, completed }) => {
       //Update mission check/completed
       MissionsUtil.updateMissionComplete(missionId, completed);
