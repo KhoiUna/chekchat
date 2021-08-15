@@ -195,7 +195,7 @@ io.on("connection", (socket) => {
       UsersUtil.updateNotificationCount(friendId, "increment");
 
       const actionData = { type: "notification count" };
-      io.to(friendId.toString()).emit("update", actionData);
+      socket.to(friendId.toString()).emit("update", actionData);
     });
 
     socket.on("mission requests", async ({ requestId, action }) => {
@@ -216,7 +216,7 @@ io.on("connection", (socket) => {
       UsersUtil.updateNotificationCount(senderId, "increment");
 
       const actionData = { type: "notification count" };
-      io.to(senderId.toString()).emit("update", actionData);
+      socket.to(senderId.toString()).emit("update", actionData);
     });
   }
 
