@@ -30,14 +30,9 @@ export const socketMiddleware = (store) => {
       return;
     }
 
-    if (action.type === "user/subscribe") {
-      socket.connect();
-      socket.emit("subscribe");
-      setupSocketListener(socket, store);
-    }
-
     if (action.type === "missions/replyMission") {
       socket.emit("mission requests", action.payload);
+      return;
     }
 
     if (action.type === "missions/updateMissionTodoList") {
@@ -49,10 +44,19 @@ export const socketMiddleware = (store) => {
       if (updateAction === "star") {
         socket.emit("star missions", { missionId: id, starred: value });
       }
+
+      return;
     }
 
     if (action.type === "friends/replyFriendRequest") {
       socket.emit("friend requests", action.payload);
+      return;
+    }
+
+    if (action.type === "user/subscribe") {
+      socket.connect();
+      socket.emit("subscribe");
+      setupSocketListener(socket, store);
     }
 
     return next(action);
