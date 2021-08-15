@@ -4,7 +4,10 @@ import { pushChatMessage } from "../features/chatSlice";
 import { loadNotificationCountAsync } from "../features/notificationSlice";
 
 export const socketMiddleware = (store) => {
-  const socket = io(origin, { withCredentials: true, autoConnect: false });
+  const socket = io(origin, {
+    withCredentials: true,
+    autoConnect: false,
+  });
 
   return (next) => (action) => {
     if (action.type === "notifications/clickNotification") {
