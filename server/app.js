@@ -159,7 +159,7 @@ io.on("connection", (socket) => {
           sent_datetime,
         },
       };
-      io.to(currentRoom.roomId).emit("update", actionData);
+      io.in(currentRoom.roomId).emit("update", actionData);
     });
 
     socket.on("check missions", ({ missionId, completed }) => {
