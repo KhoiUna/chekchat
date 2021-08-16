@@ -193,4 +193,46 @@ module.exports = class ChatUtil {
       return;
     }
   }
+
+  static async getChatMessages({ roomId }) {
+    try {
+      const collection = client.db("chekchat").collection("messages");
+
+      const agg = [
+        {
+          $match: {
+            roomId: ObjectID(roomId),
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "from_user",
+            foreignField: "_id",
+            as: "from_user",
+          },
+        },
+        {
+          $project: {
+            from_user: {
+              username: { $arrayElemAt: ["$from_user.username", 0] },
+              avatarURL: { $arrayElemAt: ["$from_user.avatarURL", 0] },
+            },
+            sent_datetime: 1,
+            message: 1,
+          },
+        },
+      ];
+
+      const chatMessages = await collection
+        .aggregate(agg)
+        .sort({ sent_datetime: 1 })
+        .toArray();
+
+      return chatMessages;
+    } catch (err) {
+      console.error("Error getting chat messages ---util");
+      return;
+    }
+  }
 };
