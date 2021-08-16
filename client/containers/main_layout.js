@@ -93,7 +93,7 @@ export default function MainLayout({ children, componentName, roomTitle }) {
             <Menu componentName={componentName} userInfo={userInfo} />
 
             <Typography variant="h5" className={classes.title}>
-              {roomTitle ? roomTitle : componentName}
+              {roomTitle ? roomTitle : ""}
             </Typography>
 
             {componentName !== "Notifications" &&
