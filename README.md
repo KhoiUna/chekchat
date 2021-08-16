@@ -78,6 +78,6 @@
   - **messages** {\
     from_user: <_ObjectID ref to users schema_>,\
     roomId: <_ObjectID ref to rooms schema_>,\
-    sent_datetime: <_Date_>
+    sent_datetime: <_Date_>,\
     message\
     }
