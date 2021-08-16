@@ -65,3 +65,12 @@
   - **sessions** {\
     _store users' cookie sessions_\
     }
+
+  - **rooms** {\
+    missionId: <_ObjectID ref to missions schema_>,\
+    from_user: <_ObjectID ref to users schema_>,\
+    to_user: <_ObjectID ref to users schema_>,\
+    notified: <_Boolean_>,\
+    last_updated,\
+    lastMessage\
+    }
