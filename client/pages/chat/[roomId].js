@@ -4,7 +4,6 @@ import ChatDisplay from "../../containers/chat/ChatDisplay";
 import SendBar from "../../components/chat/send_bar";
 import utilStyles from "../../styles/utils.module.css";
 import { useEffect } from "react";
-import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadChatRoomTitleAsync,
@@ -14,11 +13,8 @@ import {
   selectChatMessages,
 } from "../../features/chatSlice";
 
-export default function ChatRoom({}) {
+export default function ChatRoom({ roomId }) {
   const dispatch = useDispatch();
-
-  const router = useRouter();
-  const { roomId } = router.query;
 
   const isLoading = useSelector(selectChatIsLoading);
   const chatRoomTitle = useSelector(selectChatRoomTitle);
@@ -61,4 +57,12 @@ export default function ChatRoom({}) {
       </div>
     </MainLayout>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { roomId } = context.params;
+
+  return {
+    props: { roomId },
+  };
 }
