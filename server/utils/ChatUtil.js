@@ -114,7 +114,7 @@ module.exports = class ChatUtil {
 
       const chatRooms = await collection
         .aggregate(agg)
-        .sort({ last_updated: 1 })
+        .sort({ last_updated: -1 })
         .toArray();
 
       return chatRooms;
@@ -233,6 +233,24 @@ module.exports = class ChatUtil {
     } catch (err) {
       console.error("Error getting chat messages ---util");
       return;
+    }
+  }
+
+  static async updateChatRoom({ lastMessage, notified, last_updated, roomId }) {
+    try {
+      const collection = client.db("chekchat").collection("rooms");
+
+      const response = await collection.updateOne(
+        {
+          _id: ObjectID(roomId),
+        },
+        { $set: { notified, last_updated, lastMessage } }
+      );
+      if (!response) return false;
+
+      return response;
+    } catch (err) {
+      console.error("Error updating chat room ---util");
     }
   }
 };
