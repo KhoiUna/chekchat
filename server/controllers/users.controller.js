@@ -139,6 +139,17 @@ module.exports = class UsersController {
       next();
     }
   }
+  static async getChatMessages(req, res, next) {
+    try {
+      const chatMessages = await ChatUtil.getChatMessages({
+        roomId: req.params.roomId,
+      });
+      res.json(chatMessages);
+    } catch (err) {
+      console.error("Error getting chat messages");
+      next();
+    }
+  }
 
   //profile route
   static authToUpdateAvatar(req, res, next) {
