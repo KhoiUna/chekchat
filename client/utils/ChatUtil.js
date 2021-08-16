@@ -37,11 +37,10 @@ export default class ChatUtil {
 
   static async fetchChatMessages(roomId) {
     try {
-      const chatMessages = await fetch(
-        `${origin}/api/user/chat/messages/${roomId}`,
-        {
+      const chatMessages = await (
+        await fetch(`${origin}/api/user/chat/messages/${roomId}`, {
           credentials: "include",
-        }
+        })
       ).json();
 
       return chatMessages;
