@@ -26,11 +26,11 @@ export default function Chatbox({ from_user, message, sent_datetime }) {
       <div className={utilStyles.chat_avatar}>
         <Image
           loader={imageLoader}
-          src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${from_user.avatarURL}`}
+          src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${from_user[0].avatarURL}`}
           priority
           height={50}
           width={50}
-          alt={from_user.username}
+          alt={from_user[0].username}
         />
       </div>
 
@@ -41,7 +41,7 @@ export default function Chatbox({ from_user, message, sent_datetime }) {
             gutterBottom
             className={classes.chat_username}
           >
-            {from_user.username}
+            {from_user[0].username}
           </Typography>
           <Typography
             variant="subtitle2"
