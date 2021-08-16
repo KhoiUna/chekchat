@@ -37,8 +37,14 @@ export default class ChatUtil {
 
   static async fetchChatMessages(roomId) {
     try {
-      //FIXME: add fetch here
-      return;
+      const chatMessages = await fetch(
+        `${origin}/api/user/chat/messages/${roomId}`,
+        {
+          credentials: "include",
+        }
+      ).json();
+
+      return chatMessages;
     } catch (err) {
       console.error("Error getting chat messages");
       return;
