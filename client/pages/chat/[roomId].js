@@ -20,17 +20,15 @@ export default function ChatRoom({ roomId }) {
   const chatRoomTitle = useSelector(selectChatRoomTitle);
   const chatMessages = useSelector(selectChatMessages);
   useEffect(() => {
-    if (roomId) {
-      dispatch({
-        type: "chat/subscribe",
-        payload: roomId,
-      });
+    dispatch({
+      type: "chat/subscribe",
+      payload: roomId,
+    });
 
-      dispatch(loadChatRoomTitleAsync(roomId));
+    dispatch(loadChatRoomTitleAsync(roomId));
 
-      dispatch(loadChatMessagesAsync(roomId));
-    }
-  }, [roomId]);
+    dispatch(loadChatMessagesAsync(roomId));
+  }, []);
 
   useEffect(() => {
     document.querySelector("#chat-display").scrollTop =
