@@ -54,9 +54,13 @@ export default function MainLayout({ children, componentName, roomTitle }) {
   const userInfo = useSelector(selectUserInfo);
   const notificationCount = useSelector(selectNotificationCount);
   useEffect(() => {
-    dispatch({ type: "user/subscribe" });
-    dispatch(loadUserInfoAsync());
-    dispatch(loadNotificationCountAsync());
+    const componentNamesArray = ["Chat", "Chat Room"];
+    if (!componentNamesArray.includes(componentName)) {
+      console.log("sub");
+      dispatch({ type: "user/subscribe" });
+      dispatch(loadUserInfoAsync());
+      dispatch(loadNotificationCountAsync());
+    }
   }, []);
 
   return (
