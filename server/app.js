@@ -151,10 +151,12 @@ io.on("connection", (socket) => {
       const actionData = {
         type: "chat message",
         payload: {
-          from_user: {
-            username: userSession.username,
-            avatarURL: userSession.avatarURL,
-          },
+          from_user: [
+            {
+              username: userSession.username,
+              avatarURL: userSession.avatarURL,
+            },
+          ],
           message,
           sent_datetime,
         },
