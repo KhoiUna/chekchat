@@ -147,6 +147,12 @@ io.on("connection", (socket) => {
         message,
       };
       ChatUtil.saveMessage(messageForSaving);
+      ChatUtil.updateChatRoom({
+        roomId: ObjectID(currentRoom.roomId),
+        lastMessage: messageForSaving.message,
+        notified: true,
+        last_updated: messageForSaving.sent_datetime,
+      });
 
       const actionData = {
         type: "chat message",
