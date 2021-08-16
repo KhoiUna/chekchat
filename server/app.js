@@ -99,6 +99,7 @@ const userRouter = require("./routes/userRouter");
 app.use("/api/user", userRouter);
 
 //Socket
+const { ObjectID } = require("mongodb");
 const MissionsUtil = require("./utils/MissionsUtil");
 const FriendRequestUtil = require("./utils/FriendRequestUtil");
 const UsersUtil = require("./utils/UsersUtil");
@@ -138,15 +139,14 @@ io.on("connection", (socket) => {
     socket.on("chat message", ({ sent_datetime, message }) => {
       const currentRoom = SocketHelper.getCurrentChatRoom(socket.id);
 
-      //FIXME: save to db
+      // Save message to db
       const messageForSaving = {
         from_user: userSession.id,
-        roomId: currentRoom.roomId,
+        roomId: ObjectID(currentRoom.roomId),
         sent_datetime: new Date(sent_datetime),
         message,
       };
-      //FIXME: write code to save here in ChatUtil
-      //
+      ChatUtil.saveMessage(messageForSaving);
 
       const actionData = {
         type: "chat message",

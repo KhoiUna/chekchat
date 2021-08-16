@@ -180,4 +180,17 @@ module.exports = class ChatUtil {
       return;
     }
   }
+
+  static async saveMessage(msgObj) {
+    try {
+      const collection = client.db("chekchat").collection("messages");
+
+      const response = await collection.insertOne(msgObj);
+
+      return response;
+    } catch (err) {
+      console.error("Error saving message ---util");
+      return;
+    }
+  }
 };
