@@ -68,6 +68,22 @@
   margin: 3.7rem 0 0.5rem 0;
 }
 
+.datedivider_container {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.datedivider_info {
+  margin-top: 0.75rem;
+  padding: 0.25rem;
+  background-color: #f1f1f1;
+  border-radius: 12px;
+  width: 6rem;
+  text-align: center;
+}
+
 .chat_room {
   background-color: #f1f1f1;
   display: grid;
