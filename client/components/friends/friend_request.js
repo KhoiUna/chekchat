@@ -80,6 +80,7 @@ export default function FriendRequest({
         <CardActionArea className={classes.gridColumn}>
           <div className={utilStyles.request_image}>
             <Image
+              unoptimized={true}
               loader={imageLoader}
               priority
               src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${avatarURL}`}
@@ -109,6 +110,7 @@ export default function FriendRequest({
       <CardActionArea className={classes.gridColumn}>
         <div className={utilStyles.request_image}>
           <Image
+            unoptimized={true}
             loader={imageLoader}
             priority
             src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${avatarURL}`}

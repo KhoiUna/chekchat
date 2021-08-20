@@ -25,6 +25,7 @@ export default function Chatbox({ from_user, message, sent_datetime }) {
     <div className={utilStyles.chatbox}>
       <div className={utilStyles.chat_avatar}>
         <Image
+          unoptimized={true}
           loader={imageLoader}
           src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${from_user[0].avatarURL}`}
           priority

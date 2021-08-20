@@ -108,6 +108,7 @@ export default function Profile() {
 
       <div className={utilStyles.uploadedAvatar}>
         <Image
+          unoptimized={true}
           loader={imageLoader}
           src={
             avatarURL
