@@ -16,6 +16,11 @@ import {
 export default function ChatRoom({ roomId }) {
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (!localStorage.getItem("chatReloaded")) window.location.reload();
+    localStorage.setItem("chatReloaded", true);
+  }, []);
+
   const isLoading = useSelector(selectChatIsLoading);
   const chatRoomTitle = useSelector(selectChatRoomTitle);
   const chatMessages = useSelector(selectChatMessages);
