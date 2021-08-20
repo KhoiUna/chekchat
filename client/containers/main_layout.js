@@ -59,6 +59,10 @@ export default function MainLayout({ children, componentName, roomTitle }) {
     dispatch(loadNotificationCountAsync());
   }, []);
 
+  useEffect(() => {
+    if (componentName !== "Chat Room") localStorage.removeItem("chatReloaded");
+  }, []);
+
   return (
     <div className={styles.container}>
       <Head>
