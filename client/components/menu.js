@@ -58,11 +58,23 @@ export default function Menu({ componentName, userInfo }) {
 
   const router = useRouter();
   const goBack = () => {
-    if (componentName === "Chat Room")
+    if (componentName === "Chat") {
+      router.push("/todo");
+      return;
+    }
+    if (componentName === "Chat Room") {
       dispatch({
         type: "chat/unsubscribe",
       });
+
+      localStorage.removeItem("chatReloaded");
+
+      router.push("/chat");
+      return;
+    }
+
     router.back();
+    return;
   };
 
   const [drawerState, setDrawerState] = useState(false);
@@ -105,6 +117,7 @@ export default function Menu({ componentName, userInfo }) {
           <ListItem className={classes.flex} button>
             <div className={utilStyles.menu_image}>
               <Image
+                unoptimized={true}
                 loader={imageLoader}
                 src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${userInfo.avatarURL}`}
                 priority
