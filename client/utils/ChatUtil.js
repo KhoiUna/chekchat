@@ -35,12 +35,15 @@ export default class ChatUtil {
     }
   }
 
-  static async fetchChatMessages(roomId) {
+  static async fetchChatMessages(roomId, queryLimit) {
     try {
       const chatMessages = await (
-        await fetch(`${origin}/api/user/chat/messages/${roomId}`, {
-          credentials: "include",
-        })
+        await fetch(
+          `${origin}/api/user/chat/messages/${roomId}?queryLimit=${queryLimit}`,
+          {
+            credentials: "include",
+          }
+        )
       ).json();
 
       return chatMessages;
