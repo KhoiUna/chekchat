@@ -15,10 +15,11 @@ const useStyles = makeStyles({
     width: "85%",
     maxWidth: 600,
     margin: "0.8rem 0",
+    padding: "0.8rem 0",
   },
   gridColumn: {
     display: "grid",
-    gridTemplateColumns: "1fr 0fr 2fr",
+    gridTemplateColumns: "2fr 0fr 1fr",
   },
   gridRow: {
     display: "grid",
@@ -40,7 +41,7 @@ const useStyles = makeStyles({
     padding: "0 0.5rem",
   },
   divider: {
-    margin: "0.7rem 0 0.7rem 0",
+    margin: "0",
   },
 });
 
@@ -62,9 +63,15 @@ export default function InboxMissionRequest({
       <Card className={classes.notificationRoot}>
         <CardActionArea className={classes.gridColumn}>
           <div className={classes.gridRow}>
-            <Typography gutterBottom variant="inherit" component="h2">
+            <Typography
+              gutterBottom
+              variant="inherit"
+              component="h2"
+              style={{ margin: "auto" }}
+            >
               From:
             </Typography>
+
             <Typography
               gutterBottom
               variant="h6"
@@ -73,6 +80,19 @@ export default function InboxMissionRequest({
             >
               {username}
             </Typography>
+
+            <CardActions>
+              <MuiThemeProvider theme={buttonTheme}>
+                <Button
+                  variant="outlined"
+                  aria-label="view and reply"
+                  color="primary"
+                  onClick={toggleMissionPopupView}
+                >
+                  <b>View & Reply</b>
+                </Button>
+              </MuiThemeProvider>
+            </CardActions>
           </div>
 
           <Divider
@@ -93,19 +113,6 @@ export default function InboxMissionRequest({
             >
               {subject}
             </Typography>
-
-            <CardActions>
-              <MuiThemeProvider theme={buttonTheme}>
-                <Button
-                  variant="outlined"
-                  aria-label="view and reply"
-                  color="primary"
-                  onClick={toggleMissionPopupView}
-                >
-                  <b>View & Reply</b>
-                </Button>
-              </MuiThemeProvider>
-            </CardActions>
           </CardContent>
         </CardActionArea>
       </Card>
