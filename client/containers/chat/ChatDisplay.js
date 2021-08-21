@@ -2,6 +2,7 @@ import Chatbox from "../../components/chat/chatbox";
 import Typography from "@material-ui/core/Typography";
 import FormatDatetime from "../../helpers/FormatDatetime";
 import utilStyles from "../../styles/utils.module.css";
+import { useEffect, useRef, Fragment } from "react";
 
 const DateDivider = ({ time }) => (
   <div className={utilStyles.datedivider_container}>
@@ -16,6 +17,18 @@ const DateDivider = ({ time }) => (
 export default function ChatDisplay({ msgArray }) {
   let repeatedDate;
   let renderDateDivider;
+
+  const scrollTopForChatArea = useRef(0);
+  useEffect(() => {
+    console.log("upd");
+    document.getElementById("chat-display").scrollTop =
+      document.getElementById("chat-display").scrollHeight -
+      scrollTopForChatArea.current -
+      50;
+
+    scrollTopForChatArea.current =
+      document.getElementById("chat-display").scrollHeight;
+  }, [msgArray]);
 
   if (msgArray.length === 0) {
     return (
