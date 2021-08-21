@@ -60,7 +60,7 @@ export default function ChatroomTag({
   const classes = useStyles();
 
   return (
-    <Link href={`/chat/${roomId}`}>
+    <Link href={`/chat/${roomId}`} scroll={false}>
       <Grid container justifyContent="center" className={classes.gridColumn}>
         <div style={{ borderRadius: "100%", margin: "auto" }}>
           <Image
