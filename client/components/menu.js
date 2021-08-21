@@ -120,9 +120,8 @@ export default function Menu({ componentName, userInfo }) {
           <ListItem className={classes.flex} button>
             <div className={utilStyles.menu_image}>
               <Image
-                unoptimized={true}
                 loader={imageLoader}
-                src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${userInfo.avatarURL}`}
+                src={userInfo.avatarURL}
                 priority
                 height={60}
                 width={60}

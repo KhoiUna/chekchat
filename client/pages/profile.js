@@ -108,13 +108,8 @@ export default function Profile() {
 
       <div className={utilStyles.uploadedAvatar}>
         <Image
-          unoptimized={true}
           loader={imageLoader}
-          src={
-            avatarURL
-              ? `${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${avatarURL}?tr=w-300,h-300`
-              : `${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}default-avatar_TAffG0nED.png?tr=w-300,h-300`
-          }
+          src={avatarURL ? avatarURL : "default-avatar_TAffG0nED.png"}
           priority
           height={200}
           width={200}

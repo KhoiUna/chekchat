@@ -64,10 +64,9 @@ export default function ChatroomTag({
       <Grid container justifyContent="center" className={classes.gridColumn}>
         <div style={{ borderRadius: "100%", margin: "auto" }}>
           <Image
-            unoptimized={true}
             loader={imageLoader}
             priority
-            src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${avatarURL}`}
+            src={avatarURL}
             height={108}
             width={108}
             alt={username}
