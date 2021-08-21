@@ -14,7 +14,8 @@ export const loadChatRoomTitleAsync = createAsyncThunk(
 
 export const loadChatMessagesAsync = createAsyncThunk(
   "chat/loadChatMessages",
-  async (roomId) => await ChatUtil.fetchChatMessages(roomId)
+  async ({ roomId, queryLimit }) =>
+    await ChatUtil.fetchChatMessages(roomId, queryLimit)
 );
 
 //Slice
@@ -70,7 +71,7 @@ export const chatSlice = createSlice({
       state.failedToLoad = false;
     },
     [loadChatMessagesAsync.fulfilled]: (state, action) => {
-      state.chatMessages = action.payload;
+      state.chatMessages = [...action.payload, ...state.chatMessages];
 
       state.isLoading = false;
       state.failedToLoad = false;
