@@ -48,7 +48,7 @@ export default function MainLayout({ children, componentName, roomTitle }) {
   useEffect(() => {
     CheckLoggedIn()
       .then((res) => {
-        if (res.ok === true) setCookie("redirectLogin", true);
+        if (res.ok === true) setCookie("loggedIn", true);
 
         if (res.ok === false) {
           removeCookie("loggedIn");
