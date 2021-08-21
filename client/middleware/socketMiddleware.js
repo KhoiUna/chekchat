@@ -30,19 +30,6 @@ export const socketMiddleware = (store) => {
       return;
     }
 
-    if (action.type === "missions/updateMissionTodoList") {
-      const { id, updateAction, value } = action.payload;
-
-      if (updateAction === "check") {
-        socket.emit("check missions", { missionId: id, completed: value });
-      }
-      if (updateAction === "star") {
-        socket.emit("star missions", { missionId: id, starred: value });
-      }
-
-      return;
-    }
-
     if (action.type === "user/subscribe") {
       socket.connect();
       socket.emit("subscribe");
@@ -55,6 +42,17 @@ export const socketMiddleware = (store) => {
 
     if (action.type === "friends/replyFriendRequest") {
       socket.emit("friend requests", action.payload);
+    }
+
+    if (action.type === "missions/updateMissionTodoList") {
+      const { id, updateAction, value } = action.payload;
+
+      if (updateAction === "check") {
+        socket.emit("check missions", { missionId: id, completed: value });
+      }
+      if (updateAction === "star") {
+        socket.emit("star missions", { missionId: id, starred: value });
+      }
     }
 
     return next(action);
