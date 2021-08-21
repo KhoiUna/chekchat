@@ -3,7 +3,7 @@ import Spinner from "../../components/spinner";
 import ChatDisplay from "../../containers/chat/ChatDisplay";
 import SendBar from "../../components/chat/send_bar";
 import utilStyles from "../../styles/utils.module.css";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadChatRoomTitleAsync,
@@ -32,13 +32,30 @@ export default function ChatRoom({ roomId }) {
 
     dispatch(loadChatRoomTitleAsync(roomId));
 
-    dispatch(loadChatMessagesAsync(roomId));
+    dispatch(loadChatMessagesAsync({ roomId, queryLimit: 0 }));
   }, []);
 
+  const firstLoad = useRef(true);
   useEffect(() => {
     document.querySelector("#chat-display").scrollTop =
       document.querySelector("#chat-display").scrollHeight;
-  }, [isLoading]);
+  }, []);
+
+  const [queryLimit, setQueryLimit] = useState(1);
+  const newMessageArrayLength = useRef(20);
+  const scrollToLoadMessages = () => {
+    if (
+      document.getElementById("chat-display").scrollTop === 0 &&
+      newMessageArrayLength.current === 20
+    ) {
+      firstLoad.current = false;
+
+      dispatch(loadChatMessagesAsync({ roomId, queryLimit }));
+      newMessageArrayLength.current =
+        chatMessages.length - 20 * (queryLimit - 1);
+      setQueryLimit((prev) => prev + 1);
+    }
+  };
 
   return (
     <MainLayout
@@ -46,13 +63,20 @@ export default function ChatRoom({ roomId }) {
       roomTitle={roomId ? chatRoomTitle : ""}
     >
       <div className={utilStyles.chat_area}>
-        <div className={utilStyles.chat_display} id="chat-display">
-          {isLoading ? (
+        <div
+          className={utilStyles.chat_display}
+          id="chat-display"
+          onScroll={scrollToLoadMessages}
+        >
+          {isLoading && firstLoad.current ? (
             <div style={{ marginTop: "1rem" }}>
               <Spinner />
             </div>
           ) : (
-            <ChatDisplay msgArray={chatMessages} />
+            <>
+              {isLoading && !firstLoad.current && <Spinner />}
+              <ChatDisplay msgArray={chatMessages} />
+            </>
           )}
         </div>
 
