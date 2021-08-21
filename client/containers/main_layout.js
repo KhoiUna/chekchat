@@ -14,6 +14,7 @@ import {
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import CheckLoggedIn from "../helpers/checkLoggedIn";
+import { useCookies } from "react-cookie";
 
 const useStyles = makeStyles({
   root: {
@@ -43,10 +44,14 @@ export default function MainLayout({ children, componentName, roomTitle }) {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const [cookies, setCookie, removeCookie] = useCookies(["loggedIn"]);
   useEffect(() => {
     CheckLoggedIn()
       .then((res) => {
-        if (res.ok === false) router.push("/login");
+        if (res.ok === false) {
+          removeCookie("loggedIn");
+          router.push("/login");
+        }
       })
       .catch((err) => console.error(err));
   }, []);
