@@ -9,7 +9,6 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Image from "next/image";
 import utilStyles from "../../styles/utils.module.css";
-import Badge from "@material-ui/core/Badge";
 import CardActions from "@material-ui/core/CardActions";
 import DoneIcon from "@material-ui/icons/Done";
 import CloseIcon from "@material-ui/icons/Close";
@@ -56,56 +55,15 @@ const friendRequestButtonTheme = createTheme({
 });
 
 export default function FriendRequest({
-  fromPage,
   requestId,
   username,
   email,
   avatarURL,
-  status,
   onClickAction,
 }) {
   const classes = useStyles();
 
-  return fromPage === "friends" ? (
-    <Badge
-      badgeContent={status === "Pending" ? `${status}...` : status}
-      color="primary"
-      anchorOrigin={{
-        vertical: "bottom",
-        horizontal: "left",
-      }}
-      className={classes.badge}
-    >
-      <Card className={classes.root}>
-        <CardActionArea className={classes.gridColumn}>
-          <div className={utilStyles.request_image}>
-            <Image
-              unoptimized={true}
-              loader={imageLoader}
-              priority
-              src={`${process.env.NEXT_PUBLIC_IMGKIT_IMGKIT_URL_ENDPOINT}tr:r-max${avatarURL}`}
-              height={108}
-              width={108}
-              alt={username}
-            />
-          </div>
-
-          <CardContent className={classes.gridRow}>
-            <Typography
-              gutterBottom
-              variant="h6"
-              className={classes.overflowText}
-            >
-              {username}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
-              {email}
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    </Badge>
-  ) : (
+  return (
     <Card className={classes.notificationRoot}>
       <CardActionArea className={classes.gridColumn}>
         <div className={utilStyles.request_image}>
