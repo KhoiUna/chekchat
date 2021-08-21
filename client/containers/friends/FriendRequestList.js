@@ -37,11 +37,12 @@ export default function FriendRequestList() {
       {friendRequestList.map((item, index) => (
         <Fragment key={index}>
           <FriendRequest
-            fromPage="friends"
-            username={item.to_user[0].username}
-            email={item.to_user[0].email}
-            avatarURL={item.to_user[0].avatarURL}
-            status={item.status}
+            key={index}
+            requestId={item._id}
+            username={item.from_user[0].username}
+            email={item.from_user[0].email}
+            avatarURL={item.from_user[0].avatarURL}
+            onClickAction={handleClick}
           />
         </Fragment>
       ))}
