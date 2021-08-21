@@ -12,12 +12,11 @@ import { useCookies } from "react-cookie";
 export default function Login() {
   const router = useRouter();
 
-  const [cookies, setCookie] = useCookies(["loggedIn"]);
+  const [cookies, setCookie, removeCookie] = useCookies(["loggedIn"]);
   useEffect(() => {
-    const redirect = new URL(window.location).searchParams.get("redirect");
-
-    if (redirect === "true") {
-      // window.location.reload();
+    if (cookies.redirectLogin === "true") {
+      window.location.reload();
+      removeCookie("redirectLogin");
     }
   }, []);
   useEffect(() => {
