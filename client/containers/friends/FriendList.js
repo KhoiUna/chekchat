@@ -4,14 +4,23 @@ import FriendsUtil from "../../utils/FriendsUtil";
 import Spinner from "../../components/spinner";
 import FriendBlankState from "../../components/friends/friend_blank_state";
 import Grid from "@material-ui/core/Grid";
+import {
+  loadFriendListAsync,
+  selectFriendList,
+  selectIsLoading,
+} from "../../features/friendSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function FriendList() {
-  const [friendList, setFriendList] = useState(null);
+  const dispatch = useDispatch();
+
+  const friendList = useSelector(selectFriendList);
+  const isLoading = useSelector(selectIsLoading);
   useEffect(() => {
-    FriendsUtil.fetchFriendList()
-      .then((r) => setFriendList(r))
-      .catch((err) => console.error("Error fetching friend list"));
+    dispatch(loadFriendListAsync());
   }, []);
+
+  if (isLoading) return <Spinner />;
 
   if (friendList?.length === 0)
     return (
@@ -26,7 +35,7 @@ export default function FriendList() {
       </Grid>
     );
 
-  return friendList ? (
+  return (
     <Grid
       container
       direction="row"
@@ -44,7 +53,5 @@ export default function FriendList() {
         </Fragment>
       ))}
     </Grid>
-  ) : (
-    <Spinner />
   );
 }
