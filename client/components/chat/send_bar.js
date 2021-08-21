@@ -68,6 +68,15 @@ export default function SendBar({}) {
           className={utilStyles.send_form}
           placeholder="Type message here"
           contentEditable={true}
+          autoCorrect="off"
+          spellCheck={false}
+          aria-label="Type message here"
+          aria-multiline={true}
+          role="textbox"
+          data-gramm={false}
+          data-slate-editor={true}
+          data-can-focus={true}
+          data-key={0}
           onKeyPress={handleKeyPress}
         ></div>
 
