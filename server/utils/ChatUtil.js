@@ -222,14 +222,12 @@ module.exports = class ChatUtil {
             message: 1,
           },
         },
+        { $sort: { sent_datetime: -1 } },
         { $skip: queryLimit * 20 },
         { $limit: 20 },
       ];
 
-      const chatMessages = await collection
-        .aggregate(agg)
-        .sort({ sent_datetime: 1 })
-        .toArray();
+      const chatMessages = await collection.aggregate(agg).toArray();
 
       return chatMessages;
     } catch (err) {

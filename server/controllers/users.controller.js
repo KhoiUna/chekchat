@@ -143,6 +143,7 @@ module.exports = class UsersController {
     try {
       const chatMessages = await ChatUtil.getChatMessages({
         roomId: req.params.roomId,
+        queryLimit: req.query.queryLimit,
       });
       res.json(chatMessages);
     } catch (err) {
