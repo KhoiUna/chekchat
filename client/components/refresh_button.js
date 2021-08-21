@@ -12,10 +12,8 @@ const useStyles = makeStyles({
   },
 });
 
-export default function RefreshButton() {
+export default function RefreshButton({ refresh }) {
   const classes = useStyles();
-
-  const refresh = () => location.reload();
 
   return (
     <MuiThemeProvider theme={buttonTheme}>
@@ -23,7 +21,7 @@ export default function RefreshButton() {
         color="primary"
         aria-label="refresh inbox"
         className={classes.refreshButton}
-        onClick={refresh}
+        onClick={() => refresh()}
       >
         <RefreshIcon style={{ fontSize: "2rem" }} />
       </Fab>
