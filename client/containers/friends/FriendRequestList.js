@@ -1,17 +1,30 @@
-import { useState, useEffect, Fragment } from "react";
+import { useEffect, Fragment } from "react";
 import FriendRequest from "../../components/friends/friend_request";
-import FriendRequestUtil from "../../utils/FriendRequestUtil";
 import Spinner from "../../components/spinner";
 import FriendBlankState from "../../components/friends/friend_blank_state";
 import Grid from "@material-ui/core/Grid";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  loadReceivedFriendRequestsListAsync,
+  selectFriendRequestList,
+  replyFriendRequest,
+  selectIsLoading,
+} from "../../features/friendSlice";
 
 export default function FriendRequestList() {
-  const [friendRequestList, setFriendRequestList] = useState(null);
+  const dispatch = useDispatch();
+
+  const friendRequestList = useSelector(selectFriendRequestList);
+  const isLoading = useSelector(selectIsLoading);
   useEffect(() => {
-    FriendRequestUtil.fetchSentFriendRequestsList()
-      .then((r) => setFriendRequestList(r))
-      .catch((err) => console.error("Error fetching friend requests list"));
+    dispatch(loadReceivedFriendRequestsListAsync());
   }, []);
+
+  const handleClick = (action, requestId) => {
+    dispatch(replyFriendRequest({ action, requestId }));
+  };
+
+  if (isLoading) return <Spinner />;
 
   if (friendRequestList?.length === 0)
     return (
@@ -26,7 +39,7 @@ export default function FriendRequestList() {
       </Grid>
     );
 
-  return friendRequestList ? (
+  return (
     <Grid
       container
       direction="row"
@@ -47,7 +60,5 @@ export default function FriendRequestList() {
         </Fragment>
       ))}
     </Grid>
-  ) : (
-    <Spinner />
   );
 }
