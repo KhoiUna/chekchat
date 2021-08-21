@@ -194,7 +194,7 @@ module.exports = class ChatUtil {
     }
   }
 
-  static async getChatMessages({ roomId }) {
+  static async getChatMessages({ roomId, queryLimit }) {
     try {
       const collection = client.db("chekchat").collection("messages");
 
@@ -222,6 +222,8 @@ module.exports = class ChatUtil {
             message: 1,
           },
         },
+        { $skip: queryLimit * 20 },
+        { $limit: 20 },
       ];
 
       const chatMessages = await collection
