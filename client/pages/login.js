@@ -5,19 +5,23 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import { origin } from "../config/config";
+import { origin, cookieOptions } from "../config/config";
 import { loginRegisterTheme } from "../themes/theme";
-import CheckLoggedIn from "../helpers/checkLoggedIn";
+import { useCookies } from "react-cookie";
 
 export default function Login() {
   const router = useRouter();
 
+  const [cookies, setCookie] = useCookies(["loggedIn"]);
   useEffect(() => {
-    CheckLoggedIn()
-      .then((res) => {
-        if (res.ok === true) router.push("/inbox");
-      })
-      .catch((err) => console.error(err));
+    const redirect = new URL(window.location).searchParams.get("redirect");
+
+    if (redirect === "true") {
+      // window.location.reload();
+    }
+  }, []);
+  useEffect(() => {
+    if (cookies.loggedIn) router.push("/inbox");
   }, []);
 
   const [responseText, setResponseText] = useState("");
@@ -54,6 +58,7 @@ export default function Login() {
         setResponseText("Invalid email or password");
       }
       if (res.ok === true) {
+        setCookie("loggedIn", true, cookieOptions);
         router.push("/inbox");
       }
     } catch (err) {
