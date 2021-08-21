@@ -46,7 +46,7 @@ export default class ChatUtil {
         )
       ).json();
 
-      return chatMessages;
+      return chatMessages.reverse();
     } catch (err) {
       console.error("Error getting chat messages");
       return;
