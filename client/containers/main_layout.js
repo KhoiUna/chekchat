@@ -50,7 +50,10 @@ export default function MainLayout({ children, componentName, roomTitle }) {
       .then((res) => {
         if (res.ok === false) {
           removeCookie("loggedIn");
-          router.push("/login");
+          router.push({
+            pathname: "/login",
+            query: { redirect: true },
+          });
         }
       })
       .catch((err) => console.error(err));
