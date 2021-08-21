@@ -23,6 +23,7 @@ import Image from "next/image";
 import imageLoader from "../helpers/imageLoader";
 import { origin } from "../config/config";
 import { useDispatch } from "react-redux";
+import { useCookies } from "react-cookie";
 
 const menuList = [
   { name: "Inbox", icon: <InboxIcon /> },
@@ -90,6 +91,7 @@ export default function Menu({ componentName, userInfo }) {
     setDrawerState(!drawerState);
   };
 
+  const [cookies, setCookie, removeCookie] = useCookies(["loggedIn"]);
   const logout = async () => {
     try {
       const res = await fetch(`${origin}/api/user/logout`, {
@@ -98,6 +100,7 @@ export default function Menu({ componentName, userInfo }) {
       });
 
       if (res.ok) {
+        removeCookie("loggedIn");
         router.push("/login");
       }
     } catch (err) {
