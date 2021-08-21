@@ -7,7 +7,7 @@ const useStyles = makeStyles({
   refreshButton: {
     position: "fixed",
     bottom: "1rem",
-    left: "0.8rem",
+    right: "0.8rem",
     zIndex: 1,
   },
 });
