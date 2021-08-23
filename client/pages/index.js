@@ -1,6 +1,9 @@
 import Head from "next/head";
 import Link from "next/link";
 import Logo from "../components/logo";
+import homeStyles from "../styles/home.module.css";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 
 export default function Home() {
   return (
@@ -28,15 +31,22 @@ export default function Home() {
       </Head>
 
       <body>
-        <header>
-          <Logo
-            style={{
-              width: "5.5rem",
-              height: "5.5rem",
-              margin: 0,
-              backgroundColor: "#0db3ff",
-            }}
-          />
+        <header className={homeStyles.header}>
+          <Grid container direction="row">
+            <Logo
+              style={{
+                width: "5.5rem",
+                height: "5.5rem",
+                margin: 0,
+                backgroundColor: "#0db3ff",
+              }}
+            />
+            <h1 className={homeStyles.title}>hekChat</h1>
+
+            <Typography variant="h6" gutterBottom>
+              Pricing
+            </Typography>
+          </Grid>
         </header>
         <main>
           <Link href="/login">
