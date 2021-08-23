@@ -32,18 +32,29 @@ export default function Home() {
 
       <body>
         <header className={homeStyles.header}>
-          <Grid container direction="row">
-            <Logo
-              style={{
-                width: "5.5rem",
-                height: "5.5rem",
-                margin: 0,
-                backgroundColor: "#0db3ff",
-              }}
-            />
-            <h1 className={homeStyles.title}>hekChat</h1>
+          <Grid
+            container
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <div className={homeStyles.header_logo}>
+              <Logo
+                style={{
+                  width: "3.6rem",
+                  height: "4rem",
+                  margin: 0,
+                  backgroundColor: "#0db3ff",
+                }}
+              />
+              <h1 className={homeStyles.title}>hekChat</h1>
+            </div>
 
-            <Typography variant="h6" gutterBottom>
+            <Typography
+              variant="body1"
+              gutterBottom
+              style={{ margin: "auto 0.25rem auto 0", color: "#fff" }}
+            >
               Pricing
             </Typography>
           </Grid>

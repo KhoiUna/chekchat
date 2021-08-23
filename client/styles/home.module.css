@@ -1,0 +1,19 @@
+.header {
+  background-color: #0db3ff;
+  padding: 0.7rem;
+}
+
+.header_logo {
+  display: flex;
+  margin: 0;
+}
+
+.title {
+  margin: 0;
+  line-height: 4rem;
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif !important;
+}
