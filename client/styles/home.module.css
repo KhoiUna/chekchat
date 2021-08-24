@@ -115,3 +115,6 @@
 .footer_nav_item {
   cursor: pointer;
 }
+.footer_nav_item:hover {
+  text-decoration: underline;
+}

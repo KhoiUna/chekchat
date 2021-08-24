@@ -134,7 +134,7 @@ export default function Home() {
             <div className={homeStyles.media}>
               <iframe
                 width="100%"
-                height="400"
+                height="500"
                 src="https://www.youtube-nocookie.com/embed/7hqGhvkNuhk?controls=0"
                 title="YouTube video player"
                 frameborder="0"
