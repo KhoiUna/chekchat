@@ -1,11 +1,26 @@
+import { useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Logo from "../components/logo";
 import homeStyles from "../styles/home.module.css";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import PeopleIcon from "@material-ui/icons/People";
+import UpdateIcon from "@material-ui/icons/Update";
+import WidgetsIcon from "@material-ui/icons/Widgets";
 
 export default function Home() {
+  const [email, setEmail] = useState("");
+  const handleChange = ({ target }) => {
+    setEmail(target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       <Head>
@@ -38,10 +53,149 @@ export default function Home() {
             justifyContent="space-between"
             alignItems="center"
           >
-            <div className={homeStyles.header_logo}>
+            <Link href="/">
               <Logo
                 style={{
-                  width: "3.6rem",
+                  width: "4rem",
+                  height: "4rem",
+                  margin: "0.3rem",
+                  backgroundColor: "#0db3ff",
+                  cursor: "pointer",
+                }}
+              />
+            </Link>
+
+            <nav className={homeStyles.nav}>
+              <Link href="/">
+                <Typography
+                  variant="body1"
+                  gutterBottom
+                  className={homeStyles.nav_item}
+                >
+                  Home
+                </Typography>
+              </Link>
+
+              <Link href="/pricing">
+                <Typography
+                  variant="body1"
+                  gutterBottom
+                  className={homeStyles.nav_item}
+                >
+                  Pricing
+                </Typography>
+              </Link>
+            </nav>
+          </Grid>
+        </header>
+
+        <main>
+          <section style={{ margin: "1rem" }}>
+            <div className={homeStyles.jumbotron}>
+              <Typography variant="h4" gutterBottom>
+                The app for assigning tasks
+              </Typography>
+              <Typography variant="h5" gutterBottom>
+                Made for teamwork and productivity
+              </Typography>
+              <Typography variant="subtitle1" gutterBottom>
+                Help teams communicate easily & collaborate efficiently to get
+                work done
+              </Typography>
+            </div>
+          </section>
+
+          <section>
+            <form
+              autoComplete="off"
+              className={homeStyles.email_form}
+              onSubmit={handleSubmit}
+            >
+              <label for="email" hidden>
+                Email Address:
+              </label>
+              <input
+                className={homeStyles.email_input}
+                id="email"
+                name="email"
+                value={email}
+                placeholder="Enter your email"
+                onChange={handleChange}
+              />
+              <br />
+
+              <button className={homeStyles.request_button}>
+                Request Access
+              </button>
+            </form>
+          </section>
+
+          <section style={{ margin: "1rem" }}>
+            <div className={homeStyles.media}>
+              <iframe
+                width="100%"
+                height="400"
+                src="https://www.youtube-nocookie.com/embed/7hqGhvkNuhk?controls=0"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </section>
+
+          <section className={homeStyles.info_cards_flex_container}>
+            <Card variant="outlined" className={homeStyles.info_card}>
+              <CardContent>
+                <Typography variant="h5">Organized</Typography>
+                <Typography
+                  color="textSecondary"
+                  className={homeStyles.info_description}
+                >
+                  All of your tasks are located in one place
+                </Typography>
+                <PeopleIcon className={homeStyles.info_icons} />
+              </CardContent>
+            </Card>
+
+            <Card variant="outlined" className={homeStyles.info_card}>
+              <CardContent>
+                <Typography variant="h5" component="h2">
+                  Fast
+                </Typography>
+                <Typography
+                  color="textSecondary"
+                  className={homeStyles.info_description}
+                >
+                  Send messages to your team in a blink of an eye
+                </Typography>
+                <UpdateIcon className={homeStyles.info_icons} />
+              </CardContent>
+            </Card>
+
+            <Card variant="outlined" className={homeStyles.info_card}>
+              <CardContent>
+                <Typography variant="h5" component="h2">
+                  Simple
+                </Typography>
+                <Typography
+                  color="textSecondary"
+                  className={homeStyles.info_description}
+                >
+                  Easy to use & intuitive. Anyone can master it
+                </Typography>
+                <WidgetsIcon className={homeStyles.info_icons} />
+              </CardContent>
+            </Card>
+          </section>
+        </main>
+
+        <footer className={homeStyles.footer}>
+          <section style={{ margin: "0 0 1.5rem 0" }}>
+            <div className={homeStyles.footer_logo}>
+              <Logo
+                style={{
+                  width: "4rem",
                   height: "4rem",
                   margin: 0,
                   backgroundColor: "#0db3ff",
@@ -49,21 +203,47 @@ export default function Home() {
               />
               <h1 className={homeStyles.title}>hekChat</h1>
             </div>
-
             <Typography
-              variant="body1"
+              variant="h6"
               gutterBottom
-              style={{ margin: "auto 0.25rem auto 0", color: "#fff" }}
+              style={{ fontSize: "1.1rem" }}
             >
-              Pricing
+              The app for assigning tasks
             </Typography>
-          </Grid>
-        </header>
-        <main>
-          <Link href="/login">
-            <a>Login</a>
-          </Link>
-        </main>
+          </section>
+
+          <nav className={homeStyles.footer_nav}>
+            <section>
+              <Typography variant="h6" gutterBottom>
+                Pricing:
+              </Typography>
+              <Link href="/pricing">
+                <Typography
+                  variant="body1"
+                  gutterBottom
+                  className={homeStyles.footer_nav_item}
+                >
+                  Plans
+                </Typography>
+              </Link>
+            </section>
+
+            <section>
+              <Typography variant="h6" gutterBottom>
+                Contact Us:
+              </Typography>
+              <Link href="mailto:help@chekchat.xyz">
+                <Typography
+                  variant="body1"
+                  gutterBottom
+                  className={homeStyles.footer_nav_item}
+                >
+                  help@chekchat.xyz
+                </Typography>
+              </Link>
+            </section>
+          </nav>
+        </footer>
       </body>
     </>
   );
