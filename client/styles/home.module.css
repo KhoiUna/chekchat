@@ -25,6 +25,10 @@
   cursor: pointer;
 }
 
+.main {
+  padding: 3rem 0;
+}
+
 .jumbotron {
   background-color: #fff;
   text-align: center;

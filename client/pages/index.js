@@ -58,7 +58,7 @@ export default function Home() {
                 style={{
                   width: "4rem",
                   height: "4rem",
-                  margin: "0.3rem",
+                  margin: "0.3rem 0 0.3rem 1rem",
                   backgroundColor: "#0db3ff",
                   cursor: "pointer",
                 }}
@@ -89,7 +89,7 @@ export default function Home() {
           </Grid>
         </header>
 
-        <main>
+        <main className={homeStyles.main}>
           <section style={{ margin: "1rem" }}>
             <div className={homeStyles.jumbotron}>
               <Typography variant="h4" gutterBottom>
