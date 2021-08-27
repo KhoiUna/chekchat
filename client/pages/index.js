@@ -215,7 +215,7 @@ export default function Home() {
           <nav className={homeStyles.footer_nav}>
             <section>
               <Typography variant="h6" gutterBottom>
-                Pricing:
+                <b>Pricing:</b>
               </Typography>
               <Link href="/pricing">
                 <Typography
@@ -230,7 +230,7 @@ export default function Home() {
 
             <section>
               <Typography variant="h6" gutterBottom>
-                Contact Us:
+                <b>Contact Us:</b>
               </Typography>
               <Link href="mailto:help@chekchat.xyz">
                 <Typography
