@@ -115,6 +115,8 @@ export default function Home() {
                 Email Address:
               </label>
               <input
+                type="email"
+                required
                 className={homeStyles.email_input}
                 id="email"
                 name="email"
@@ -124,7 +126,7 @@ export default function Home() {
               />
               <br />
 
-              <button className={homeStyles.request_button}>
+              <button className={homeStyles.request_button} type="submit">
                 Request Access
               </button>
             </form>
