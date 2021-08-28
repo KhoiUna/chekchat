@@ -10,6 +10,7 @@ import CardContent from "@material-ui/core/CardContent";
 import PeopleIcon from "@material-ui/icons/People";
 import UpdateIcon from "@material-ui/icons/Update";
 import WidgetsIcon from "@material-ui/icons/Widgets";
+import InstagramIcon from "@material-ui/icons/Instagram";
 
 export default function Home() {
   useEffect(() => {
@@ -234,58 +235,68 @@ export default function Home() {
         </main>
 
         <footer className={homeStyles.footer}>
-          <section style={{ margin: "0 0 1.5rem 0" }}>
-            <div className={homeStyles.footer_logo}>
-              <Logo
-                style={{
-                  width: "4rem",
-                  height: "4rem",
-                  margin: 0,
-                  backgroundColor: "#0db3ff",
-                }}
-              />
-              <h1 className={homeStyles.title}>hekChat</h1>
-            </div>
-            <Typography
-              variant="h6"
-              gutterBottom
-              style={{ fontSize: "1.1rem" }}
-            >
-              The app for assigning tasks
+          <div className={homeStyles.footer_flex_container}>
+            <section style={{ margin: "0 0 1.5rem 0" }}>
+              <div className={homeStyles.footer_logo}>
+                <Logo
+                  style={{
+                    width: "4rem",
+                    height: "4rem",
+                    margin: 0,
+                    backgroundColor: "#0db3ff",
+                  }}
+                />
+                <h1 className={homeStyles.title}>hekChat</h1>
+              </div>
+              <Typography
+                variant="h6"
+                gutterBottom
+                style={{ fontSize: "1.1rem" }}
+              >
+                The app for assigning tasks
+              </Typography>
+            </section>
+
+            <nav className={homeStyles.footer_nav}>
+              <section>
+                <Typography variant="h6" gutterBottom>
+                  <b>Pricing:</b>
+                </Typography>
+                <Link href="/pricing">
+                  <Typography
+                    variant="body1"
+                    gutterBottom
+                    className={homeStyles.footer_nav_item}
+                  >
+                    Plans
+                  </Typography>
+                </Link>
+              </section>
+
+              <section>
+                <Typography variant="h6" gutterBottom>
+                  <b>Contact Us:</b>
+                </Typography>
+                <Link href="mailto:help@chekchat.xyz">
+                  <Typography
+                    variant="body1"
+                    gutterBottom
+                    className={homeStyles.footer_nav_item}
+                  >
+                    help@chekchat.xyz
+                  </Typography>
+                </Link>
+              </section>
+            </nav>
+          </div>
+
+          <section className={homeStyles.copyright_section}>
+            <Typography gutterBottom variant="subtitle1" display="block">
+              &copy; {new Date().getFullYear()} ChekChat
             </Typography>
+
+            <InstagramIcon className={homeStyles.social_icons} />
           </section>
-
-          <nav className={homeStyles.footer_nav}>
-            <section>
-              <Typography variant="h6" gutterBottom>
-                <b>Pricing:</b>
-              </Typography>
-              <Link href="/pricing">
-                <Typography
-                  variant="body1"
-                  gutterBottom
-                  className={homeStyles.footer_nav_item}
-                >
-                  Plans
-                </Typography>
-              </Link>
-            </section>
-
-            <section>
-              <Typography variant="h6" gutterBottom>
-                <b>Contact Us:</b>
-              </Typography>
-              <Link href="mailto:help@chekchat.xyz">
-                <Typography
-                  variant="body1"
-                  gutterBottom
-                  className={homeStyles.footer_nav_item}
-                >
-                  help@chekchat.xyz
-                </Typography>
-              </Link>
-            </section>
-          </nav>
         </footer>
       </body>
     </>
