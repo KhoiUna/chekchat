@@ -295,7 +295,13 @@ export default function Home() {
               &copy; {new Date().getFullYear()} ChekChat
             </Typography>
 
-            <InstagramIcon className={homeStyles.social_icons} />
+            <a
+              href="https://www.instagram.com/chek.chat/"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              <InstagramIcon className={homeStyles.social_icons} />
+            </a>
           </section>
         </footer>
       </body>
