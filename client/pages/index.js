@@ -94,13 +94,13 @@ export default function Home() {
             </Link>
 
             <nav className={homeStyles.nav}>
-              <Link href="/">
+              <Link href="#features">
                 <Typography
                   variant="body1"
                   gutterBottom
                   className={homeStyles.nav_item}
                 >
-                  Home
+                  Features
                 </Typography>
               </Link>
 
@@ -223,6 +223,7 @@ export default function Home() {
 
           <section className={homeStyles.features_section}>
             <Typography
+              id="features"
               variant="h4"
               gutterBottom
               className={homeStyles.feature_title}
