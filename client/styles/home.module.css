@@ -1,6 +1,8 @@
 .header {
   background-color: #0db3ff;
   padding: 0.4rem;
+  position: sticky;
+  top: 0;
 }
 
 .title {
@@ -26,7 +28,7 @@
 }
 
 .main {
-  padding: 3rem 0;
+  padding: 1rem 0;
 }
 
 .jumbotron {
@@ -119,6 +121,16 @@
   font-size: 2.4rem !important;
 }
 
+/* Style features section */
+.features_section {
+  background-color: #fff;
+}
+
+.feature_title {
+  text-align: center;
+}
+
+/* Style footer */
 .footer {
   background-color: #0db3ff;
   display: flex;

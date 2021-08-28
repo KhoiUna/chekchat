@@ -220,6 +220,16 @@ export default function Home() {
               </CardContent>
             </Card>
           </section>
+
+          <section className={homeStyles.features_section}>
+            <Typography
+              variant="h4"
+              gutterBottom
+              className={homeStyles.feature_title}
+            >
+              Features
+            </Typography>
+          </section>
         </main>
 
         <footer className={homeStyles.footer}>
