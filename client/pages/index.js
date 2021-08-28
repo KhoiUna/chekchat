@@ -179,14 +179,16 @@ export default function Home() {
           <section className={homeStyles.info_cards_flex_container}>
             <Card variant="outlined" className={homeStyles.info_card}>
               <CardContent>
-                <Typography variant="h5">Organized</Typography>
+                <Typography variant="h5" component="h2">
+                  Simple
+                </Typography>
                 <Typography
                   color="textSecondary"
                   className={homeStyles.info_description}
                 >
-                  All of your tasks are located in one place
+                  Easy to use & intuitive. Anyone can master it
                 </Typography>
-                <PeopleIcon className={homeStyles.info_icons} />
+                <WidgetsIcon className={homeStyles.info_icons} />
               </CardContent>
             </Card>
 
@@ -207,16 +209,14 @@ export default function Home() {
 
             <Card variant="outlined" className={homeStyles.info_card}>
               <CardContent>
-                <Typography variant="h5" component="h2">
-                  Simple
-                </Typography>
+                <Typography variant="h5">Organized</Typography>
                 <Typography
                   color="textSecondary"
                   className={homeStyles.info_description}
                 >
-                  Easy to use & intuitive. Anyone can master it
+                  All of your tasks are located in one place
                 </Typography>
-                <WidgetsIcon className={homeStyles.info_icons} />
+                <PeopleIcon className={homeStyles.info_icons} />
               </CardContent>
             </Card>
           </section>
