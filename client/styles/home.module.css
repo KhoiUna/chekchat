@@ -37,6 +37,27 @@
   padding: 2%;
 }
 
+.jumbotron_title {
+  width: fit-content;
+  margin: 0 auto 0.5rem auto !important;
+}
+.jumbotron_title span:last-child {
+  border-right: 0.1em solid #0db3ff;
+}
+
+.blink_caret {
+  animation: blink-caret 0.75s step-end infinite !important;
+}
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: #0db3ff;
+  }
+}
+
 .email_form {
   text-align: center;
   margin: 1.5rem;

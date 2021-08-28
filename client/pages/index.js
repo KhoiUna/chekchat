@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Logo from "../components/logo";
@@ -12,6 +12,34 @@ import UpdateIcon from "@material-ui/icons/Update";
 import WidgetsIcon from "@material-ui/icons/Widgets";
 
 export default function Home() {
+  useEffect(() => {
+    const jumbotronTitle = "The app for assigning tasks";
+    const speed = 60;
+    let i = 0;
+
+    const typeWriter = () => {
+      if (i < jumbotronTitle.length) {
+        document.getElementById(
+          "jumbotron_title"
+        ).innerHTML += `<span>${jumbotronTitle.charAt(i)}</span>${
+          i + 1 === jumbotronTitle.length
+            ? `<span class=${homeStyles.blink_caret}></span>`
+            : ""
+        }`;
+
+        i++;
+      }
+    };
+
+    const typeWriterInterval = setInterval(() => {
+      typeWriter();
+    }, speed);
+
+    return () => {
+      clearInterval(typeWriterInterval);
+    };
+  }, []);
+
   const [email, setEmail] = useState("");
   const handleChange = ({ target }) => {
     setEmail(target.value);
@@ -92,15 +120,17 @@ export default function Home() {
         <main className={homeStyles.main}>
           <section style={{ margin: "1rem" }}>
             <div className={homeStyles.jumbotron}>
-              <Typography variant="h4" gutterBottom>
-                The app for assigning tasks
-              </Typography>
+              <Typography
+                variant="h4"
+                gutterBottom
+                className={homeStyles.jumbotron_title}
+                id="jumbotron_title"
+              ></Typography>
               <Typography variant="h5" gutterBottom>
                 Made for teamwork and productivity
               </Typography>
               <Typography variant="subtitle1" gutterBottom>
-                Help teams communicate easily & collaborate efficiently to get
-                work done
+                Help teams communicate efficiently to get work done
               </Typography>
             </div>
           </section>
@@ -111,7 +141,7 @@ export default function Home() {
               className={homeStyles.email_form}
               onSubmit={handleSubmit}
             >
-              <label for="email" hidden>
+              <label htmlFor="email" hidden>
                 Email Address:
               </label>
               <input
@@ -139,9 +169,9 @@ export default function Home() {
                 height="500"
                 src="https://www.youtube-nocookie.com/embed/7hqGhvkNuhk?controls=0"
                 title="YouTube video player"
-                frameborder="0"
+                frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
+                allowFullScreen
               ></iframe>
             </div>
           </section>
