@@ -244,7 +244,7 @@ export default function Home() {
                     className={homeStyles.feature_icons}
                   />
                   <Typography variant="h5" component="h2">
-                    Assignment
+                    Assign
                   </Typography>
                 </div>
 
@@ -258,7 +258,7 @@ export default function Home() {
                     </li>
 
                     <li className={homeStyles.feature_list_items}>
-                      Assign them to a specific member on your team.
+                      Assign them to a member on your team.
                     </li>
                   </ul>
                 </Typography>
@@ -280,10 +280,10 @@ export default function Home() {
                 >
                   <ul>
                     <li className={homeStyles.feature_list_items}>
-                      Your team member accepts the task request
+                      Your team member accepts task request.
                     </li>
                     <li className={homeStyles.feature_list_items}>
-                      The task will show on the app's todo list
+                      Task will be transferred to the app's todo list.
                     </li>
                   </ul>
                 </Typography>
@@ -305,10 +305,10 @@ export default function Home() {
                 >
                   <ul>
                     <li className={homeStyles.feature_list_items}>
-                      Automatically create chat room for that specific task
+                      Automatically create chat room for accepted task.
                     </li>
                     <li className={homeStyles.feature_list_items}>
-                      Helps you communicate in a single focused channel at once
+                      Communicate in a single channel at once.
                     </li>
                   </ul>
                 </Typography>
@@ -360,6 +360,7 @@ export default function Home() {
                 <Typography variant="h6" gutterBottom>
                   <b>Contact Us:</b>
                 </Typography>
+
                 <Link href="mailto:help@chekchat.xyz">
                   <Typography
                     variant="body1"
@@ -369,22 +370,22 @@ export default function Home() {
                     help@chekchat.xyz
                   </Typography>
                 </Link>
+
+                <a
+                  href="https://www.instagram.com/chek.chat/"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  <InstagramIcon className={homeStyles.social_icons} />
+                </a>
               </section>
             </nav>
           </div>
 
           <section className={homeStyles.copyright_section}>
-            <Typography gutterBottom variant="subtitle1" display="block">
+            <Typography gutterBottom variant="subtitle2" style={{ margin: 0 }}>
               &copy; {new Date().getFullYear()} ChekChat
             </Typography>
-
-            <a
-              href="https://www.instagram.com/chek.chat/"
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              <InstagramIcon className={homeStyles.social_icons} />
-            </a>
           </section>
         </footer>
       </body>

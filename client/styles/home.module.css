@@ -119,6 +119,7 @@
   width: 16rem;
   margin-bottom: 1rem;
   border: 3px solid #000 !important;
+  box-shadow: 0 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
 }
 
 .info_description {
@@ -145,6 +146,7 @@
 .feature_card {
   margin: 1.5rem 0;
   border: 3px solid #000 !important;
+  box-shadow: 0 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
 }
 
 .feature_card_flex {
@@ -172,7 +174,7 @@
 .footer {
   background-color: #0db3ff;
   color: #fff;
-  padding: 1.5rem;
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
 }
 
 .footer_flex_container {
@@ -198,8 +200,8 @@
 }
 
 .copyright_section {
-  margin: 1.8rem 0 0 0;
-  text-align: right;
+  margin: 1.7rem 0 0 0;
+  text-align: left;
 }
 
 .social_icons {
@@ -208,4 +210,5 @@
   padding: 0.4rem;
   border-radius: 100%;
   cursor: pointer;
+  margin: 0.5rem 0 0 0;
 }
