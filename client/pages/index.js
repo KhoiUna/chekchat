@@ -11,6 +11,9 @@ import PeopleIcon from "@material-ui/icons/People";
 import UpdateIcon from "@material-ui/icons/Update";
 import WidgetsIcon from "@material-ui/icons/Widgets";
 import InstagramIcon from "@material-ui/icons/Instagram";
+import MessageOutlinedIcon from "@material-ui/icons/MessageOutlined";
+import ListAltOutlinedIcon from "@material-ui/icons/ListAltOutlined";
+import AssignmentIndOutlinedIcon from "@material-ui/icons/AssignmentIndOutlined";
 
 export default function Home() {
   useEffect(() => {
@@ -163,7 +166,7 @@ export default function Home() {
             </form>
           </section>
 
-          <section style={{ margin: "1rem" }}>
+          <section style={{ margin: "1rem 1rem 2.5rem 1rem" }}>
             <div className={homeStyles.media}>
               <iframe
                 width="100%"
@@ -223,14 +226,94 @@ export default function Home() {
           </section>
 
           <section className={homeStyles.features_section}>
+            <hr />
+
             <Typography
               id="features"
               variant="h4"
               gutterBottom
               className={homeStyles.feature_title}
             >
-              Features
+              <b>Features</b>
             </Typography>
+
+            <Card variant="outlined" className={homeStyles.feature_card}>
+              <CardContent>
+                <div className={homeStyles.feature_card_flex}>
+                  <AssignmentIndOutlinedIcon
+                    className={homeStyles.feature_icons}
+                  />
+                  <Typography variant="h5" component="h2">
+                    Assignment
+                  </Typography>
+                </div>
+
+                <Typography
+                  color="textSecondary"
+                  className={homeStyles.feature_description}
+                >
+                  <ul>
+                    <li className={homeStyles.feature_list_items}>
+                      Send task requests.
+                    </li>
+
+                    <li className={homeStyles.feature_list_items}>
+                      Assign them to a specific member on your team.
+                    </li>
+                  </ul>
+                </Typography>
+              </CardContent>
+            </Card>
+
+            <Card variant="outlined" className={homeStyles.feature_card}>
+              <CardContent>
+                <div className={homeStyles.feature_card_flex}>
+                  <ListAltOutlinedIcon className={homeStyles.feature_icons} />
+                  <Typography variant="h5" component="h2">
+                    Todo
+                  </Typography>
+                </div>
+
+                <Typography
+                  color="textSecondary"
+                  className={homeStyles.feature_description}
+                >
+                  <ul>
+                    <li className={homeStyles.feature_list_items}>
+                      Your team member accepts the task request
+                    </li>
+                    <li className={homeStyles.feature_list_items}>
+                      The task will show on the app's todo list
+                    </li>
+                  </ul>
+                </Typography>
+              </CardContent>
+            </Card>
+
+            <Card variant="outlined" className={homeStyles.feature_card}>
+              <CardContent>
+                <div className={homeStyles.feature_card_flex}>
+                  <MessageOutlinedIcon className={homeStyles.feature_icons} />
+                  <Typography variant="h5" component="h2">
+                    Chat
+                  </Typography>
+                </div>
+
+                <Typography
+                  color="textSecondary"
+                  className={homeStyles.feature_description}
+                >
+                  <ul>
+                    <li className={homeStyles.feature_list_items}>
+                      Automatically create chat room for that specific task
+                    </li>
+                    <li className={homeStyles.feature_list_items}>
+                      Helps you communicate in a single focused channel at once
+                    </li>
+                  </ul>
+                </Typography>
+              </CardContent>
+            </Card>
           </section>
         </main>
 

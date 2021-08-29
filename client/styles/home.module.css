@@ -118,6 +118,7 @@
   text-align: center;
   width: 16rem;
   margin-bottom: 1rem;
+  border: 3px solid #000 !important;
 }
 
 .info_description {
@@ -131,11 +132,40 @@
 
 /* Style features section */
 .features_section {
-  background-color: #fff;
+  padding: 2%;
+  margin: 3rem 2rem 0 2rem;
 }
 
 .feature_title {
   text-align: center;
+  margin: 1.7rem 0 !important;
+  text-decoration: 3px underline #000;
+}
+
+.feature_card {
+  margin: 1.5rem 0;
+  border: 3px solid #000 !important;
+}
+
+.feature_card_flex {
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 1rem;
+}
+
+.feature_icons {
+  margin: 0 1rem 0 0 !important;
+  font-size: 4rem !important;
+}
+
+.feature_description {
+  margin: 1.5rem 2rem 1.5rem 1.5rem !important;
+  font-size: 1.2rem !important;
+}
+
+.feature_list_items {
+  margin: 0.5rem 0;
+  color: #000;
 }
 
 /* Style footer */
