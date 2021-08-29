@@ -140,7 +140,7 @@
 .feature_title {
   text-align: center;
   margin: 1.7rem 0 !important;
-  text-decoration: 3px underline #000;
+  text-decoration: underline;
 }
 
 .feature_card {
