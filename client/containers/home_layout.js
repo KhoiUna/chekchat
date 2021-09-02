@@ -5,29 +5,20 @@ import homeStyles from "../styles/home.module.css";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import InstagramIcon from "@material-ui/icons/Instagram";
-import Script from "next/script";
+import TagManager from "react-gtm-module";
+
+const tagManagerArgs = {
+  id: "GTM-W6PK98F",
+};
 
 export default function Home({ children, componentName }) {
+  useEffect(() => {
+    TagManager.initialize(tagManagerArgs);
+  }, []);
+
   return (
     <>
       <Head>
-        {/* Google Tag Manager */}
-        <Script
-          dangerouslySetInnerHTML={{
-            __html: `(function (w, d, s, l, i) {
-              w[l] = w[l] || [];
-              w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
-              var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != "dataLayer" ? "&l=" + l : "";
-              j.async = true;
-              j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
-              f.parentNode.insertBefore(j, f);
-            })(window, document, "script", "dataLayer", "GTM-W6PK98F");`,
-          }}
-        />
-        {/* End Google Tag Manager */}
-
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
