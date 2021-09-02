@@ -13,7 +13,6 @@ export default function Home({ children, componentName }) {
       <Head>
         {/* Google Tag Manager */}
         <Script
-          strategy="beforeInteractive"
           dangerouslySetInnerHTML={{
             __html: `if (typeof window !== "undefined") {(function (w, d, s, l, i) {
               w[l] = w[l] || [];
