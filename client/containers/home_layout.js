@@ -8,13 +8,11 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import TagManager from "react-gtm-module";
 import { useEffect } from "react";
 
-const tagManagerArgs = {
-  id: "GTM-W6PK98F",
-};
-
 export default function Home({ children, componentName }) {
   useEffect(() => {
-    TagManager.initialize(tagManagerArgs);
+    TagManager.initialize({
+      id: "GTM-W6PK98F",
+    });
   }, []);
 
   return (
