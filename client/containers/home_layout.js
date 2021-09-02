@@ -5,6 +5,7 @@ import homeStyles from "../styles/home.module.css";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import InstagramIcon from "@material-ui/icons/Instagram";
+import Script from "next/script";
 
 export default function Home({ children, componentName }) {
   return (
