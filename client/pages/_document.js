@@ -1,6 +1,7 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
+import Script from "next/script";
 
 export default class MyDocument extends Document {
   render() {
@@ -8,8 +9,8 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           {/* Google Tag Manager */}
-          <script>
-            if (typeof window !== 'undefined')
+          <Script strategy="beforeInteractive">
+            if (typeof window !== 'undefined){" "}
             {(function (w, d, s, l, i) {
               w[l] = w[l] || [];
               w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -20,7 +21,7 @@ export default class MyDocument extends Document {
               j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
               f.parentNode.insertBefore(j, f);
             })(window, document, "script", "dataLayer", "GTM-W6PK98F")}
-          </script>
+          </Script>
           {/* End Google Tag Manager */}
 
           <link rel="icon" href="/favicon.ico" />
