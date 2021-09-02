@@ -2,6 +2,7 @@ import "../styles/global.css";
 import { wrapper } from "../app/store";
 import Head from "next/head";
 import TagManager from "react-gtm-module";
+import { useEffect } from "react";
 
 const tagManagerArgs = {
   id: "GTM-W6PK98F",
