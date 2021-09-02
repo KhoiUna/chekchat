@@ -1,8 +1,17 @@
 import "../styles/global.css";
 import { wrapper } from "../app/store";
 import Head from "next/head";
+import TagManager from "react-gtm-module";
+
+const tagManagerArgs = {
+  id: "GTM-W6PK98F",
+};
 
 function MyApp({ Component, pageProps }) {
+  useEffect(() => {
+    TagManager.initialize(tagManagerArgs);
+  }, []);
+
   return (
     <>
       <Head>

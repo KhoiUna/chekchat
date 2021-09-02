@@ -5,17 +5,8 @@ import homeStyles from "../styles/home.module.css";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import InstagramIcon from "@material-ui/icons/Instagram";
-import TagManager from "react-gtm-module";
-
-const tagManagerArgs = {
-  id: "GTM-W6PK98F",
-};
 
 export default function Home({ children, componentName }) {
-  useEffect(() => {
-    TagManager.initialize(tagManagerArgs);
-  }, []);
-
   return (
     <>
       <Head>
@@ -87,20 +78,7 @@ export default function Home({ children, componentName }) {
         </Grid>
       </header>
 
-      <main className={homeStyles.main}>
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-W6PK98F"
-            height="0"
-            width="0"
-            style="display:none;visibility:hidden"
-          ></iframe>
-        </noscript>
-        {/* End Google Tag Manager (noscript) */}
-
-        {children}
-      </main>
+      <main className={homeStyles.main}>{children}</main>
 
       <footer className={homeStyles.footer}>
         <div className={homeStyles.footer_flex_container}>
