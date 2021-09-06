@@ -28,6 +28,7 @@
   cursor: pointer;
   padding: 0.4rem;
   border-radius: 15px;
+  transition: all 0.4s ease 0s;
 }
 .nav_item:hover {
   color: #000;
@@ -81,6 +82,11 @@
   outline: none;
   max-width: 520px;
   border: 2px solid #000;
+  transition: all 0.4s ease 0s;
+}
+.email_input:focus {
+  box-shadow: 0 0.2rem 1rem 0.2rem rgb(13, 179, 255);
+  border: 2px solid #0db3ff;
 }
 
 .request_button {
@@ -88,17 +94,27 @@
   width: 100%;
   font-size: 1rem;
   max-width: 550px;
-  margin-top: 1rem;
+  margin: 1.5rem 0 0.5rem 0;
   color: #fff;
   font-weight: bold;
   background: linear-gradient(
     180deg,
-    #24cb52 61.98%,
+    #0db3ff 61.98%,
     rgba(36, 203, 82, 0) 100%
   );
   border: 2px solid #000;
   border-radius: 7px;
   cursor: pointer;
+  transition: all 0.4s ease 0s;
+}
+.request_button:hover {
+  background: linear-gradient(
+    180deg,
+    #24cb52 61.98%,
+    rgba(36, 203, 82, 0) 100%
+  );
+  box-shadow: 0 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
+  color: #000;
 }
 
 .media {
