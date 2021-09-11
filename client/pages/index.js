@@ -94,7 +94,7 @@ export default function Home({}) {
           <br />
 
           <button className={homeStyles.request_button} type="submit">
-            Request Access
+            Get Early Access
           </button>
         </form>
       </section>
@@ -158,11 +158,11 @@ export default function Home({}) {
         </Card>
       </section>
 
+      <div id="features"></div>
       <section className={homeStyles.features_section}>
         <hr />
 
         <Typography
-          id="features"
           variant="h4"
           gutterBottom
           className={homeStyles.feature_title}

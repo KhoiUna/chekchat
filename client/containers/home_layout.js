@@ -56,19 +56,21 @@ export default function Home({ children, componentName }) {
           alignItems="center"
         >
           <Link href="/">
-            <Logo
-              style={{
-                width: "4rem",
-                height: "4rem",
-                margin: "0.3rem 0 0.3rem 1rem",
-                backgroundColor: "#0db3ff",
-                cursor: "pointer",
-              }}
-            />
+            <div style={{ margin: 0 }}>
+              <Logo
+                style={{
+                  width: "4rem",
+                  height: "4rem",
+                  margin: "0.3rem 0 0.3rem 1rem",
+                  backgroundColor: "#0db3ff",
+                  cursor: "pointer",
+                }}
+              />
+            </div>
           </Link>
 
           <nav className={homeStyles.nav}>
-            <Link href="#features">
+            <Link href={componentName === "Home" ? "#features" : "/#features"}>
               <Typography
                 variant="body1"
                 gutterBottom
