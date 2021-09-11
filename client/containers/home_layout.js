@@ -27,15 +27,20 @@ export default function Home({ children, componentName }) {
           content="chekchat, task app, productivity app, chat app"
         />
         <meta name="twitter:card" content="summary" />
-        <meta
-          name="og:title"
-          property="og:title"
-          content={`ChekChat | ${componentName}`}
-        />
+
+        {/* Open Graph meta tags */}
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://chekchat.xyz/" />
+        <meta property="og:title" content={`ChekChat | ${componentName}`} />
         <meta
           property="og:image"
-          content="https://www.chekchat.xyz/logo192.png"
+          content="https://www.chekchat.xyz/images/192x192.png"
         />
+        <meta
+          property="og:description"
+          content="The app for assigning tasks. Register to make your team more productive."
+        />
+
         <link rel="canonical" href="https://chekchat.xyz/" />
         <link rel="image_src" href="/logo192.png" />
         <link rel="apple-touch-icon" href="/logo192.png" />
