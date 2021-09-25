@@ -21,6 +21,10 @@
   border-radius: 20px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #f1f1f1;
 }
