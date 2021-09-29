@@ -151,6 +151,7 @@ export default function Profile() {
         variant="filled"
         className={classes.textField}
         value={username}
+        onFocus={(e) => e.preventDefault()}
         // onChange={}
       />
       <br />
