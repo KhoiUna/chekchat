@@ -7,7 +7,7 @@
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "64x64",
       "type": "image/x-icon"
     },
     {
@@ -18,7 +18,7 @@
     {
       "src": "/images/512x512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x511"
     },
     {
       "purpose": "maskable",
@@ -30,7 +30,7 @@
       "purpose": "maskable",
       "src": "/images/512x512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x511"
     }
   ],
   "start_url": "/todo",
