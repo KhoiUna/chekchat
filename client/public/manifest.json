@@ -37,6 +37,6 @@
   "scope": ".",
   "display": "standalone",
   "theme_color": "#0db3ff",
-  "background_color": "#0db3ff",
+  "background_color": "#f1f1f1",
   "screenshots": []
 }

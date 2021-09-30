@@ -10,6 +10,7 @@ export default function Layout({ children, componentName }) {
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="The app for assigning tasks" />
+        <meta name="theme-color" content="#0db3ff" />
         <meta
           name="keywords"
           content="chekchat, task app, productivity app, chat app"
