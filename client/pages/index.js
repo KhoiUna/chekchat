@@ -120,7 +120,6 @@ export default function Home({}) {
           />
           {status.text && (
             <p
-              gutterBottom
               style={{
                 color: status.color,
                 fontWeight: "bold",
