@@ -1,8 +1,9 @@
 const Joi = require("joi");
+const axios = require("axios");
 const passwordValidator = require("password-validator");
 
-module.exports = {
-  validatePassword(password) {
+module.exports = class ValidationHelper {
+  static validatePassword(password) {
     //Password schema
     const passwordSchema = new passwordValidator();
     passwordSchema
@@ -22,8 +23,19 @@ module.exports = {
 
     const error = passwordSchema.validate(password, { list: true });
     return error;
-  },
-  validateEmail(email) {
+  }
+
+  static async validateEmailMailboxlayer(email) {
+    const res = await axios.get(
+      `http://apilayer.net/api/check?access_key=${process.env.MAILBOXLAYER_ACCESS_KEY}&email=${email}&smtp=1&format=1`
+    );
+
+    if (res.data?.error === "rate_limit_reached") return true;
+
+    return format_valid && mx_found;
+  }
+
+  static async validateEmail(email) {
     const schema = Joi.object({
       email: Joi.string()
         .email({
@@ -36,9 +48,10 @@ module.exports = {
     });
     if (error) return false;
 
-    return true;
-  },
-  forRegistration(username, email, password, confirmPassword) {
+    return await this.validateEmailMailboxlayer(email);
+  }
+
+  static forRegistration(username, email, password, confirmPassword) {
     //username & email schema
     const schema = Joi.object({
       username: Joi.string().alphanum().min(3).max(30).required(),
@@ -87,8 +100,9 @@ module.exports = {
     }
 
     return true;
-  },
-  validateMission(
+  }
+
+  static validateMission(
     userEmail,
     subject,
     selectedDate,
@@ -103,5 +117,5 @@ module.exports = {
         new Date(new Date().toLocaleDateString()) &&
       description
     );
-  },
+  }
 };

@@ -313,7 +313,7 @@ module.exports = class UsersController {
       const userEmail = req.user.email;
       const { requestEmail } = req.body;
       //Validate email
-      const validation = ValidationHelper.validateEmail(requestEmail);
+      const validation = await ValidationHelper.validateEmail(requestEmail);
       if (!validation) return res.status(400).send("Invalid email");
 
       //If request email is user's email, block it
