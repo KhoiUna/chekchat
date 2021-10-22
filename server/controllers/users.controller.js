@@ -215,13 +215,13 @@ module.exports = class UsersController {
         return res.status(400).send("Cannot send request to yourself");
 
       if (
-        !ValidationHelper.validateMission(
+        !(await ValidationHelper.validateMission(
           userEmail,
           subject,
           selectedDate,
           receiverEmail,
           description
-        )
+        ))
       )
         return res.status(400).send("Invalid data");
 
