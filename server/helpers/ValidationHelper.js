@@ -32,6 +32,7 @@ module.exports = class ValidationHelper {
 
     if (res.data?.error === "rate_limit_reached") return true;
 
+    const { format_valid, mx_found } = res.data;
     return format_valid && mx_found;
   }
 
@@ -102,7 +103,7 @@ module.exports = class ValidationHelper {
     return true;
   }
 
-  static validateMission(
+  static async validateMission(
     userEmail,
     subject,
     selectedDate,
@@ -110,8 +111,8 @@ module.exports = class ValidationHelper {
     description
   ) {
     return (
-      this.validateEmail(userEmail) &&
-      this.validateEmail(receiverEmail) &&
+      (await this.validateEmail(userEmail)) &&
+      (await this.validateEmail(receiverEmail)) &&
       subject &&
       new Date(new Date(selectedDate).toLocaleDateString()) >=
         new Date(new Date().toLocaleDateString()) &&
