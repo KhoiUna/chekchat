@@ -95,6 +95,11 @@ passport.deserializeUser((userObj, done) => {
 });
 
 //Routes
+//requestAccessRouter to validate emails & get early access
+const requestAccessRouter = require("./routes/requestAccessRouter.js");
+app.use("/api/requestAccess", requestAccessRouter);
+
+//userRouter for main app
 const userRouter = require("./routes/userRouter");
 app.use("/api/user", userRouter);
 
