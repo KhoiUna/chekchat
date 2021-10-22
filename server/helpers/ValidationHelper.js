@@ -25,7 +25,7 @@ module.exports = class ValidationHelper {
     return error;
   }
 
-  static async validateEmailMailboxlayer(email) {
+  static async validateEmailMailboxlayer(email, enabledMailboxlayer) {
     const res = await axios.get(
       `http://apilayer.net/api/check?access_key=${process.env.MAILBOXLAYER_ACCESS_KEY}&email=${email}&smtp=1&format=1`
     );
@@ -36,7 +36,7 @@ module.exports = class ValidationHelper {
     return format_valid && mx_found;
   }
 
-  static async validateEmail(email) {
+  static async validateEmail(email, enabledMailboxlayer = false) {
     const schema = Joi.object({
       email: Joi.string()
         .email({
@@ -49,25 +49,22 @@ module.exports = class ValidationHelper {
     });
     if (error) return false;
 
-    return await this.validateEmailMailboxlayer(email);
+    if (!enabledMailboxlayer) return true;
+    return await this.validateEmailMailboxlayer(email, enabledMailboxlayer);
   }
 
-  static forRegistration(username, email, password, confirmPassword) {
+  static async forRegistration(username, email, password, confirmPassword) {
     //username & email schema
     const schema = Joi.object({
       username: Joi.string().alphanum().min(3).max(30).required(),
-      email: Joi.string()
-        .email({
-          minDomainSegments: 2,
-        })
-        .required(),
     });
 
     const { error } = schema.validate({
       username,
-      email,
     });
     if (error) return error.details[0].message;
+
+    if (!(await this.validateEmail(email, true))) return "Email is invalid";
 
     const validation = this.validatePassword(password);
     if (validation.length !== 0) {
