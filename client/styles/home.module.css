@@ -95,7 +95,7 @@
   font-size: 1rem;
   max-width: 550px;
   margin: 1.5rem 0 0.5rem 0;
-  color: #fff;
+  color: #000;
   font-weight: bold;
   background: linear-gradient(
     180deg,
@@ -108,13 +108,7 @@
   transition: all 0.4s ease 0s;
 }
 .request_button:hover {
-  background: linear-gradient(
-    180deg,
-    #24cb52 61.98%,
-    rgba(36, 203, 82, 0) 100%
-  );
   box-shadow: 0 0.5rem 1rem 0.5rem rgba(0, 0, 0, 0.15);
-  color: #000;
 }
 
 .media {
