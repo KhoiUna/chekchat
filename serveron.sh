@@ -1,2 +1,2 @@
 cd server;
-nodemon app;
+npx nodemon app;
