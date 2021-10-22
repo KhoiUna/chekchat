@@ -7,7 +7,7 @@ module.exports = class RequestAccessController {
       const { email } = req.body;
 
       //Validate email
-      if (!(await ValidationHelper.validateEmail(email)))
+      if (!(await ValidationHelper.validateEmail(email, true)))
         return res.status(400).send("Your email is invalid!");
 
       if (!(await RequestAccessUtil.saveAccessRequest(email)))
