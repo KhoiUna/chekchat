@@ -15,7 +15,7 @@ module.exports = class UsersController {
     try {
       const { username, email, password, confirmPassword } = req.body;
       //Validate data
-      const validation = ValidationHelper.forRegistration(
+      const validation = await ValidationHelper.forRegistration(
         username,
         email,
         password,
