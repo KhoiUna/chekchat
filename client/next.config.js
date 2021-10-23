@@ -5,4 +5,20 @@ module.exports = {
     domains: ["ik.imagekit.io"],
   },
   productionBrowserSourceMaps: false,
+
+  //Redirect pages
+  async redirects() {
+    return [
+      {
+        source: "/register",
+        destination: "/",
+        permanent: true,
+      },
+      {
+        source: "/login",
+        destination: "/",
+        permanent: true,
+      },
+    ];
+  },
 };
