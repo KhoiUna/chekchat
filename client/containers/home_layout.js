@@ -9,11 +9,11 @@ import TagManager from "react-gtm-module";
 import { useEffect } from "react";
 
 export default function Home({ children, componentName }) {
-  useEffect(() => {
-    TagManager.initialize({
-      id: "GTM-W6PK98F",
-    });
-  }, []);
+  // useEffect(() => {
+  //   TagManager.initialize({
+  //     id: "GTM-W6PK98F",
+  //   });
+  // }, []);
 
   return (
     <>
