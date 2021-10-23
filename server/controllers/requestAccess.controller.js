@@ -1,3 +1,4 @@
+const createDiscordAlert = require("../helpers/createDiscordAlert");
 const ValidationHelper = require("../helpers/ValidationHelper");
 const RequestAccessUtil = require("../utils/RequestAccessUtil");
 
@@ -11,6 +12,9 @@ module.exports = class RequestAccessController {
         return res.status(400).send("Your email is invalid!");
 
       if (!(await RequestAccessUtil.saveAccessRequest(email)))
+        return res.status(400).send("Sorry, something is wrong");
+
+      if (!(await createDiscordAlert(email)))
         return res.status(400).send("Sorry, something is wrong");
 
       res.send("ok");
