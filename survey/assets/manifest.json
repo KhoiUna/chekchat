@@ -11,29 +11,29 @@
       "type": "image/x-icon"
     },
     {
-      "src": "/images/192x192.png",
+      "src": "/assets/images/192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "/images/512x512.png",
+      "src": "/assets/images/512x512.png",
       "type": "image/png",
       "sizes": "512x511"
     },
     {
       "purpose": "maskable",
-      "src": "/images/192x192.png",
+      "src": "/assets/images/192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
       "purpose": "maskable",
-      "src": "/images/512x512.png",
+      "src": "/assets/images/512x512.png",
       "type": "image/png",
       "sizes": "512x511"
     }
   ],
-  "start_url": "/todo",
+  "start_url": "/",
   "scope": ".",
   "display": "standalone",
   "theme_color": "#0db3ff",
