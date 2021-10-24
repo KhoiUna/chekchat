@@ -7,18 +7,18 @@ module.exports = {
   productionBrowserSourceMaps: false,
 
   //Redirect pages
-  async redirects() {
-    return [
-      {
-        source: "/register",
-        destination: "/",
-        permanent: true,
-      },
-      {
-        source: "/login",
-        destination: "/",
-        permanent: true,
-      },
-    ];
-  },
+  // async redirects() {
+  //   return [
+  //     {
+  //       source: "/register",
+  //       destination: "/",
+  //       permanent: true,
+  //     },
+  //     {
+  //       source: "/login",
+  //       destination: "/",
+  //       permanent: true,
+  //     },
+  //   ];
+  // },
 };
