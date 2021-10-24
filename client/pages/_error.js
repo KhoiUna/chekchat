@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 
 function Error({ statusCode }) {
   return (
-    <Layout componentName="Login">
+    <Layout componentName="Error">
       <div className={utilStyles.container}>
         <Typography
           variant="h4"
@@ -16,8 +16,8 @@ function Error({ statusCode }) {
           <div style={{ marginTop: "1%" }}>
             <i>
               Please try refreshing the page or heading back to our{" "}
-              <Link href="/login">
-                <u style={{ cursor: "pointer", fontWeight: "bold" }}>login</u>
+              <Link href="/">
+                <u style={{ cursor: "pointer", fontWeight: "bold" }}>home</u>
               </Link>{" "}
               page{" "}
             </i>

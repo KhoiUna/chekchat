@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 
 export default function Custom404() {
   return (
-    <Layout componentName="Login">
+    <Layout componentName="Error">
       <div className={utilStyles.container}>
         <Typography
           variant="h4"
@@ -17,8 +17,8 @@ export default function Custom404() {
             <i>
               We cannot find the page you are looking for. Please head back to
               our{" "}
-              <Link href="/login">
-                <u style={{ cursor: "pointer", fontWeight: "bold" }}>login</u>
+              <Link href="/">
+                <u style={{ cursor: "pointer", fontWeight: "bold" }}>home</u>
               </Link>{" "}
               page.
             </i>
