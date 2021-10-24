@@ -139,13 +139,13 @@ export default function Home({ children, componentName }) {
                 <b>Contact Us:</b>
               </Typography>
 
-              <Link href="mailto:help@chekchat.xyz">
+              <Link href="mailto:info@chekchat.xyz">
                 <Typography
                   variant="body1"
                   gutterBottom
                   className={homeStyles.footer_nav_item}
                 >
-                  help@chekchat.xyz
+                  info@chekchat.xyz
                 </Typography>
               </Link>
 
