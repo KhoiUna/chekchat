@@ -169,3 +169,9 @@ export default function Register() {
     </Layout>
   );
 }
+
+export async function getStaticProps(context) {
+  return {
+    notFound: true, // triggers 404
+  };
+}
