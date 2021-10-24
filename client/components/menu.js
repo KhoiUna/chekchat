@@ -29,7 +29,7 @@ const menuList = [
   { name: "Inbox", icon: <InboxIcon /> },
   { name: "Send tasks", icon: <SendIcon /> },
   { name: "Todo", icon: <ListAltIcon /> },
-  { name: "Calendar", icon: <EventIcon /> },
+  // { name: "Calendar", icon: <EventIcon /> },
   { name: "Friends", icon: <GroupIcon /> },
   { name: "Feedback", icon: <FeedbackIcon /> },
   { name: "Logout", icon: <ExitToAppIcon /> },
