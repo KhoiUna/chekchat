@@ -10,6 +10,7 @@ import {
   selectNotificationList,
   selectNotificationIsLoading,
 } from "../features/notificationSlice";
+import { launched } from "../config/config";
 
 export default function Notifications({}) {
   const dispatch = useDispatch();
@@ -64,4 +65,10 @@ export default function Notifications({}) {
       </Grid>
     </MainLayout>
   );
+}
+
+export async function getStaticProps(context) {
+  return {
+    notFound: !launched,
+  };
 }

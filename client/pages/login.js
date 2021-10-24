@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { MuiThemeProvider } from "@material-ui/core/styles";
-import { origin, cookieOptions } from "../config/config";
+import { origin, cookieOptions, launched } from "../config/config";
 import { loginRegisterTheme } from "../themes/theme";
 import { useCookies } from "react-cookie";
 
@@ -156,6 +156,6 @@ export default function Login() {
 
 export async function getStaticProps(context) {
   return {
-    notFound: true, // triggers 404
+    notFound: !launched,
   };
 }

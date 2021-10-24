@@ -9,6 +9,7 @@ import { appTheme, buttonTheme } from "../themes/theme";
 import FriendPopup from "../components/friends/friend_popup";
 import FriendList from "../containers/friends/FriendList";
 import FriendRequestList from "../containers/friends/FriendRequestList";
+import { launched } from "../config/config";
 
 const useStyles = makeStyles({
   button: {
@@ -73,4 +74,10 @@ export default function Friends({}) {
       )}
     </MainLayout>
   );
+}
+
+export async function getStaticProps(context) {
+  return {
+    notFound: !launched,
+  };
 }

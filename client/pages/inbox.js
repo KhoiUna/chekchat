@@ -12,6 +12,7 @@ import {
   selectMissionRequestsList,
 } from "../features/missionSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { launched } from "../config/config";
 
 export default function Inbox({}) {
   const dispatch = useDispatch();
@@ -80,4 +81,10 @@ export default function Inbox({}) {
       </Grid>
     </MainLayout>
   );
+}
+
+export async function getStaticProps(context) {
+  return {
+    notFound: !launched,
+  };
 }

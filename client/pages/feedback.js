@@ -8,6 +8,7 @@ import { useState } from "react";
 import utilStyles from "../styles/login_register.module.css";
 import { appTheme, buttonTheme } from "../themes/theme";
 import FeedbackUtil from "../utils/FeedbackUtil";
+import { launched } from "../config/config";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -134,4 +135,10 @@ export default function Feedback({}) {
       </Card>
     </MainLayout>
   );
+}
+
+export async function getStaticProps(context) {
+  return {
+    notFound: !launched,
+  };
 }

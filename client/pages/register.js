@@ -172,6 +172,6 @@ export default function Register() {
 
 export async function getStaticProps(context) {
   return {
-    notFound: true, // triggers 404
+    notFound: true,
   };
 }

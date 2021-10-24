@@ -1,3 +1,4 @@
+import { launched } from "../config/config";
 import MainLayout from "../containers/main_layout";
 
 export default function Calendar({}) {
@@ -8,4 +9,10 @@ export default function Calendar({}) {
       </h3>
     </MainLayout>
   );
+}
+
+export async function getStaticProps(context) {
+  return {
+    notFound: !launched,
+  };
 }

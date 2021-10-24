@@ -13,6 +13,7 @@ import {
   sortMissionTodoList,
   updateMissionTodoList,
 } from "../features/missionSlice";
+import { launched } from "../config/config";
 
 export default function Todo({}) {
   const dispatch = useDispatch();
@@ -79,4 +80,10 @@ export default function Todo({}) {
       </Grid>
     </MainLayout>
   );
+}
+
+export async function getStaticProps(context) {
+  return {
+    notFound: !launched,
+  };
 }

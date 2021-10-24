@@ -14,6 +14,7 @@ import MissionsUtil from "../utils/MissionsUtil";
 import Spinner from "../components/spinner";
 import FilterButton from "../components/send/filter_button";
 import removeItemFromList from "../helpers/removeItemFromList";
+import { launched } from "../config/config";
 
 const useStyles = makeStyles((theme) => ({
   extendedIcon: {
@@ -201,4 +202,10 @@ export default function Send({}) {
       )}
     </MainLayout>
   );
+}
+
+export async function getStaticProps(context) {
+  return {
+    notFound: !launched,
+  };
 }

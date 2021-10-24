@@ -3,7 +3,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import Button from "@material-ui/core/Button";
 import { buttonTheme } from "../themes/theme";
 import { IKContext, IKUpload } from "imagekitio-react";
-import { origin } from "../config/config";
+import { launched, origin } from "../config/config";
 import { makeStyles, MuiThemeProvider } from "@material-ui/core/styles";
 import utilStyles from "../styles/utils.module.css";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -169,4 +169,10 @@ export default function Profile() {
       </MuiThemeProvider>
     </MainLayout>
   );
+}
+
+export async function getStaticProps(context) {
+  return {
+    notFound: !launched,
+  };
 }
