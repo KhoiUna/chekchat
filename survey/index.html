@@ -54,5 +54,35 @@
         >Loading…</iframe
       >
     </div>
+
+    <script>
+      const origin =
+        window.location.protocol === "http:"
+          ? "http://localhost:5000"
+          : "https://api.chekchat.xyz";
+
+      const getIdFromURL = () => {
+        const url = new URL(window.location);
+        const id = url.searchParams.get("id");
+        return id;
+      };
+
+      const updateEarlyUser = async () => {
+        try {
+          const res = await fetch(
+            `${origin}/api/requestAccess?id=${getIdFromURL()}`,
+            {
+              method: "PUT",
+            }
+          );
+          return await res.text();
+        } catch (err) {
+          console.error("Error updating early user");
+        }
+      };
+      updateEarlyUser()
+        .then((r) => console.log(r))
+        .catch(console.error);
+    </script>
   </body>
 </html>
