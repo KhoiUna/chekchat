@@ -26,7 +26,7 @@ export default function Pricing({}) {
         setEmail("");
         return setStatus({
           color: "#3dda58",
-          text: "You will receive a survey lately in your inbox. Please answer it to get early access.",
+          text: "You will receive a survey lately in your inbox (if not it is possibly in your junk/spam folder, sorry for the inconvenient). Please answer it to get early access.",
         });
       }
 
