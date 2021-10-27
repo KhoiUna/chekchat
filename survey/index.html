@@ -55,7 +55,7 @@
       >
     </div>
 
-    <script>
+    <script defer>
       const origin =
         window.location.protocol === "http:"
           ? "http://localhost:5000"
@@ -75,6 +75,12 @@
               method: "PUT",
             }
           );
+          if (res.ok === false) {
+            document.querySelector("iframe").remove();
+            document.querySelector("div").innerHTML =
+              "<h1 style='text-align: center; color: red; margin-top: 3rem;'>Invalid URL</h1>";
+          }
+
           return await res.text();
         } catch (err) {
           console.error("Error updating early user");
