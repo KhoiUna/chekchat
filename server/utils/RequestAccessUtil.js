@@ -38,4 +38,18 @@ module.exports = class RequestAccessUtil {
       return null;
     }
   }
+
+  static async checkAccessRequest(email) {
+    try {
+      const collection = client.db("chekchat").collection("early_access_users");
+
+      const user = await collection.findOne({ email });
+      if (user) return true;
+
+      return false;
+    } catch (err) {
+      console.error("Error checking user ---util");
+      return null;
+    }
+  }
 };

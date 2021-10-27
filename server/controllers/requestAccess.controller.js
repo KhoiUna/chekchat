@@ -7,6 +7,12 @@ module.exports = class RequestAccessController {
     try {
       const { email } = req.body;
 
+      //Check if user already submitted request
+      if (await RequestAccessUtil.checkAccessRequest(email))
+        return res
+          .status(400)
+          .send("You have already submitted an early access request!");
+
       //Validate email
       if (!(await ValidationHelper.validateEmail(email, true)))
         return res.status(400).send("Your email is invalid!");
