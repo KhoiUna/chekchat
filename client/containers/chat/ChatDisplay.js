@@ -20,7 +20,6 @@ export default function ChatDisplay({ msgArray }) {
 
   const scrollTopForChatArea = useRef(0);
   useEffect(() => {
-    console.log("upd");
     document.getElementById("chat-display").scrollTop =
       document.getElementById("chat-display").scrollHeight -
       scrollTopForChatArea.current -
