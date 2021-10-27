@@ -23,4 +23,16 @@ module.exports = class RequestAccessController {
       next(err);
     }
   }
+
+  static async updateAccess(req, res, next) {
+    try {
+      if (!(await RequestAccessUtil.updateAccessRequest(req.query.id)))
+        return res.status(400).send("Sorry, something is wrong");
+
+      res.send("ok");
+    } catch (err) {
+      console.error("Error updating early access");
+      next(err);
+    }
+  }
 };
