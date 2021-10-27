@@ -33,7 +33,7 @@ module.exports = class RequestAccessController {
   static async updateAccess(req, res, next) {
     try {
       if (!(await RequestAccessUtil.updateAccessRequest(req.query.id)))
-        return res.status(400).send("Sorry, something is wrong");
+        return res.status(400).send("Invalid ID");
 
       res.send("ok");
     } catch (err) {
