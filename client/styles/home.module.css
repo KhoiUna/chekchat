@@ -97,7 +97,11 @@
   margin: 1.5rem 0 0.5rem 0;
   color: #000;
   font-weight: bold;
-  background-color: #0db3ff;
+  background: linear-gradient(
+    180deg,
+    #24cb52 61.98%,
+    rgba(36, 203, 82, 0) 100%
+  );
   border: 2px solid #000;
   border-radius: 7px;
   cursor: pointer;
