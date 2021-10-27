@@ -27,13 +27,14 @@ module.exports = class RequestAccessUtil {
           _id: ObjectId(id),
         },
         {
-          viewed_survey: true,
+          $set: {
+            viewed_survey: true,
+          },
         }
       );
       return response;
     } catch (err) {
       console.error("Error updating early user ---util");
-      console.error(err);
       return null;
     }
   }
