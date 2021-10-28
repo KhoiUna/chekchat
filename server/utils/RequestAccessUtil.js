@@ -11,7 +11,9 @@ module.exports = class RequestAccessUtil {
         requested_date: new Date(new Date().toUTCString()),
         viewed_survey: false,
       });
-      return response;
+
+      const { insertedId } = response;
+      return insertedId;
     } catch (err) {
       console.error("Error saving early user ---util");
       return null;

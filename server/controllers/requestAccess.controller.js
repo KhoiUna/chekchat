@@ -1,4 +1,5 @@
 const createDiscordAlert = require("../helpers/createDiscordAlert");
+const sendSurvey = require("../helpers/sendSurvey");
 const ValidationHelper = require("../helpers/ValidationHelper");
 const RequestAccessUtil = require("../utils/RequestAccessUtil");
 
@@ -17,9 +18,14 @@ module.exports = class RequestAccessController {
       if (!(await ValidationHelper.validateEmail(email, true)))
         return res.status(400).send("Your email is invalid!");
 
-      if (!(await RequestAccessUtil.saveAccessRequest(email)))
+      const insertedId = await RequestAccessUtil.saveAccessRequest(email);
+      if (!insertedId) return res.status(400).send("Sorry, something is wrong");
+
+      //Send survey mail
+      if (!(await sendSurvey({ id: insertedId, email })))
         return res.status(400).send("Sorry, something is wrong");
 
+      //Create Discord alert
       if (!(await createDiscordAlert(email)))
         return res.status(400).send("Sorry, something is wrong");
 
