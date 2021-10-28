@@ -33,3 +33,17 @@ export const progressTheme = createTheme({
     },
   },
 });
+
+export const earlyAccessProgressTheme = createTheme({
+  overrides: {
+    MuiCircularProgress: {
+      root: {
+        width: "1.5rem !important",
+        height: "1.5rem !important",
+      },
+      svg: {
+        color: "#000",
+      },
+    },
+  },
+});

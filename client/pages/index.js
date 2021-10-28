@@ -11,6 +11,9 @@ import ListAltOutlinedIcon from "@material-ui/icons/ListAltOutlined";
 import AssignmentIndOutlinedIcon from "@material-ui/icons/AssignmentIndOutlined";
 import HomeLayout from "../containers/home_layout";
 import { origin } from "../config/config";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { MuiThemeProvider } from "@material-ui/core/styles";
+import { earlyAccessProgressTheme } from "../themes/theme";
 
 export default function Home({}) {
   useEffect(() => {
@@ -50,9 +53,12 @@ export default function Home({}) {
     setEmail(target.value);
   };
 
+  const [progress, setProgress] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setProgress("start");
+
       const res = await fetch(`${origin}/api/requestAccess`, {
         method: "POST",
         headers: {
@@ -61,6 +67,7 @@ export default function Home({}) {
         body: JSON.stringify({ email }),
       });
       if (res.ok === true) {
+        setProgress("");
         setEmail("");
         return setStatus({
           color: "#3dda58",
@@ -68,11 +75,13 @@ export default function Home({}) {
         });
       }
 
+      setProgress("");
       return setStatus({
         color: "red",
         text: await res.text(),
       });
     } catch (err) {
+      setProgress("");
       console.error("Error submitting email");
       return;
     }
@@ -137,7 +146,13 @@ export default function Home({}) {
             type="submit"
             style={status.text ? { marginTop: 0 } : null}
           >
-            Get Early Access
+            {progress === "start" ? (
+              <MuiThemeProvider theme={earlyAccessProgressTheme}>
+                <CircularProgress />
+              </MuiThemeProvider>
+            ) : (
+              "Get Early Access"
+            )}
           </button>
         </form>
       </section>
