@@ -3,7 +3,7 @@ const nodemailer = require("nodemailer");
 module.exports = async ({ id, email }) => {
   try {
     let transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
+      host: "mail.privateemail.com",
       port: 465,
       secure: true, // true for 465, false for other ports
       auth: {
@@ -13,7 +13,7 @@ module.exports = async ({ id, email }) => {
     });
 
     await transporter.sendMail({
-      from: "ChekChat <info@chekchat.xyz>",
+      from: `ChekChat <${process.env.MAIL_USERNAME}>`,
       to: email,
       subject: "Hello from ChekChat",
       html: `<!DOCTYPE html>
