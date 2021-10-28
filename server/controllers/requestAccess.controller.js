@@ -26,7 +26,7 @@ module.exports = class RequestAccessController {
         return res.status(400).send("Sorry, something is wrong");
 
       //Create Discord alert
-      if (!(await createDiscordAlert(email)))
+      if (!(await createDiscordAlert(email)) && process.env.NODE_ENV)
         return res.status(400).send("Sorry, something is wrong");
 
       res.send("ok");
