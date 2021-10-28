@@ -32,9 +32,6 @@ const useStyles = makeStyles((theme) => ({
     float: "right",
     marginTop: "1rem",
   },
-  progress: {
-    color: "white",
-  },
 }));
 
 export default function FriendPopup({ showPopup, togglePopup }) {
