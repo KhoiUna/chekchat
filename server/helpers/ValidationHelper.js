@@ -25,12 +25,12 @@ module.exports = class ValidationHelper {
     return error;
   }
 
-  static async validateEmailMailboxlayer(email, enabledMailboxlayer) {
+  static async validateEmailMailboxlayer(email) {
     const res = await axios.get(
       `http://apilayer.net/api/check?access_key=${process.env.MAILBOXLAYER_ACCESS_KEY}&email=${email}&smtp=1&format=1`
     );
 
-    if (res.data?.error === "rate_limit_reached") return true;
+    if (res.data?.error.code === 104) return true;
 
     const { format_valid, mx_found } = res.data;
     return format_valid && mx_found;
