@@ -38,6 +38,7 @@ export const notificationSlice = createSlice({
       state.failedToLoad = true;
     },
     //
+    //
     [loadNotificationListAsync.pending]: (state, action) => {
       state.isLoading = true;
       state.failedToLoad = false;
@@ -55,7 +56,7 @@ export const notificationSlice = createSlice({
   },
 });
 
-export const {} = notificationSlice.actions;
+// export const {} = notificationSlice.actions;
 export default notificationSlice.reducer;
 
 //Selectors

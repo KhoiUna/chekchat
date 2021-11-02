@@ -85,6 +85,7 @@ export const missionSlice = createSlice({
       state.failedToLoad = true;
     },
     //
+    //
     [loadMissionTodoListAsync.pending]: (state, action) => {
       state.isLoading = true;
       state.failedToLoad = false;

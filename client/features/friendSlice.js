@@ -48,6 +48,7 @@ export const friendSlice = createSlice({
       state.failedToLoad = true;
     },
     //
+    //
     [loadReceivedFriendRequestsListAsync.pending]: (state, action) => {
       state.isLoading = true;
       state.failedToLoad = false;

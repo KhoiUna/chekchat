@@ -157,9 +157,15 @@ export default function Home({}) {
         </form> */}
 
         <div style={{ textAlign: "center" }}>
-          <button className={homeStyles.request_button} type="button">
-            Get Early Access
-          </button>
+          <a
+            href="https://survey.chekchat.xyz"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className={homeStyles.request_button} type="button">
+              Get Early Access
+            </button>
+          </a>
         </div>
       </section>
 
