@@ -156,7 +156,7 @@ export default function Home({}) {
           </button>
         </form> */}
 
-        <div style={{ textAlign: "center" }}>
+        <div className={homeStyles.email_form}>
           <a
             href="https://survey.chekchat.xyz"
             target="_blank"
