@@ -109,7 +109,7 @@ export default function Home({}) {
       </section>
 
       <section>
-        <form
+        {/* <form
           autoComplete="off"
           className={homeStyles.email_form}
           onSubmit={handleSubmit}
@@ -154,7 +154,13 @@ export default function Home({}) {
               "Get Early Access"
             )}
           </button>
-        </form>
+        </form> */}
+
+        <div style={{ textAlign: "center" }}>
+          <button className={homeStyles.request_button} type="button">
+            Get Early Access
+          </button>
+        </div>
       </section>
 
       <section style={{ margin: "1rem 1rem 2.5rem 1rem" }}>

@@ -83,7 +83,7 @@ export default function Pricing({}) {
           </section>
 
           <section>
-            <form
+            {/* <form
               autoComplete="off"
               className={homeStyles.email_form}
               onSubmit={handleSubmit}
@@ -129,7 +129,19 @@ export default function Pricing({}) {
                   "Get Early Access"
                 )}
               </button>
-            </form>
+            </form> */}
+
+            <div style={{ textAlign: "center" }}>
+              <a
+                href="https://survey.chekchat.xyz"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className={homeStyles.request_button} type="button">
+                  Get Early Access
+                </button>
+              </a>
+            </div>
           </section>
         </div>
       </div>
