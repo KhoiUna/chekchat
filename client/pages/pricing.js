@@ -78,7 +78,7 @@ export default function Pricing({}) {
             </Typography>
 
             <Typography variant="h5" gutterBottom>
-              Enter your email below to get early accesss!
+              Click the button below!
             </Typography>
           </section>
 
