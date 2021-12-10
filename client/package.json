@@ -16,7 +16,7 @@
     "@reduxjs/toolkit": "^1.6.2",
     "date-fns": "^2.25.0",
     "imagekitio-react": "^1.0.11",
-    "next": "^12.0.3",
+    "next": "^12.0.4",
     "next-redux-wrapper": "^6.0.2",
     "react": "17.0.2",
     "react-cookie": "^4.1.1",
