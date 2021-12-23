@@ -170,9 +170,3 @@ export default function Profile() {
     </MainLayout>
   );
 }
-
-export async function getStaticProps(context) {
-  return {
-    notFound: !launched,
-  };
-}

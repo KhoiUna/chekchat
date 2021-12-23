@@ -203,9 +203,3 @@ export default function Send({}) {
     </MainLayout>
   );
 }
-
-export async function getStaticProps(context) {
-  return {
-    notFound: !launched,
-  };
-}

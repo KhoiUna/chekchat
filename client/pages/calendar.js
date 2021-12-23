@@ -10,9 +10,3 @@ export default function Calendar({}) {
     </MainLayout>
   );
 }
-
-export async function getStaticProps(context) {
-  return {
-    notFound: !launched,
-  };
-}

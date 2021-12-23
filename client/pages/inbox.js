@@ -82,9 +82,3 @@ export default function Inbox({}) {
     </MainLayout>
   );
 }
-
-export async function getStaticProps(context) {
-  return {
-    notFound: !launched,
-  };
-}

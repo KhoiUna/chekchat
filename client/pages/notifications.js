@@ -66,9 +66,3 @@ export default function Notifications({}) {
     </MainLayout>
   );
 }
-
-export async function getStaticProps(context) {
-  return {
-    notFound: !launched,
-  };
-}

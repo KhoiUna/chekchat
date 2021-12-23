@@ -153,9 +153,3 @@ export default function Login() {
     </Layout>
   );
 }
-
-export async function getStaticProps(context) {
-  return {
-    notFound: !launched,
-  };
-}

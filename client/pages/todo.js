@@ -81,9 +81,3 @@ export default function Todo({}) {
     </MainLayout>
   );
 }
-
-export async function getStaticProps(context) {
-  return {
-    notFound: !launched,
-  };
-}
