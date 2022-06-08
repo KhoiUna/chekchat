@@ -10,7 +10,7 @@ const server = require("http").createServer(app);
 const { origin, surveyOrigin } = require("./config/config");
 const io = require("socket.io")(server, {
   cors: {
-    origin: [origin, "https://www.chekchat.xyz"],
+    origin,
     methods: ["GET", "POST"],
     credentials: true,
   },
@@ -56,7 +56,7 @@ app.use(helmet());
 app.set("trust proxy", 1);
 app.use(
   cors({
-    origin: [origin, surveyOrigin, "https://www.chekchat.xyz"],
+    origin: [...origin, ...surveyOrigin],
     optionsSuccessStatus: 200,
     credentials: true,
     allowedHeaders: ["Content-Type", "Cookie"],
