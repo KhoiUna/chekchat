@@ -56,7 +56,7 @@ app.use(helmet());
 app.set("trust proxy", 1);
 app.use(
   cors({
-    origin: [...origin, ...surveyOrigin],
+    origin,
     optionsSuccessStatus: 200,
     credentials: true,
     allowedHeaders: ["Content-Type", "Cookie"],
