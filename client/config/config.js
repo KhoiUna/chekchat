@@ -1,5 +1,6 @@
 module.exports = {
-  origin: process.env.NEXT_PUBLIC_ORIGIN || "https://chekapp.herokuapp.com",
+  origin: process.env.NEXT_PUBLIC_ORIGIN || "https://api.chekchat.cc",
+  // "https://chekapp.herokuapp.com",
   launched: true,
   cookieOptions: {
     path: "/",
