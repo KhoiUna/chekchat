@@ -70,23 +70,23 @@ export default function Home({ children, componentName }) {
           </Link>
 
           <nav className={homeStyles.nav}>
-            <Link href={componentName === "Home" ? "#features" : "/#features"}>
+            <Link href={"/login"}>
               <Typography
                 variant="body1"
                 gutterBottom
                 className={homeStyles.nav_item}
               >
-                Features
+                Login
               </Typography>
             </Link>
 
-            <Link href="/pricing">
+            <Link href="/register">
               <Typography
                 variant="body1"
                 gutterBottom
                 className={homeStyles.nav_item}
               >
-                Pricing
+                Register
               </Typography>
             </Link>
           </nav>

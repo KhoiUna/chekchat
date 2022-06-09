@@ -11,9 +11,6 @@ import ListAltOutlinedIcon from "@material-ui/icons/ListAltOutlined";
 import AssignmentIndOutlinedIcon from "@material-ui/icons/AssignmentIndOutlined";
 import HomeLayout from "../containers/home_layout";
 import { origin } from "../config/config";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { MuiThemeProvider } from "@material-ui/core/styles";
-import { earlyAccessProgressTheme } from "../themes/theme";
 
 export default function Home({}) {
   useEffect(() => {
@@ -105,67 +102,6 @@ export default function Home({}) {
           <Typography variant="subtitle1" gutterBottom>
             Help teams communicate efficiently to get work done
           </Typography>
-        </div>
-      </section>
-
-      <section>
-        {/* <form
-          autoComplete="off"
-          className={homeStyles.email_form}
-          onSubmit={handleSubmit}
-        >
-          <label htmlFor="email" hidden>
-            Email Address:
-          </label>
-          <input
-            type="email"
-            required
-            className={homeStyles.email_input}
-            id="email"
-            name="email"
-            value={email}
-            placeholder="Enter your email"
-            onChange={handleChange}
-          />
-          {status.text && (
-            <p
-              style={{
-                color: status.color,
-                fontWeight: "bold",
-                fontStyle: "italic",
-                margin: "1.5rem 0 0.5rem 0",
-              }}
-            >
-              {status.text}
-            </p>
-          )}
-          <br />
-
-          <button
-            className={homeStyles.request_button}
-            type="submit"
-            style={status.text ? { marginTop: 0 } : null}
-          >
-            {progress === "start" ? (
-              <MuiThemeProvider theme={earlyAccessProgressTheme}>
-                <CircularProgress />
-              </MuiThemeProvider>
-            ) : (
-              "Get Early Access"
-            )}
-          </button>
-        </form> */}
-
-        <div className={homeStyles.email_form}>
-          <a
-            href="https://survey.chekchat.xyz"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <button className={homeStyles.request_button} type="button">
-              Get Early Access
-            </button>
-          </a>
         </div>
       </section>
 
