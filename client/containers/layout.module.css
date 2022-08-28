@@ -1,0 +1,27 @@
+.container {
+  background-color: #0db3ff;
+  height: 100vh;
+  padding-bottom: 5rem;
+}
+
+.title {
+  margin: 0;
+  line-height: 4rem;
+  color: #fff;
+  font-size: 2.5rem;
+  font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif !important;
+}
+
+.header {
+  text-align: center;
+  padding-top: 2rem;
+}
+.header:hover {
+  cursor: pointer;
+}
+
+.main {
+  margin-top: 1rem;
+}

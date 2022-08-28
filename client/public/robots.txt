@@ -1,0 +1,10 @@
+User-agent: *
+Disallow: /feedback
+Disallow: /friends
+Disallow: /inbox
+Disallow: /notifications
+Disallow: /profile
+Disallow: /send
+Disallow: /todo
+Disallow: /register
+Disallow: /login

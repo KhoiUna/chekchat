@@ -1,0 +1,13 @@
+.container {
+  background-color: #f1f1f1;
+  height: 100%;
+}
+
+.main {
+  padding-top: 4.2rem;
+  text-align: center;
+}
+
+.main_for_chatroom {
+  text-align: center;
+}

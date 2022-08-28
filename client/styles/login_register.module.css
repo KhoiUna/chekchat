@@ -1,0 +1,38 @@
+.container {
+  width: 80%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.paper {
+  padding: 2% 0;
+}
+
+.grid {
+  padding: 2% 0;
+  margin: 2% 0;
+}
+
+.notice {
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 3%;
+  color: white;
+}
+.notice:hover {
+  cursor: pointer;
+}
+
+.title {
+  margin: 2% 0;
+  font-size: 2rem;
+}
+
+.button {
+  margin-top: 2%;
+}
+
+.responseText {
+  font-weight: bold;
+  font-style: italic;
+}

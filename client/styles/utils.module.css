@@ -1,0 +1,148 @@
+.icon {
+  color: white;
+  cursor: pointer;
+}
+
+.image {
+  border-radius: 100%;
+  margin: 0 1rem;
+}
+
+.request_image {
+  border-radius: 100%;
+  margin: 0 0.6rem;
+}
+
+.menu_image {
+  border-radius: 100%;
+  margin: 0 0.5rem;
+}
+
+.responseText {
+  font-style: italic;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.popup_layer {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.popup_container {
+  position: absolute;
+  z-index: 3;
+  bottom: 98%;
+}
+
+.sortButton {
+  margin: 2%;
+  text-align: left;
+}
+
+.filterButton {
+  text-align: left;
+  margin: 1rem;
+}
+
+.uploadedAvatar {
+  margin: 5% 0 1% 0;
+}
+
+.chat_area {
+  height: 94vh;
+  display: grid;
+  grid-template-rows: 94% 6%;
+}
+
+.chat_display {
+  overflow-x: hidden;
+  overflow-y: auto;
+  margin: 3.7rem 0 0.5rem 0;
+}
+
+.datedivider_container {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.datedivider_info {
+  margin-top: 0.75rem;
+  padding: 0.25rem;
+  background-color: #f1f1f1;
+  border-radius: 12px;
+  width: 6rem;
+  text-align: center;
+}
+
+.chat_room {
+  background-color: #f1f1f1;
+  display: grid;
+  grid-template-rows: 15fr 1fr;
+}
+
+.chatbox {
+  text-align: left;
+  display: flex;
+  margin: 1rem 0.5rem 1.3rem 0.5rem;
+}
+
+.chat_avatar {
+  border-radius: 100%;
+  margin: 0 0.5rem;
+  width: 100%;
+  max-width: 50px;
+}
+
+.chat_container {
+  margin: 0 0 0 0.5rem;
+}
+
+.chat_info {
+  display: flex;
+  align-items: baseline;
+}
+
+.send_bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f1f1f1;
+}
+
+.send_area {
+  background-color: #fff;
+  width: 90%;
+  padding: 0.7rem;
+  border-radius: 12px;
+  margin: 0 0 0.8rem 0.5rem;
+  display: flex;
+}
+
+.send_form {
+  -webkit-user-modify: read-write-plaintext-only;
+  background-color: #fff;
+  text-align: left;
+  float: left;
+  overflow-y: auto;
+  max-height: 160px;
+  margin: auto 0;
+  width: 100%;
+}
+.send_form:focus {
+  outline: none;
+}
+.send_form:empty:before {
+  content: attr(placeholder);
+  color: #787878;
+}
