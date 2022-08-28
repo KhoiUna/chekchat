@@ -13,7 +13,8 @@ import HomeLayout from "../containers/home_layout";
 
 export default function Home({}) {
   useEffect(() => {
-    const jumbotronTitle = "The app for assigning tasks";
+    const jumbotronTitle =
+      "Fully open-sourced chatting app for assigning tasks";
     const speed = 50;
     let i = 0;
 
