@@ -1,4 +1,4 @@
-# ChekChat - The app for assigning missions
+# ChekChat | The open-sourced app for assigning tasks
 
 ## Tech stack
 
