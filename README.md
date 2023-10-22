@@ -1,5 +1,13 @@
 # ChekChat | The open-sourced app for assigning tasks
 
+# Live demo
+
+[Live demo](https://chekchat.khoiuna.info/)
+
+- Test users:
+  - Email: john@example.com &mdash; Password: John123456
+  - Email: jane@example.com &mdash; Password: Jane123456
+
 ## Tech stack
 
 - Front-end: NextJS, Material UI, Vercel
