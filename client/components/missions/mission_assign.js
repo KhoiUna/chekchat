@@ -115,16 +115,14 @@ export default function MissionAssign({ toggleMissionAssign }) {
         fullScreen
         open={true}
         onClose={toggleMissionAssign}
-        TransitionComponent={Transition}
-      >
+        TransitionComponent={Transition}>
         <AppBar>
           <Toolbar style={{ margin: 0 }}>
             <IconButton
               edge="start"
               color="inherit"
               onClick={toggleMissionAssign}
-              aria-label="close"
-            >
+              aria-label="close">
               <CloseIcon />
             </IconButton>
             <Typography variant="h5">Send task</Typography>
@@ -136,13 +134,11 @@ export default function MissionAssign({ toggleMissionAssign }) {
           direction="column"
           justifyContent="center"
           alignItems="flex-start"
-          style={{ marginTop: "4rem" }}
-        >
+          style={{ marginTop: "4rem" }}>
           <Grid
             container
             justifyContent="center"
-            className={classes.gridContainer}
-          >
+            className={classes.gridContainer}>
             <Grid item xs={6}>
               <Typography gutterBottom variant="inherit" component="h3">
                 Subject:
@@ -166,8 +162,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
           <Grid
             container
             justifyContent="center"
-            className={classes.gridContainer}
-          >
+            className={classes.gridContainer}>
             <Grid item xs={6}>
               <Typography gutterBottom variant="inherit" component="h3">
                 Due date:
@@ -190,8 +185,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
           <Grid
             container
             justifyContent="center"
-            className={classes.gridContainer}
-          >
+            className={classes.gridContainer}>
             <Grid item xs={6}>
               <Typography gutterBottom variant="inherit" component="h3">
                 Time:
@@ -215,8 +209,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
           <Grid
             container
             justifyContent="center"
-            className={classes.gridContainer}
-          >
+            className={classes.gridContainer}>
             <Grid item xs={6}>
               <Typography gutterBottom variant="inherit" component="h3">
                 Send to:
@@ -231,9 +224,14 @@ export default function MissionAssign({ toggleMissionAssign }) {
                   value={selectedReceiver}
                   onChange={handleSelect}
                   label="To"
-                  className={classes.selectEmpty}
-                >
-                  {friendList.map((i, index) => (
+                  className={classes.selectEmpty}>
+                  {!friendList && (
+                    <MenuItem disabled>
+                      You need at least one friend to send a task.
+                    </MenuItem>
+                  )}
+
+                  {friendList?.map((i, index) => (
                     <MenuItem value={i.friend[0].email} key={index}>
                       {i.friend[0].username}
                     </MenuItem>
@@ -246,8 +244,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
           <Grid
             container
             justifyContent="center"
-            className={classes.gridContainer}
-          >
+            className={classes.gridContainer}>
             <Grid item xs={6}>
               <Typography gutterBottom variant="inherit" component="h3">
                 Description:
@@ -276,11 +273,9 @@ export default function MissionAssign({ toggleMissionAssign }) {
             <Grid item xs={12} className={classes.alignRight}>
               <Button
                 variant="contained"
-                className={utilStyles.button}
+                className={utilStyles.button + " " + classes.margin}
                 type="submit"
-                className={classes.margin}
-                onClick={toggleMissionAssign}
-              >
+                onClick={toggleMissionAssign}>
                 Cancel
               </Button>
               <MuiThemeProvider theme={{ ...appTheme, ...buttonTheme }}>
@@ -296,8 +291,7 @@ export default function MissionAssign({ toggleMissionAssign }) {
                       : progress === "fail"
                       ? { backgroundColor: "red" }
                       : null
-                  }
-                >
+                  }>
                   {progress === "start" || !progress ? "Send" : null}
                   {progress === "fail" && "Invalid data"}
                   <MuiThemeProvider theme={progressTheme}>
