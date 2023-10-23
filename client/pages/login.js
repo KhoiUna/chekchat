@@ -76,8 +76,7 @@ export default function Login() {
               justifyContent="center"
               alignItems="center"
               spacing={1}
-              className={utilStyles.grid}
-            >
+              className={utilStyles.grid}>
               <h2 className={utilStyles.title}>LOGIN</h2>
 
               <Grid item xs={12} sm={6}>
@@ -87,7 +86,6 @@ export default function Login() {
                   name="email"
                   label="Email"
                   fullWidth
-                  autoComplete="off"
                   variant="filled"
                   type="email"
                   value={data.email}
@@ -101,7 +99,6 @@ export default function Login() {
                   name="password"
                   label="Password"
                   fullWidth
-                  autoComplete="off"
                   variant="filled"
                   type="password"
                   value={data.password}
@@ -112,8 +109,7 @@ export default function Login() {
                 <Grid item xs={12} sm={6}>
                   <p
                     className={utilStyles.responseText}
-                    style={{ color: "red" }}
-                  >
+                    style={{ color: "red" }}>
                     {responseText}
                   </p>
                 </Grid>
@@ -125,8 +121,7 @@ export default function Login() {
                     variant="contained"
                     color="primary"
                     className={utilStyles.button}
-                    type="submit"
-                  >
+                    type="submit">
                     Login
                   </Button>
                 </MuiThemeProvider>
@@ -143,8 +138,7 @@ export default function Login() {
                 borderBottom: "2px solid",
                 fontStyle: "italic",
                 marginLeft: "2px",
-              }}
-            >
+              }}>
               Sign up
             </span>
           </p>
