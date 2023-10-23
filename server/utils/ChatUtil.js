@@ -1,4 +1,4 @@
-const { ObjectID } = require("mongodb");
+const { ObjectId } = require("mongodb");
 const client = require("../db/client");
 
 module.exports = class ChatUtil {
@@ -11,7 +11,7 @@ module.exports = class ChatUtil {
         agg = [
           {
             $match: {
-              to_user: ObjectID(userId),
+              to_user: new ObjectId(userId),
             },
           },
           {
@@ -63,7 +63,7 @@ module.exports = class ChatUtil {
         agg = [
           {
             $match: {
-              from_user: ObjectID(userId),
+              from_user: new ObjectId(userId),
             },
           },
           {
@@ -129,9 +129,9 @@ module.exports = class ChatUtil {
       const collection = client.db("chekchat").collection("rooms");
 
       const response = await collection.insertOne({
-        missionId: ObjectID(requestId),
-        from_user: ObjectID(senderId),
-        to_user: ObjectID(receiverId),
+        missionId: new ObjectId(requestId),
+        from_user: new ObjectId(senderId),
+        to_user: new ObjectId(receiverId),
         notified: false,
         last_updated: new Date(new Date().toUTCString()),
         lastMessage: "Let's start your discussion!",
@@ -151,7 +151,7 @@ module.exports = class ChatUtil {
       const agg = [
         {
           $match: {
-            _id: ObjectID(roomId),
+            _id: new ObjectId(roomId),
           },
         },
         {
@@ -201,7 +201,7 @@ module.exports = class ChatUtil {
       const agg = [
         {
           $match: {
-            roomId: ObjectID(roomId),
+            roomId: new ObjectId(roomId),
           },
         },
         {
@@ -242,7 +242,7 @@ module.exports = class ChatUtil {
 
       const response = await collection.updateOne(
         {
-          _id: ObjectID(roomId),
+          _id: new ObjectId(roomId),
         },
         { $set: { notified, last_updated, lastMessage } }
       );

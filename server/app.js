@@ -99,7 +99,7 @@ const userRouter = require("./routes/userRouter");
 app.use("/api/user", userRouter);
 
 //Socket
-const { ObjectID } = require("mongodb");
+const { ObjectId } = require("mongodb");
 const MissionsUtil = require("./utils/MissionsUtil");
 const FriendRequestUtil = require("./utils/FriendRequestUtil");
 const UsersUtil = require("./utils/UsersUtil");
@@ -141,14 +141,14 @@ io.on("connection", (socket) => {
 
       // Save message to db
       const messageForSaving = {
-        from_user: userSession.id,
-        roomId: ObjectID(currentRoom.roomId),
+        from_user: new ObjectId(userSession.id),
+        roomId: new ObjectId(currentRoom.roomId),
         sent_datetime: new Date(sent_datetime),
         message,
       };
       ChatUtil.saveMessage(messageForSaving);
       ChatUtil.updateChatRoom({
-        roomId: ObjectID(currentRoom.roomId),
+        roomId: new ObjectId(currentRoom.roomId),
         lastMessage: messageForSaving.message,
         notified: true,
         last_updated: messageForSaving.sent_datetime,

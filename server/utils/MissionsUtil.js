@@ -105,7 +105,7 @@ module.exports = class MissionsUtil {
         .aggregate([
           {
             $match: {
-              to_user: userId,
+              to_user: new ObjectId(userId),
               status: "Accepted",
             },
           },
