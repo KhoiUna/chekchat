@@ -1,4 +1,4 @@
-const { ObjectID } = require("bson");
+const { ObjectId } = require("mongodb");
 const client = require("../db/client");
 const UsersUtil = require("./UsersUtil");
 
@@ -8,8 +8,8 @@ module.exports = class FriendRequestUtil {
       const collection = client.db("chekchat").collection("friend_requests");
 
       const response = await collection.insertOne({
-        from_user: await UsersUtil.getUserId(userEmail),
-        to_user: await UsersUtil.getUserId(requestEmail),
+        from_user: new ObjectId(await UsersUtil.getUserId(userEmail)),
+        to_user: new ObjectId(await UsersUtil.getUserId(requestEmail)),
         status: "Pending",
       });
       return response;
@@ -26,7 +26,7 @@ module.exports = class FriendRequestUtil {
 
       const { modifiedCount } = await collection.updateOne(
         {
-          _id: ObjectID(requestId),
+          _id: new ObjectId(requestId),
         },
         { $set: { status } }
       );
@@ -34,7 +34,7 @@ module.exports = class FriendRequestUtil {
       if (!modifiedCount) return false;
 
       const response = await collection.findOne({
-        _id: ObjectID(requestId),
+        _id: new ObjectId(requestId),
       });
 
       const friendId = response.from_user;
@@ -52,8 +52,8 @@ module.exports = class FriendRequestUtil {
       const collection = client.db("chekchat").collection("friend_requests");
 
       const response = await collection.deleteOne({
-        from_user: ObjectID(userId),
-        to_user: ObjectID(friendId),
+        from_user: new ObjectId(userId),
+        to_user: new ObjectId(friendId),
       });
 
       return response;
@@ -68,8 +68,8 @@ module.exports = class FriendRequestUtil {
       const collection = client.db("chekchat").collection("friend_requests");
 
       const cursor = await collection.find({
-        from_user: ObjectID(await UsersUtil.getUserId(userEmail)),
-        to_user: ObjectID(await UsersUtil.getUserId(requestEmail)),
+        from_user: new ObjectId(await UsersUtil.getUserId(userEmail)),
+        to_user: new ObjectId(await UsersUtil.getUserId(requestEmail)),
         status: "Pending",
       });
       const friendRequest = await cursor.next();
@@ -88,7 +88,7 @@ module.exports = class FriendRequestUtil {
       const agg = [
         {
           $match: {
-            from_user: ObjectID(userId),
+            from_user: new ObjectId(userId),
             status: "Pending",
           },
         },
@@ -127,7 +127,7 @@ module.exports = class FriendRequestUtil {
       const agg = [
         {
           $match: {
-            to_user: ObjectID(userId),
+            to_user: new ObjectId(userId),
             status: "Pending",
           },
         },
