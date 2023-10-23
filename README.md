@@ -8,6 +8,7 @@
   - Email: john@example.com &mdash; Password: John123456
   - Email: jane@example.com &mdash; Password: Jane123456
   - Email: ben@example.com &mdash; Password: Ben1234567
+  - Email: tom@example.com &mdash; Password: Tom1234567
 
 ## Tech stack
 
