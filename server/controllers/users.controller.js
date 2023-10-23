@@ -21,7 +21,7 @@ module.exports = class UsersController {
         password,
         confirmPassword
       );
-      if (validation !== true) return res.status(400).send(validation);
+      if (validation !== true) return res.status(400).json(validation);
 
       //Check user
       if (await UsersUtil.checkUser(email))
@@ -100,6 +100,7 @@ module.exports = class UsersController {
       res.json(notificationList);
     } catch (err) {
       console.error("Error getting notifications");
+      console.error(err);
       next();
     }
   }
