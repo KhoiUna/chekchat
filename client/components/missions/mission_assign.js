@@ -225,13 +225,13 @@ export default function MissionAssign({ toggleMissionAssign }) {
                   onChange={handleSelect}
                   label="To"
                   className={classes.selectEmpty}>
-                  {!friendList && (
+                  {friendList.length === 0 && (
                     <MenuItem disabled>
                       You need at least one friend to send a task.
                     </MenuItem>
                   )}
 
-                  {friendList?.map((i, index) => (
+                  {friendList.map((i, index) => (
                     <MenuItem value={i.friend[0].email} key={index}>
                       {i.friend[0].username}
                     </MenuItem>
