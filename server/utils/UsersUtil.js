@@ -150,7 +150,7 @@ module.exports = class UsersUtil {
         },
       ];
 
-      const friendList = await collection.aggregate(agg).toArray;
+      const friendList = await collection.aggregate(agg).toArray();
       return friendList;
     } catch (err) {
       console.error("Error getting friend list ---util");
