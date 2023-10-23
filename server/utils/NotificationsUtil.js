@@ -1,5 +1,5 @@
 const client = require("../db/client");
-const { ObjectID } = require("bson");
+const { ObjectId } = require("mongodb");
 
 module.exports = class NotificationsUtil {
   static async getNotifications(userId) {
@@ -8,7 +8,7 @@ module.exports = class NotificationsUtil {
       const agg = [
         {
           $match: {
-            to_user: userId,
+            to_user: new ObjectId(userId),
           },
         },
         {
@@ -40,7 +40,7 @@ module.exports = class NotificationsUtil {
         .toArray();
       return notificationList;
     } catch (err) {
-      console.error("Error getting notifications");
+      console.error("Error getting notifications --util");
     }
   }
 
@@ -48,8 +48,8 @@ module.exports = class NotificationsUtil {
     try {
       const collection = client.db("chekchat").collection("notifications");
       const response = await collection.insertOne({
-        from_user: ObjectID(userId),
-        to_user: ObjectID(friendId),
+        from_user: new ObjectId(userId),
+        to_user: new ObjectId(friendId),
         type,
         text: `${action}ed your ${type} request`,
         clicked: false,
@@ -68,7 +68,7 @@ module.exports = class NotificationsUtil {
 
       const response = await collection.updateOne(
         {
-          _id: ObjectID(notificationId),
+          _id: new ObjectId(notificationId),
         },
         { $set: { clicked: true } }
       );
