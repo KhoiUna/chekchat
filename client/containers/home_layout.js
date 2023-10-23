@@ -44,8 +44,7 @@ export default function Home({ children, componentName }) {
           container
           direction="row"
           justifyContent="space-between"
-          alignItems="center"
-        >
+          alignItems="center">
           <Link href="/">
             <div style={{ margin: 0 }}>
               <Logo
@@ -65,8 +64,7 @@ export default function Home({ children, componentName }) {
               <Typography
                 variant="body1"
                 gutterBottom
-                className={homeStyles.nav_item}
-              >
+                className={homeStyles.nav_item}>
                 Login
               </Typography>
             </Link>
@@ -75,11 +73,23 @@ export default function Home({ children, componentName }) {
               <Typography
                 variant="body1"
                 gutterBottom
-                className={homeStyles.nav_item}
-              >
+                className={homeStyles.nav_item}>
                 Register
               </Typography>
             </Link>
+
+            <a
+              style={{ textDecoration: "none" }}
+              rel="noopener noreferrer"
+              href={"https://github.com/KhoiUna/chekchat"}
+              target="_blank">
+              <Typography
+                variant="body1"
+                gutterBottom
+                className={homeStyles.nav_item}>
+                Source code
+              </Typography>
+            </a>
           </nav>
         </Grid>
       </header>
@@ -103,8 +113,7 @@ export default function Home({ children, componentName }) {
             <Typography
               variant="h6"
               gutterBottom
-              style={{ fontSize: "1.1rem" }}
-            >
+              style={{ fontSize: "1.1rem" }}>
               The app for assigning tasks
             </Typography>
           </section>
