@@ -1,6 +1,6 @@
 const UsersUtil = require("./UsersUtil");
 const client = require("../db/client");
-const { ObjectID } = require("bson");
+const { ObjectId } = require("mongodb");
 
 module.exports = class MissionsUtil {
   static async getMissionRequest(position, userId) {
@@ -12,7 +12,7 @@ module.exports = class MissionsUtil {
         agg = [
           {
             $match: {
-              from_user: ObjectID(userId),
+              from_user: new ObjectId(userId),
               visibility: true,
             },
           },
@@ -46,7 +46,7 @@ module.exports = class MissionsUtil {
         agg = [
           {
             $match: {
-              to_user: ObjectID(userId),
+              to_user: new ObjectId(userId),
               status: "Pending",
             },
           },
@@ -150,7 +150,7 @@ module.exports = class MissionsUtil {
       const cursor = await collection.aggregate([
         {
           $match: {
-            _id: ObjectID(requestId),
+            _id: new ObjectId(requestId),
           },
         },
         {
@@ -242,7 +242,7 @@ module.exports = class MissionsUtil {
 
       const { modifiedCount } = await collection.updateOne(
         {
-          _id: ObjectID(requestId),
+          _id: new ObjectId(requestId),
         },
         { $set: { status } }
       );
@@ -250,7 +250,7 @@ module.exports = class MissionsUtil {
       if (!modifiedCount) return false;
 
       const response = await collection.findOne({
-        _id: ObjectID(requestId),
+        _id: new ObjectId(requestId),
       });
       const senderId = response.from_user;
       const receiverId = response.to_user;
@@ -267,7 +267,7 @@ module.exports = class MissionsUtil {
       const collection = client.db("chekchat").collection("missions");
 
       const { deletedCount } = await collection.deleteOne({
-        _id: ObjectID(requestId),
+        _id: new ObjectId(requestId),
         status: "Pending",
       });
 
@@ -284,7 +284,7 @@ module.exports = class MissionsUtil {
 
       const response = await collection.updateOne(
         {
-          _id: ObjectID(missionId),
+          _id: new ObjectId(missionId),
         },
         { $set: { completed } }
       );
@@ -303,7 +303,7 @@ module.exports = class MissionsUtil {
 
       const response = await collection.updateOne(
         {
-          _id: ObjectID(missionId),
+          _id: new ObjectId(missionId),
         },
         { $set: { visibility: false } }
       );
@@ -320,7 +320,7 @@ module.exports = class MissionsUtil {
 
       const response = await collection.updateOne(
         {
-          _id: ObjectID(missionId),
+          _id: new ObjectId(missionId),
         },
         { $set: { starred } }
       );

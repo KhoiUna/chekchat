@@ -3,6 +3,5 @@ module.exports = async (client) => {
     await client.connect();
   } catch (err) {
     console.error("Error connecting to db");
-    console.error(err);
   }
 };

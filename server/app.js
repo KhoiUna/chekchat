@@ -38,7 +38,6 @@ const store = new MongoDBStore(
     expires: 1000 * 60 * 60 * 24 * 30, // 30 days in milliseconds
     connectionOptions: {
       useNewUrlParser: true,
-      useUnifiedTopology: true,
       serverSelectionTimeoutMS: 10000,
     },
   },

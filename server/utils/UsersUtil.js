@@ -1,4 +1,4 @@
-const { ObjectID, ObjectId } = require("mongodb");
+const { ObjectId } = require("mongodb");
 const client = require("../db/client");
 const PasswordHelper = require("../helpers/PasswordHelper");
 
@@ -59,8 +59,8 @@ module.exports = class UsersUtil {
       const collection = client.db("chekchat").collection("friends");
 
       const friend = await collection.findOne({
-        userId: ObjectId(await this.getUserId(userEmail)),
-        friendId: ObjectID(await this.getUserId(requestEmail)),
+        userId: new ObjectId(await UsersUtil.getUserId(userEmail))(),
+        friendId: new ObjectId(await UsersUtil.getUserId(requestEmail))(),
       });
       if (friend) return true;
 
@@ -76,7 +76,7 @@ module.exports = class UsersUtil {
       const collection = client.db("chekchat").collection("users");
 
       const user = await collection.findOne({
-        _id: ObjectID(userId),
+        _id: new ObjectId(userId),
       });
       return {
         email: user.email,
@@ -107,12 +107,12 @@ module.exports = class UsersUtil {
       const collection = client.db("chekchat").collection("friends");
 
       const addFriendToFirstUser = await collection.insertOne({
-        userId: ObjectID(userId),
-        friendId: ObjectID(friendId),
+        userId: new ObjectId(userId)(),
+        friendId: new ObjectId(friendId)(),
       });
       const addFriendToSecondUser = await collection.insertOne({
-        userId: ObjectID(friendId),
-        friendId: ObjectID(userId),
+        userId: new ObjectId(friendId)(),
+        friendId: new ObjectId(userId)(),
       });
 
       return addFriendToFirstUser && addFriendToSecondUser;
@@ -165,7 +165,7 @@ module.exports = class UsersUtil {
       if (action === "reset") {
         const response = await collection.updateOne(
           {
-            _id: ObjectID(userId),
+            _id: new ObjectId(userId)(),
           },
           { $set: { notificationCount: 0 } }
         );
@@ -193,7 +193,7 @@ module.exports = class UsersUtil {
       const collection = client.db("chekchat").collection("users");
 
       const { notificationCount } = await collection.findOne({
-        _id: userId,
+        _id: new ObjectId(userId),
       });
 
       return notificationCount;
@@ -208,7 +208,7 @@ module.exports = class UsersUtil {
       const userCollection = client.db("chekchat").collection("users");
       const userResponse = await userCollection.updateOne(
         {
-          _id: ObjectID(userId),
+          _id: new ObjectId(userId)(),
         },
         { $set: { avatarURL } }
       );
